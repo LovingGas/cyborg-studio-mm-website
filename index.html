@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cyborg Studio MM — v0.5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#0f172a;--mut:#64748b;--line:#e6edf5;--blue:#0284c7;--blue2:#0369a1;--cyan:#06b6d4;--soft:#e0f2fe;--radius:20px;--shadow:0 10px 30px rgba(2,132,199,.08),0 2px 8px rgba(15,23,42,.04)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans Myanmar','Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;gap:16px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.2px}
+.logo-dot{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#fff;font-size:19px;box-shadow:0 8px 18px rgba(2,132,199,.35)}
+nav{margin-left:auto;display:flex;align-items:center;gap:6px}
+nav button{padding:9px 14px;border-radius:999px;font-size:15px;font-weight:600;color:var(--mut)}
+nav button:hover{color:var(--ink);background:#f1f5f9}
+nav button.on{color:#fff;background:var(--blue)}
+.lang{border:1.5px solid var(--line)!important;font-weight:800!important;color:var(--ink)!important}
+.cta{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff!important;padding:11px 20px!important;box-shadow:0 8px 20px rgba(2,132,199,.3)}
+@media(max-width:760px){nav .hideM{display:none}}
+/* Hero */
+.hero{margin:26px 0 8px;border-radius:28px;background:radial-gradient(700px 320px at 85% -10%,rgba(6,182,212,.45),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(2,132,199,.5),transparent 55%),linear-gradient(135deg,#0f172a,#0c4a6e);color:#fff;padding:52px 48px;display:grid;grid-template-columns:1.05fr .95fr;gap:36px;overflow:hidden}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding:36px 24px}}
+.badge{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:999px;font-size:13.5px;font-weight:600}
+.hero h1{font-size:42px;line-height:1.45;font-weight:800;margin:18px 0 10px;letter-spacing:-.5px}
+.hero h1 .grad{background:linear-gradient(90deg,#38bdf8,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:#bae6fd;font-size:17px;max-width:480px}
+.hbtns{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.btn{padding:14px 26px;border-radius:14px;font-size:16px;font-weight:700;display:inline-flex;align-items:center;gap:9px;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-cyan{background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff;box-shadow:0 12px 26px rgba(6,182,212,.4)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.35);color:#fff}
+.stats{display:flex;gap:28px;margin-top:32px}
+.stats b{font-size:22px;display:block;line-height:1.3}
+.stats span{font-size:13px;color:#7dd3fc}
+/* Player card (pinned preview style) */
+.player{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:22px;backdrop-filter:blur(8px);align-self:start}
+.player .ttl{font-weight:700;font-size:15px;display:flex;justify-content:space-between;align-items:center}
+.pill{font-size:12px;background:rgba(34,211,238,.2);color:#67e8f9;padding:3px 10px;border-radius:999px;border:1px solid rgba(34,211,238,.35)}
+.wave{display:flex;align-items:center;gap:3px;height:64px;margin:16px 0 6px}
+.wave i{flex:1;background:linear-gradient(180deg,#38bdf8,#0284c7);border-radius:4px;opacity:.9;animation:eq 1.1s ease-in-out infinite alternate}
+@keyframes eq{from{transform:scaleY(.55)}to{transform:scaleY(1)}}
+.prow{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:10px 12px;margin-top:10px}
+.play{width:40px;height:40px;flex:none;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;display:grid;place-items:center;font-size:15px;box-shadow:0 6px 14px rgba(2,132,199,.4)}
+.prow b{font-size:14.5px;display:block;line-height:1.5}
+.prow span{font-size:12.5px;color:#7dd3fc}
+.prow .tag{margin-left:auto;font-size:11.5px;color:#a5f3fc;border:1px solid rgba(165,243,252,.3);padding:2px 8px;border-radius:999px;white-space:nowrap}
+/* Sections */
+section.blk{padding:38px 0 6px}
+.sec-h{font-size:24px;font-weight:800;letter-spacing:-.3px}
+.sec-s{color:var(--mut);font-size:15px;margin-bottom:20px}
+.grid5{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transition:.2s;cursor:pointer}
+.tool:hover{transform:translateY(-4px);border-color:#bae6fd}
+.tool .ic{width:48px;height:48px;border-radius:14px;background:var(--soft);display:grid;place-items:center;color:var(--blue2);margin-bottom:12px}
+.tool h3{font-size:16.5px;line-height:1.6}
+.tool p{color:var(--mut);font-size:13.5px;line-height:1.8;min-height:48px}
+.tool .open{color:var(--blue);font-weight:700;font-size:14px;margin-top:8px;display:inline-block}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.stepc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);display:flex;gap:14px}
+.num{width:36px;height:36px;flex:none;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-weight:800;display:grid;place-items:center;font-size:16px}
+.stepc h3{font-size:16px}.stepc p{color:var(--mut);font-size:13.5px;line-height:1.8}
+.testi{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.tcard p{font-size:15px}.tcard .who{margin-top:12px;color:var(--mut);font-size:13.5px;font-weight:600}
+.stars{color:#f59e0b;letter-spacing:2px;font-size:14px}
+/* TTS */
+.screen{display:none}.screen.on{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.stepper{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 18px}
+.stp{display:flex;align-items:center;gap:9px;background:#fff;border:1.5px solid var(--line);padding:9px 16px 9px 9px;border-radius:999px;font-weight:700;font-size:14.5px;color:var(--mut)}
+.stp .n{width:28px;height:28px;border-radius:50%;background:#e2e8f0;color:var(--mut);display:grid;place-items:center;font-size:14px}
+.stp.act{border-color:var(--blue);color:var(--ink)}.stp.act .n{background:var(--blue);color:#fff}
+.stp.done .n{background:#0891b2;color:#fff}
+.tts-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start}
+@media(max-width:860px){.tts-grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
+.card h3{font-size:17px;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.card h3 .n{width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:14px;flex:none}
+.card .hint{color:var(--mut);font-size:13.5px;margin-bottom:12px}
+textarea{width:100%;min-height:150px;border:1.5px solid var(--line);border-radius:14px;padding:16px;font-family:inherit;font-size:16px;line-height:1.9;resize:vertical;background:#fbfdff}
+textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(2,132,199,.12)}
+.meta{display:flex;justify-content:space-between;color:var(--mut);font-size:13px;margin-top:6px}
+.glabel{font-weight:700;font-size:14.5px;margin:16px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:flex;align-items:center;gap:9px;border:1.5px solid var(--line);background:#fff;padding:8px 14px 8px 8px;border-radius:999px;font-weight:600;font-size:14.5px;transition:.15s}
+.chip:hover{border-color:#7dd3fc}
+.chip.sel{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 8px 18px rgba(2,132,199,.3)}
+.ava{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#38bdf8,#0369a1);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800}
+.chip.sel .ava{background:rgba(255,255,255,.25)}
+.chip small{font-weight:500;opacity:.75;font-size:12px}
+.miniplay{width:26px;height:26px;border-radius:50%;background:var(--soft);color:var(--blue2);display:grid;place-items:center;font-size:11px}
+.sticky-out{position:sticky;top:88px}
+.out-empty{border:2px dashed var(--line);border-radius:16px;padding:28px 16px;text-align:center;color:var(--mut);font-size:14px}
+.barwrap{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:14px 0 6px;display:none}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:99px;transition:width .2s}
+.genbar{position:sticky;bottom:14px;background:rgba(15,23,42,.94);backdrop-filter:blur(10px);border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:14px;color:#fff;box-shadow:0 18px 36px rgba(15,23,42,.35);margin-top:6px;z-index:20}
+.genbar .info{font-size:13.5px;color:#cbd5e1;line-height:1.6}.genbar .info b{color:#fff;font-size:15px}
+.genbtn{margin-left:auto;background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff;font-size:17px;font-weight:800;padding:15px 34px;border-radius:14px;box-shadow:0 10px 24px rgba(6,182,212,.45);white-space:nowrap}
+.genbtn:active{transform:scale(.98)}
+.dl{display:flex;gap:10px;margin-top:12px}
+.dl button{flex:1;padding:12px;border-radius:12px;font-weight:700;font-size:14.5px;border:1.5px solid var(--line);background:#fff}
+.dl button.pri{background:var(--blue);border-color:var(--blue);color:#fff}
+.dl button:disabled{opacity:.45;cursor:not-allowed}
+.hist{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.hist:last-child{border:none}.hist span{margin-left:auto;color:var(--mut);font-size:13px}
+footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;color:var(--mut);font-size:13.5px;text-align:center}
+.ctaband{margin-top:38px;background:linear-gradient(135deg,var(--blue2),var(--blue) 55%,var(--cyan));border-radius:26px;color:#fff;padding:40px;text-align:center}
+.ctaband h2{font-size:27px;line-height:1.6}.ctaband p{color:#e0f2fe;margin:6px 0 20px}
+/* Customer Service AI Bot */
+.botfab{position:fixed;right:20px;bottom:20px;z-index:90;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;padding:12px 18px 12px 12px;border-radius:999px;box-shadow:0 16px 34px rgba(2,132,199,.45);font-weight:800;font-size:14.5px;transition:.2s}
+.botfab:hover{transform:translateY(-2px)}
+.botfab .bf{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:19px}
+.botfab .dot{width:9px;height:9px;border-radius:50%;background:#4ade80;border:2px solid #fff;margin-left:-16px;margin-top:-22px;z-index:1}
+.botpanel{position:fixed;right:20px;bottom:88px;z-index:91;width:350px;max-width:calc(100vw - 32px);background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 24px 60px rgba(15,23,42,.28);overflow:hidden;display:none;flex-direction:column}
+.botpanel.on{display:flex;animation:fade .25s ease}
+.bot-hd{background:linear-gradient(135deg,#0c4a6e,var(--blue) 60%,var(--cyan));color:#fff;padding:16px 18px;display:flex;align-items:center;gap:11px}
+.bot-hd .ba{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:20px;flex:none}
+.bot-hd b{font-size:15.5px;display:block;line-height:1.5}
+.bot-hd span{font-size:12.5px;color:#bae6fd;display:flex;align-items:center;gap:6px}
+.bot-hd span i{width:8px;height:8px;border-radius:50%;background:#4ade80;display:inline-block}
+.bot-hd .x{margin-left:auto;color:#fff;font-size:19px;opacity:.85;padding:4px 8px}
+.bot-body{padding:16px;height:300px;overflow-y:auto;background:#f8fafc;display:flex;flex-direction:column;gap:9px}
+.msg{max-width:82%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.8}
+.msg.bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start;box-shadow:0 2px 6px rgba(15,23,42,.04)}
+.msg.me{background:var(--blue);color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+.bot-q{display:flex;flex-wrap:wrap;gap:7px;padding:11px 14px 4px;background:#f8fafc}
+.bot-q button{border:1.5px solid #bae6fd;background:#f0f9ff;color:var(--blue2);font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px}
+.bot-in{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:#fff}
+.bot-in input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font-family:inherit;font-size:14px;min-width:0}
+.bot-in input:focus{outline:none;border-color:var(--blue)}
+.bot-in button{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-weight:800;padding:11px 17px;border-radius:12px}
+
+.prodgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.prodcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:.2s;cursor:pointer}
+.prodcard:hover{transform:translateY(-4px);border-color:#bae6fd}
+.prodcard h3{font-size:17.5px;margin-bottom:6px}
+.prodcard p{color:var(--mut);font-size:14px;line-height:1.85}
+.prodcard .open{color:var(--blue);font-weight:700;font-size:14px;margin-top:10px;display:inline-block}
+.purl{font-size:12px;font-weight:700;color:var(--blue2);background:var(--soft);display:inline-block;padding:3px 10px;border-radius:999px;margin-bottom:12px;letter-spacing:.2px}
+.catchips{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.catchips span{font-size:13px;font-weight:600;border:1.5px solid var(--line);padding:6px 11px;border-radius:999px;color:var(--mut)}
+.catchips span.done{background:#ecfdf5;border-color:#a7f3d0;color:#047857}
+.logosvg{width:40px;height:40px;flex:none}
+
+.hero-mgmt{background:radial-gradient(700px 320px at 85% -10%,rgba(45,212,191,.4),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(13,148,136,.45),transparent 55%),linear-gradient(135deg,#0b2530,#134e4a)}
+.acc-teal{background:#ccfbf1!important;color:#0f766e!important}
+.mgmtcard{border-top:4px solid #14b8a6}
+.soon{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:800;color:#0f766e;background:#f0fdfa;border:1.5px solid #99f6e4;padding:4px 12px;border-radius:999px}
+</style>
+</head>
+<body>
+<header><div class="wrap hd">
+  <div class="logo"><svg class="logosvg" viewBox="0 0 120 120"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0284c7"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><path d="M 85.4 31.8 A 38 38 0 1 0 85.4 88.2" fill="none" stroke="url(#hg)" stroke-width="15" stroke-linecap="round"/><rect x="38" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><rect x="51" y="40" width="8.5" height="40" rx="4.25" fill="url(#hg)"/><rect x="64" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><circle cx="90" cy="60" r="5.5" fill="#06b6d4"/></svg>Cyborg Studio <span style="color:var(--blue)">MM</span></div>
+  <nav>
+    <button class="on hideM" onclick="show('home',this)">ပင်မ</button>
+    <button class="hideM" onclick="show('pos',this)">POS</button>
+    <button class="hideM" onclick="show('studio',this)">AI Voice Studio</button>
+    <button class="hideM" onclick="show('recap',this)">Recap App</button>
+    <button class="hideM" onclick="show('mgmt',this)">Management</button>
+    <button class="hideM" onclick="showPoints()">Credit Points</button>
+    <button class="lang" id="langBtn" onclick="toggleLang()">EN</button>
+    <button class="cta" onclick="show('studio')">အခမဲ့ စသုံးမယ်</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<!-- ============ LANDING ============ -->
+<!-- ============ UMBRELLA HOME (cyborgstudiomm.com/) ============ -->
+<div class="screen on" id="scr-home">
+  <div class="hero">
+    <div>
+      <span class="badge">✦ Cyborg Studio MM · Myanmar Software Studio</span>
+      <h1>ဆိုင်အတွက်လည်း<br><span class="grad">Creator အတွက်လည်း</span></h1>
+      <p>CyborgMM POS နဲ့ AI Voice Studio — မြန်မာလုပ်ငန်းတွေနဲ့ creator တွေအတွက် offline-first software တွေ၊ တစ်မိသားစုတည်း၊ ဒီဇိုင်း တစ်ပုံစံတည်း။</p>
+      <div class="hbtns">
+        <button class="btn btn-cyan" onclick="show('pos')">CyborgMM POS ကြည့်မယ် →</button>
+        <button class="btn btn-ghost" onclick="show('studio')">AI Voice Studio ဖွင့်မယ်</button>
+      </div>
+      <div class="stats">
+        <div><b>24+</b><span>POS ဆိုင်အမျိုးအစား</span></div>
+        <div><b>5</b><span>AI Tool များ</span></div>
+        <div><b>100%</b><span>POS Offline အလုပ်</span></div>
+      </div>
+    </div>
+    <div class="player">
+      <div class="ttl"><span>ကျွန်တော်တို့ ထုတ်ကုန်များ</span><span class="pill">CYBORG FAMILY</span></div>
+      <div class="prow" style="cursor:pointer" onclick="show('pos')"><div class="play">🛒</div><div><b>CyborgMM POS</b><span>ဆိုင်သုံး POS · Offline-first</span></div><span class="tag">/pos</span></div>
+      <div class="prow" style="cursor:pointer" onclick="show('studio')"><div class="play">🎙️</div><div><b>AI Voice Studio</b><span>TTS · Clone · Recap · SRT</span></div><span class="tag">/studio</span></div>
+      <div class="prow" style="cursor:pointer" onclick="show('recap')"><div class="play">🎬</div><div><b>CyborgRecapMM</b><span>ဖုန်းထဲ Recap လုပ်တဲ့ Android app</span></div><span class="tag">/recap</span></div>
+      <div class="prow" style="cursor:pointer" onclick="show('mgmt')"><div class="play">🧰</div><div><b>Management Tools</b><span>HR · Clinic · School အပါ ၈ မျိုး (မကြာမီ)</span></div><span class="tag">/management</span></div>
+      <div class="prow"><div class="play">🪙</div><div><b>Credit Points</b><span>Pay as you go · 1 Point = ၁၀၀ ကျပ်</span></div><span class="tag">PAYG</span></div>
+    </div>
+  </div>
+
+  <section class="blk">
+    <div class="sec-h">ထုတ်ကုန်များ</div>
+    <div class="sec-s">ကဏ္ဍ တစ်ခုချင်းစီကို နှိပ်ပြီး အသေးစိတ် ကြည့်နိုင်တယ်။ လိပ်စာတွေက cyborgstudiomm.com အောက်မှာ ကဏ္ဍခွဲထားမယ်။</div>
+    <div class="prodgrid">
+      <div class="prodcard" onclick="show('pos')">
+        <div class="purl">cyborgstudiomm.com/pos</div>
+        <h3>🛒 CyborgMM POS</h3>
+        <p>ဆိုင်အမျိုးအစား ၂၄ မျိုးအတွက် offline POS — stock, အကြွေးစာအုပ်, လက်ကား/လက်လီ, receipt ပုံနှိပ်, report အားလုံး internet မလိုဘူး။</p>
+        <span class="open">POS ကဏ္ဍ ဖွင့်မယ် →</span>
+      </div>
+      <div class="prodcard" onclick="show('studio')">
+        <div class="purl">cyborgstudiomm.com/studio</div>
+        <h3>🎙️ AI Voice Studio</h3>
+        <p>Faceless creator တွေအတွက် web စတူဒီယို — အသံထုတ်, Voice Clone, Auto Recap, SRT ဘာသာပြန်။ Credit Points နဲ့ သုံးသလောက်ပဲ ပေးရမယ်။</p>
+        <span class="open">Studio ဖွင့်မယ် →</span>
+      </div>
+      <div class="prodcard" onclick="show('recap')">
+        <div class="purl">cyborgstudiomm.com/recap</div>
+        <h3>🎬 CyborgRecapMM</h3>
+        <p>ဖုန်းတစ်လုံးတည်းနဲ့ ရုပ်ရှင် recap လုပ်နိုင်တဲ့ Android app — AI script, အသံအမျိုးမျိုး, live preview editor, poster maker အစုံ၊ render က ဖုန်းထဲမှာပဲ။</p>
+        <span class="open">Recap app ကြည့်မယ် →</span>
+      </div>
+      <div class="prodcard" onclick="show('mgmt')">
+        <div class="purl acc-teal">cyborgstudiomm.com/management</div>
+        <h3>🧰 Management Tools</h3>
+        <p>လုပ်ငန်း စီမံခန့်ခွဲမှု app တွေ — HR & Payroll, ဆေးရုံ/ဆေးခန်း, ကျောင်း, စာရင်းကိုင် အပါ ၈ မျိုး။ တစ်ခုချင်းစီ သီးသန့် app၊ နှစ်စဉ် license ပုံစံ (roadmap)။</p>
+        <span class="open">Management ကဏ္ဍ ဖွင့်မယ် →</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="sec-h">အခုချိန် ဦးစားပေး လုပ်နေတာတွေ</div>
+    <div class="sec-s">အစီအစဉ်အတိုင်း တစ်ဆင့်ချင်း သွားနေတယ်။</div>
+    <div class="steps">
+      <div class="stepc"><div class="num">1</div><div><h3>Offline App တွေ အရင်</h3><p>အခု အားထည့်နေတာက POS နဲ့ Recap offline app တွေ — internet မရှိလည်း အလုပ် မရပ်ဘူး။</p></div></div>
+      <div class="stepc"><div class="num">2</div><div><h3>Domain + Website</h3><p>cyborgstudiomm.com နဲ့ ဒီ website — ထုတ်ကုန်အားလုံး တစ်နေရာတည်းမှာ ကဏ္ဍခွဲပြီး ပြမယ်။</p></div></div>
+      <div class="stepc"><div class="num">3</div><div><h3>Users များလာရင် VPS Cloud</h3><p>License server နဲ့ Studio backend အတွက် performance ကောင်းတဲ့ VPS cloud ကို user များလာချိန်မှာ သုံးမယ်။</p></div></div>
+    </div>
+  </section>
+</div>
+
+
+<div class="screen" id="scr-studio">
+  <div class="hero">
+    <div>
+      <span class="badge">✦ <span data-en="Myanmar AI Voice Studio">မြန်မာ AI အသံ စတူဒီယို</span></span>
+      <h1><span data-en="Text in.">စာရိုက်လိုက်တာနဲ့</span><br><span class="grad" data-en="Voice out.">အသံ ထွက်လာမယ်</span></h1>
+      <p data-en="TTS, Voice Clone, Auto Recap and SRT translation — everything a faceless creator needs, in one clean studio.">TTS, Voice Clone, Auto Recap, SRT ဘာသာပြန် — faceless creator တစ်ယောက်အတွက် လိုတာ အကုန်၊ စတူဒီယို တစ်ခုတည်းမှာ။</p>
+      <div class="hbtns">
+        <button class="btn btn-cyan" onclick="show('tts')" data-en="Start Free →">အခမဲ့ စသုံးမယ် →</button>
+        <button class="btn btn-ghost" onclick="playSample(this)" data-en="▶ Listen to Samples">▶ အသံနမူနာ နားထောင်မယ်</button>
+      </div>
+      <div class="stats">
+        <div><b>12+</b><span data-en="AI Voices">AI အသံများ</span></div>
+        <div><b>5</b><span data-en="Tools in One">Tool ၅ မျိုး</span></div>
+        <div><b>100%</b><span data-en="In Burmese">မြန်မာလို</span></div>
+      </div>
+    </div>
+    <div class="player">
+      <div class="ttl"><span data-en="Voice Samples">အသံ နမူနာများ</span><span class="pill">LIVE PREVIEW</span></div>
+      <div class="wave" id="wave"></div>
+      <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>ကောင်း</b><span data-en="Male · Narrator">ကျား · ဇာတ်ကြောင်းပြော</span></div><span class="tag">ElevenLabs</span></div>
+      <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>မိုးမိုး</b><span data-en="Female · Warm">မ · နွေးထွေးသော</span></div><span class="tag">Gemini</span></div>
+      <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>သီဟ</b><span data-en="Male · Free">ကျား · အခမဲ့</span></div><span class="tag">Free</span></div>
+    </div>
+  </div>
+
+  <section class="blk">
+    <div class="sec-h" data-en="All tools, one studio">Tool အကုန်, စတူဒီယို တစ်ခု</div>
+    <div class="sec-s" data-en="Pick a tool — each one opens as simple numbered steps, just like the app.">Tool တစ်ခုရွေးပါ — app ထဲကလိုပဲ အဆင့်လိုက် ရှင်းရှင်း ပွင့်လာမယ်။</div>
+    <div class="grid5" id="tools"></div>
+  </section>
+
+  <section class="blk">
+    <div class="sec-h" data-en="How it works">ဘယ်လို အလုပ်လုပ်လဲ</div>
+    <div class="sec-s" data-en="Three steps. No technical setup.">အဆင့် ၃ ဆင့်ပဲ။ နည်းပညာ ပြင်ဆင်စရာ မလိုဘူး။</div>
+    <div class="steps">
+      <div class="stepc"><div class="num">1</div><div><h3 data-en="Create account">အကောင့် ဖွင့်ပါ</h3><p data-en="Free quota every day — top up with Credit Points (1 Point = 100 Ks) when you need more.">နေ့တိုင်း အခမဲ့ quota ရမယ်၊ လိုရင် Credit Points နဲ့ ဆက်သုံးလို့ရတယ် (1 Point = ၁၀၀ ကျပ်)။</p></div></div>
+      <div class="stepc"><div class="num">2</div><div><h3 data-en="Pick a tool & voice">Tool နဲ့ အသံ ရွေးပါ</h3><p data-en="Type text or upload a file, choose a voice with chips.">စာရိုက်/ဖိုင်တင်၊ အသံကို chip လေးတွေနဲ့ ရွေး။</p></div></div>
+      <div class="stepc"><div class="num">3</div><div><h3 data-en="Generate & download">ထုတ်ပြီး Download ဆွဲပါ</h3><p data-en="MP3 / MP4 / SRT ready in minutes.">မိနစ်ပိုင်းအတွင်း MP3 / MP4 / SRT အသင့်ရမယ်။</p></div></div>
+    </div>
+  </section>
+
+  <section class="blk" id="points">
+    <div class="sec-h">Credit Points — Pay as you go</div>
+    <div class="sec-s">လစဉ် subscription မဟုတ်ဘူး။ Points ဝယ်ထားပြီး သုံးသလောက်ပဲ ဖြတ်တယ်။</div>
+    <div class="steps">
+      <div class="stepc"><div class="num">🪙</div><div><h3>1 Point = ၁၀၀ ကျပ်</h3><p>KBZPay / WavePay / AYA Pay နဲ့ Points ဝယ်လို့ရတယ်။ ဝယ်ထားတဲ့ Points က သက်တမ်း မကုန်ဘူး။</p></div></div>
+      <div class="stepc"><div class="num">👁️</div><div><h3>မနှိပ်ခင် အရင်ပြ</h3><p>Tool တစ်ခုစီမှာ ကုန်မယ့် Points ကို Generate ခလုတ်မှာ အရင်ပြထားတယ် — ဥပမာ Recap ၁ ပုဒ် = Points ဘယ်လောက် ဆိုတာ သိပြီးမှ နှိပ်ရုံပဲ။ (Tool အလိုက် ဖြတ်နှုန်းတွေ မကြာမီ ကြေညာမယ်)</p></div></div>
+      <div class="stepc"><div class="num">↩️</div><div><h3>Fail ရင် ပြန်ဝင်</h3><p>အလုပ် မအောင်မြင်ရင် ဖြတ်ထားတဲ့ Points အလိုလို ပြန်ဝင်တယ်။ ဆုံးရှုံးစရာ မရှိဘူး။</p></div></div>
+    </div>
+  </section>
+
+  <div class="ctaband">
+    <h2 data-en="Make your first voice today — free">ဒီနေ့ပဲ ပထမဆုံး အသံ ထုတ်ကြည့်ပါ — အခမဲ့</h2>
+    <p data-en="Pay with Credit Points — 1 Point = 100 Ks. Daily free quota included.">Credit Points နဲ့ သုံးလို့ရတယ် — 1 Point = ၁၀၀ ကျပ်။ နေ့တိုင်း အခမဲ့ quota ပါတယ်။</p>
+    <button class="btn" style="background:#fff;color:var(--blue2)" onclick="show('tts')" data-en="Open TTS Studio →">TTS Studio ဖွင့်မယ် →</button>
+  </div>
+</div>
+
+<!-- ============ TTS STUDIO ============ -->
+<div class="screen" id="scr-tts">
+  <div class="stepper">
+    <div class="stp act"><span class="n">1</span><span data-en="Text">စာသား</span></div>
+    <div class="stp"><span class="n">2</span><span data-en="Voice">အသံ ရွေးမယ်</span></div>
+    <div class="stp"><span class="n">3</span><span data-en="Generate">အသံ ထုတ်မယ်</span></div>
+    <div class="stp"><span class="n">4</span><span data-en="Download">Download</span></div>
+  </div>
+  <div class="tts-grid">
+    <div>
+      <div class="card">
+        <h3><span class="n">1</span><span data-en="Type your text">စာသား ရိုက်ပါ</span></h3>
+        <div class="hint" data-en="Myanmar or English — up to 5,000 characters per generate.">မြန်မာ / English ရတယ် — တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ။</div>
+        <textarea id="txt" oninput="updCount()" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — တစ်ခါတုန်းက ရွာလေးတစ်ရွာမှာ...">တစ်ခါတုန်းက တောင်ပေါ်ရွာလေးတစ်ရွာမှာ မောင်နှမ နှစ်ယောက် နေထိုင်ကြတယ်။ တစ်နေ့မှာတော့ သူတို့ဘဝကို ပြောင်းလဲသွားစေမယ့် ဖြစ်ရပ်တစ်ခု ဖြစ်ပွားခဲ့ပါတယ်။</textarea>
+        <div class="meta"><span id="ccount">0 / 5,000</span><span id="dur" data-en="Est. ~0 sec">ခန့်မှန်း ~၀ စက္ကန့်</span></div>
+      </div>
+      <div class="card">
+        <h3><span class="n">2</span><span data-en="Choose a voice">အသံ ရွေးပါ</span></h3>
+        <div class="hint" data-en="Tap a voice chip. Press ▶ to hear a sample.">အသံ chip ကို နှိပ်ရွေးပါ။ ▶ နှိပ်ရင် နမူနာ နားထောင်လို့ရတယ်။</div>
+        <div class="glabel">ElevenLabs · <small style="color:var(--mut);font-weight:500">အရည်အသွေး အကောင်းဆုံး</small></div>
+        <div class="chips" data-group="voice">
+          <button class="chip sel"><span class="ava">က</span>ကောင်း <small>ကျား · ဇာတ်ကြောင်း</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">မ</span>မိုးမိုး <small>မ · နွေးထွေး</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">ဇ</span>ဇေယျာ <small>ကျား · တက်ကြွ</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">ကျ</span>ကျော် <small>ကျား · သတင်း</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+        </div>
+        <div class="glabel">Gemini · <small style="color:var(--mut);font-weight:500">မြန်၊ ဈေးသက်သာ</small></div>
+        <div class="chips" data-group="voice">
+          <button class="chip"><span class="ava">P</span>Puck <small>ကျား</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">K</span>Kore <small>မ</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">F</span>Fenrir <small>ကျား · နက်ရှိုင်း</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+        </div>
+        <div class="glabel"><span data-en="Free voices">အခမဲ့ အသံများ</span> · <small style="color:var(--mut);font-weight:500">Edge TTS</small></div>
+        <div class="chips" data-group="voice">
+          <button class="chip"><span class="ava">သီ</span>သီဟ <small>ကျား · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">နီ</span>နီလာ <small>မ · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+        </div>
+        <div class="glabel" data-en="Speed">အသံ အမြန်နှုန်း</div>
+        <div class="chips" data-group="speed">
+          <button class="chip">0.5x</button><button class="chip">0.75x</button><button class="chip sel">1.0x <small>ပုံမှန်</small></button><button class="chip">1.25x</button><button class="chip">1.5x</button>
+        </div>
+      </div>
+    </div>
+    <div class="sticky-out">
+      <div class="card">
+        <h3><span class="n">3</span><span data-en="Output">ထွက်လာမယ့် အသံ</span></h3>
+        <div class="hint" data-en="Your generated voice will appear here.">ထုတ်ပြီးသား အသံ ဒီမှာ ပေါ်လာမယ်။</div>
+        <div class="out-empty" id="outEmpty">🎧<br><span data-en="Nothing yet — press Generate below.">ဘာမှ မရှိသေးဘူး — အောက်က အသံထုတ်မယ် နှိပ်ပါ။</span></div>
+        <div id="outReady" style="display:none">
+          <div class="prow" style="background:#f0f9ff;border-color:#bae6fd;color:var(--ink)"><button class="play" onclick="playSample(this)">▶</button><div><b id="outName">my_voice.mp3</b><span style="color:var(--mut)" id="outMeta">0:42 · MP3</span></div><span class="tag" style="color:var(--blue2);border-color:#bae6fd">READY</span></div>
+        </div>
+        <div class="barwrap" id="barwrap"><div class="bar" id="bar"></div></div>
+        <div class="meta" id="barmeta" style="display:none"><span data-en="Generating...">ထုတ်နေတယ်...</span><span id="barpct">0%</span></div>
+        <div class="dl">
+          <button id="btnListen" disabled onclick="playSample(this)" data-en="▶ Listen">▶ နားထောင်မယ်</button>
+          <button class="pri" id="btnDl" disabled onclick="alert('နမူနာ mockup ပါ — တကယ့် version မှာ MP3 download ရမယ်')" data-en="Download MP3">MP3 Download</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15.5px" data-en="Recent history">မကြာသေးခင် ထုတ်ထားတာများ</h3>
+        <div class="hist"><span class="miniplay">▶</span>intro_v1.mp3<span>0:42 · မနေ့က</span></div>
+        <div class="hist"><span class="miniplay">▶</span>recap_ep3.mp3<span>6:12 · လွန်ခဲ့တဲ့ ၂ ရက်</span></div>
+        <div class="hist"><span class="miniplay">▶</span>drama_part2.mp3<span>3:05 · လွန်ခဲ့တဲ့ ၅ ရက်</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="genbar">
+    <div class="info"><b id="genVoice">ကောင်း · 1.0x</b><br><span data-en="Free quota: 3 left today · Credit Points: 120">ဒီနေ့ အခမဲ့ ကျန်တာ: ၃ ကြိမ် · Credit Points: ၁၂၀</span></div>
+    <button class="genbtn" onclick="generate()" data-en="Generate Voice 🎙️">အသံ ထုတ်မယ် 🎙️</button>
+  </div>
+</div>
+<!-- ============ POS (cyborgstudiomm.com/pos) ============ -->
+<div class="screen" id="scr-pos">
+  <div class="hero">
+    <div>
+      <span class="badge">🛒 cyborgstudiomm.com/pos</span>
+      <h1>CyborgMM <span class="grad">POS</span></h1>
+      <p>မြန်မာဆိုင်တွေအတွက် offline-first POS — internet ပြတ်လည်း အရောင်း မရပ်ဘူး။ မြန်မာ/English နှစ်ဘာသာ၊ ဆိုင်အမျိုးအစား ၂၄ မျိုး။</p>
+      <div class="hbtns">
+        <button class="btn btn-cyan" onclick="alert('နမူနာ mockup ပါ — တကယ့် version မှာ APK download ဒီမှာ ရမယ်')">📥 APK Download ဆွဲမယ်</button>
+        <button class="btn btn-ghost" onclick="toggleBot()">မေးစရာ မေးမယ်</button>
+      </div>
+      <div class="stats">
+        <div><b>24</b><span>ဆိုင်အမျိုးအစား ကဏ္ဍ</span></div>
+        <div><b>100%</b><span>Offline အလုပ်</span></div>
+        <div><b>2</b><span>ဘာသာ MM / EN</span></div>
+      </div>
+    </div>
+    <div class="player">
+      <div class="ttl"><span>License</span><span class="pill">မကြာမီ</span></div>
+      <p style="color:#e0f2fe;font-size:15px;margin-top:12px">POS license ဈေးနှုန်းကို <b style="color:#fff">မကြာမီ ကြေညာပါမည်</b>။ အခုချိန်မှာ app ကို အခမဲ့ စမ်းသုံးပြီး feature တွေ ကြည့်ထားနိုင်ပါတယ်။</p>
+      <div class="prow"><div class="play">✓</div><div><b>Offline License Key</b><span>internet မလိုပဲ activate လုပ်နိုင်မယ်</span></div></div>
+      <div class="prow"><div class="play">✓</div><div><b>Online Sync (နောက်ပိုင်း)</b><span>VPS cloud နဲ့ ချိတ်မယ့် အဆင့်</span></div></div>
+      <button class="btn btn-cyan" style="margin-top:16px;width:100%;justify-content:center" onclick="toggleBot()">ဆက်သွယ်ရန်</button>
+    </div>
+  </div>
+
+  <section class="blk">
+    <div class="sec-h">ဆိုင်အမျိုးအစား ကဏ္ဍများ — ၂၄ မျိုး</div>
+    <div class="sec-s">✓ စိမ်းနေတာတွေက အသင့်ရပြီးသား ကဏ္ဍတွေ၊ ကျန်တာတွေ အစီအစဉ်အတိုင်း လာမယ်။ ဆိုင်ရှင်ကိုယ်တိုင် ပစ္စည်းအမျိုးအစား အကန့်အသတ်မရှိ ထပ်ထည့်လို့ရတယ်။</div>
+    <div class="prodgrid">
+      <div class="prodcard"><h3>🍜 အစားအသောက်</h3><div class="catchips">
+        <span class="done">Food & Restaurant ✓</span><span class="done">Tea & Traditional Snacks ✓</span><span class="done">Beverage · Café ✓</span><span class="done">KTV Bar ✓</span><span class="done">Bar & Club ✓</span><span class="done">Hotel and Bar ✓</span>
+      </div></div>
+      <div class="prodcard"><h3>🛍️ လက်လီ ဆိုင်များ</h3><div class="catchips">
+        <span class="done">Grocery ✓</span><span>Online Shop</span><span>Pharmacy</span><span>Toy Shop</span><span>Gold & Jewelry</span><span>Travel & Tours</span><span>+ အခြား</span>
+      </div></div>
+      <div class="prodcard"><h3>🧰 ဝန်ဆောင်မှု & အခြား</h3><div class="catchips">
+        <span>Beauty + Salon/Spa</span><span>Pawnshop · အပေါင်ဆိုင်</span><span>Car Workshop/Garage</span><span>+ ကဏ္ဍ စုစုပေါင်း ၂၄ မျိုး</span>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="sec-h">အဓိက Feature များ</div>
+    <div class="sec-s"></div>
+    <div class="prodgrid">
+      <div class="prodcard"><h3>📦 Stock စီမံခန့်ခွဲမှု</h3><p>Branch အလိုက် stock, low-stock သတိပေး, stock adjustment, supplier ဝယ်ယူမှု, expiry သတိပေး အစုံ။</p></div>
+      <div class="prodcard"><h3>📒 အကြွေး စာအုပ်</h3><p>Credit အရောင်းနဲ့ ပြန်ဆပ်ငွေ စည်းကမ်းအတိအကျ — ပြန်ဆပ်တဲ့နေ့မှ ဝင်ငွေအဖြစ် ရေတွက်တယ်။</p></div>
+      <div class="prodcard"><h3>🧾 Receipt + Report</h3><p>Myanmar receipt thermal ပုံနှိပ်, လက်ကား/လက်လီ ခွဲပြ, Excel/CSV export, ကာလအလိုက် အမြတ်/အရှုံး report။</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ RECAP (cyborgstudiomm.com/recap) ============ -->
+<div class="screen" id="scr-recap">
+  <div class="hero">
+    <div>
+      <span class="badge">🎬 cyborgstudiomm.com/recap</span>
+      <h1>Cyborg<span class="grad">Recap</span>MM</h1>
+      <p>ဖုန်းတစ်လုံးတည်းနဲ့ ရုပ်ရှင် recap video လုပ်နိုင်တဲ့ Android app — Termux, localhost, JSON copy/paste တွေ မလိုဘူး၊ app ထဲမှာပဲ အကုန်ပြီးတယ်။</p>
+      <div class="hbtns">
+        <button class="btn btn-cyan" onclick="alert('နမူနာ mockup ပါ — တကယ့် version မှာ APK download ဒီမှာ ရမယ်')">📥 Android APK ဆွဲမယ်</button>
+        <button class="btn btn-ghost" onclick="show('studio')">Web Studio လည်း ရှိတယ်</button>
+      </div>
+      <div class="stats">
+        <div><b>7</b><span>အဆင့် Wizard</span></div>
+        <div><b>3+</b><span>အသံ မိသားစု (Gemini/ElevenLabs/Clone)</span></div>
+        <div><b>100%</b><span>Render က ဖုန်းထဲမှာ</span></div>
+      </div>
+    </div>
+    <div class="player">
+      <div class="ttl"><span>App ထဲက Feature များ</span><span class="pill">ANDROID</span></div>
+      <div class="prow"><div class="play">✦</div><div><b>AI Recap Script</b><span>Gemini နဲ့ ဇာတ်လမ်း ပြန်ရေး/ဘာသာပြန်</span></div></div>
+      <div class="prow"><div class="play">▶</div><div><b>Live Preview Editor</b><span>Mirror, Zoom, Freeze, Preset အရောင်တွေ live ပြင်</span></div></div>
+      <div class="prow"><div class="play">🖼️</div><div><b>Poster / Thumbnail Maker</b><span>9:16 poster နဲ့ 16:9 thumbnail ထုတ်နိုင်</span></div></div>
+      <div class="prow"><div class="play">✂️</div><div><b>Scene Trim</b><span>Scene တွေ အလိုလို ဖြတ်ပြီး ရွေးပေး</span></div></div>
+    </div>
+  </div>
+  <section class="blk">
+    <div class="sec-h">Web မှာပါ သုံးချင်ရင်</div>
+    <div class="sec-s">ဖုန်းနဲ့ မဟုတ်ပဲ browser နဲ့ သုံးချင်သူတွေအတွက် AI Voice Studio web version လည်း တစ်ပြိုင်တည်း ဆောက်နေတယ် — Credit Points စနစ် အတူတူပဲ။</div>
+    <button class="btn btn-cyan" onclick="show('studio')">AI Voice Studio ဖွင့်မယ် →</button>
+  </section>
+</div>
+
+<!-- ============ MANAGEMENT TOOLS (cyborgstudiomm.com/management) ============ -->
+<div class="screen" id="scr-mgmt">
+  <div class="hero hero-mgmt">
+    <div>
+      <span class="badge">🧰 cyborgstudiomm.com/management</span>
+      <h1>Management <span class="grad">Tools</span></h1>
+      <p>လုပ်ငန်းတစ်ခုလုံးကို စီမံခန့်ခွဲဖို့ သီးသန့် software တွေ — POS နဲ့ မရောဘူး၊ တစ်ခုချင်းစီ သီးသန့် app အဖြစ် လာမယ်။ အခု roadmap အဖြစ် ကြိုတင် ကြေညာထားတာပါ။</p>
+      <div class="hbtns">
+        <button class="btn btn-cyan" onclick="toggleBot()">ဘယ် app အရင် လိုချင်လဲ ပြောပြမယ်</button>
+        <button class="btn btn-ghost" onclick="show('pos')">POS ကဏ္ဍ ကြည့်မယ်</button>
+      </div>
+      <div class="stats">
+        <div><b>8</b><span>Management App အစီအစဉ်</span></div>
+        <div><b>1st</b><span>HR က အရင် လာမယ်</span></div>
+        <div><b>နှစ်စဉ်</b><span>License ပုံစံ (Points မဟုတ်)</span></div>
+      </div>
+    </div>
+    <div class="player">
+      <div class="ttl"><span>ဘာလို့ သီးသန့် ကဏ္ဍလဲ</span><span class="pill">ROADMAP</span></div>
+      <div class="prow"><div class="play">✓</div><div><b>ဝယ်သူ သီးသန့်</b><span>HR manager, ဆေးရုံ/ကျောင်း စီမံသူတွေ အတွက်</span></div></div>
+      <div class="prow"><div class="play">✓</div><div><b>POS customer နဲ့ ချိတ်ဆက်</b><span>POS သုံးနေတဲ့ ဆိုင်တွေကို HR အရင် မိတ်ဆက်နိုင်</span></div></div>
+      <div class="prow"><div class="play">✓</div><div><b>နှစ်စဉ် License</b><span>လုပ်ငန်းတစ်ခုလုံး သုံးတာမို့ Points စနစ်နဲ့ မရော</span></div></div>
+    </div>
+  </div>
+
+  <section class="blk">
+    <div class="sec-h">Management App များ — ၈ မျိုး</div>
+    <div class="sec-s">အကုန်လုံး "မကြာမီ" အဆင့်ပါ။ ဆောက်မယ့် အစီအစဉ်အတိုင်း နံပါတ် တပ်ထားတယ်။ နာမည်ပုံစံက CyborgMM + နယ်ပယ် ဆိုပြီး တစ်ခုတည်း သွားမယ်။</div>
+    <div class="prodgrid">
+      <div class="prodcard mgmtcard"><div class="purl acc-teal">အဆင့် ၁ · မကြာမီ</div><h3>👥 CyborgMM HR</h3><p>HR & Payroll — ဝန်ထမ်း မှတ်တမ်း, တက်ရောက်/ခွင့်, လစာ တွက်ချက်မှု, OT နဲ့ နုတ်ယူငွေ အစုံ။</p><span class="soon">မကြာမီ လာမည်</span></div>
+      <div class="prodcard mgmtcard"><div class="purl acc-teal">အဆင့် ၂ · မကြာမီ</div><h3>🏥 CyborgMM Clinic</h3><p>Hospital & Clinic Management — လူနာ မှတ်တမ်း, appointment, ဆေးရုံ/ဆေးခန်း လုပ်ငန်းအဆင့်ဆင့်, ဆေး stock။</p><span class="soon">မကြာမီ လာမည်</span></div>
+      <div class="prodcard mgmtcard"><div class="purl acc-teal">အဆင့် ၃ · မကြာမီ</div><h3>🎓 CyborgMM School</h3><p>School & Tuition Management — ကျောင်းသား မှတ်တမ်း, အတန်း/အချိန်ဇယား, လခ ကောက်ခံမှု, တက်ရောက် စာရင်း။</p><span class="soon">မကြာမီ လာမည်</span></div>
+      <div class="prodcard mgmtcard"><div class="purl acc-teal">မကြာမီ</div><h3>📊 CyborgMM Accounting</h3><p>Full Accounting — စာရင်းအင်း အပြည့်အစုံ, ဝင်ငွေ/ထွက်ငွေ, အမြတ်/အရှုံး report, စာရင်းပိတ် လုပ်ငန်းတွေ။</p><span class="soon">မကြာမီ လာမည်</span></div>
+      <div class="prodcard mgmtcard"><div class="purl acc-teal">မကြာမီ</div><h3>💰 CyborgMM Microfinance</h3><p>Microfinance Management — ချေးငွေ ထုတ်ပေးမှု, ပြန်ဆပ် အစီအစဉ်, အဖွဲ့လိုက် ချေးငွေ မှတ်တမ်း။</p><span class="soon">မကြာမီ လာမည်</span></div>
+      <div class="prodcard mgmtcard"><div class="purl acc-teal">မကြာမီ</div><h3>🏠 CyborgMM Property</h3><p>Property Rental Management — အခန်း/တိုက်ခန်း ငှားရမ်း မှတ်တမ်း, လချုပ် ကောက်ခံမှု, စာချုပ် သက်တမ်း သတိပေး။</p><span class="soon">မကြာမီ လာမည်</span></div>
+      <div class="prodcard mgmtcard"><div class="purl acc-teal">မကြာမီ</div><h3>🚚 CyborgMM Delivery</h3><p>Delivery Company Management — parcel လက်ခံ/ပို့ဆောင် မှတ်တမ်း, driver လမ်းကြောင်း, COD စာရင်း။</p><span class="soon">မကြာမီ လာမည်</span></div>
+      <div class="prodcard mgmtcard"><div class="purl acc-teal">မကြာမီ</div><h3>🌾 CyborgMM Broker</h3><p>Commodity Brokerage — ကုန်စည် ပွဲရုံ စီမံခန့်ခွဲမှု, ဝယ်/ရောင်း မှတ်တမ်း, ကော်မရှင် တွက်ချက်မှု။</p><span class="soon">မကြာမီ လာမည်</span></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="sec-h">ဆောက်မယ့် အစီအစဉ်</div>
+    <div class="sec-s">အခု ဦးစားပေးက offline app တွေ (POS + Recap) အရင်ပါ။ Management Tools က အဲ့ဒီနောက်မှ တစ်ခု ချင်း လာမယ်။</div>
+    <div class="steps">
+      <div class="stepc"><div class="num">1</div><div><h3>CyborgMM HR</h3><p>ဈေးကွက် အကျယ်ဆုံးနဲ့ POS customer တွေနဲ့ အနီးဆုံး — ဝန်ထမ်းရှိတဲ့ ဆိုင်တိုင်း လိုတယ်။</p></div></div>
+      <div class="stepc"><div class="num">2</div><div><h3>CyborgMM Clinic</h3><p>တန်ဖိုး မြင့်ပေမယ့် လူနာ data ကို အထူး ဂရုစိုက်ရမှာမို့ ဒုတိယ အဆင့်မှာ သေချာ ဆောက်မယ်။</p></div></div>
+      <div class="stepc"><div class="num">3</div><div><h3>School + ကျန်တာတွေ</h3><p>School, Accounting, Microfinance, Property, Delivery, Broker — လိုအပ်ချက် အတိုင်း အစီအစဉ်နဲ့ ဆက်ထုတ်မယ်။</p></div></div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>© 2026 Cyborg Studio MM — UI နမူနာ v0.5 (အကြမ်း) · cyborgstudiomm.com — Home / POS / Studio / Recap / Management</footer>
+
+<!-- Customer Service AI Bot -->
+<button class="botfab" onclick="toggleBot()"><span class="bf">🤖</span><span class="dot"></span>Customer Service</button>
+<div class="botpanel" id="botPanel">
+  <div class="bot-hd"><div class="ba">🤖</div><div><b>Cyborg AI Bot</b><span><i></i>Customer Service · Online</span></div><button class="x" onclick="toggleBot()">✕</button></div>
+  <div class="bot-body" id="botBody">
+    <div class="msg bot">မင်္ဂလာပါ ခင်ဗျာ 🙏 ကျွန်တော် Cyborg Studio MM ရဲ့ AI Bot ပါ။ Credit Points, အသံထုတ်နည်း, ဈေးနှုန်း — သိချင်တာ မေးလို့ရပါတယ်။</div>
+  </div>
+  <div class="bot-q">
+    <button onclick="askBot('Credit Points ဘယ်လို ဝယ်ရမလဲ?')">Credit Points ဝယ်နည်း</button>
+    <button onclick="askBot('အသံ ဘယ်လို ထုတ်ရမလဲ?')">အသံ ထုတ်နည်း</button>
+    <button onclick="askBot('ဈေးနှုန်း သိချင်တယ်')">ဈေးနှုန်း</button>
+    <button onclick="askBot('Recap ဘယ်လို လုပ်ရမလဲ?')">Recap လုပ်နည်း</button>
+  </div>
+  <div class="bot-in"><input id="botInput" placeholder="မေးခွန်း ရိုက်ပါ..." onkeydown="if(event.key==='Enter')sendBot()"><button onclick="sendBot()">ပို့မယ်</button></div>
+</div>
+
+<script>
+const tools=[
+ {t:'AI အသံ ထုတ်မယ်',e:'AI Voice Generation',d:'စာရိုက်လိုက်တာနဲ့ အသံထွက်မယ်၊ အသံ ၁၂+ ထဲက ရွေးလို့ရတယ်',go:'tts',ic:'<path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
+ {t:'Voice Clone',e:'Voice Clone',d:'ကိုယ့်အသံကို clone လုပ်ပြီး ဘယ် script မဆို ပြောခိုင်းလို့ရတယ်',go:'',ic:'<circle cx="8" cy="8" r="3.2"/><path d="M3.5 20c.6-3.4 2.4-5 4.5-5s3.9 1.6 4.5 5M16 4.5c1.8.8 3 2.4 3 4.5M16.5 9.5c1 .5 1.7 1.5 1.9 2.8"/>'},
+ {t:'အသံမှ စာသား',e:'Speech to Text',d:'အသံ/ဗီဒီယို တင်လိုက်တာနဲ့ စာသားနဲ့ SRT အလိုလို ရမယ်',go:'',ic:'<path d="M4 6h16M4 12h10M4 18h13"/>'},
+ {t:'Auto Recap',e:'Auto Recap',d:'ရုပ်ရှင်/ဒရမ်မာကို recap video အဖြစ် အလိုလို ထုတ်ပေးတယ်',go:'',ic:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5l5 2.5-5 2.5z"/>'},
+ {t:'SRT ဘာသာပြန်',e:'SRT Translator',d:'Timing မပျက်၊ စာကြောင်းနံပါတ် မပျက် မြန်မာလို ပြန်ပေးတယ်',go:'',ic:'<path d="M4 6h9M8.5 4v2c0 3.5-2 6.5-4 8M6 9.5c.8 2 2.7 4 4.8 5M13 20l4.5-10L22 20M14.8 16.5h5.4"/>'}
+];
+document.getElementById('tools').innerHTML=tools.map(x=>`<div class="tool" onclick="${x.go?`show('${x.go}')`:`alert('v0.4 နမူနာမှာ ဒီ Tool က မပါသေးဘူး — နောက် version မှာ ပါမယ်')`}"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${x.ic}</svg></div><h3>${x.t}</h3><p>${x.d}</p><span class="open">ဖွင့်မယ် →</span></div>`).join('');
+// waveform
+const w=document.getElementById('wave');let wh='';
+for(let i=0;i<36;i++){const h=18+Math.round(Math.abs(Math.sin(i*.55))*44);wh+=`<i style="height:${h}px;animation-delay:${(i%9)*.09}s"></i>`}
+w.innerHTML=wh;
+// screens
+function showPoints(){show('studio');setTimeout(()=>{const el=document.getElementById('points');if(el)el.scrollIntoView({behavior:'smooth'})},80)}
+function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById('scr-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});if(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}}
+// chips: single-select per group + update genbar
+document.querySelectorAll('.chips').forEach(g=>{g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');updGen()})});
+function selText(group){const g=document.querySelector(`.chips[data-group="${group}"] .sel`);return g?g.textContent.replace('▶','').trim().split('·')[0].trim():''}
+function updGen(){const v=selText('voice'),s=selText('speed');if(v||s)document.getElementById('genVoice').textContent=`${v||'ကောင်း'} · ${s||'1.0x'}`}
+function updCount(){const t=document.getElementById('txt').value;document.getElementById('ccount').textContent=`${t.length.toLocaleString()} / 5,000`;const sec=Math.max(1,Math.round(t.length/13));document.getElementById('dur').textContent=`ခန့်မှန်း ~${sec} စက္ကန့်`}
+updCount();
+let playing=false;
+function playSample(el){playing=!playing;const old=el.textContent;el.textContent=playing?'❚❚':'▶';setTimeout(()=>{el.textContent=old==='▶'||old.includes('Listen')?'▶':old;playing=false},1600)}
+// fake generate
+function generate(){const bw=document.getElementById('barwrap'),bar=document.getElementById('bar'),bm=document.getElementById('barmeta');bw.style.display='block';bm.style.display='flex';document.getElementById('outEmpty').style.display='block';document.getElementById('outReady').style.display='none';let p=0;const iv=setInterval(()=>{p+=Math.random()*16+6;if(p>=100){p=100;clearInterval(iv);setTimeout(()=>{bw.style.display='none';bm.style.display='none';document.getElementById('outEmpty').style.display='none';document.getElementById('outReady').style.display='block';document.getElementById('btnListen').disabled=false;document.getElementById('btnDl').disabled=false;const sec=Math.max(1,Math.round(document.getElementById('txt').value.length/13));document.getElementById('outMeta').textContent=`0:${String(sec).padStart(2,'0')} · MP3`;document.querySelectorAll('.stp').forEach((s,i)=>{s.classList.toggle('act',i===3);s.classList.toggle('done',i<3)})},350)}bar.style.width=p+'%';document.getElementById('barpct').textContent=Math.floor(p)+'%'},180)}
+// Customer Service AI Bot (mock)
+function toggleBot(){document.getElementById('botPanel').classList.toggle('on')}
+function botReply(q){const s=q.toLowerCase();
+ if(s.includes('credit')||s.includes('point')||q.includes('ဝယ်'))return '1 Point = ၁၀၀ ကျပ် ပါ။ Credit Points ကို KBZPay / WavePay / AYA Pay နဲ့ ဝယ်လို့ရပါတယ်။ Points က အသံထုတ် ၁ ကြိမ်, Recap ၁ ကြိမ် စသဖြင့် သုံးတဲ့အပေါ် မူတည်ပြီး ဖြတ်ပါတယ် 🙏';
+ if(q.includes('ဈေး')||s.includes('price'))return 'အခမဲ့ အစီအစဉ်မှာ နေ့တိုင်း အခမဲ့ quota ရပါတယ်။ ပိုသုံးချင်ရင် Credit Points ဝယ်သုံးရုံပါပဲ — 1 Point = ၁၀၀ ကျပ်၊ လစဉ် subscription မလိုပါဘူး။';
+ if(q.includes('အသံ')||s.includes('tts'))return 'အသံထုတ်နည်းက လွယ်ပါတယ် — ၁။ TTS Studio ဖွင့် ၂။ စာရိုက် ၃။ အသံ chip ရွေး ၄။ အသံ ထုတ်မယ် နှိပ် ၅။ MP3 Download ဆွဲရုံပါပဲ။';
+ if(s.includes('recap'))return 'Auto Recap မှာ ဗီဒီယိုတင်ပြီး (သို့) YouTube/TikTok link ထည့်၊ ပြောမယ့်အသံနဲ့ Ratio (9:16 / 16:9) ရွေးပြီး Start Recap နှိပ်ရုံပါပဲ။';
+ if(s.includes('clone'))return 'Voice Clone မှာ ကိုယ့်အသံ sample (၁–၅ မိနစ်) တင်ပြီး နာမည်ပေးလိုက်ရင် clone အသံ ရပါပြီ။ ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံ ပဲ clone လုပ်ပါ။';
+ if(s.includes('srt'))return 'SRT Translate မှာ .srt ဖိုင်တင်ပြီး From/To ဘာသာရွေးရုံပါပဲ — timing နဲ့ စာကြောင်းနံပါတ် လုံးဝ မပျက်ပါဘူး။';
+ return 'ဟုတ်ကဲ့၊ မေးခွန်းကို မှတ်ထားပါတယ် 🙏 ဒီနမူနာမှာတော့ AI Bot က အခြေခံမေးခွန်းတွေပဲ ဖြေနိုင်သေးတယ်။ တကယ့် version မှာ မဖြေနိုင်ရင် Customer Service လူကိုယ်‌တိုင် ဆက်သွယ်ပေးပါမယ်။'}
+function pushMsg(t,me){const b=document.getElementById('botBody');const d=document.createElement('div');d.className='msg '+(me?'me':'bot');d.textContent=t;b.appendChild(d);b.scrollTop=b.scrollHeight}
+function askBot(q){if(!document.getElementById('botPanel').classList.contains('on'))toggleBot();pushMsg(q,true);setTimeout(()=>pushMsg(botReply(q),false),550)}
+function sendBot(){const i=document.getElementById('botInput');const q=i.value.trim();if(!q)return;i.value='';pushMsg(q,true);setTimeout(()=>pushMsg(botReply(q),false),550)}
+// EN/MM toggle (key strings)
+let en=false;const orig=new Map();
+function toggleLang(){en=!en;document.getElementById('langBtn').textContent=en?'MM':'EN';document.querySelectorAll('[data-en]').forEach(el=>{if(!orig.has(el))orig.set(el,el.textContent);el.textContent=en?el.dataset.en:orig.get(el)})}
+</script>
+</body>
+</html>
