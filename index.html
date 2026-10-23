@@ -1,25 +1,48 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="my" data-theme="day" data-font="pyidaungsu">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cyborg Studio MM — v0.5</title>
+<title>Cyborg Studio MM — POS · AI Voice · Recap</title>
+<meta name="description" content="Cyborg Studio MM — မြန်မာလုပ်ငန်းတွေနဲ့ creator တွေအတွက် offline-first software: CyborgMM POS, AI Voice Studio နဲ့ CyborgRecapMM။">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyborgstudiomm.com/">
+<meta property="og:title" content="Cyborg Studio MM — POS · AI Voice · Recap">
+<meta property="og:description" content="CyborgMM POS · AI Voice Studio · CyborgRecapMM — မြန်မာလုပ်ငန်းတွေနဲ့ creator တွေအတွက် offline-first software မိသားစု။">
+<meta property="og:image" content="https://cyborgstudiomm.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script>(function(){try{var t=localStorage.getItem('csmm-theme');if(t==='night'||t==='neon')document.documentElement.setAttribute('data-theme',t)}catch(e){}try{var f=localStorage.getItem('csmm-font');if(f==='padauk'||f==='noto'||f==='pyidaungsu')document.documentElement.setAttribute('data-font',f)}catch(e){}})();</script>
 <style>
-:root{--bg:#f4f7fb;--card:#fff;--ink:#0f172a;--mut:#64748b;--line:#e6edf5;--blue:#0284c7;--blue2:#0369a1;--cyan:#06b6d4;--soft:#e0f2fe;--radius:20px;--shadow:0 10px 30px rgba(2,132,199,.08),0 2px 8px rgba(15,23,42,.04)}
+:root{--bg:#eaf6ff;--card:#fff;--ink:#0b1526;--mut:#5d6f8a;--line:#d6e9f8;--blue:#0096d6;--blue2:#0070d1;--cyan:#00b8d9;--pink:#ff4d8d;--orange:#ff8f2e;--red:#ff5252;--purple:#b388ff;--vivid-blue:#448aff;--teal:#2fd4d9;--green:#4fd964;--gold:#ffd740;--grad:linear-gradient(135deg,#00b8d9 0%,#448aff 48%,#ff4d8d 100%);--grad-warm:linear-gradient(135deg,#ff8f2e 0%,#ff5252 55%,#ff4d8d 100%);--soft:#e2f5ff;--radius:20px;--shadow:0 12px 32px rgba(0,150,214,.13),0 3px 10px rgba(255,77,141,.06);--hdr:rgba(255,255,255,.88);--hover:#eaf4ff;--field:#f7fcff;--track:#dbeeff;--num-n:#e2f0ff;--botbg:#f2f9ff;color-scheme:light}
+[data-theme="night"]{--bg:#0a101e;--card:#131c2f;--ink:#f3f8ff;--mut:#a7bad6;--line:#263a5c;--blue:#2fd4d9;--blue2:#7fd4ea;--cyan:#ff4d8d;--soft:#1b2a47;--shadow:0 14px 36px rgba(0,0,0,.48),0 4px 16px rgba(255,77,141,.08);--hdr:rgba(10,16,30,.88);--hover:#1a2a49;--field:#0d1729;--track:#263a5c;--num-n:#24365a;--botbg:#0c1526;color-scheme:dark}
+[data-theme="neon"]{--bg:#05060f;--card:#0a1024;--ink:#eefaff;--mut:#93aee0;--line:#1d3a6e;--blue:#00e5ff;--blue2:#8ef4ff;--cyan:#ff3df0;--grad:linear-gradient(135deg,#00e5ff 0%,#448aff 45%,#ff3df0 100%);--grad-warm:linear-gradient(135deg,#ffb300 0%,#ff5252 52%,#ff3df0 100%);--soft:#0d2149;--shadow:0 12px 34px rgba(0,229,255,.13),0 3px 18px rgba(255,61,240,.12);--hdr:rgba(5,6,15,.89);--hover:#101a3a;--field:#060a1a;--track:#1d3a6e;--num-n:#12234a;--botbg:#060a18;color-scheme:dark}
+.themesw{display:flex;gap:2px;background:var(--hover);border:1.5px solid var(--line);border-radius:999px;padding:3px;flex:none}
+.themesw button{width:34px;height:30px;border-radius:999px;font-size:15px;display:grid;place-items:center;padding:0!important;line-height:1;color:var(--ink)}
+.themesw button.on{background:var(--blue);box-shadow:0 4px 12px rgba(2,132,199,.35)}
+@media(max-width:640px){.cta{display:none}.logo{font-size:16px}}
+@media(max-width:1300px){nav button{padding:9px 10px}.logo{font-size:17px}.hd{gap:10px}nav{gap:4px}.cta{white-space:nowrap}}
+[data-theme="night"] nav button.on,[data-theme="night"] .chip.sel,[data-theme="night"] .card h3 .n,[data-theme="night"] .stp.act .n{color:#082f49}
+[data-theme="neon"] nav button.on,[data-theme="neon"] .chip.sel,[data-theme="neon"] .card h3 .n,[data-theme="neon"] .stp.act .n{color:#03141c}
+[data-theme="night"] .soon,[data-theme="neon"] .soon{background:rgba(20,184,166,.13);color:#2dd4bf;border-color:rgba(45,212,191,.45)}
+[data-theme="night"] .catchips span.done,[data-theme="neon"] .catchips span.done{background:rgba(16,185,129,.13);border-color:rgba(52,211,153,.45);color:#34d399}
+[data-theme="night"] .acc-teal,[data-theme="neon"] .acc-teal{background:rgba(20,184,166,.22)!important;color:#5eead4!important}
+[data-theme="neon"] .tool,[data-theme="neon"] .card,[data-theme="neon"] .stepc,[data-theme="neon"] .tcard,[data-theme="neon"] .prodcard{border-color:rgba(0,224,255,.30)}
+[data-theme="neon"] .hero{box-shadow:0 0 46px rgba(0,224,255,.20),inset 0 0 70px rgba(255,61,240,.05)}
+[data-theme="neon"] .sec-h{background:linear-gradient(90deg,#00e0ff,#ff3df0);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="neon"] .themesw button.on{background:linear-gradient(135deg,#00b8d9,#e021d8);box-shadow:0 0 14px rgba(0,224,255,.55)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans Myanmar','Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;-webkit-font-smoothing:antialiased}
+body{font-family:var(--mmfont),'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;-webkit-font-smoothing:antialiased}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 /* Header */
-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:50;background:var(--hdr);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .hd{display:flex;align-items:center;gap:16px;height:68px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.2px}
 .logo-dot{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#fff;font-size:19px;box-shadow:0 8px 18px rgba(2,132,199,.35)}
 nav{margin-left:auto;display:flex;align-items:center;gap:6px}
 nav button{padding:9px 14px;border-radius:999px;font-size:15px;font-weight:600;color:var(--mut)}
-nav button:hover{color:var(--ink);background:#f1f5f9}
+nav button:hover{color:var(--ink);background:var(--hover)}
 nav button.on{color:#fff;background:var(--blue)}
 .lang{border:1.5px solid var(--line)!important;font-weight:800!important;color:var(--ink)!important}
 .cta{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff!important;padding:11px 20px!important;box-shadow:0 8px 20px rgba(2,132,199,.3)}
@@ -57,7 +80,7 @@ section.blk{padding:38px 0 6px}
 .sec-s{color:var(--mut);font-size:15px;margin-bottom:20px}
 .grid5{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
 .tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transition:.2s;cursor:pointer}
-.tool:hover{transform:translateY(-4px);border-color:#bae6fd}
+.tool:hover{transform:translateY(-4px);border-color:var(--cyan)}
 .tool .ic{width:48px;height:48px;border-radius:14px;background:var(--soft);display:grid;place-items:center;color:var(--blue2);margin-bottom:12px}
 .tool h3{font-size:16.5px;line-height:1.6}
 .tool p{color:var(--mut);font-size:13.5px;line-height:1.8;min-height:48px}
@@ -74,8 +97,8 @@ section.blk{padding:38px 0 6px}
 .screen{display:none}.screen.on{display:block;animation:fade .35s ease}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .stepper{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 18px}
-.stp{display:flex;align-items:center;gap:9px;background:#fff;border:1.5px solid var(--line);padding:9px 16px 9px 9px;border-radius:999px;font-weight:700;font-size:14.5px;color:var(--mut)}
-.stp .n{width:28px;height:28px;border-radius:50%;background:#e2e8f0;color:var(--mut);display:grid;place-items:center;font-size:14px}
+.stp{display:flex;align-items:center;gap:9px;background:var(--card);border:1.5px solid var(--line);padding:9px 16px 9px 9px;border-radius:999px;font-weight:700;font-size:14.5px;color:var(--mut)}
+.stp .n{width:28px;height:28px;border-radius:50%;background:var(--num-n);color:var(--mut);display:grid;place-items:center;font-size:14px}
 .stp.act{border-color:var(--blue);color:var(--ink)}.stp.act .n{background:var(--blue);color:#fff}
 .stp.done .n{background:#0891b2;color:#fff}
 .tts-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start}
@@ -84,12 +107,12 @@ section.blk{padding:38px 0 6px}
 .card h3{font-size:17px;display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .card h3 .n{width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:14px;flex:none}
 .card .hint{color:var(--mut);font-size:13.5px;margin-bottom:12px}
-textarea{width:100%;min-height:150px;border:1.5px solid var(--line);border-radius:14px;padding:16px;font-family:inherit;font-size:16px;line-height:1.9;resize:vertical;background:#fbfdff}
+textarea{width:100%;min-height:150px;border:1.5px solid var(--line);border-radius:14px;padding:16px;font-family:inherit;font-size:16px;line-height:1.9;resize:vertical;background:var(--field);color:var(--ink)}
 textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(2,132,199,.12)}
 .meta{display:flex;justify-content:space-between;color:var(--mut);font-size:13px;margin-top:6px}
 .glabel{font-weight:700;font-size:14.5px;margin:16px 0 8px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{display:flex;align-items:center;gap:9px;border:1.5px solid var(--line);background:#fff;padding:8px 14px 8px 8px;border-radius:999px;font-weight:600;font-size:14.5px;transition:.15s}
+.chip{display:flex;align-items:center;gap:9px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px 8px 8px;border-radius:999px;font-weight:600;font-size:14.5px;transition:.15s}
 .chip:hover{border-color:#7dd3fc}
 .chip.sel{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 8px 18px rgba(2,132,199,.3)}
 .ava{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#38bdf8,#0369a1);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800}
@@ -98,19 +121,32 @@ textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(2
 .miniplay{width:26px;height:26px;border-radius:50%;background:var(--soft);color:var(--blue2);display:grid;place-items:center;font-size:11px}
 .sticky-out{position:sticky;top:88px}
 .out-empty{border:2px dashed var(--line);border-radius:16px;padding:28px 16px;text-align:center;color:var(--mut);font-size:14px}
-.barwrap{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:14px 0 6px;display:none}
+.barwrap{height:10px;background:var(--track);border-radius:99px;overflow:hidden;margin:14px 0 6px;display:none}
 .bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:99px;transition:width .2s}
 .genbar{position:sticky;bottom:14px;background:rgba(15,23,42,.94);backdrop-filter:blur(10px);border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:14px;color:#fff;box-shadow:0 18px 36px rgba(15,23,42,.35);margin-top:6px;z-index:20}
 .genbar .info{font-size:13.5px;color:#cbd5e1;line-height:1.6}.genbar .info b{color:#fff;font-size:15px}
 .genbtn{margin-left:auto;background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff;font-size:17px;font-weight:800;padding:15px 34px;border-radius:14px;box-shadow:0 10px 24px rgba(6,182,212,.45);white-space:nowrap}
 .genbtn:active{transform:scale(.98)}
 .dl{display:flex;gap:10px;margin-top:12px}
-.dl button{flex:1;padding:12px;border-radius:12px;font-weight:700;font-size:14.5px;border:1.5px solid var(--line);background:#fff}
+.dl button{flex:1;padding:12px;border-radius:12px;font-weight:700;font-size:14.5px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
 .dl button.pri{background:var(--blue);border-color:var(--blue);color:#fff}
 .dl button:disabled{opacity:.45;cursor:not-allowed}
 .hist{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
 .hist:last-child{border:none}.hist span{margin-left:auto;color:var(--mut);font-size:13px}
 footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;color:var(--mut);font-size:13.5px;text-align:center}
+.socrow{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-bottom:15px;padding:0 12px}
+.soc{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--ink);font-size:13.5px;font-weight:700;text-decoration:none;box-shadow:0 2px 8px rgba(15,23,42,.05);transition:.18s}
+.soc:hover{transform:translateY(-2px);border-color:var(--blue);color:var(--blue2)}
+.soc svg{width:17px;height:17px;fill:currentColor;flex:none}
+.ptshelp{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow)}
+.ptshelp span{font-size:14.5px;font-weight:700;color:var(--ink)}
+.bot-contact{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 14px 2px;background:var(--botbg)}
+.bot-contact span{font-size:12.5px;color:var(--mut);font-weight:700}
+.bot-contact a{display:inline-flex;align-items:center;gap:6px;color:#fff;font-size:13px;font-weight:800;padding:7px 13px;border-radius:999px;text-decoration:none;transition:.18s}
+.bot-contact a:hover{transform:translateY(-1px);opacity:.92}
+.bot-contact a svg{width:15px;height:15px;fill:#fff;flex:none}
+.bot-contact .bc-m{background:#0084ff}
+.bot-contact .bc-t{background:#2aabee}
 .ctaband{margin-top:38px;background:linear-gradient(135deg,var(--blue2),var(--blue) 55%,var(--cyan));border-radius:26px;color:#fff;padding:40px;text-align:center}
 .ctaband h2{font-size:27px;line-height:1.6}.ctaband p{color:#e0f2fe;margin:6px 0 20px}
 /* Customer Service AI Bot */
@@ -118,7 +154,7 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
 .botfab:hover{transform:translateY(-2px)}
 .botfab .bf{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:19px}
 .botfab .dot{width:9px;height:9px;border-radius:50%;background:#4ade80;border:2px solid #fff;margin-left:-16px;margin-top:-22px;z-index:1}
-.botpanel{position:fixed;right:20px;bottom:88px;z-index:91;width:350px;max-width:calc(100vw - 32px);background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 24px 60px rgba(15,23,42,.28);overflow:hidden;display:none;flex-direction:column}
+.botpanel{position:fixed;right:20px;bottom:88px;z-index:91;width:350px;max-width:calc(100vw - 32px);background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 24px 60px rgba(15,23,42,.28);overflow:hidden;display:none;flex-direction:column}
 .botpanel.on{display:flex;animation:fade .25s ease}
 .bot-hd{background:linear-gradient(135deg,#0c4a6e,var(--blue) 60%,var(--cyan));color:#fff;padding:16px 18px;display:flex;align-items:center;gap:11px}
 .bot-hd .ba{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:20px;flex:none}
@@ -126,20 +162,24 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
 .bot-hd span{font-size:12.5px;color:#bae6fd;display:flex;align-items:center;gap:6px}
 .bot-hd span i{width:8px;height:8px;border-radius:50%;background:#4ade80;display:inline-block}
 .bot-hd .x{margin-left:auto;color:#fff;font-size:19px;opacity:.85;padding:4px 8px}
-.bot-body{padding:16px;height:300px;overflow-y:auto;background:#f8fafc;display:flex;flex-direction:column;gap:9px}
+.bot-body{padding:16px;height:300px;overflow-y:auto;background:var(--botbg);display:flex;flex-direction:column;gap:9px}
 .msg{max-width:82%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.8}
-.msg.bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start;box-shadow:0 2px 6px rgba(15,23,42,.04)}
+.msg.bot{background:var(--card);color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start;box-shadow:0 2px 6px rgba(15,23,42,.04)}
+.msg.bot{white-space:pre-line}
 .msg.me{background:var(--blue);color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
-.bot-q{display:flex;flex-wrap:wrap;gap:7px;padding:11px 14px 4px;background:#f8fafc}
-.bot-q button{border:1.5px solid #bae6fd;background:#f0f9ff;color:var(--blue2);font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px}
-.bot-in{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:#fff}
-.bot-in input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font-family:inherit;font-size:14px;min-width:0}
+.bot-q{display:flex;flex-wrap:wrap;gap:7px;padding:11px 14px 4px;background:var(--botbg)}
+.bot-q button{border:1.5px solid var(--line);background:var(--soft);color:var(--blue2);font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px}
+.chap{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card);margin-bottom:8px;font-family:inherit;font-size:14.5px;color:var(--ink);cursor:pointer}
+.chap:hover{border-color:var(--blue)}
+.chap .tm{flex:none;font-weight:800;color:var(--blue2);background:var(--soft);border-radius:999px;padding:3px 10px;font-size:13px}
+.bot-in{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:var(--card)}
+.bot-in input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font-family:inherit;font-size:14px;min-width:0;background:var(--field);color:var(--ink)}
 .bot-in input:focus{outline:none;border-color:var(--blue)}
 .bot-in button{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-weight:800;padding:11px 17px;border-radius:12px}
 
 .prodgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
 .prodcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:.2s;cursor:pointer}
-.prodcard:hover{transform:translateY(-4px);border-color:#bae6fd}
+.prodcard:hover{transform:translateY(-4px);border-color:var(--cyan)}
 .prodcard h3{font-size:17.5px;margin-bottom:6px}
 .prodcard p{color:var(--mut);font-size:14px;line-height:1.85}
 .prodcard .open{color:var(--blue);font-weight:700;font-size:14px;margin-top:10px;display:inline-block}
@@ -153,18 +193,115 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
 .acc-teal{background:#ccfbf1!important;color:#0f766e!important}
 .mgmtcard{border-top:4px solid #14b8a6}
 .soon{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:800;color:#0f766e;background:#f0fdfa;border:1.5px solid #99f6e4;padding:4px 12px;border-radius:999px}
+
+
+/* ===== Burmese font picker: Pyidaungsu (default, self-hosted) / Padauk (self-hosted) / Noto (Google Fonts) ===== */
+@font-face{font-family:'Pyidaungsu';src:url('fonts/Pyidaungsu-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Pyidaungsu';src:url('fonts/Pyidaungsu-Bold.ttf') format('truetype');font-weight:700 900;font-display:swap}
+@font-face{font-family:'Padauk';src:url('fonts/Padauk-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Padauk';src:url('fonts/Padauk-Bold.ttf') format('truetype');font-weight:700 900;font-display:swap}
+:root{--mmfont:'Pyidaungsu','Noto Sans Myanmar'}
+[data-font="padauk"]{--mmfont:'Padauk','Noto Sans Myanmar'}
+[data-font="noto"]{--mmfont:'Noto Sans Myanmar'}
+.fontsw button{width:auto;padding:0 11px!important;font-size:12.5px;font-weight:700;white-space:nowrap}
+@media(max-width:1300px){.fontsw button{padding:0 7px!important;font-size:11.5px}}
+.sfxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:10px;margin-top:14px}
+.sfxpad{position:relative;border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:14px;padding:18px 8px 12px;font-size:27px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:7px;user-select:none}
+.sfxpad span{font-size:13px;font-weight:700;font-family:inherit}
+.sfxpad:active{transform:scale(.96)}
+.sfxdl{position:absolute;top:6px;right:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;font-size:12px;padding:2px 7px;cursor:pointer;font-family:inherit}
+/* ===== Free Tools bundle (Zawgyi / SRT / Resize / Trim / Frame / QR / EdgeTTS / STT) ===== */
+.tin{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:15px;background:var(--field);color:var(--ink)}
+.pvid{width:100%;border-radius:12px;border:1px solid var(--line);background:#000}
+.qrwrap{background:#fff;padding:16px;border-radius:14px;display:none;line-height:0}
+.numrow{display:flex;gap:12px;flex-wrap:wrap}
+.numrow>label{flex:1;min-width:130px}
+/* Recap vivid palette layer (2026-10-21): cyan/blue -> pink brand gradient + warm Recap accents */
+.logo span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+.logo-dot{background:var(--grad);box-shadow:0 10px 22px rgba(0,184,217,.30),0 8px 20px rgba(255,77,141,.22)}
+nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,77,141,.25)}
+.cta{background:var(--grad);box-shadow:0 10px 24px rgba(0,184,217,.28),0 8px 22px rgba(255,77,141,.24)}
+.hero{background:radial-gradient(760px 360px at 88% -12%,rgba(255,77,141,.58),transparent 62%),radial-gradient(640px 340px at 0% 112%,rgba(255,143,46,.50),transparent 58%),radial-gradient(520px 280px at 48% 0%,rgba(47,212,217,.35),transparent 60%),linear-gradient(135deg,#0a101e 0%,#102a56 58%,#123a6d 100%);box-shadow:0 22px 55px rgba(10,16,30,.22)}
+.hero h1 .grad{background:linear-gradient(90deg,#2fd4d9 0%,#448aff 38%,#ff4d8d 72%,#ff8f2e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.badge{border-color:rgba(255,215,64,.42);background:rgba(255,143,46,.16)}
+.pill{background:rgba(255,143,46,.22);color:#ffd740;border-color:rgba(255,215,64,.45)}
+.stats span{color:#ffd740}
+.btn-cyan{background:var(--grad);box-shadow:0 14px 30px rgba(0,184,217,.30),0 10px 26px rgba(255,77,141,.28)}
+.btn-ghost{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.06)}
+.wave i{background:linear-gradient(180deg,#2fd4d9,#448aff 55%,#ff4d8d)}
+.play{background:var(--grad);box-shadow:0 8px 18px rgba(255,77,141,.28)}
+.prow .tag{color:#ffd740;border-color:rgba(255,215,64,.40)}
+.tool .ic{background:linear-gradient(135deg,rgba(0,184,217,.18),rgba(255,77,141,.18));box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+.tool:hover{border-color:#ff4d8d;box-shadow:0 16px 34px rgba(255,77,141,.13),0 6px 18px rgba(0,184,217,.10)}
+.prodcard:hover{border-color:#ff4d8d;box-shadow:0 16px 34px rgba(255,77,141,.12),0 6px 18px rgba(0,184,217,.10)}
+.num{background:var(--grad-warm);box-shadow:0 8px 18px rgba(255,82,82,.25)}
+.stp.act .n{background:var(--grad-warm)}
+.stp.done .n{background:#2fd4d9}
+.card h3 .n{background:var(--grad-warm)}
+.chip.sel{background:var(--grad);border-color:transparent;box-shadow:0 10px 22px rgba(255,77,141,.25)}
+.ava{background:linear-gradient(135deg,#ff8f2e,#ff4d8d)}
+.miniplay{background:linear-gradient(135deg,rgba(255,143,46,.20),rgba(255,77,141,.20));color:#ff4d8d}
+.bar{background:linear-gradient(90deg,#00b8d9,#448aff,#ff4d8d,#ff8f2e)}
+.genbar{background:linear-gradient(135deg,rgba(10,16,30,.97),rgba(18,42,86,.94));border:1px solid rgba(127,212,234,.25)}
+.genbtn{background:var(--grad);box-shadow:0 12px 28px rgba(255,77,141,.32)}
+.dl button.pri{background:var(--grad);border-color:transparent}
+.stars{color:#ffb300}
+.ctaband{background:radial-gradient(600px 240px at 90% 0%,rgba(255,215,64,.45),transparent 55%),linear-gradient(135deg,#00b8d9,#448aff 48%,#ff4d8d);box-shadow:0 22px 50px rgba(68,138,255,.20),0 14px 34px rgba(255,77,141,.18)}
+.ctaband p{color:#eaf7ff}
+.botfab{background:var(--grad);box-shadow:0 18px 38px rgba(0,184,217,.30),0 12px 30px rgba(255,77,141,.30)}
+.botfab .dot{background:#4fd964}
+.bot-hd{background:linear-gradient(135deg,#102a56,#00b8d9 45%,#ff4d8d)}
+.bot-hd span i{background:#4fd964}
+.msg.me{background:var(--grad)}
+.hero-mgmt{background:radial-gradient(700px 320px at 85% -10%,rgba(79,217,100,.42),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(255,143,46,.38),transparent 55%),linear-gradient(135deg,#071a1d,#0f766e)}
+.mgmtcard{border-top:4px solid #2fd4d9}
+.soon{color:#00875a;background:#eafff5;border-color:#4fd964}
+
+/* Night vs Neon separation (2026-10-21): Night = calm navy/blue, Neon = black + electric glow */
+/* --- NIGHT: calm deep-sea blue, pink removed from the loud spots --- */
+[data-theme="night"] .hero{background:radial-gradient(700px 320px at 85% -10%,rgba(47,212,217,.34),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(68,138,255,.38),transparent 55%),linear-gradient(135deg,#0a101e,#0d2f57);box-shadow:0 22px 55px rgba(3,8,20,.5)}
+[data-theme="night"] .hero h1 .grad{background:linear-gradient(90deg,#2fd4d9,#448aff);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="night"] .btn-cyan,[data-theme="night"] .cta,[data-theme="night"] .genbtn,[data-theme="night"] nav button.on,[data-theme="night"] .chip.sel{background:linear-gradient(135deg,#0891b2,#2563eb);box-shadow:0 12px 26px rgba(8,145,178,.35)}
+[data-theme="night"] .play{background:linear-gradient(135deg,#0891b2,#2563eb);box-shadow:0 8px 18px rgba(8,145,178,.35)}
+[data-theme="night"] .wave i{background:linear-gradient(180deg,#2fd4d9,#2563eb)}
+[data-theme="night"] .num,[data-theme="night"] .stp.act .n,[data-theme="night"] .card h3 .n{background:linear-gradient(135deg,#0891b2,#2563eb);box-shadow:none}
+[data-theme="night"] .ava{background:linear-gradient(135deg,#0ea5c6,#2563eb)}
+[data-theme="night"] .stats span{color:#7fd4ea}
+[data-theme="night"] .pill{background:rgba(47,212,217,.16);color:#7fd4ea;border-color:rgba(47,212,217,.4)}
+[data-theme="night"] .prow .tag{color:#7fd4ea;border-color:rgba(127,212,234,.35)}
+[data-theme="night"] .badge{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.22)}
+[data-theme="night"] .botfab,[data-theme="night"] .bot-hd{background:linear-gradient(135deg,#0d2f57,#0891b2 55%,#2563eb);box-shadow:0 16px 34px rgba(8,145,178,.4)}
+[data-theme="night"] .ctaband{background:linear-gradient(135deg,#0d2f57,#0891b2 55%,#2563eb);box-shadow:0 22px 50px rgba(3,8,20,.45)}
+[data-theme="night"] .logo span{background:linear-gradient(90deg,#2fd4d9,#448aff);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+[data-theme="night"] .tool:hover,[data-theme="night"] .prodcard:hover{border-color:#2fd4d9;box-shadow:0 16px 34px rgba(8,145,178,.18)}
+[data-theme="night"] .bar{background:linear-gradient(90deg,#2fd4d9,#448aff)}
+[data-theme="night"] .msg.me{background:linear-gradient(135deg,#0891b2,#2563eb)}
+/* --- NEON: black stage, electric cyan + magenta, visible glow --- */
+[data-theme="neon"] body{background-image:radial-gradient(900px 520px at 105% -5%,rgba(255,61,240,.10),transparent 60%),radial-gradient(900px 520px at -5% 100%,rgba(0,229,255,.10),transparent 60%);background-attachment:fixed}
+[data-theme="neon"] header{border-bottom:1px solid rgba(0,229,255,.45);box-shadow:0 6px 24px rgba(0,229,255,.12)}
+[data-theme="neon"] .hero{box-shadow:0 0 60px rgba(0,229,255,.28),0 0 90px rgba(255,61,240,.14),inset 0 0 80px rgba(255,61,240,.07)}
+[data-theme="neon"] .tool,[data-theme="neon"] .card,[data-theme="neon"] .stepc,[data-theme="neon"] .tcard,[data-theme="neon"] .prodcard{border-color:rgba(0,229,255,.45);box-shadow:0 0 0 1px rgba(0,229,255,.08),0 10px 30px rgba(0,229,255,.10),0 4px 18px rgba(255,61,240,.08)}
+[data-theme="neon"] .tool:hover,[data-theme="neon"] .prodcard:hover{border-color:#ff3df0;box-shadow:0 0 26px rgba(255,61,240,.35),0 14px 34px rgba(0,229,255,.15)}
+[data-theme="neon"] .sec-h{text-shadow:0 0 24px rgba(0,229,255,.35)}
+[data-theme="neon"] .play{box-shadow:0 0 18px rgba(255,61,240,.55)}
+[data-theme="neon"] .num,[data-theme="neon"] .card h3 .n,[data-theme="neon"] .stp.act .n{box-shadow:0 0 16px rgba(255,82,82,.5)}
+[data-theme="neon"] .botfab{box-shadow:0 0 30px rgba(0,229,255,.45),0 0 44px rgba(255,61,240,.30)}
+.botfab .bf{background:#fff}.bot-hd .ba{background:#fff}.bf svg{width:23px;height:23px;display:block}.ba svg{width:26px;height:26px;display:block}
 </style>
 </head>
 <body>
 <header><div class="wrap hd">
-  <div class="logo"><svg class="logosvg" viewBox="0 0 120 120"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0284c7"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><path d="M 85.4 31.8 A 38 38 0 1 0 85.4 88.2" fill="none" stroke="url(#hg)" stroke-width="15" stroke-linecap="round"/><rect x="38" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><rect x="51" y="40" width="8.5" height="40" rx="4.25" fill="url(#hg)"/><rect x="64" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><line x1="68.75" y1="60" x2="84" y2="60" stroke="#06b6d4" stroke-width="3.5"/><circle cx="90" cy="60" r="5.5" fill="#06b6d4"/><circle cx="85.4" cy="31.8" r="6" fill="#ffffff" stroke="#0284c7" stroke-width="4"/><circle cx="85.4" cy="88.2" r="6" fill="#ffffff" stroke="#06b6d4" stroke-width="4"/></svg>Cyborg Studio <span style="color:var(--blue)">MM</span></div>
+  <div class="logo"><svg class="logosvg" viewBox="0 0 120 120"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00b8d9"/><stop offset=".52" stop-color="#448aff"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs><path d="M 85.4 31.8 A 38 38 0 1 0 85.4 88.2" fill="none" stroke="url(#hg)" stroke-width="15" stroke-linecap="round"/><rect x="38" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><rect x="51" y="40" width="8.5" height="40" rx="4.25" fill="url(#hg)"/><rect x="64" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><line x1="68.75" y1="60" x2="84" y2="60" stroke="#ff4d8d" stroke-width="3.5"/><circle cx="90" cy="60" r="5.5" fill="#ff4d8d"/><circle cx="85.4" cy="31.8" r="6" fill="#ffffff" stroke="#00b8d9" stroke-width="4"/><circle cx="85.4" cy="88.2" r="6" fill="#ffffff" stroke="#ff4d8d" stroke-width="4"/></svg>Cyborg Studio <span style="color:var(--blue)">MM</span></div>
   <nav>
     <button class="on hideM" onclick="show('home',this)">ပင်မ</button>
     <button class="hideM" onclick="show('pos',this)">POS</button>
     <button class="hideM" onclick="show('studio',this)">AI Voice Studio</button>
     <button class="hideM" onclick="show('recap',this)">Recap App</button>
+    <button class="hideM" onclick="show('guide',this)">📖 Guide</button>
     <button class="hideM" onclick="show('mgmt',this)">Management</button>
     <button class="hideM" onclick="showPoints()">Credit Points</button>
+    <div class="themesw" role="group" aria-label="Theme"><button data-t="day" class="on" onclick="setTheme('day')" title="Day">☀️</button><button data-t="night" onclick="setTheme('night')" title="Night">🌙</button><button data-t="neon" onclick="setTheme('neon')" title="Neon">⚡</button></div>
+    <div class="themesw fontsw" role="group" aria-label="Font"><button data-f="pyidaungsu" class="on" onclick="setFont('pyidaungsu')" title="Pyidaungsu">ပြည်ထောင်စု</button><button data-f="padauk" onclick="setFont('padauk')" title="Padauk">Padauk</button><button data-f="noto" onclick="setFont('noto')" title="Noto Sans Myanmar">Noto</button></div>
     <button class="lang" id="langBtn" onclick="toggleLang()">EN</button>
     <button class="cta" onclick="show('studio')">အခမဲ့ စသုံးမယ်</button>
   </nav>
@@ -195,7 +332,7 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
       <div class="prow" style="cursor:pointer" onclick="show('studio')"><div class="play">🎙️</div><div><b>AI Voice Studio</b><span>TTS · Clone · Recap · SRT</span></div><span class="tag">/studio</span></div>
       <div class="prow" style="cursor:pointer" onclick="show('recap')"><div class="play">🎬</div><div><b>CyborgRecapMM</b><span>ဖုန်းထဲ Recap လုပ်တဲ့ Android app</span></div><span class="tag">/recap</span></div>
       <div class="prow" style="cursor:pointer" onclick="show('mgmt')"><div class="play">🧰</div><div><b>Management Tools</b><span>HR · Clinic · School အပါ ၈ မျိုး (မကြာမီ)</span></div><span class="tag">/management</span></div>
-      <div class="prow"><div class="play">🪙</div><div><b>Credit Points</b><span>Pay as you go · 1 Point = ၁၀၀ ကျပ်</span></div><span class="tag">PAYG</span></div>
+      <div class="prow"><div class="play">🪙</div><div><b>Credit Points</b><span>Pay as you go · 1 Point = ၁ ကျပ်</span></div><span class="tag">PAYG</span></div>
     </div>
   </div>
 
@@ -230,15 +367,7 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
     </div>
   </section>
 
-  <section class="blk">
-    <div class="sec-h">အခုချိန် ဦးစားပေး လုပ်နေတာတွေ</div>
-    <div class="sec-s">အစီအစဉ်အတိုင်း တစ်ဆင့်ချင်း သွားနေတယ်။</div>
-    <div class="steps">
-      <div class="stepc"><div class="num">1</div><div><h3>Offline App တွေ အရင်</h3><p>အခု အားထည့်နေတာက POS နဲ့ Recap offline app တွေ — internet မရှိလည်း အလုပ် မရပ်ဘူး။</p></div></div>
-      <div class="stepc"><div class="num">2</div><div><h3>Domain + Website</h3><p>cyborgstudiomm.com နဲ့ ဒီ website — ထုတ်ကုန်အားလုံး တစ်နေရာတည်းမှာ ကဏ္ဍခွဲပြီး ပြမယ်။</p></div></div>
-      <div class="stepc"><div class="num">3</div><div><h3>Users များလာရင် VPS Cloud</h3><p>License server နဲ့ Studio backend အတွက် performance ကောင်းတဲ့ VPS cloud ကို user များလာချိန်မှာ သုံးမယ်။</p></div></div>
-    </div>
-  </section>
+  
 </div>
 
 
@@ -253,8 +382,8 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
         <button class="btn btn-ghost" onclick="playSample(this)" data-en="▶ Listen to Samples">▶ အသံနမူနာ နားထောင်မယ်</button>
       </div>
       <div class="stats">
-        <div><b>12+</b><span data-en="AI Voices">AI အသံများ</span></div>
-        <div><b>5</b><span data-en="Tools in One">Tool ၅ မျိုး</span></div>
+        <div><b>30</b><span data-en="Gemini TTS Voices">Gemini TTS အသံများ</span></div>
+        <div><b>25</b><span data-en="Tools in One">Tool ၂၅ မျိုး</span></div>
         <div><b>100%</b><span data-en="In Burmese">မြန်မာလို</span></div>
       </div>
     </div>
@@ -262,7 +391,7 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
       <div class="ttl"><span data-en="Voice Samples">အသံ နမူနာများ</span><span class="pill">LIVE PREVIEW</span></div>
       <div class="wave" id="wave"></div>
       <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>ကောင်း</b><span data-en="Male · Narrator">ကျား · ဇာတ်ကြောင်းပြော</span></div><span class="tag">ElevenLabs</span></div>
-      <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>မိုးမိုး</b><span data-en="Female · Warm">မ · နွေးထွေးသော</span></div><span class="tag">Gemini</span></div>
+      <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>မိုးမိုး</b><span data-en="Female · Warm">မ · နွေးထွေးသော</span></div><span class="tag">ElevenLabs</span></div>
       <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>သီဟ</b><span data-en="Male · Free">ကျား · အခမဲ့</span></div><span class="tag">Free</span></div>
     </div>
   </div>
@@ -277,7 +406,7 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
     <div class="sec-h" data-en="How it works">ဘယ်လို အလုပ်လုပ်လဲ</div>
     <div class="sec-s" data-en="Three steps. No technical setup.">အဆင့် ၃ ဆင့်ပဲ။ နည်းပညာ ပြင်ဆင်စရာ မလိုဘူး။</div>
     <div class="steps">
-      <div class="stepc"><div class="num">1</div><div><h3 data-en="Create account">အကောင့် ဖွင့်ပါ</h3><p data-en="Free quota every day — top up with Credit Points (1 Point = 100 Ks) when you need more.">နေ့တိုင်း အခမဲ့ quota ရမယ်၊ လိုရင် Credit Points နဲ့ ဆက်သုံးလို့ရတယ် (1 Point = ၁၀၀ ကျပ်)။</p></div></div>
+      <div class="stepc"><div class="num">1</div><div><h3 data-en="Create account">အကောင့် ဖွင့်ပါ</h3><p data-en="Free quota every day — top up with Credit Points (1 Point = 1 Ks) when you need more.">နေ့တိုင်း အခမဲ့ quota ရမယ်၊ လိုရင် Credit Points နဲ့ ဆက်သုံးလို့ရတယ် (1 Point = ၁ ကျပ်)။</p></div></div>
       <div class="stepc"><div class="num">2</div><div><h3 data-en="Pick a tool & voice">Tool နဲ့ အသံ ရွေးပါ</h3><p data-en="Type text or upload a file, choose a voice with chips.">စာရိုက်/ဖိုင်တင်၊ အသံကို chip လေးတွေနဲ့ ရွေး။</p></div></div>
       <div class="stepc"><div class="num">3</div><div><h3 data-en="Generate & download">ထုတ်ပြီး Download ဆွဲပါ</h3><p data-en="MP3 / MP4 / SRT ready in minutes.">မိနစ်ပိုင်းအတွင်း MP3 / MP4 / SRT အသင့်ရမယ်။</p></div></div>
     </div>
@@ -287,15 +416,20 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
     <div class="sec-h">Credit Points — Pay as you go</div>
     <div class="sec-s">လစဉ် subscription မဟုတ်ဘူး။ Points ဝယ်ထားပြီး သုံးသလောက်ပဲ ဖြတ်တယ်။</div>
     <div class="steps">
-      <div class="stepc"><div class="num">🪙</div><div><h3>1 Point = ၁၀၀ ကျပ်</h3><p>KBZPay / WavePay / AYA Pay နဲ့ Points ဝယ်လို့ရတယ်။ ဝယ်ထားတဲ့ Points က သက်တမ်း မကုန်ဘူး။</p></div></div>
+      <div class="stepc"><div class="num">🪙</div><div><h3>1 Point = ၁ ကျပ်</h3><p>KBZPay / WavePay / AYA Pay နဲ့ Points ဝယ်လို့ရတယ်။ ဝယ်ထားတဲ့ Points က သက်တမ်း မကုန်ဘူး။</p></div></div>
       <div class="stepc"><div class="num">👁️</div><div><h3>မနှိပ်ခင် အရင်ပြ</h3><p>Tool တစ်ခုစီမှာ ကုန်မယ့် Points ကို Generate ခလုတ်မှာ အရင်ပြထားတယ် — ဥပမာ Recap ၁ ပုဒ် = Points ဘယ်လောက် ဆိုတာ သိပြီးမှ နှိပ်ရုံပဲ။ (Tool အလိုက် ဖြတ်နှုန်းတွေ မကြာမီ ကြေညာမယ်)</p></div></div>
       <div class="stepc"><div class="num">↩️</div><div><h3>Fail ရင် ပြန်ဝင်</h3><p>အလုပ် မအောင်မြင်ရင် ဖြတ်ထားတဲ့ Points အလိုလို ပြန်ဝင်တယ်။ ဆုံးရှုံးစရာ မရှိဘူး။</p></div></div>
+    </div>
+    <div class="ptshelp">
+      <span>💬 Points ဝယ်ယူဖို့နဲ့ အကူအညီ လိုရင် ဆက်သွယ်ပါ:</span>
+      <a class="soc" href="https://m.me/cyborgstudiomm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.549 1.797 6.701 4.615 8.684V24l3.923-2.156c1.09.301 2.246.46 3.462.46 6.627 0 12-4.974 12-11.111C24 4.974 18.627 0 12 0zm1.266 15.626l-3.2-3.417-6.241 3.417 6.865-7.292 3.268 3.417 6.173-3.417-6.865 7.292z"/></svg>Messenger</a>
+      <a class="soc" href="https://t.me/cyborgstudiomm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>
     </div>
   </section>
 
   <div class="ctaband">
     <h2 data-en="Make your first voice today — free">ဒီနေ့ပဲ ပထမဆုံး အသံ ထုတ်ကြည့်ပါ — အခမဲ့</h2>
-    <p data-en="Pay with Credit Points — 1 Point = 100 Ks. Daily free quota included.">Credit Points နဲ့ သုံးလို့ရတယ် — 1 Point = ၁၀၀ ကျပ်။ နေ့တိုင်း အခမဲ့ quota ပါတယ်။</p>
+    <p data-en="Pay with Credit Points — 1 Point = 1 Ks. Daily free quota included.">Credit Points နဲ့ သုံးလို့ရတယ် — 1 Point = ၁ ကျပ်။ နေ့တိုင်း အခမဲ့ quota ပါတယ်။</p>
     <button class="btn" style="background:#fff;color:var(--blue2)" onclick="show('tts')" data-en="Open TTS Studio →">TTS Studio ဖွင့်မယ် →</button>
   </div>
 </div>
@@ -326,11 +460,38 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
           <button class="chip"><span class="ava">ဇ</span>ဇေယျာ <small>ကျား · တက်ကြွ</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
           <button class="chip"><span class="ava">ကျ</span>ကျော် <small>ကျား · သတင်း</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
         </div>
-        <div class="glabel">Gemini · <small style="color:var(--mut);font-weight:500">မြန်၊ ဈေးသက်သာ</small></div>
+                <div class="glabel">Gemini TTS · <small style="color:var(--mut);font-weight:500">အသံ ၃၀ လုံး · မြန်၊ ဈေးသက်သာ</small></div>
         <div class="chips" data-group="voice">
-          <button class="chip"><span class="ava">P</span>Puck <small>ကျား</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
-          <button class="chip"><span class="ava">K</span>Kore <small>မ</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
-          <button class="chip"><span class="ava">F</span>Fenrir <small>ကျား · နက်ရှိုင်း</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">Z</span>Zephyr <small>မ · တောက်ပ</small></button>
+          <button class="chip"><span class="ava">P</span>Puck <small>ကျား · တက်ကြွ</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">C</span>Charon <small>ကျား · သတင်း</small></button>
+          <button class="chip"><span class="ava">K</span>Kore <small>မ · ပြတ်သား</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">F</span>Fenrir <small>ကျား · စိတ်လှုပ်ရှား</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">L</span>Leda <small>မ · နုပျို</small></button>
+          <button class="chip"><span class="ava">O</span>Orus <small>ကျား · ပြတ်သား</small></button>
+          <button class="chip"><span class="ava">A</span>Aoede <small>မ · လေညင်း</small></button>
+          <button class="chip"><span class="ava">C</span>Callirrhoe <small>မ · အေးဆေး</small></button>
+          <button class="chip"><span class="ava">A</span>Autonoe <small>မ · တောက်ပ</small></button>
+          <button class="chip"><span class="ava">E</span>Enceladus <small>ကျား · နူးညံ့</small></button>
+          <button class="chip"><span class="ava">I</span>Iapetus <small>ကျား · ရှင်းလင်း</small></button>
+          <button class="chip"><span class="ava">U</span>Umbriel <small>ကျား · အေးဆေး</small></button>
+          <button class="chip"><span class="ava">A</span>Algieba <small>ကျား · ချောမွေ့</small></button>
+          <button class="chip"><span class="ava">D</span>Despina <small>မ · ချောမွေ့</small></button>
+          <button class="chip"><span class="ava">E</span>Erinome <small>မ · ရှင်းလင်း</small></button>
+          <button class="chip"><span class="ava">A</span>Algenib <small>ကျား · ကြမ်းတမ်း</small></button>
+          <button class="chip"><span class="ava">R</span>Rasalgethi <small>ကျား · သတင်း</small></button>
+          <button class="chip"><span class="ava">L</span>Laomedeia <small>မ · တက်ကြွ</small></button>
+          <button class="chip"><span class="ava">A</span>Alnilam <small>ကျား · ပြတ်သား</small></button>
+          <button class="chip"><span class="ava">S</span>Schedar <small>ကျား · ညီညာ</small></button>
+          <button class="chip"><span class="ava">G</span>Gacrux <small>မ · ရင့်ကျက်</small></button>
+          <button class="chip"><span class="ava">P</span>Pulcherrima <small>မ · ရှေ့သို့</small></button>
+          <button class="chip"><span class="ava">A</span>Achird <small>ကျား · ဖော်ရွေ</small></button>
+          <button class="chip"><span class="ava">Z</span>Zubenelgenubi <small>ကျား · ပုံမှန်</small></button>
+          <button class="chip"><span class="ava">V</span>Vindemiatrix <small>မ · နူးညံ့</small></button>
+          <button class="chip"><span class="ava">S</span>Sadachbia <small>ကျား · ရွှင်လန်း</small></button>
+          <button class="chip"><span class="ava">S</span>Sadaltager <small>ကျား · အသိပညာ</small></button>
+          <button class="chip"><span class="ava">S</span>Sulafat <small>မ · နွေးထွေး</small></button>
+          <button class="chip"><span class="ava">A</span>Achernar <small>မ · ငြိမ်သက်</small></button>
         </div>
         <div class="glabel"><span data-en="Free voices">အခမဲ့ အသံများ</span> · <small style="color:var(--mut);font-weight:500">Edge TTS</small></div>
         <div class="chips" data-group="voice">
@@ -349,22 +510,30 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
         <div class="hint" data-en="Your generated voice will appear here.">ထုတ်ပြီးသား အသံ ဒီမှာ ပေါ်လာမယ်။</div>
         <div class="out-empty" id="outEmpty">🎧<br><span data-en="Nothing yet — press Generate below.">ဘာမှ မရှိသေးဘူး — အောက်က အသံထုတ်မယ် နှိပ်ပါ။</span></div>
         <div id="outReady" style="display:none">
-          <div class="prow" style="background:#f0f9ff;border-color:#bae6fd;color:var(--ink)"><button class="play" onclick="playSample(this)">▶</button><div><b id="outName">my_voice.mp3</b><span style="color:var(--mut)" id="outMeta">0:42 · MP3</span></div><span class="tag" style="color:var(--blue2);border-color:#bae6fd">READY</span></div>
+          <div class="prow" style="background:var(--soft);border-color:var(--line);color:var(--ink)"><button class="play" id="btnPlayRow">▶</button><div><b id="outName">my_voice.mp3</b><span style="color:var(--mut)" id="outMeta">0:42 · MP3</span></div><span class="tag" style="color:var(--blue2);border-color:#bae6fd">READY</span></div>
         </div>
         <div class="barwrap" id="barwrap"><div class="bar" id="bar"></div></div>
         <div class="meta" id="barmeta" style="display:none"><span data-en="Generating...">ထုတ်နေတယ်...</span><span id="barpct">0%</span></div>
         <div class="dl">
-          <button id="btnListen" disabled onclick="playSample(this)" data-en="▶ Listen">▶ နားထောင်မယ်</button>
-          <button class="pri" id="btnDl" disabled onclick="alert('နမူနာ mockup ပါ — တကယ့် version မှာ MP3 download ရမယ်')" data-en="Download MP3">MP3 Download</button>
+          <button id="btnListen" disabled data-en="▶ Listen">▶ နားထောင်မယ်</button>
+          <button class="pri" id="btnDl" disabled data-en="Download MP3">MP3 Download</button>
         </div>
+        <div class="hint" id="ttsStatus" style="margin-top:10px"></div>
       </div>
       <div class="card">
         <h3 style="font-size:15.5px" data-en="Recent history">မကြာသေးခင် ထုတ်ထားတာများ</h3>
-        <div class="hist"><span class="miniplay">▶</span>intro_v1.mp3<span>0:42 · မနေ့က</span></div>
-        <div class="hist"><span class="miniplay">▶</span>recap_ep3.mp3<span>6:12 · လွန်ခဲ့တဲ့ ၂ ရက်</span></div>
-        <div class="hist"><span class="miniplay">▶</span>drama_part2.mp3<span>3:05 · လွန်ခဲ့တဲ့ ၅ ရက်</span></div>
+        <div id="histList"></div>
+        <div id="histEmpty" style="color:var(--mut);font-size:14px;padding:10px 0 4px">ဘာမှ မရှိသေးဘူး — အသံ ထုတ်ပြီးရင် ဒီမှာ ပေါ်လာပါမယ်။</div>
       </div>
     </div>
+  </div>
+  <div class="card" id="gkeyWrap" style="display:none;margin-bottom:14px">
+    <h3><span class="n">🔑</span>Gemini API Key <small style="color:var(--mut);font-weight:500">ကိုယ့် key နဲ့ အသံ ထုတ်မယ်</small></h3>
+    <div style="display:flex;gap:8px;align-items:stretch">
+      <input type="password" id="gKey" class="tin" placeholder="Gemini API Key ထည့်ပါ (AIza...)" autocomplete="off" spellcheck="false">
+      <button type="button" id="gKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
+    </div>
+    <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
   </div>
   <div class="genbar">
     <div class="info"><b id="genVoice">ကောင်း · 1.0x</b><br><span data-en="Free quota: 3 left today · Credit Points: 120">ဒီနေ့ အခမဲ့ ကျန်တာ: ၃ ကြိမ် · Credit Points: ၁၂၀</span></div>
@@ -392,7 +561,7 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
       <div class="ttl"><span>License</span><span class="pill">မကြာမီ</span></div>
       <p style="color:#e0f2fe;font-size:15px;margin-top:12px">POS license ဈေးနှုန်းကို <b style="color:#fff">မကြာမီ ကြေညာပါမည်</b>။ အခုချိန်မှာ app ကို အခမဲ့ စမ်းသုံးပြီး feature တွေ ကြည့်ထားနိုင်ပါတယ်။</p>
       <div class="prow"><div class="play">✓</div><div><b>Offline License Key</b><span>internet မလိုပဲ activate လုပ်နိုင်မယ်</span></div></div>
-      <div class="prow"><div class="play">✓</div><div><b>Online Sync (နောက်ပိုင်း)</b><span>VPS cloud နဲ့ ချိတ်မယ့် အဆင့်</span></div></div>
+      <div class="prow"><div class="play">✓</div><div><b>Online Sync</b><span>VPS cloud နဲ့ ချိတ်မယ့် အဆင့်</span></div></div>
       <button class="btn btn-cyan" style="margin-top:16px;width:100%;justify-content:center" onclick="toggleBot()">ဆက်သွယ်ရန်</button>
     </div>
   </div>
@@ -432,9 +601,13 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
       <h1>Cyborg<span class="grad">Recap</span>MM</h1>
       <p>ဖုန်းတစ်လုံးတည်းနဲ့ ရုပ်ရှင် recap video လုပ်နိုင်တဲ့ Android app — Termux, localhost, JSON copy/paste တွေ မလိုဘူး၊ app ထဲမှာပဲ အကုန်ပြီးတယ်။</p>
       <div class="hbtns">
-        <button class="btn btn-cyan" onclick="alert('နမူနာ mockup ပါ — တကယ့် version မှာ APK download ဒီမှာ ရမယ်')">📥 Android APK ဆွဲမယ်</button>
+        <a class="btn btn-cyan" style="text-decoration:none" href="https://drive.google.com/file/d/1hLeH_LAissyYN_eS1eUWnO6V_5itzaIM/view" target="_blank" rel="noopener">📥 Android APK ဆွဲမယ်</a>
+        <a class="btn btn-ghost" style="text-decoration:none" href="https://drive.google.com/file/d/1zsPGyLGQLnGzuhaeC03SpreKHNhis4B2/view" target="_blank" rel="noopener">📖 အသုံးပြုနည်း Manual (PDF)</a>
+        <button class="btn btn-ghost" onclick="show('guide')">🎬 Video Guide</button>
         <button class="btn btn-ghost" onclick="show('studio')">Web Studio လည်း ရှိတယ်</button>
       </div>
+      <p style="margin-top:10px;font-size:13.5px;opacity:.85">📖 Manual PDF — စာမျက်နှာ ၄၂ မျက်နှာ · 9.7 MB · ပုံနှင့်တကွ ရှင်းပြထားသည်</p>
+      <p style="margin-top:10px;font-size:13.5px;opacity:.85">နောက်ဆုံး version <b>v1.3.16</b> · 74 MB · Google Drive ကနေ တိုက်ရိုက် download ဆွဲနိုင်တယ် (Drive ဖိုင်ကို build အသစ်တိုင်း အစားထိုး တင်ထားတာမို့ ဒီ link က အမြဲ နောက်ဆုံး version ပဲ ရမယ်)</p>
       <div class="stats">
         <div><b>7</b><span>အဆင့် Wizard</span></div>
         <div><b>3+</b><span>အသံ မိသားစု (Gemini/ElevenLabs/Clone)</span></div>
@@ -453,6 +626,39 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
     <div class="sec-h">Web မှာပါ သုံးချင်ရင်</div>
     <div class="sec-s">ဖုန်းနဲ့ မဟုတ်ပဲ browser နဲ့ သုံးချင်သူတွေအတွက် AI Voice Studio web version လည်း တစ်ပြိုင်တည်း ဆောက်နေတယ် — Credit Points စနစ် အတူတူပဲ။</div>
     <button class="btn btn-cyan" onclick="show('studio')">AI Voice Studio ဖွင့်မယ် →</button>
+  </section>
+</div>
+
+<!-- ============ GUIDE (cyborgstudiomm.com/guide) ============ -->
+<div class="screen" id="scr-guide">
+  <section class="blk" style="margin-top:26px">
+    <div class="sec-h">အသုံးပြုနည်း လမ်းညွှန် — CyborgRecapMM</div>
+    <div class="sec-s">CyborgRecapMM ကို အစအဆုံး သုံးတတ်အောင် အသံနဲ့ ရှင်းပြထားတဲ့ video tutorial (၄ မိနစ် ၂၄ စက္ကန့်) ပါ။ အခန်း တစ်ခုချင်းစီကိုလည်း အောက်က စာရင်းကနေ အချိန် နှိပ်ပြီး တိုက်ရိုက် ကြည့်လို့ရပါတယ်။</div>
+    <div class="card" style="padding:14px">
+      <video id="guideVid" controls preload="none" poster="guide-recap-poster.jpg" src="guide-recap-video.mp4" style="width:100%;aspect-ratio:16/9;border-radius:14px;background:#000;display:block"></video>
+    </div>
+    <div class="sec-h" style="font-size:19px">ပါဝင်သော အခန်းများ</div>
+    <div>
+      <button class="chap" onclick="guideSeek(0)"><span class="tm">0:00</span>၁။ စတင်ခြင်း (Home Screen)</button>
+      <button class="chap" onclick="guideSeek(15.74)"><span class="tm">0:16</span>၂။ License ဖွင့်ခြင်း (Activation)</button>
+      <button class="chap" onclick="guideSeek(41.24)"><span class="tm">0:41</span>၃။ Settings နဲ့ API Keys</button>
+      <button class="chap" onclick="guideSeek(59.54)"><span class="tm">1:00</span>၄။ အဆင့် ၁ — Video</button>
+      <button class="chap" onclick="guideSeek(75.68)"><span class="tm">1:16</span>၅။ အဆင့် ၂ — Script (SRT)</button>
+      <button class="chap" onclick="guideSeek(98.94)"><span class="tm">1:39</span>၆။ အဆင့် ၃ — အသံ (Voice)</button>
+      <button class="chap" onclick="guideSeek(121.4)"><span class="tm">2:01</span>၇။ My Voices — Clone အသံများ</button>
+      <button class="chap" onclick="guideSeek(135.06)"><span class="tm">2:15</span>၈။ အဆင့် ၄ — Style ပုံ (Look)</button>
+      <button class="chap" onclick="guideSeek(159.84)"><span class="tm">2:40</span>၉။ အဆင့် ၅ — Style စစ် (Check) နဲ့ Preview</button>
+      <button class="chap" onclick="guideSeek(186.06)"><span class="tm">3:06</span>၁၀။ အဆင့် ၆ — Overlay</button>
+      <button class="chap" onclick="guideSeek(201.96)"><span class="tm">3:22</span>၁၁။ အဆင့် ၇ — ထုတ်မယ် (Export)</button>
+      <button class="chap" onclick="guideSeek(224.98)"><span class="tm">3:45</span>၁၂။ Poster / Thumbnail နဲ့ Batch Queue</button>
+      <button class="chap" onclick="guideSeek(237.76)"><span class="tm">3:58</span>၁၃။ ပြဿနာ ဖြေရှင်းခြင်း + FAQ</button>
+    </div>
+    <div class="hbtns" style="margin-top:16px">
+      <a class="btn btn-cyan" style="text-decoration:none" href="https://drive.google.com/file/d/1hLeH_LAissyYN_eS1eUWnO6V_5itzaIM/view" target="_blank" rel="noopener">📥 Android APK ဆွဲမယ်</a>
+      <a class="btn btn-ghost" style="text-decoration:none" href="https://drive.google.com/file/d/1zsPGyLGQLnGzuhaeC03SpreKHNhis4B2/view" target="_blank" rel="noopener">📖 Manual (PDF) ဆွဲမယ်</a>
+      <button class="btn btn-ghost" onclick="show('recap')">Recap App screen သို့ →</button>
+    </div>
+    <p style="margin-top:14px;font-size:13.5px;color:var(--mut)">POS နဲ့ Studio guide တွေကိုလည်း ဒီနေရာမှာပဲ ထပ်ထည့်သွားပါမယ်။</p>
   </section>
 </div>
 
@@ -496,52 +702,784 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
     </div>
   </section>
 
+  
+</div>
+
+<!-- ============ PHOTO CONVERTER ============ -->
+<div class="screen" id="scr-photo">
   <section class="blk">
-    <div class="sec-h">ဆောက်မယ့် အစီအစဉ်</div>
-    <div class="sec-s">အခု ဦးစားပေးက offline app တွေ (POS + Recap) အရင်ပါ။ Management Tools က အဲ့ဒီနောက်မှ တစ်ခု ချင်း လာမယ်။</div>
-    <div class="steps">
-      <div class="stepc"><div class="num">1</div><div><h3>CyborgMM HR</h3><p>ဈေးကွက် အကျယ်ဆုံးနဲ့ POS customer တွေနဲ့ အနီးဆုံး — ဝန်ထမ်းရှိတဲ့ ဆိုင်တိုင်း လိုတယ်။</p></div></div>
-      <div class="stepc"><div class="num">2</div><div><h3>CyborgMM Clinic</h3><p>တန်ဖိုး မြင့်ပေမယ့် လူနာ data ကို အထူး ဂရုစိုက်ရမှာမို့ ဒုတိယ အဆင့်မှာ သေချာ ဆောက်မယ်။</p></div></div>
-      <div class="stepc"><div class="num">3</div><div><h3>School + ကျန်တာတွေ</h3><p>School, Accounting, Microfinance, Property, Delivery, Broker — လိုအပ်ချက် အတိုင်း အစီအစဉ်နဲ့ ဆက်ထုတ်မယ်။</p></div></div>
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🖼️ ဓာတ်ပုံ Converter</div>
+    <div class="sec-s">JPG ↔ PNG ပြောင်းလို့ရတယ်။ ဖိုင် server လုံးဝ မတက်ဘူး — converter က browser ထဲမှာပဲ အလုပ်လုပ်တယ်၊ လုံခြုံတယ်၊ မြန်တယ်၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">ပြောင်းမယ့် ပုံစံ</div>
+      <div class="chips" data-group="pdir">
+        <button class="chip sel" data-dir="jpg2png">JPG → PNG</button>
+        <button class="chip" data-dir="png2jpg">PNG → JPG</button>
+      </div>
+      <div class="drop" id="pDrop" style="margin-top:16px" onclick="document.getElementById('pFile').click()">
+        <b>ဓာတ်ပုံ ရွေးရန် နှိပ်ပါ</b><br>JPG (သို့) PNG ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="pFile" accept=".jpg,.jpeg,.png,image/jpeg,image/png" hidden onchange="pPick(this)">
+      </div>
+      <div id="pInfo" class="hint" style="margin-top:10px"></div>
+      <div class="convgrid" style="margin-top:14px">
+        <div><div class="glabel">မူရင်း</div><img id="pIn" class="pimg" style="display:none"></div>
+        <div><div class="glabel">ပြောင်းပြီး</div><img id="pOut" class="pimg" style="display:none"><div id="pOutInfo" class="hint"></div></div>
+      </div>
+      <div id="pQualWrap" style="display:none;margin-top:14px">
+        <div class="glabel">JPG အရည်အသွေး: <span id="pQualVal">92%</span></div>
+        <input type="range" id="pQual" min="60" max="100" value="92" oninput="document.getElementById('pQualVal').textContent=this.value+'%'">
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="pBtn" onclick="pConvert()" disabled>ပြောင်းမယ် 🔄</button>
+        <a class="dlbtn" id="pDl" style="display:none" download>⬇ Download ဆွဲမယ်</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ AUDIO CONVERTER ============ -->
+<div class="screen" id="scr-audio">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🎵 အသံ Converter</div>
+    <div class="sec-s">MP3 ↔ WAV ပြောင်းလို့ရတယ်။ ဖိုင် server လုံးဝ မတက်ဘူး — browser ထဲမှာပဲ ပြောင်းပေးတယ်၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">ပြောင်းမယ့် ပုံစံ</div>
+      <div class="chips" data-group="adir">
+        <button class="chip sel" data-dir="mp32wav">MP3 → WAV</button>
+        <button class="chip" data-dir="wav2mp3">WAV → MP3</button>
+      </div>
+      <div class="drop" id="aDrop" style="margin-top:16px" onclick="document.getElementById('aFile').click()">
+        <b>အသံဖိုင် ရွေးရန် နှိပ်ပါ</b><br>MP3 (သို့) WAV ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="aFile" accept=".mp3,.wav,audio/mpeg,audio/wav" hidden onchange="aPick(this)">
+      </div>
+      <div id="aInfo" class="hint" style="margin-top:10px"></div>
+      <audio id="aIn" controls style="width:100%;margin-top:10px;display:none"></audio>
+      <div id="aStatus" class="hint" style="margin-top:10px"></div>
+      <audio id="aOut" controls style="width:100%;margin-top:10px;display:none"></audio>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="aBtn" onclick="aConvert()" disabled>ပြောင်းမယ် 🔄</button>
+        <a class="dlbtn" id="aDl" style="display:none" download>⬇ Download ဆွဲမယ်</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🔤 Zawgyi ↔ Unicode ============ -->
+<div class="screen" id="scr-zawgyi">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🔤 Zawgyi ↔ Unicode</div>
+    <div class="sec-s">ဇော်ဂျီ နဲ့ ယူနီကုဒ် စာသား အပြန်အလှန် ပြောင်းလို့ရတယ်။ browser ထဲမှာပဲ ပြောင်းတာ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">ပြောင်းမယ့် ပုံစံ</div>
+      <div class="chips" data-group="zdir">
+        <button class="chip sel" data-dir="zg2uni">Zawgyi → Unicode</button>
+        <button class="chip" data-dir="uni2zg">Unicode → Zawgyi</button>
+      </div>
+      <div class="glabel" style="margin-top:14px">မူရင်း စာသား</div>
+      <textarea id="zIn" rows="5" placeholder="ဒီမှာ စာသား ထည့်ပါ..."></textarea>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center">
+        <button class="genbtn" onclick="zConvert()">ပြောင်းမယ် 🔄</button>
+        <button class="btn btn-ghost" onclick="zCopy('zIn')">မူရင်း Copy</button>
+      </div>
+      <div class="glabel" style="margin-top:16px">ပြောင်းပြီး စာသား</div>
+      <textarea id="zOut" rows="5" readonly placeholder="ရလဒ် ဒီမှာ ပေါ်မယ်"></textarea>
+      <div style="margin-top:12px"><button class="btn btn-ghost" onclick="zCopy('zOut')">ရလဒ် Copy ကူးမယ် 📋</button></div>
+      <div id="zStatus" class="hint" style="margin-top:10px"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 💬 SRT Tool ============ -->
+<div class="screen" id="scr-srt">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">💬 SRT Tool</div>
+    <div class="sec-s">Subtitle အချိန် ရွှေ့တာ (+/− စက္ကန့်) နဲ့ SRT ↔ VTT ပြောင်းတာ — browser ထဲမှာပဲ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="sDrop" onclick="document.getElementById('sFile').click()">
+        <b>.srt / .vtt ဖိုင် ရွေးရန် နှိပ်ပါ</b><br>ဖိုင် ဆွဲချလို့လည်း ရတယ်၊ စာသား တိုက်ရိုက် ကူးထည့်လို့လည်း ရတယ်
+        <input type="file" id="sFile" accept=".srt,.vtt,text/plain" hidden onchange="sPick(this)">
+      </div>
+      <div class="glabel" style="margin-top:14px">Subtitle စာသား</div>
+      <textarea id="sTxt" rows="9" placeholder="1&#10;00:00:01,000 --> 00:00:04,000&#10;မင်္ဂလာပါ"></textarea>
+      <div class="numrow" style="margin-top:14px">
+        <label><span class="glabel">အချိန် ရွှေ့ရန် (စက္ကန့်, − လည်း ရ)</span><input type="number" class="tin" id="sSec" step="0.1" value="1.0"></label>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center">
+        <button class="genbtn" onclick="sShift()">အချိန် ရွှေ့မယ် ⏱️</button>
+        <button class="btn btn-ghost" onclick="sToVtt()">SRT → VTT</button>
+        <button class="btn btn-ghost" onclick="sToSrt()">VTT → SRT</button>
+        <button class="dlbtn" onclick="sDownload()">⬇ Download ဆွဲမယ်</button>
+      </div>
+      <div id="sStatus" class="hint" style="margin-top:10px"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 📐 ဓာတ်ပုံ Resize + Ratio ============ -->
+<div class="screen" id="scr-resize">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">📐 ဓာတ်ပုံ Resize + Ratio</div>
+    <div class="sec-s">ပုံ အရွယ် ပြောင်းပြီး Ratio ပါ ညှိလို့ရတယ် — 16:9, 9:16, 1:1 စသဖြင့် ဖြတ်ထည့်/အပြည့်ထည့် ရွေး၊ browser ထဲမှာပဲ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="rDrop" onclick="document.getElementById('rFile').click()">
+        <b>ဓာတ်ပုံ ရွေးရန် နှိပ်ပါ</b><br>JPG / PNG ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="rFile" accept=".jpg,.jpeg,.png,image/jpeg,image/png" hidden onchange="rPick(this)">
+      </div>
+      <div id="rInfo" class="hint" style="margin-top:10px"></div>
+      <img id="rIn" class="pimg" style="display:none;margin-top:10px">
+      <div class="glabel" style="margin-top:16px">Ratio ပုံစံ</div>
+      <div class="chips" data-group="rratio">
+        <button class="chip sel" data-dir="orig" onclick="rSetRatio(null)">မူရင်း</button>
+        <button class="chip" data-dir="16:9" onclick="rSetRatio(16,9)">16:9</button>
+        <button class="chip" data-dir="9:16" onclick="rSetRatio(9,16)">9:16</button>
+        <button class="chip" data-dir="1:1" onclick="rSetRatio(1,1)">1:1</button>
+        <button class="chip" data-dir="4:5" onclick="rSetRatio(4,5)">4:5</button>
+        <button class="chip" data-dir="3:2" onclick="rSetRatio(3,2)">3:2</button>
+      </div>
+      <div class="glabel" style="margin-top:14px">Ratio မတူရင် ဘယ်လို ထည့်မလဲ</div>
+      <div class="chips" data-group="rmode">
+        <button class="chip sel" data-dir="crop">ဖြတ်ထည့် (crop)</button>
+        <button class="chip" data-dir="fit">အပြည့်ထည့် (fit, နောက်ခံ အဖြူ)</button>
+      </div>
+      <div class="numrow" style="margin-top:14px">
+        <label><span class="glabel">အနံ (px)</span><input type="number" class="tin" id="rW" min="1" oninput="rSyncH()"></label>
+        <label><span class="glabel">အလျား (px)</span><input type="number" class="tin" id="rH" min="1" oninput="rSyncW()"></label>
+      </div>
+      <label style="display:flex;gap:8px;align-items:center;margin-top:10px;cursor:pointer"><input type="checkbox" id="rLock" checked onchange="rSyncH()"> 🔒 အချိုး ထိန်းထား (lock)</label>
+      <div class="glabel" style="margin-top:14px">အရွယ် % နဲ့ ရွေး</div>
+      <div class="chips" data-group="rscale">
+        <button class="chip" data-dir="25" onclick="rScale(25)">25%</button>
+        <button class="chip" data-dir="50" onclick="rScale(50)">50%</button>
+        <button class="chip" data-dir="75" onclick="rScale(75)">75%</button>
+        <button class="chip sel" data-dir="100" onclick="rScale(100)">100%</button>
+      </div>
+      <div class="glabel" style="margin-top:14px">Format</div>
+      <div class="chips" data-group="rfmt">
+        <button class="chip sel" data-dir="jpg">JPG</button>
+        <button class="chip" data-dir="png">PNG</button>
+      </div>
+      <div style="margin-top:14px">
+        <div class="glabel">JPG အရည်အသွေး: <span id="rQualVal">92%</span></div>
+        <input type="range" id="rQual" min="60" max="100" value="92" oninput="document.getElementById('rQualVal').textContent=this.value+'%'">
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="rBtn" onclick="rConvert()" disabled>ပြောင်းမယ် 🔄</button>
+        <a class="dlbtn" id="rDl" style="display:none" download>⬇ Download ဆွဲမယ်</a>
+      </div>
+      <div class="glabel" style="margin-top:16px">ပြောင်းပြီး ပုံ</div>
+      <img id="rOut" class="pimg" style="display:none">
+      <div id="rOutInfo" class="hint"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ✂️ MP3 ဖြတ် / Ringtone ဖြတ် ============ -->
+<div class="screen" id="scr-trim">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">✂️ MP3 ဖြတ် / Ringtone ဖြတ်</div>
+    <div class="sec-s">MP3/WAV ဖိုင်ထဲက လိုတဲ့ အပိုင်းပဲ ဖြတ်ထုတ် — ringtone အတွက် အစ/အဆုံး fade ပါ ထည့်လို့ရတယ်၊ browser ထဲမှာပဲ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="tDrop" onclick="document.getElementById('tFile').click()">
+        <b>အသံဖိုင် ရွေးရန် နှိပ်ပါ</b><br>MP3 / WAV ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="tFile" accept=".mp3,.wav,audio/mpeg,audio/wav" hidden onchange="tPick(this)">
+      </div>
+      <div id="tInfo" class="hint" style="margin-top:10px"></div>
+      <audio id="tIn" controls style="width:100%;margin-top:10px;display:none"></audio>
+      <div class="numrow" style="margin-top:14px">
+        <label><span class="glabel">စ (စက္ကန့်)</span><input type="number" class="tin" id="tStart" min="0" step="0.1" value="0"></label>
+        <label><span class="glabel">ဆုံး (စက္ကန့်)</span><input type="number" class="tin" id="tEnd" min="0" step="0.1" value="0"></label>
+      </div>
+      <div class="glabel" style="margin-top:14px">အမြန် အလျား ရွေး (start နေရာကနေ)</div>
+      <div class="chips" data-group="tpreset">
+        <button class="chip" data-dir="15" onclick="tPreset(15)">15 စက္ကန့်</button>
+        <button class="chip" data-dir="30" onclick="tPreset(30)">30 စက္ကန့်</button>
+        <button class="chip" data-dir="40" onclick="tPreset(40)">40 စက္ကန့်</button>
+      </div>
+      <div class="glabel" style="margin-top:14px">Fade (ringtone အတွက်)</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="chip" id="tFadeIn" onclick="tFadeTog('in')">🎚️ Fade In</button>
+        <button class="chip" id="tFadeOut" onclick="tFadeTog('out')">🎚️ Fade Out</button>
+      </div>
+      <div class="glabel" style="margin-top:14px">Format (ringtone ဆို MP3 ရွေးပါ)</div>
+      <div class="chips" data-group="tfmt">
+        <button class="chip sel" data-dir="mp3">MP3</button>
+        <button class="chip" data-dir="wav">WAV</button>
+      </div>
+      <div id="tStatus" class="hint" style="margin-top:10px"></div>
+      <audio id="tOut" controls style="width:100%;margin-top:10px;display:none"></audio>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="tBtn" onclick="tConvert()" disabled>ဖြတ်မယ် ✂️</button>
+        <a class="dlbtn" id="tDl" style="display:none" download>⬇ Download ဆွဲမယ်</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🎞️ Video Frame ဖမ်း ============ -->
+<div class="screen" id="scr-frame">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🎞️ Video Frame ဖမ်း</div>
+    <div class="sec-s">ဗီဒီယိုထဲက ကြိုက်တဲ့ frame ကို ဓာတ်ပုံအဖြစ် ထုတ်လို့ရတယ် — thumbnail/poster အတွက်၊ browser ထဲမှာပဲ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="fDrop" onclick="document.getElementById('fFile').click()">
+        <b>ဗီဒီယိုဖိုင် ရွေးရန် နှိပ်ပါ</b><br>MP4 / WebM ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="fFile" accept="video/*,.mp4,.webm,.mov" hidden onchange="fPick(this)">
+      </div>
+      <div id="fInfo" class="hint" style="margin-top:10px"></div>
+      <video id="fVid" class="pvid" controls style="display:none;margin-top:10px"></video>
+      <div style="margin-top:12px">
+        <div class="glabel">အချိန် ရွှေ့ရန်: <span id="fTime">0.0s</span></div>
+        <input type="range" id="fSeek" min="0" max="0" step="0.1" value="0" oninput="fSeekTo(this)">
+      </div>
+      <div class="glabel" style="margin-top:14px">ပုံ Format</div>
+      <div class="chips" data-group="ffmt">
+        <button class="chip sel" data-dir="png">PNG</button>
+        <button class="chip" data-dir="jpg">JPG</button>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="fBtn" onclick="fGrab()" disabled>Frame ထုတ်မယ် 📸</button>
+        <a class="dlbtn" id="fDl" style="display:none" download>⬇ Download ဆွဲမယ်</a>
+      </div>
+      <div class="glabel" style="margin-top:16px">ဖမ်းထားတဲ့ Frame</div>
+      <img id="fOut" class="pimg" style="display:none">
+      <div id="fOutInfo" class="hint"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🔳 QR Code ထုတ် ============ -->
+<div class="screen" id="scr-qr">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🔳 QR Code ထုတ်</div>
+    <div class="sec-s">Link (သို့) စာသား ထည့်လိုက်ရင် QR ပုံ ထုတ်ပေးတယ် — browser ထဲမှာပဲ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">Link / စာသား</div>
+      <input type="text" class="tin" id="qTxt" placeholder="ဥပမာ https://cyborgstudiomm.com" onkeydown="if(event.key==='Enter')qGen()">
+      <div style="margin-top:16px">
+        <span class="qrwrap" id="qBox"></span>
+      </div>
+      <div id="qStatus" class="hint" style="margin-top:10px"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" onclick="qGen()">QR ထုတ်မယ် 🔳</button>
+        <a class="dlbtn" id="qDl" style="display:none" download="qrcode.png">⬇ QR ပုံ Download ဆွဲမယ်</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🔊 Edge TTS — သီဟ / နီလာ ============ -->
+<div class="screen" id="scr-edgetts">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🔊 Edge TTS — သီဟ / နီလာ</div>
+    <div class="sec-s">စာရိုက်လိုက်ရင် Microsoft Edge ရဲ့ မြန်မာ အသံ (သီဟ/နီလာ) နဲ့ အသံ ထွက်လာမယ်။ အသံက Microsoft server က လာတာမို့ internet လိုတယ်၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">အသံ ရွေးပါ</div>
+      <div class="chips" data-group="evoice">
+        <button class="chip sel" data-dir="my-MM-ThihaNeural"><span class="ava">သီ</span>သီဟ <small>ကျား</small></button>
+        <button class="chip" data-dir="my-MM-NilarNeural"><span class="ava">နီ</span>နီလာ <small>မ</small></button>
+      </div>
+      <div class="glabel" style="margin-top:14px">စာသား <span id="eCount" style="color:var(--mut);font-weight:500">0 စာလုံး</span></div>
+      <textarea id="eTxt" rows="5" placeholder="အသံ ထုတ်ချင်တဲ့ မြန်မာ စာသား ရိုက်ပါ..." oninput="document.getElementById('eCount').textContent=this.value.length+' စာလုံး'"></textarea>
+      <div id="eStatus" class="hint" style="margin-top:10px"></div>
+      <audio id="eOut" controls style="width:100%;margin-top:10px;display:none"></audio>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="eBtn" onclick="eGen()">အသံ ထုတ်မယ် 🎙️</button>
+        <a class="dlbtn" id="eDl" style="display:none" download>⬇ MP3 Download ဆွဲမယ်</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🎧 အသံမှ စာသား (Whisper) ============ -->
+<div class="screen" id="scr-stt">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🎧 အသံမှ စာသား (Whisper)</div>
+    <div class="sec-s">အသံဖိုင် တင်လိုက်ရင် Whisper AI က စာသားနဲ့ SRT ထုတ်ပေးတယ်။ Model က browser ထဲမှာပဲ မောင်းတာ — ဖိုင် server မတက်ဘူး၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">Model ရွေးပါ</div>
+      <div class="chips" data-group="wmodel">
+        <button class="chip sel" data-dir="onnx-community/whisper-tiny">Tiny <small>မြန်၊ ပေါ့</small></button>
+        <button class="chip" data-dir="onnx-community/whisper-base">Base <small>ပိုမှန်</small></button>
+      </div>
+      <div class="drop" id="wDrop" style="margin-top:16px" onclick="document.getElementById('wFile').click()">
+        <b>အသံဖိုင် ရွေးရန် နှိပ်ပါ</b><br>MP3 / WAV / M4A ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="wFile" accept=".mp3,.wav,.m4a,audio/*" hidden onchange="wPick(this)">
+      </div>
+      <div id="wInfo" class="hint" style="margin-top:10px"></div>
+      <div class="hint" style="margin-top:10px">ℹ️ ပထမဆုံး အကြိမ် model download လိုတယ် (internet လိုတယ်) — နောက်ပိုင်း device ထဲမှာပဲ မောင်းတယ်။ မြန်မာ တိုက်ရိုက် အသံမှတ်ဉာဏ် အားနည်းနိုင်သေးတယ် — SRT Tool / Gemini ဘာသာပြန် နဲ့ တွဲသုံးရင် ပိုကောင်းတယ်။</div>
+      <div id="wStatus" class="hint" style="margin-top:10px"></div>
+      <div class="glabel" style="margin-top:14px">ရလာတဲ့ စာသား</div>
+      <textarea id="wOut" rows="6" readonly placeholder="စာသား ဒီမှာ ပေါ်မယ်"></textarea>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="wBtn" onclick="wRun()" disabled>စာသား ပြောင်းမယ် 🎧</button>
+        <a class="dlbtn" id="wDl" style="display:none" download>⬇ SRT Download ဆွဲမယ်</a>
+      </div>
     </div>
   </section>
 </div>
 
 </main>
 
-<footer>© 2026 Cyborg Studio MM — UI နမူနာ v0.5 (အကြမ်း) · cyborgstudiomm.com — Home / POS / Studio / Recap / Management</footer>
+<!-- ============ 🪓 တရား အပိုင်းခွဲ ============ -->
+<div class="screen" id="scr-split">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🪓 တရား အပိုင်းခွဲ (Sermon Splitter)</div>
+    <div class="sec-s">အသံဖိုင် အရှည် (တရား/lecture) ကို ၁၀/၁၅/၂၀/၃၀ မိနစ် အပိုင်းတွေ ခွဲထုတ်လို့ရတယ် — browser ထဲမှာပဲ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="spDrop" onclick="document.getElementById('spFile').click()">
+        <b>အသံဖိုင် ရွေးရန် နှိပ်ပါ</b><br>MP3 / WAV ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="spFile" accept=".mp3,.wav,audio/*" hidden  onchange="spPick(this)">
+      </div>
+      <div id="spInfo" class="hint" style="margin-top:10px"></div>
+      <div class="glabel" style="margin-top:14px">အပိုင်း တစ်ခု အလျား</div>
+      <div class="chips" data-group="spmin">
+        <button class="chip" data-dir="10">10 မိနစ်</button>
+        <button class="chip sel" data-dir="15">15 မိနစ်</button>
+        <button class="chip" data-dir="20">20 မိနစ်</button>
+        <button class="chip" data-dir="30">30 မိနစ်</button>
+      </div>
+      <div class="glabel" style="margin-top:14px">Format</div>
+      <div class="chips" data-group="spfmt">
+        <button class="chip sel" data-dir="wav">WAV (မြန်)</button>
+        <button class="chip" data-dir="mp3">MP3 (ကြာနိုင်တယ်)</button>
+      </div>
+      <div id="spStatus" class="hint" style="margin-top:10px"></div>
+      <div id="spParts"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="spBtn" onclick="spGo()" disabled>အပိုင်းခွဲ ✂️</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🎚️ အသံရှင်း ============ -->
+<div class="screen" id="scr-voiceclear">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🎚️ အသံရှင်း / Normalize</div>
+    <div class="sec-s">အသံ တိုးလွန်း/ကျယ်လွန်း ဖြစ်နေရင် ညှိပေးတယ် — ⚡ Smart Audio preset (1.06x + pitch) နဲ့ Manual speed/pitch ထိန်းချုပ်မှု ပါတယ် — <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="vcDrop" onclick="document.getElementById('vcFile').click()">
+        <b>အသံဖိုင် ရွေးရန် နှိပ်ပါ</b><br>MP3 / WAV ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="vcFile" accept=".mp3,.wav,audio/*" hidden  onchange="vcPick(this)">
+      </div>
+      <div id="vcInfo" class="hint" style="margin-top:10px"></div>
+      <audio id="vcBefore" controls style="width:100%;margin-top:10px;display:none"></audio>
+      <div class="glabel" style="margin-top:14px">Preset</div>
+      <div class="chips" data-group="vpreset">
+        <button class="chip sel" data-dir="orig" onclick="vcPreset()">မူရင်း (1x)</button>
+        <button class="chip" data-dir="0.75" onclick="vcPreset()">0.75x နှေး</button>
+        <button class="chip" data-dir="1.25" onclick="vcPreset()">1.25x</button>
+        <button class="chip" data-dir="1.5" onclick="vcPreset()">1.5x မြန်</button>
+        <button class="chip" data-dir="smart" onclick="vcPreset()">⚡ Smart Audio</button>
+        <button class="chip" data-dir="manual" onclick="vcPreset()">🎛️ Manual</button>
+      </div>
+      <div class="hint" style="margin-top:8px">⚡ Smart Audio ဆိုတာ standard smart-audio processing ပုံစံပါ — speed 1.06x + pitch +1 semitone နဲ့ အသံကို ပိုကြည်လင် သွက်လက်အောင် လုပ်ပေးတယ်။</div>
+      <div id="vcManual" style="display:none;margin-top:12px">
+        <div class="glabel">မြန်နှုန်း: <span id="vcSpeedVal">1.00x</span></div>
+        <input type="range" id="vcSpeed" min="0.9" max="1.2" step="0.01" value="1" style="width:100%" oninput="document.getElementById('vcSpeedVal').textContent=(+this.value).toFixed(2)+'x'">
+        <div class="glabel" style="margin-top:10px">Pitch (semitone): <span id="vcPitchVal">0</span></div>
+        <input type="range" id="vcPitch" min="-2" max="2" step="0.5" value="0" style="width:100%" oninput="document.getElementById('vcPitchVal').textContent=this.value">
+      </div>
+      <div class="glabel" style="margin-top:14px">အသံ ညှိ (Toggle)</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="chip sel" id="vcNormT" onclick="vcTog('norm')">🔊 Normalize (−1 dB)</button>
+        <button class="chip sel" id="vcCompT" onclick="vcTog('comp')">🎚️ Compressor</button>
+      </div>
+      <div class="glabel" style="margin-top:14px">Format</div>
+      <div class="chips" data-group="vfmt">
+        <button class="chip sel" data-dir="wav">WAV</button>
+        <button class="chip" data-dir="mp3">MP3</button>
+      </div>
+      <div id="vcStatus" class="hint" style="margin-top:10px"></div>
+      <audio id="vcAfter" controls style="width:100%;margin-top:10px;display:none"></audio>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="vcBtn" onclick="vcGo()" disabled>ရှင်းပြီး ထုတ်မယ် 🎚️</button>
+        <a class="dlbtn" id="vcDl" style="display:none" download>⬇ Download ဆွဲမယ်</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🖼️ တရား Thumbnail ============ -->
+<div class="screen" id="scr-dhamma">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🖼️ တရား Thumbnail ထုတ်ရန်</div>
+    <div class="sec-s">YouTube/Facebook တရား video အတွက် 1280×720 thumbnail — Auto Mix နောက်ခံ၊ ဆရာတော် ပုံ (ရွှေကွပ် စက်ဝိုင်း)၊ စာသား အကြီး၊ channel logo — <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="dhBgDrop" onclick="document.getElementById('dhBgFile').click()">
+        <b>နောက်ခံ ပုံ ရွေးရန် နှိပ်ပါ</b><br>JPG / PNG ဖိုင် ဆွဲချလို့လည်း ရတယ် (မရွေးရင် Auto Mix သုံးမယ်)
+        <input type="file" id="dhBgFile" accept=".jpg,.jpeg,.png,image/*" hidden  onchange="dhBgPick(this)">
+      </div>
+      <div class="glabel" style="margin-top:14px">Background — Auto Mix (အဆင်သင့် နောက်ခံများ)</div>
+      <div class="chips" data-group="dhgrad">
+        <button class="chip sel" data-dir="morning" onclick="dhDraw()">🌅 ရွှေရောင် နံနက်</button>
+        <button class="chip" data-dir="evening" onclick="dhDraw()">🌇 အညို ညနေ</button>
+        <button class="chip" data-dir="nature" onclick="dhDraw()">🌿 စိမ်း သဘာဝ</button>
+        <button class="chip" data-dir="night" onclick="dhDraw()">🌌 မှောင်ပြာ ည</button>
+      </div>
+      <div class="glabel" style="margin-top:16px">ဆရာတော် ပုံ (Monk Photo — ရွေးချယ်နိုင်)</div>
+      <div class="drop" id="dhMonkDrop" onclick="document.getElementById('dhMonkFile').click()">
+        <b>ဆရာတော် ပုံ ရွေးရန် နှိပ်ပါ</b><br>Portrait ပုံ — ရွှေ အနားကွပ် စက်ဝိုင်းပုံ ထည့်ပေးမယ်
+        <input type="file" id="dhMonkFile" accept=".jpg,.jpeg,.png,image/*" hidden  onchange="dhMonkPick(this)">
+      </div>
+      <div class="numrow" style="margin-top:12px">
+        <div>
+          <div class="glabel">Monk နေရာ</div>
+          <div class="chips" data-group="dhmonkpos">
+            <button class="chip sel" data-dir="left" onclick="dhDraw()">ဘယ်</button>
+            <button class="chip" data-dir="right" onclick="dhDraw()">ညာ</button>
+          </div>
+        </div>
+        <div style="flex:1;min-width:160px">
+          <div class="glabel">Monk အရွယ်အစား</div>
+          <input type="range" id="dhMonkSize" min="25" max="60" value="40" style="width:100%" oninput="dhDraw()">
+        </div>
+      </div>
+      <div class="glabel" style="margin-top:14px">ခေါင်းစဉ် စာသား (စာကြောင်း ခွဲလို့ရ)</div>
+      <textarea id="dhTitle" rows="2" style="min-height:90px" placeholder="တရား ခေါင်းစဉ် ရိုက်ပါ" oninput="dhDraw()"></textarea>
+      <div class="glabel" style="margin-top:10px">ဒုတိယ စာကြောင်း (ဆရာတော် အမည် / ရက်စွဲ — မလိုရင် ချန်ထား)</div>
+      <input type="text" class="tin" id="dhSub" placeholder="ဥပမာ — ဆရာတော် ဦးသုမင်္ဂလ" oninput="dhDraw()">
+      <div class="glabel" style="margin-top:12px">စာလုံး အရွယ်အစား</div>
+      <input type="range" id="dhSize" min="60" max="150" value="96" style="width:100%" oninput="dhDraw()">
+      <div class="glabel" style="margin-top:10px">စာသား အရောင်</div>
+      <div class="chips" data-group="dhcolor">
+        <button class="chip sel" data-dir="#FFD740" onclick="dhDraw()">ရွှေ</button>
+        <button class="chip" data-dir="#FFFFFF" onclick="dhDraw()">အဖြူ</button>
+      </div>
+      <div class="glabel" style="margin-top:16px">Channel Logo (ရွေးချယ်နိုင်)</div>
+      <div class="drop" id="dhLogoDrop" onclick="document.getElementById('dhLogoFile').click()">
+        <b>Logo ပုံ ရွေးရန် နှိပ်ပါ</b><br>PNG ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="dhLogoFile" accept=".png,.jpg,.jpeg,image/*" hidden  onchange="dhLogoPick(this)">
+      </div>
+      <div class="numrow" style="margin-top:12px">
+        <div>
+          <div class="glabel">Logo နေရာ</div>
+          <div class="chips" data-group="dhcorner">
+            <button class="chip" data-dir="tl" onclick="dhDraw()">ဘယ်အပေါ်</button>
+            <button class="chip" data-dir="tr" onclick="dhDraw()">ညာအပေါ်</button>
+            <button class="chip" data-dir="bl" onclick="dhDraw()">ဘယ်အောက်</button>
+            <button class="chip sel" data-dir="br" onclick="dhDraw()">ညာအောက်</button>
+          </div>
+        </div>
+        <div style="flex:1;min-width:160px">
+          <div class="glabel">Logo အရွယ်အစား</div>
+          <input type="range" id="dhLogoSize" min="8" max="30" value="16" style="width:100%" oninput="dhDraw()">
+        </div>
+      </div>
+      <div class="glabel" style="margin-top:14px">Preview (1280×720)</div>
+      <canvas id="dhCv" width="1280" height="720" style="width:100%;border-radius:12px;border:1px solid var(--line)"></canvas>
+      <div id="dhStatus" class="hint" style="margin-top:8px"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center">
+        <button class="genbtn" onclick="dhDl()">⬇ PNG Download ဆွဲမယ်</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🎵 အသံ ပေါင်းရန် ============ -->
+<div class="screen" id="scr-merge">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🎵 အသံ ပေါင်းရန် (Audio Merge)</div>
+    <div class="sec-s">အသံဖိုင် အများ ကို စဉ်အတိုင်း ဆက်ပြီး ဖိုင်တစ်ခုတည်း ပေါင်းထုတ်လို့ရတယ် — browser ထဲမှာပဲ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="mgDrop" onclick="document.getElementById('mgFile').click()">
+        <b>အသံဖိုင် အများ ရွေးရန် နှိပ်ပါ</b><br>MP3 / WAV ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="mgFile" accept=".mp3,.wav,audio/*" hidden multiple onchange="mgPick(this)">
+      </div>
+      <div id="mgList" style="margin-top:8px"></div>
+      <div id="mgInfo" class="hint" style="margin-top:6px"></div>
+      <div class="glabel" style="margin-top:14px">Format</div>
+      <div class="chips" data-group="mgfmt">
+        <button class="chip sel" data-dir="wav">WAV</button>
+        <button class="chip" data-dir="mp3">MP3</button>
+      </div>
+      <div id="mgStatus" class="hint" style="margin-top:10px"></div>
+      <audio id="mgOut" controls style="width:100%;margin-top:10px;display:none"></audio>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="mgBtn" onclick="mgGo()" disabled>ပေါင်းပြီး ထုတ်မယ် 🎵</button>
+        <a class="dlbtn" id="mgDl" style="display:none" download>⬇ Download ဆွဲမယ်</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🔢 ဂဏန်း မြန်မာ စာလုံး ============ -->
+<div class="screen" id="scr-numwords">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🔢 ဂဏန်း → မြန်မာ စာလုံး</div>
+    <div class="sec-s">TTS စာသား ပြင်ဆင်ဖို့ — ဂဏန်း ကို မြန်မာ စာလုံး ပြောင်းပေးတယ် (ဥပမာ 123456 → တစ်သိန်းနှစ်သောင်းသုံးထောင်လေးရာငါးဆယ့်ခြောက်) — <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">ဂဏန်း တစ်လုံးတည်း</div>
+      <input type="text" class="tin" id="nwNum" inputmode="numeric" placeholder="ဥပမာ 123456 (သို့) ၁၂၃၄၅၆">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center">
+        <button class="genbtn" onclick="nwConvert()">ပြောင်းမယ် 🔢</button>
+      </div>
+      <div id="nwOut" style="margin-top:12px;font-size:19px;font-weight:700;line-height:1.7"></div>
+      <div class="glabel" style="margin-top:20px">စာသား တစ်ခုလုံး — ဂဏန်း အကုန် ပြောင်း (TTS ပြင်ဆင်ဖို့)</div>
+      <textarea id="nwTxt" rows="4" style="min-height:110px" placeholder="စာသား ကူးထည့်ပါ — ဂဏန်း (123 နှင့် ၁၂၃ နှစ်မျိုးလုံး) ကို စာလုံး ပြောင်းပေးမယ်"></textarea>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center">
+        <button class="genbtn" onclick="nwTextGo()">စာသားထဲက ဂဏန်း အကုန် ပြောင်း 🔢</button>
+        <button class="chip" onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('nwTxtOut').value);this.textContent='ကူးပြီး ✓'">📋 ရလဒ် ကူးမယ်</button>
+      </div>
+      <textarea id="nwTxtOut" rows="4" style="min-height:110px;margin-top:12px" readonly placeholder="ရလဒ် ဒီမှာ ပေါ်မယ်"></textarea>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ⏱️ စာဖတ် ကြာချိန် ============ -->
+<div class="screen" id="scr-readtime">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">⏱️ စာဖတ် ကြာချိန် ခန့်မှန်း</div>
+    <div class="sec-s">စာသား ဘယ်လောက် ကြာကြာ ဖတ်ရမလဲ ခန့်မှန်းပေးတယ် — narration/recap ပြင်ဆင်ဖို့ — <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <textarea id="rtTxt" rows="7" placeholder="စာသား ကူးထည့်ပါ" oninput="rtCalc()"></textarea>
+      <div class="glabel" style="margin-top:12px">ဖတ် မြန်နှုန်း</div>
+      <div class="chips" data-group="rtspeed">
+        <button class="chip" data-dir="600" onclick="rtCalc()">နှေး (600/မိနစ်)</button>
+        <button class="chip sel" data-dir="780" onclick="rtCalc()">ပုံမှန် (780/မိနစ်)</button>
+        <button class="chip" data-dir="950" onclick="rtCalc()">မြန် (950/မိနစ်)</button>
+      </div>
+      <div id="rtOut" class="hint" style="margin-top:12px;font-size:15px"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 💧 Watermark တပ် ============ -->
+<div class="screen" id="scr-watermark">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">💧 Watermark / Logo တပ်</div>
+    <div class="sec-s">ပုံပေါ် logo/တံဆိပ် တင်ထုတ်လို့ရတယ် — နေရာ၊ အရွယ်၊ မှိန်/လင်း ရွေး — browser ထဲမှာပဲ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="wmBaseDrop" onclick="document.getElementById('wmBaseFile').click()">
+        <b>အခြေခံ ပုံ ရွေးရန် နှိပ်ပါ</b><br>JPG / PNG ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="wmBaseFile" accept=".jpg,.jpeg,.png,image/*" hidden  onchange="wmPickBase(this)">
+      </div>
+      <div style="height:10px"></div>
+      <div class="drop" id="wmLogoDrop" onclick="document.getElementById('wmLogoFile').click()">
+        <b>Logo ပုံ ရွေးရန် နှိပ်ပါ</b><br>PNG ဖိုင် ဆွဲချလို့လည်း ရတယ်
+        <input type="file" id="wmLogoFile" accept=".png,.jpg,.jpeg,image/*" hidden  onchange="wmPickLogo(this)">
+      </div>
+      <div class="glabel" style="margin-top:14px">နေရာ</div>
+      <div class="chips" data-group="wmpos">
+        <button class="chip" data-dir="tl" onclick="wmDraw()">ဘယ်အပေါ်</button>
+        <button class="chip" data-dir="tr" onclick="wmDraw()">ညာအပေါ်</button>
+        <button class="chip" data-dir="bl" onclick="wmDraw()">ဘယ်အောက်</button>
+        <button class="chip sel" data-dir="br" onclick="wmDraw()">ညာအောက်</button>
+        <button class="chip" data-dir="c" onclick="wmDraw()">အလယ်</button>
+      </div>
+      <div class="glabel" style="margin-top:12px">Logo အရွယ်အစား (%)</div>
+      <input type="range" id="wmSize" min="5" max="50" value="20" style="width:100%" oninput="wmDraw()">
+      <div class="glabel" style="margin-top:10px">မှိန်/လင်း (Opacity %)</div>
+      <input type="range" id="wmOp" min="10" max="100" value="80" style="width:100%" oninput="wmDraw()">
+      <div class="glabel" style="margin-top:12px">Format</div>
+      <div class="chips" data-group="wmfmt">
+        <button class="chip sel" data-dir="png">PNG</button>
+        <button class="chip" data-dir="jpg">JPG</button>
+      </div>
+      <canvas id="wmCv" style="max-width:100%;margin-top:14px;border:1px dashed var(--line);border-radius:12px"></canvas>
+      <div id="wmStatus" class="hint" style="margin-top:8px"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center">
+        <button class="genbtn" onclick="wmExport()">⬇ Download ဆွဲမယ်</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 📄 ပုံများ PDF ============ -->
+<div class="screen" id="scr-img2pdf">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">📄 ပုံများ → PDF</div>
+    <div class="sec-s">ပုံ အများ ကို PDF တစ်ဖိုင် ပေါင်းထုတ်လို့ရတယ် (တစ်မျက်နှာ တစ်ပုံ) — browser ထဲမှာပဲ၊ <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" id="p2Drop" onclick="document.getElementById('p2File').click()">
+        <b>ပုံ အများ ရွေးရန် နှိပ်ပါ</b><br>JPG / PNG ဖိုင် ဆွဲချလို့လည်း ရတယ် — ရွေးတာနဲ့ PDF လုပ်ပေးမယ်
+        <input type="file" id="p2File" accept=".jpg,.jpeg,.png,image/*" hidden multiple onchange="p2Go(this)">
+      </div>
+      <div id="p2Status" class="hint" style="margin-top:10px">ပုံတွေ ရွေးတာနဲ့ PDF အလိုအလျောက် လုပ်ပေးမယ်။</div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ============ 🔊 SFX Soundboard ============ -->
+<div class="screen" id="scr-sfx">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🔊 SFX Soundboard (အသံ Effect များ)</div>
+    <div class="sec-s">အသံ Effect ၁၂ မျိုး — အားလုံး Web Audio နဲ့ browser ထဲမှာ ဖန်တီးထားတာ (အသံဖိုင် မပါ၊ copyright pack မဟုတ်)။ Pad နှိပ်ရင် ဖွင့်၊ ⬇ နှိပ်ရင် download — <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">အသံ အတိုးအကျယ် (Volume): <span id="sfxVolVal">80%</span></div>
+      <input type="range" id="sfxVol" min="10" max="100" value="80" style="width:100%" oninput="document.getElementById('sfxVolVal').textContent=this.value+'%'">
+      <div class="glabel" style="margin-top:12px">Download Format</div>
+      <div class="chips" data-group="sfxfmt">
+        <button class="chip sel" data-dir="wav">WAV</button>
+        <button class="chip" data-dir="mp3">MP3</button>
+      </div>
+      <div class="sfxgrid">
+        <div class="sfxpad" onclick="sfxPlay('bell')">🔔<span>ကြေးစည် · Bell</span><button class="sfxdl" title="Download" onclick="sfxDl('bell',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('gong')">🛎️<span>Gong</span><button class="sfxdl" title="Download" onclick="sfxDl('gong',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('ding')">✨<span>Ding · အသိပေး</span><button class="sfxdl" title="Download" onclick="sfxDl('ding',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('success')">🎉<span>Success Chime</span><button class="sfxdl" title="Download" onclick="sfxDl('success',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('whoosh')">💨<span>Whoosh</span><button class="sfxdl" title="Download" onclick="sfxDl('whoosh',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('sweepup')">📈<span>Sweep Up</span><button class="sfxdl" title="Download" onclick="sfxDl('sweepup',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('sweepdown')">📉<span>Sweep Down</span><button class="sfxdl" title="Download" onclick="sfxDl('sweepdown',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('pop')">🫧<span>Pop</span><button class="sfxdl" title="Download" onclick="sfxDl('pop',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('coin')">🪙<span>Coin</span><button class="sfxdl" title="Download" onclick="sfxDl('coin',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('drum')">🥁<span>Drum Hit</span><button class="sfxdl" title="Download" onclick="sfxDl('drum',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('error')">🚫<span>Error Buzz</span><button class="sfxdl" title="Download" onclick="sfxDl('error',event)">⬇</button></div>
+        <div class="sfxpad" onclick="sfxPlay('laser')">🔫<span>Laser</span><button class="sfxdl" title="Download" onclick="sfxDl('laser',event)">⬇</button></div>
+      </div>
+      <div id="sfxStatus" class="hint" style="margin-top:12px">Pad တစ်ခု နှိပ်လိုက်ရင် အသံ ထွက်မယ် — ပထမဆုံး နှိပ်မှုမှာ browser က အသံ ခွင့်ပြုချက် လိုနိုင်တယ်။</div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 🤖 AI စာသား — Translate & Recap (BYOK Gemini) ============ -->
+<div class="screen" id="scr-aitext">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🤖 AI စာသား — Translate &amp; Recap</div>
+    <div class="sec-s">SRT / စာသားကို Gemini AI နဲ့ <b>မြန်မာ ဘာသာပြန်</b> ပေးတယ်၊ ဒါမှမဟုတ် transcript ကနေ <b>Recap narration စာသား</b> အလိုလို ထုတ်ပေးတယ် — Recap App ထဲက AI ပုံစံ အတိုင်း၊ ကိုယ့် Gemini API Key (BYOK) နဲ့ သုံးရတယ်။ ကျွန်တော်တို့ proxy ကနေ ချိတ်တာမို့ <b>VPN မလို</b>ပါ။</div>
+    <div class="card" id="atKeyWrap" style="display:none;margin-bottom:14px">
+      <h3><span class="n">🔑</span>Gemini API Key <small style="color:var(--mut);font-weight:500">ကိုယ့် key နဲ့ AI စာသား ထုတ်မယ်</small></h3>
+      <div style="display:flex;gap:8px;align-items:stretch">
+        <input type="password" id="atKey" class="tin" placeholder="Gemini API Key ထည့်ပါ (AIza...)" autocomplete="off" spellcheck="false">
+        <button type="button" id="atKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
+      </div>
+      <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။</div>
+    </div>
+    <div class="card">
+      <div class="glabel">လုပ်မယ့် အလုပ်</div>
+      <div class="chips" data-group="atmode">
+        <button class="chip sel" data-dir="translate">🌐 ဘာသာပြန် (Translate)</button>
+        <button class="chip" data-dir="recap">🎬 Recap စာသား (AI Recap)</button>
+      </div>
+      <div id="atLenWrap" style="display:none">
+        <div class="glabel" style="margin-top:14px">Recap အရှည် (မူရင်း စာသားရဲ့ % လောက်)</div>
+        <div class="chips" data-group="atlen">
+          <button class="chip" data-dir="30">တို · ~30%</button>
+          <button class="chip sel" data-dir="50">လတ် · ~50%</button>
+          <button class="chip" data-dir="70">ရှည် · ~70%</button>
+        </div>
+      </div>
+      <div class="drop" id="atDrop" style="margin-top:16px" onclick="document.getElementById('atFile').click()">
+        <b>.srt / .vtt / .txt ဖိုင် ရွေးရန် နှိပ်ပါ</b><br>ဖိုင် ဆွဲချလို့လည်း ရတယ်၊ စာသား တိုက်ရိုက် ကူးထည့်လို့လည်း ရတယ်
+        <input type="file" id="atFile" accept=".srt,.vtt,.txt,text/plain" hidden onchange="atPick(this)">
+      </div>
+      <div class="glabel" style="margin-top:14px">မူရင်း စာသား / Subtitle</div>
+      <textarea id="atIn" rows="9" placeholder="ဘာသာပြန် (သို့) Recap လုပ်ချင်တဲ့ transcript / SRT စာသား ဒီမှာ ကူးထည့်ပါ..." oninput="atCount()"></textarea>
+      <div id="atInfo" class="hint" style="margin-top:8px"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center">
+        <button class="genbtn" id="atBtn" onclick="atRun()">AI နဲ့ ထုတ်မယ် 🤖</button>
+      </div>
+      <div id="atStatus" class="hint" style="margin-top:10px"></div>
+      <div class="glabel" style="margin-top:16px">ထွက်လာတဲ့ စာသား</div>
+      <textarea id="atOut" rows="9" placeholder="ဘာသာပြန် / Recap စာသား ဒီမှာ ထွက်လာပါမယ်"></textarea>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center">
+        <button class="btn btn-ghost" onclick="atCopy()">📋 Copy ကူးမယ်</button>
+        <button class="dlbtn" onclick="atDownload()">⬇ Download ဆွဲမယ်</button>
+        <button class="btn btn-ghost" onclick="atSendTts()">🎙️ TTS မှာ သုံးမယ်</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="socrow">
+    <a class="soc" href="https://www.facebook.com/cyborgstudiomm" target="_blank" rel="noopener" aria-label="Cyborg Studio MM on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a>
+    <a class="soc" href="https://m.me/cyborgstudiomm" target="_blank" rel="noopener" aria-label="Cyborg Studio MM on Messenger"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.549 1.797 6.701 4.615 8.684V24l3.923-2.156c1.09.301 2.246.46 3.462.46 6.627 0 12-4.974 12-11.111C24 4.974 18.627 0 12 0zm1.266 15.626l-3.2-3.417-6.241 3.417 6.865-7.292 3.268 3.417 6.173-3.417-6.865 7.292z"/></svg>Messenger</a>
+    <a class="soc" href="https://www.tiktok.com/@cyborgstudiomm" target="_blank" rel="noopener" aria-label="Cyborg Studio MM on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.84-.32-1.75-.23-2.54.09-.83.34-1.46 1.05-1.75 1.91-.28.87-.22 1.86.16 2.69.73 1.63 2.8 2.31 4.46 1.59 1.19-.51 1.96-1.7 1.99-3 .03-2.96.02-5.92.02-8.87-.01-1.47 0-2.95 0-4.42z"/></svg>TikTok</a>
+    <a class="soc" href="https://t.me/cyborgstudiomm" target="_blank" rel="noopener" aria-label="Cyborg Studio MM on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>
+    <a class="soc" href="https://www.youtube.com/@cyborgstudiomm" target="_blank" rel="noopener" aria-label="Cyborg Studio MM on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+  </div>
+  <div>© 2026 Cyborg Studio MM · cyborgstudiomm.com — Home / POS / Studio / Recap / Management</div>
+</footer>
 
 <!-- Customer Service AI Bot -->
-<button class="botfab" onclick="toggleBot()"><span class="bf">🤖</span><span class="dot"></span>Customer Service</button>
+<button class="botfab" onclick="toggleBot()"><span class="bf"><svg viewBox="0 0 120 120" aria-label="Cyborg Studio MM logo"><defs><linearGradient id="hgb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00b8d9"/><stop offset=".52" stop-color="#448aff"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs><path d="M 85.4 31.8 A 38 38 0 1 0 85.4 88.2" fill="none" stroke="url(#hgb)" stroke-width="15" stroke-linecap="round"/><rect x="38" y="49" width="8.5" height="22" rx="4.25" fill="url(#hgb)"/><rect x="51" y="40" width="8.5" height="40" rx="4.25" fill="url(#hgb)"/><rect x="64" y="49" width="8.5" height="22" rx="4.25" fill="url(#hgb)"/><line x1="68.75" y1="60" x2="84" y2="60" stroke="#ff4d8d" stroke-width="3.5"/><circle cx="90" cy="60" r="5.5" fill="#ff4d8d"/><circle cx="85.4" cy="31.8" r="6" fill="#ffffff" stroke="#00b8d9" stroke-width="4"/><circle cx="85.4" cy="88.2" r="6" fill="#ffffff" stroke="#ff4d8d" stroke-width="4"/></svg></span><span class="dot"></span>Customer Service</button>
 <div class="botpanel" id="botPanel">
-  <div class="bot-hd"><div class="ba">🤖</div><div><b>Cyborg AI Bot</b><span><i></i>Customer Service · Online</span></div><button class="x" onclick="toggleBot()">✕</button></div>
+  <div class="bot-hd"><div class="ba"><svg viewBox="0 0 120 120" aria-label="Cyborg Studio MM logo"><defs><linearGradient id="hga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00b8d9"/><stop offset=".52" stop-color="#448aff"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs><path d="M 85.4 31.8 A 38 38 0 1 0 85.4 88.2" fill="none" stroke="url(#hga)" stroke-width="15" stroke-linecap="round"/><rect x="38" y="49" width="8.5" height="22" rx="4.25" fill="url(#hga)"/><rect x="51" y="40" width="8.5" height="40" rx="4.25" fill="url(#hga)"/><rect x="64" y="49" width="8.5" height="22" rx="4.25" fill="url(#hga)"/><line x1="68.75" y1="60" x2="84" y2="60" stroke="#ff4d8d" stroke-width="3.5"/><circle cx="90" cy="60" r="5.5" fill="#ff4d8d"/><circle cx="85.4" cy="31.8" r="6" fill="#ffffff" stroke="#00b8d9" stroke-width="4"/><circle cx="85.4" cy="88.2" r="6" fill="#ffffff" stroke="#ff4d8d" stroke-width="4"/></svg></div><div><b>Cyborg Studio MM</b><span><i></i>Customer Service · Online</span></div><button class="x" onclick="toggleBot()">✕</button></div>
   <div class="bot-body" id="botBody">
-    <div class="msg bot">မင်္ဂလာပါ ခင်ဗျာ 🙏 ကျွန်တော် Cyborg Studio MM ရဲ့ AI Bot ပါ။ Credit Points, အသံထုတ်နည်း, ဈေးနှုန်း — သိချင်တာ မေးလို့ရပါတယ်။</div>
+    <div class="msg bot">မင်္ဂလာပါ ခင်ဗျာ 🙏 ကျွန်တော် Cyborg Studio MM ရဲ့ Customer Service ကပါ။ ဘာများ ကူညီပေးရပါ့မလဲ သိချင်တာရှိရင် အားမနာတမ်း မေးမြန်းနိုင်ပါတယ်။</div>
   </div>
   <div class="bot-q">
     <button onclick="askBot('Credit Points ဘယ်လို ဝယ်ရမလဲ?')">Credit Points ဝယ်နည်း</button>
     <button onclick="askBot('အသံ ဘယ်လို ထုတ်ရမလဲ?')">အသံ ထုတ်နည်း</button>
     <button onclick="askBot('ဈေးနှုန်း သိချင်တယ်')">ဈေးနှုန်း</button>
     <button onclick="askBot('Recap ဘယ်လို လုပ်ရမလဲ?')">Recap လုပ်နည်း</button>
+    <button onclick="askBot('Recap app ဘယ်လို သုံးရမလဲ')">Recap app သုံးနည်း</button>
+    <button onclick="askBot('License ဘယ်လို ထည့်ရမလဲ')">License ထည့်နည်း</button>
+    <button onclick="askBot('မြန်မာ စာတန်း ဘယ်လို ရမလဲ')">မြန်မာ စာတန်း ရနည်း</button>
+  </div>
+  <div class="bot-contact">
+    <span>လူကိုယ်တိုင် ဆက်သွယ်ရန်:</span>
+    <a class="bc-m" href="https://m.me/cyborgstudiomm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.549 1.797 6.701 4.615 8.684V24l3.923-2.156c1.09.301 2.246.46 3.462.46 6.627 0 12-4.974 12-11.111C24 4.974 18.627 0 12 0zm1.266 15.626l-3.2-3.417-6.241 3.417 6.865-7.292 3.268 3.417 6.173-3.417-6.865 7.292z"/></svg>Messenger</a>
+    <a class="bc-t" href="https://t.me/cyborgstudiomm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>
   </div>
   <div class="bot-in"><input id="botInput" placeholder="မေးခွန်း ရိုက်ပါ..." onkeydown="if(event.key==='Enter')sendBot()"><button onclick="sendBot()">ပို့မယ်</button></div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/rabbit-node@1.0.4/dist/rabbit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 const tools=[
- {t:'AI အသံ ထုတ်မယ်',e:'AI Voice Generation',d:'စာရိုက်လိုက်တာနဲ့ အသံထွက်မယ်၊ အသံ ၁၂+ ထဲက ရွေးလို့ရတယ်',go:'tts',ic:'<path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
+ {t:'AI အသံ ထုတ်မယ်',e:'AI Voice Generation',d:'စာရိုက်လိုက်တာနဲ့ အသံထွက်မယ်၊ Gemini အသံ ၃၀ လုံးထဲက ရွေးလို့ရတယ်',go:'tts',ic:'<path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
+ {t:'ဓာတ်ပုံ Converter',e:'Photo Converter',d:'JPG ↔ PNG ပြောင်းလို့ရတယ် — ဖိုင် server မတက်ဘူး၊ browser ထဲမှာပဲ၊ အခမဲ့',go:'photo',ic:'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-4 3 3 3-3 5 4"/>'},
+ {t:'အသံ Converter',e:'Audio Converter',d:'MP3 ↔ WAV ပြောင်းလို့ရတယ် — browser ထဲမှာပဲ အလုပ်လုပ်တယ်၊ အခမဲ့',go:'audio',ic:'<path d="M4 10v4M8 7v10M12 5v14M16 8v8M20 11v2"/>'},
+ {t:'Zawgyi ↔ Unicode',e:'Zawgyi Unicode Converter',d:'ဇော်ဂျီ ⇄ ယူနီကုဒ် စာသား ပြောင်းလို့ရတယ် — အခမဲ့',go:'zawgyi',ic:'<path d="M7 4L3 8l4 4M3 8h14M17 12l4 4-4 4M21 16H7"/>'},
+ {t:'SRT Tool',e:'SRT Tool',d:'Subtitle အချိန် ရွှေ့, SRT ↔ VTT ပြောင်း — အခမဲ့',go:'srt',ic:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/>'},
+ {t:'ဓာတ်ပုံ Resize',e:'Photo Resize',d:'အရွယ် ပြောင်း + Ratio ညှိ (16:9, 9:16, 1:1 စသဖြင့်) — အခမဲ့',go:'resize',ic:'<path d="M4 9V4h5M20 15v5h-5M4 4l6 6M20 20l-6-6"/>'},
+ {t:'MP3 ဖြတ် / Ringtone ဖြတ်',e:'MP3 Cutter / Ringtone',d:'MP3 လိုတဲ့ အပိုင်း ဖြတ်၊ fade ထည့်ပြီး ringtone လုပ် — အခမဲ့',go:'trim',ic:'<circle cx="6" cy="7" r="2.4"/><circle cx="6" cy="17" r="2.4"/><path d="M8 8.5L20 19M8 15.5L20 5"/>'},
+ {t:'Video Frame ဖမ်း',e:'Video Frame Grab',d:'ဗီဒီယို frame ကို ဓာတ်ပုံအဖြစ် ထုတ် — အခမဲ့',go:'frame',ic:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 5v14M17 5v14"/>'},
+ {t:'QR Code ထုတ်',e:'QR Generator',d:'Link/စာသား ကနေ QR ပုံ ထုတ် — အခမဲ့',go:'qr',ic:'<rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h3v3h-3zM20 17v3h-3"/>'},
+ {t:'Edge TTS (သီဟ/နီလာ)',e:'Edge TTS Free',d:'စာရိုက်ရင် သီဟ/နီလာ အသံ ထွက်မယ် — Microsoft Edge အသံ၊ အခမဲ့',go:'edgetts',ic:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9c1.2 1.6 1.2 4.4 0 6M18.5 6.5c2.4 3.2 2.4 7.8 0 11"/>'},
+ {t:'အသံမှ စာသား (Whisper)',e:'Whisper STT',d:'အသံဖိုင်ကနေ စာသား + SRT ထုတ် — browser ထဲမှာ AI မောင်းတယ်၊ အခမဲ့',go:'stt',ic:'<path d="M9 11a3 3 0 0 0 6 0V6a3 3 0 0 0-6 0z"/><path d="M6.5 11a5.5 5.5 0 0 0 11 0M12 16.5V20M16 12h5M16 16h5"/>'},
+ {t:'AI စာသား — Translate & Recap',e:'AI Text — Translate & Recap',d:'SRT/စာသားကို Gemini နဲ့ မြန်မာ ဘာသာပြန် + Recap စာသား အလိုလို ထုတ် — ကိုယ့် key (BYOK) နဲ့၊ VPN မလို',go:'aitext',ic:'<path d="M4 5h16M4 10h10M4 15h13"/><path d="M17.8 14.6l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>'},
+ {t:'တရား အပိုင်းခွဲ',e:'Sermon Splitter',d:'အသံရှည် ကို ၁၀/၁၅/၂၀/၃၀ မိနစ် အပိုင်းခွဲ — အခမဲ့',go:'split',ic:'<circle cx="6" cy="7" r="2.5"/><circle cx="6" cy="17" r="2.5"/><path d="M8.2 8.6 20 19M8.2 15.4 20 5"/>'},
+ {t:'အသံရှင်း / Normalize',e:'Voice Clear',d:'အသံ ညှိ + Smart Audio preset + speed/pitch — အခမဲ့',go:'voiceclear',ic:'<path d="M5 7h8M17 7h2M5 12h2M11 12h8M5 17h10"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/>'},
+ {t:'တရား Thumbnail',e:'Dhamma Thumbnail',d:'1280×720 ပုံ + ဆရာတော် ပုံ + စာသား — အခမဲ့',go:'dhamma',ic:'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5.5-5 3.5 3 3-2.5L20 18"/>'},
+ {t:'အသံ ပေါင်းရန်',e:'Audio Merge',d:'အသံဖိုင် အများ ဆက်ပြီး တစ်ခုတည်း ဖြစ် — အခမဲ့',go:'merge',ic:'<path d="M8 5v5a4 4 0 0 0 4 4h4"/><path d="m13.5 11 3 3-3 3"/>'},
+ {t:'ဂဏန်း → မြန်မာ စာလုံး',e:'Number to Words',d:'123456 → တစ်သိန်း… TTS စာသား ပြင်ဖို့ — အခမဲ့',go:'numwords',ic:'<path d="M4.5 17V8.5L3 10M10 8.4c.6-1.1 3.6-1.1 3.6.7 0 1.8-3.6 2.4-3.6 4.6h4M16.5 9h4M16.5 13h4M16.5 17h4"/>'},
+ {t:'စာဖတ် ကြာချိန်',e:'Reading Time',d:'စာသား ဘယ်နှစ်မိနစ် ဖတ်ရမလဲ ခန့်မှန်း — အခမဲ့',go:'readtime',ic:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'},
+ {t:'Watermark တပ်',e:'Watermark',d:'ပုံပေါ် logo/တံဆိပ် တင်ထုတ် — အခမဲ့',go:'watermark',ic:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="m4 15.5 5-4 3.5 2.8L15 12l5 3.5"/><circle cx="9" cy="9" r="1.3"/>'},
+ {t:'ပုံများ → PDF',e:'Images to PDF',d:'ပုံ အများ ကို PDF တစ်ဖိုင် ပေါင်းထုတ် — အခမဲ့',go:'img2pdf',ic:'<path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v4h4M9.5 13h5M9.5 17h5"/>'},
+ {t:'SFX Soundboard',e:'SFX Soundboard',d:'Bell, Gong, Whoosh effect ၁၂ မျိုး ဖန်တီး + download — အခမဲ့',go:'sfx',ic:'<path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9ZM10.2 20a2 2 0 0 0 3.6 0"/>'},
  {t:'Voice Clone',e:'Voice Clone',d:'ကိုယ့်အသံကို clone လုပ်ပြီး ဘယ် script မဆို ပြောခိုင်းလို့ရတယ်',go:'',ic:'<circle cx="8" cy="8" r="3.2"/><path d="M3.5 20c.6-3.4 2.4-5 4.5-5s3.9 1.6 4.5 5M16 4.5c1.8.8 3 2.4 3 4.5M16.5 9.5c1 .5 1.7 1.5 1.9 2.8"/>'},
  {t:'အသံမှ စာသား',e:'Speech to Text',d:'အသံ/ဗီဒီယို တင်လိုက်တာနဲ့ စာသားနဲ့ SRT အလိုလို ရမယ်',go:'',ic:'<path d="M4 6h16M4 12h10M4 18h13"/>'},
  {t:'Auto Recap',e:'Auto Recap',d:'ရုပ်ရှင်/ဒရမ်မာကို recap video အဖြစ် အလိုလို ထုတ်ပေးတယ်',go:'',ic:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5l5 2.5-5 2.5z"/>'},
  {t:'SRT ဘာသာပြန်',e:'SRT Translator',d:'Timing မပျက်၊ စာကြောင်းနံပါတ် မပျက် မြန်မာလို ပြန်ပေးတယ်',go:'',ic:'<path d="M4 6h9M8.5 4v2c0 3.5-2 6.5-4 8M6 9.5c.8 2 2.7 4 4.8 5M13 20l4.5-10L22 20M14.8 16.5h5.4"/>'}
 ];
-document.getElementById('tools').innerHTML=tools.map(x=>`<div class="tool" onclick="${x.go?`show('${x.go}')`:`alert('v0.4 နမူနာမှာ ဒီ Tool က မပါသေးဘူး — နောက် version မှာ ပါမယ်')`}"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${x.ic}</svg></div><h3>${x.t}</h3><p>${x.d}</p><span class="open">ဖွင့်မယ် →</span></div>`).join('');
+document.getElementById('tools').innerHTML=tools.map(x=>`<div class="tool" onclick="${x.go?`show('${x.go}')`:`alert('ဒီ Tool က မကြာမီ ပါလာမယ် — အခု TTS Studio နဲ့ Converter တွေ သုံးလို့ရတယ်')`}"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${x.ic}</svg></div><h3>${x.t}</h3><p>${x.d}</p><span class="open">ဖွင့်မယ် →</span></div>`).join('');
 // waveform
 const w=document.getElementById('wave');let wh='';
 for(let i=0;i<36;i++){const h=18+Math.round(Math.abs(Math.sin(i*.55))*44);wh+=`<i style="height:${h}px;animation-delay:${(i%9)*.09}s"></i>`}
 w.innerHTML=wh;
 // screens
 function showPoints(){show('studio');setTimeout(()=>{const el=document.getElementById('points');if(el)el.scrollIntoView({behavior:'smooth'})},80)}
+function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('csmm-theme',t)}catch(e){}document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t))}
+(function(){var t=document.documentElement.getAttribute('data-theme')||'day';document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t))})();
+function setFont(f){document.documentElement.setAttribute('data-font',f);try{localStorage.setItem('csmm-font',f)}catch(e){}document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))}
+(function(){var f=document.documentElement.getAttribute('data-font')||'pyidaungsu';document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))})();
 function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById('scr-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});if(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}}
 // chips: single-select per group + update genbar
 document.querySelectorAll('.chips').forEach(g=>{g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');updGen()})});
@@ -551,13 +1489,166 @@ function updCount(){const t=document.getElementById('txt').value;document.getEle
 updCount();
 let playing=false;
 function playSample(el){playing=!playing;const old=el.textContent;el.textContent=playing?'❚❚':'▶';setTimeout(()=>{el.textContent=old==='▶'||old.includes('Listen')?'▶':old;playing=false},1600)}
-// fake generate
-function generate(){const bw=document.getElementById('barwrap'),bar=document.getElementById('bar'),bm=document.getElementById('barmeta');bw.style.display='block';bm.style.display='flex';document.getElementById('outEmpty').style.display='block';document.getElementById('outReady').style.display='none';let p=0;const iv=setInterval(()=>{p+=Math.random()*16+6;if(p>=100){p=100;clearInterval(iv);setTimeout(()=>{bw.style.display='none';bm.style.display='none';document.getElementById('outEmpty').style.display='none';document.getElementById('outReady').style.display='block';document.getElementById('btnListen').disabled=false;document.getElementById('btnDl').disabled=false;const sec=Math.max(1,Math.round(document.getElementById('txt').value.length/13));document.getElementById('outMeta').textContent=`0:${String(sec).padStart(2,'0')} · MP3`;document.querySelectorAll('.stp').forEach((s,i)=>{s.classList.toggle('act',i===3);s.classList.toggle('done',i<3)})},350)}bar.style.width=p+'%';document.getElementById('barpct').textContent=Math.floor(p)+'%'},180)}
+// ===== Studio TTS: real generation — Gemini BYOK via proxy + Free (Edge) via proxy =====
+const TTS_API='https://cyborg-edge-tts.lovinggas.workers.dev';
+let ttsSel={group:'el',name:'ကောင်း'};
+let ttsAudio=null,ttsUrl='',ttsFile='';
+function ttsSetStatus(m){const s=document.getElementById('ttsStatus');if(s)s.textContent=m||''}
+function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.ava,small,.miniplay').forEach(x=>x.remove());return c.textContent.trim()}
+(function(){
+  const groups=document.querySelectorAll('#scr-tts .chips[data-group="voice"]');
+  const kinds=['el','gm','free'];
+  groups.forEach((g,i)=>{g.dataset.vgroup=kinds[i]||'';
+    g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
+      groups.forEach(o=>{if(o!==g)o.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'))});
+      ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(c)};
+      document.getElementById('gkeyWrap').style.display=ttsSel.group==='gm'?'block':'none';
+    })});
+  const sel=document.querySelector('#scr-tts .chips[data-group="voice"] .chip.sel');
+  if(sel){const g=sel.closest('.chips');if(g&&g.dataset.vgroup)ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(sel)}}
+  document.getElementById('gkeyWrap').style.display=ttsSel.group==='gm'?'block':'none';
+  const inp=document.getElementById('gKey');
+  try{const saved=localStorage.getItem('csmm-gemini-key');if(saved)inp.value=saved}catch(e){}
+  inp.addEventListener('input',()=>{try{localStorage.setItem('csmm-gemini-key',inp.value.trim())}catch(e){}});
+  document.getElementById('gKeyEye').addEventListener('click',()=>{inp.type=inp.type==='password'?'text':'password';document.getElementById('gKeyEye').textContent=inp.type==='password'?'👁️':'🙈'});
+  const lb=document.getElementById('btnListen'),rp=document.getElementById('btnPlayRow');
+  const togglePlay=()=>{if(!ttsAudio)return;if(ttsAudio.paused)ttsAudio.play();else ttsAudio.pause()};
+  lb.addEventListener('click',togglePlay);
+  if(rp)rp.addEventListener('click',togglePlay);
+  document.getElementById('btnDl').addEventListener('click',()=>{if(!ttsUrl)return;const a=document.createElement('a');a.href=ttsUrl;a.download=ttsFile||'voice.mp3';document.body.appendChild(a);a.click();a.remove()});
+})();
+function ttsStepsDone(){document.querySelectorAll('#scr-tts .stp').forEach((s,i)=>{s.classList.toggle('act',i===3);s.classList.toggle('done',i<3)})}
+function ttsProgress(){
+  const bw=document.getElementById('barwrap'),bar=document.getElementById('bar'),bm=document.getElementById('barmeta'),pct=document.getElementById('barpct');
+  bw.style.display='block';bm.style.display='flex';let p=0;bar.style.width='0%';pct.textContent='0%';
+  const iv=setInterval(()=>{p=Math.min(92,p+Math.random()*9+3);bar.style.width=p+'%';pct.textContent=Math.floor(p)+'%'},220);
+  return function(ok){clearInterval(iv);if(ok){bar.style.width='100%';pct.textContent='100%'}setTimeout(()=>{bw.style.display='none';bm.style.display='none'},ok?350:0)};
+}
+function ttsWire(blob,filename,fmt){
+  if(ttsUrl&&!histUrls.has(ttsUrl))URL.revokeObjectURL(ttsUrl);
+  if(ttsAudio)ttsAudio.pause();
+  histCurBtn=null;
+  ttsUrl=URL.createObjectURL(blob);ttsFile=filename;
+  ttsAudio=new Audio(ttsUrl);
+  const lb=document.getElementById('btnListen'),rp=document.getElementById('btnPlayRow'),db=document.getElementById('btnDl');
+  ttsAttachSync();
+  document.getElementById('outName').textContent=filename;
+  document.getElementById('outMeta').textContent=fmt+' · '+fmtBytes(blob.size);
+  ttsAudio.addEventListener('loadedmetadata',()=>{const d=ttsAudio.duration;if(isFinite(d)&&d>0){const m=Math.floor(d/60),s=Math.round(d%60);document.getElementById('outMeta').textContent=m+':'+String(s).padStart(2,'0')+' · '+fmt+' · '+fmtBytes(blob.size)}});
+  lb.disabled=false;db.disabled=false;db.textContent=fmt+' Download';
+  document.getElementById('outEmpty').style.display='none';
+  document.getElementById('outReady').style.display='block';
+  ttsStepsDone();
+  ttsAddHistory(blob,filename);
+}
+// ===== TTS history: live list of THIS session's successful generations (session-only; blob URLs are never persisted) =====
+const histUrls=new Set();
+let histCurBtn=null;
+function ttsHistDur(d){if(!isFinite(d)||d<0)d=0;const m=Math.floor(d/60),s=Math.floor(d%60);return m+':'+String(s).padStart(2,'0')}
+function ttsHistSyncGlyphs(){document.querySelectorAll('#histList .miniplay').forEach(b=>{b.textContent=(b===histCurBtn&&ttsAudio&&!ttsAudio.paused&&!ttsAudio.ended)?'⏸':'▶'})}
+function ttsAttachSync(){const lb=document.getElementById('btnListen'),rp=document.getElementById('btnPlayRow');const sync=()=>{lb.textContent=ttsAudio.paused?'▶ နားထောင်မယ်':'❚❚ နားထောင်နေတယ်';if(rp)rp.textContent=ttsAudio.paused?'▶':'❚❚';ttsHistSyncGlyphs()};ttsAudio.addEventListener('play',sync);ttsAudio.addEventListener('pause',sync);ttsAudio.addEventListener('ended',sync)}
+function ttsAddHistory(blob,filename){
+  const list=document.getElementById('histList');if(!list)return;
+  const empty=document.getElementById('histEmpty');if(empty)empty.style.display='none';
+  const url=URL.createObjectURL(blob);histUrls.add(url);
+  const row=document.createElement('div');row.className='hist';
+  const btn=document.createElement('span');btn.className='miniplay';btn.textContent='▶';btn.style.cursor='pointer';btn.title='နားထောင်မယ် / ရပ်မယ်';btn._hurl=url;
+  const meta=document.createElement('span');meta.textContent='… · အခုပဲ';
+  row.appendChild(btn);row.appendChild(document.createTextNode(filename));row.appendChild(meta);
+  btn.addEventListener('click',()=>{
+    if(histCurBtn===btn&&ttsAudio){if(ttsAudio.paused)ttsAudio.play();else ttsAudio.pause();ttsHistSyncGlyphs();return}
+    if(ttsAudio)ttsAudio.pause();
+    ttsAudio=new Audio(url);histCurBtn=btn;ttsUrl=url;ttsFile=filename;
+    const fmt=filename.toLowerCase().endsWith('.wav')?'WAV':'MP3';
+    const lb=document.getElementById('btnListen'),db=document.getElementById('btnDl');
+    document.getElementById('outName').textContent=filename;
+    document.getElementById('outMeta').textContent=fmt+' · '+fmtBytes(blob.size);
+    ttsAudio.addEventListener('loadedmetadata',()=>{const d=ttsAudio.duration;if(isFinite(d)&&d>0)document.getElementById('outMeta').textContent=ttsHistDur(d)+' · '+fmt+' · '+fmtBytes(blob.size)});
+    ttsAttachSync();
+    lb.disabled=false;db.disabled=false;db.textContent=fmt+' Download';
+    document.getElementById('outEmpty').style.display='none';
+    document.getElementById('outReady').style.display='block';
+    ttsAudio.play();ttsHistSyncGlyphs();
+  });
+  const probe=new Audio();probe.preload='metadata';
+  probe.addEventListener('loadedmetadata',()=>{meta.textContent=ttsHistDur(probe.duration)+' · အခုပဲ'});
+  probe.addEventListener('error',()=>{meta.textContent='0:00 · အခုပဲ'});
+  probe.src=url;
+  list.prepend(row);
+  while(list.children.length>8){const last=list.lastElementChild;const b=last.querySelector('.miniplay');if(b&&b._hurl){histUrls.delete(b._hurl);if(ttsUrl!==b._hurl)URL.revokeObjectURL(b._hurl);if(histCurBtn===b)histCurBtn=null}list.removeChild(last)}
+}
+async function generate(){
+  const text=document.getElementById('txt').value.trim();
+  ttsSetStatus('');
+  if(!text){ttsSetStatus('စာသား အရင် ရိုက်ပါ။');return}
+  if(ttsSel.group==='el'){ttsSetStatus('ElevenLabs အသံတွေက Studio စတင်ချိန်မှာ ရပါမယ် — အခုတော့ Gemini (ကိုယ့် key နဲ့) ဒါမှမဟုတ် Free အသံ (သီဟ/နီလာ) ကို သုံးကြည့်ပါ။');return}
+  const gb=document.querySelector('#scr-tts .genbtn');
+  if(ttsSel.group==='gm'){
+    const n=[...text].length;
+    if(n>1000){ttsSetStatus('Gemini နဲ့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — စာသား ခွဲထုတ်ကြည့်ပါ။ (အခု '+n.toLocaleString()+' လုံး)');return}
+    const key=document.getElementById('gKey').value.trim();
+    if(!key){const w=document.getElementById('gkeyWrap');w.scrollIntoView({behavior:'smooth',block:'center'});try{w.animate([{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}],{duration:420})}catch(e){}const old=w.style.borderColor;w.style.borderColor='#f43f5e';setTimeout(()=>{w.style.borderColor=old},2200);document.getElementById('gKey').focus({preventScroll:true});ttsSetStatus('Gemini အသံ သုံးဖို့ ကိုယ့် Gemini API Key အရင် ထည့်ပေးပါ (Key ကတ်ထဲမှာ)။');return}
+    const stop=ttsProgress();if(gb)gb.disabled=true;
+    try{
+      const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),90000);
+      const res=await fetch(TTS_API+'/web-gemini-tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey:key,text:text,voice:ttsSel.name}),signal:ctl.signal});
+      clearTimeout(timer);
+      if(!res.ok){let d='';try{d=(await res.json()).detail||''}catch(_){}
+        stop(false);
+        if(res.status===400||/api key/i.test(d))ttsSetStatus('Key မှားနေပါတယ် — key ကို ပြန်စစ်ပါ (သို့) Google AI Studio မှာ key အသစ် ယူပြီး ပြန်စမ်းပါ။');
+        else if(res.status===429||/quota|RESOURCE_EXHAUSTED/i.test(d))ttsSetStatus('Quota ပြည့်သွားပါပြီ — ခဏ စောင့်ပြီး ပြန်စမ်းပါ (သို့) နောက် key တစ်ခု သုံးကြည့်ပါ။');
+        else ttsSetStatus('Server error — ခဏနေမှာ ပြန်စမ်းကြည့်ပါ။'+(d?' ('+d.slice(0,120)+')':''));
+        if(gb)gb.disabled=false;return}
+      const blob=await res.blob();stop(true);
+      ttsWire(blob,'gemini_'+ttsSel.name+'.wav','WAV');
+      ttsSetStatus('ရပြီ ✓ Gemini ('+ttsSel.name+') နဲ့ ထုတ်ပြီးပြီ။');
+    }catch(e){stop(false);ttsSetStatus('ချိတ်ဆက်လို့ မရပါ — internet စစ်ပြီး ပြန်စမ်းပါ။')}
+    if(gb)gb.disabled=false;return;
+  }
+  // Free voices (Thiha / Nilar) via /web-tts — same pattern as eGen()
+  if([...text].length>500){ttsSetStatus('Free အသံ မို့ တစ်ခါထုတ် စာလုံး ၅၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+  const vapi=ttsSel.name==='နီလာ'?'my-MM-NilarNeural':'my-MM-ThihaNeural';
+  const stop=ttsProgress();if(gb)gb.disabled=true;
+  try{
+    const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),60000);
+    const res=await fetch(TTS_API+'/web-tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:text,voice:vapi}),signal:ctl.signal});
+    clearTimeout(timer);
+    if(!res.ok)throw new Error('http '+res.status);
+    const blob=await res.blob();stop(true);
+    ttsWire(blob,(vapi.indexOf('Nilar')>-1?'nilar':'thiha')+'_edge_tts.mp3','MP3');
+    ttsSetStatus('ရပြီ ✓ အခမဲ့ အသံ ('+ttsSel.name+') နဲ့ ထုတ်ပြီးပြီ။');
+  }catch(e){stop(false);ttsSetStatus('အသံ ထုတ်လို့ မရပါ — server ခဏ အလုပ်များနေနိုင်တယ်၊ ခဏနေမှ ပြန်စမ်းကြည့်ပါ။')}
+  if(gb)gb.disabled=false;
+}
 // Customer Service AI Bot (mock)
 function toggleBot(){document.getElementById('botPanel').classList.toggle('on')}
+function guideSeek(t){const v=document.getElementById('guideVid');if(!v)return;v.currentTime=t;const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{})}
 function botReply(q){const s=q.toLowerCase();
- if(s.includes('credit')||s.includes('point')||q.includes('ဝယ်'))return '1 Point = ၁၀၀ ကျပ် ပါ။ Credit Points ကို KBZPay / WavePay / AYA Pay နဲ့ ဝယ်လို့ရပါတယ်။ Points က အသံထုတ် ၁ ကြိမ်, Recap ၁ ကြိမ် စသဖြင့် သုံးတဲ့အပေါ် မူတည်ပြီး ဖြတ်ပါတယ် 🙏';
- if(q.includes('ဈေး')||s.includes('price'))return 'အခမဲ့ အစီအစဉ်မှာ နေ့တိုင်း အခမဲ့ quota ရပါတယ်။ ပိုသုံးချင်ရင် Credit Points ဝယ်သုံးရုံပါပဲ — 1 Point = ၁၀၀ ကျပ်၊ လစဉ် subscription မလိုပါဘူး။';
+ // Recap App / POS price guard — never state a price for either product
+ if((s.includes('recap')||s.includes('app')||/\bpos\b/.test(s))&&(q.includes('ဈေး')||s.includes('price')||q.includes('ဘယ်လောက်')||q.includes('ဝယ်')))return /\bpos\b/.test(s)&&!s.includes('recap')?'POS ရဲ့ ဈေးနှုန်း အသေးစိတ်ကို ဒီမှာ မပြောထားပါဘူး ခင်ဗျာ — Customer Service ကို Messenger / Viber ကနေ ဆက်သွယ် မေးပေးပါ 🙏':'Recap app ကို ဒီ website ရဲ့ "Recap App" tab ကနေ ဆွဲလို့ ရပါတယ် ခင်ဗျာ။\nLicense ဈေးနှုန်း အသေးစိတ်ကိုတော့ ဒီမှာ မပြောထားပါဘူး — Customer Service ကို Messenger / Viber ကနေ ဆက်သွယ် မေးပေးပါ 🙏';
+ // ── CyborgRecapMM manual knowledge ──
+ if(s.includes('trial')||q.includes('အစမ်း')||q.includes('၁၀ ရက်'))return 'Trial Key က auto မဟုတ်ပါဘူး ခင်ဗျာ — Key မရှိရင် Render / Poster / SRT ထုတ်တာတွေ ပိတ်ထားပါတယ်။\n၁။ App ထဲ Settings → License ဖွင့်ပြီး Device code (CRMM-…) ကို Copy လုပ်ပါ\n၂။ အဲ့ဒီ code ကို Messenger / Viber ကနေ ကျွန်တော်တို့ဆီ ပို့ပြီး အခမဲ့ Trial Key (၁၀ ရက်) တောင်းပါ\n၃။ ရလာတဲ့ key ကို paste လုပ်ပြီး "ဖွင့်မယ်" နှိပ်ပါ — ကုန်ဆုံးရက် အပါအဝင် သုံးလို့ရပါတယ်။';
+ if(s.includes('aistudio')||(s.includes('gemini')&&s.includes('key')))return 'Gemini key က အခမဲ့ပါ ခင်ဗျာ။\n၁။ aistudio.google.com/apikey မှာ Google account နဲ့ key ဆောက်ပါ (App ထဲ Settings → Gemini API Key အောက်က "Free key ရယူနည်း" လမ်းညွှန် ခလုတ်လည်း ရှိပါတယ်)\n၂။ ရလာတဲ့ key ကို Settings ရဲ့ Gemini API Key အကွက်မှာ paste လုပ်ပြီး "သိမ်းမယ်" နှိပ်ပါ\nKey ကို ဖုန်းထဲမှာပဲ သိမ်းပါတယ် — Step 2 AI script/ဘာသာပြန်နဲ့ Gemini TTS က ဒီ key ကိုပဲ သုံးပါတယ်။';
+ if(s.includes('license')||s.includes('device code')||s.includes('activate')||q.includes('လက်မှတ်')||q.includes('key ဖွင့်')||q.includes('key ထည့်'))return 'License ကို App ထဲ Settings → License မှာ ဖွင့်ရပါတယ် ခင်ဗျာ။\n၁။ အဆင့် ၁ — ဖုန်းရဲ့ Device code (CRMM-…) ကို Copy လုပ်ပြီး ကျွန်တော်တို့ဆီ Messenger / Viber နဲ့ ပို့ပါ\n၂။ အဆင့် ၂ — ပြန်ရလာတဲ့ key ကို အပြည့်အစုံ paste လုပ်ပြီး "ဖွင့်မယ်" နှိပ်ပါ\nKey တစ်ခုက အဲ့ဒီ code ထုတ်တဲ့ ဖုန်း တစ်လုံးမှာပဲ အလုပ်လုပ်ပါတယ် — ဖုန်း ပြောင်းရင် code အသစ် ပြန်ပို့ရပါမယ်။ "လက်မှတ် မမှန်" ပြရင် key အပြည့်အစုံ copy ထားတာ စစ်ပါ။';
+ if(s.includes('downloads')||(q.includes('ဖိုင်')&&q.includes('ဘယ်မှာ')))return 'Render ပြီးရင် Step 7 မှာ "Downloads ထဲ သိမ်းမယ်" ခလုတ် ပေါ်လာပါတယ် ခင်ဗျာ — နှိပ်ရင် MP4 နဲ့ SRT ဖိုင်က ဖုန်းရဲ့ Downloads folder ထဲ ရောက်ပါတယ် (Poster ဆိုရင် PNG ဖိုင်ပါ)။ Share ခလုတ်နဲ့ တခြား app ကိုလည်း တန်း ပို့လို့ရပါတယ်။\nမသိမ်းရသေးရင် ဖိုင်တွေက app ရဲ့ project folder ထဲမှာပဲ ရှိသေးတာမို့ file manager မှာ မတွေ့တာပါ — Step 7 ပြန်သွားပြီး Downloads ထဲ သိမ်းပါ။';
+ if(s.includes('apk')||s.includes('download')||s.includes('install')||q.includes('ဆွဲ'))return 'ဒီ website ရဲ့ "Recap App" tab (screen) မှာ ခလုတ် ၂ ခု ရှိပါတယ် ခင်ဗျာ — "📥 Android APK ဆွဲမယ်" နဲ့ "📖 အသုံးပြုနည်း Manual (PDF)" ပါ။\nAPK ကို ဆွဲပြီး Android ဖုန်းမှာ install လုပ်ရုံနဲ့ တန်း သုံးလို့ရပါတယ်။\nManual PDF ထဲမှာ အသုံးပြုနည်း အပြည့်အစုံကို ပုံနှင့်တကွ ရှင်းပြထားပါတယ်။';
+ if(s.includes('whisper')||s.includes('auto-srt')||s.includes('auto srt'))return 'Auto-SRT (Whisper) က Step 2 မှာ video အသံကနေ စာတန်း အလိုအလျောက် ထုတ်ပေးပါတယ် ခင်ဗျာ။\nModel ကို တစ်ခါ ဒေါင်းထားရင် နောက်ပိုင်း offline ရပါတယ် — Tiny (101 MB) အမြန်ဆုံး · Base (159 MB) ပုံမှန်သုံးဖို့ သင့် · Small (374 MB) ပိုတိကျ · Large Turbo (1,037 MB) အတိကျဆုံး။\nဘာသာစကားက Auto-detect မို့ ရွေးစရာ မလိုပါ။ မြန်မာ စကား တိုက်ရိုက် မှတ်တာက မတိကျတတ်လို့ မူရင်း ဘာသာနဲ့ အရင် ထုတ်ပြီး Gemini "မြန်မာ ပြန်မယ်" နဲ့ ဘာသာပြန်တာ အကောင်းဆုံးပါ။';
+ if(q.includes('စကား')&&(q.includes('မပါ')||q.includes('မရှိ')))return 'စကားပြော မပါတဲ့ video (သီချင်း / အသံ အကျိုးချည်းပဲ) ဆိုရင် Auto-SRT က စာတန်း အစစ် မထုတ်နိုင်ပါဘူး ခင်ဗျာ — Whisper က စကားသံကိုပဲ မှတ်တာပါ။\nကိုယ်ပိုင် SRT ဖိုင် ထည့်သုံး (သို့) စာတန်း မပါဘဲ ဆက်လုပ်ပါ။';
+ if((q.includes('စာတန်း')||s.includes('subtitle'))&&(q.includes('ပိတ်')||q.includes('ပုံစံ')||s.includes('font')||q.includes('အရွယ်')||s.includes('player')||s.includes('burn')))return 'စာတန်း ၃ မျိုး တစ်ပြိုင်တည်း ထွက်ပါတယ် ခင်ဗျာ — ၁။ Burn-in (video ထဲ မြှုပ်ထား၊ ပုံစံ အမြဲ မှန်) ၂။ SRT ဖိုင် သပ်သပ် (YouTube အတွက်) ၃။ Embedded "Myanmar" track (MX Player / VLC ရဲ့ subtitle menu မှာ ဖွင့်/ပိတ် လို့ရ)။\nVideo ထဲ စာတန်း လုံးဝ မပါချင်ရင် Step 5 မှာ Subtitle ကို ပိတ်ထားပါ (SRT ဖိုင်ကတော့ သပ်သပ် ရနေမှာပါ)။\nFont (Pyidaungsu မူရင်း / Padauk / Noto) နဲ့ စာလုံး အရွယ်ကိုလည်း Step 5 မှာပဲ ချိန်ရပါတယ်။';
+ if(q.includes('စာတန်း')||s.includes('subtitle')||(s.includes('srt')&&(s.includes('recap')||q.includes('ဗီဒီယို')||q.includes('step'))))return 'စာတန်း (SRT) ရနည်း ၃ ခု ရှိပါတယ် ခင်ဗျာ။\n၁။ SRT ဖိုင် ရှိရင် — Step 1 မှာ video နဲ့ တွဲ ထည့်ပါ (သို့) Step 2 မှာ SRT စာသားကို paste လုပ်ပြီး "SRT ဖတ်မယ်" နှိပ်ပါ\n၂။ SRT မရှိရင် — Step 2 ရဲ့ Auto-SRT (Whisper) က video အသံကနေ စာတန်း အလိုအလျောက် ထုတ်ပေးပါတယ်\n၃။ ပြီးရင် Step 2 မှာပဲ Gemini "မြန်မာ ပြန်မယ်" နဲ့ ဘာသာပြန် (သို့) "AI Recap ရေးမယ်" နဲ့ recap script ရေးလို့ ရပါတယ်။';
+ if(s.includes('fish')||s.includes('my voices')||(s.includes('clone')&&s.includes('recap')))return 'App ထဲ Clone က Step 3 ရဲ့ My Voices မှာပါ ခင်ဗျာ — Fish Audio (သို့) ElevenLabs နဲ့ နမူနာ အသံ (၁၀ စက္ကန့် – ၁ မိနစ်) တင် (သို့) Mic နဲ့ တိုက်ရိုက် သွင်းပြီး clone လုပ်လို့ရပါတယ်။\nSettings မှာ သက်ဆိုင်ရာ key အရင် ထည့်ထားရပါမယ်၊ clone အသံ ထုတ်တာလည်း internet လိုပါတယ်။ ထုတ်ပြီးသား အပိုင်းတွေကတော့ cache ဖြစ်သွားပါတယ်။';
+ if(q.includes('နီလာ')||q.includes('သီဟ')||s.includes('elevenlabs')||s.includes('azure')||(q.includes('အသံ')&&(q.includes('မထွက်')||q.includes('မရ')||q.includes('ရွေး'))))return 'Step 3 မှာ အသံ မိသားစု ရွေးပြီး segment တွေအတွက် အသံ ထုတ်ရပါတယ် ခင်ဗျာ — Off (narration မပါ) · Edge TTS သီဟ/နီလာ (internet လို) · Gemini TTS (Gemini key လို) · ElevenLabs / Azure (ကိုယ်ပိုင် key လို) · My Voices clone (internet လို)။\nထုတ်ပြီးသား segment က cache ဖြစ်တာမို့ ပြန် မထုတ်ရပါ။ အသံ မထွက်ရင် internet ချိတ်ထားတာနဲ့ ရွေးထားတဲ့ အသံရဲ့ key ကို Settings မှာ စစ်ပါ။\nသီဟ/နီလာက online အသံတွေပါ — ဒေါင်းပြီး offline သုံးလို့ မရပါဘူး။ နီလာက English စာလုံး မပီရင် မြန်မာ အသံထွက်နဲ့ ရေးပါ (ဥပမာ Cyborg → ဆိုက်ဘာဂ်)။';
+ if(s.includes('poster')||q.includes('ပိုစတာ')||s.includes('thumbnail'))return 'Poster / Thumbnail က Step 7 (Export) screen ရဲ့ Poster ခလုတ် (သို့) Home မှာ project card ရဲ့ menu ကနေ ဝင်ရပါတယ် ခင်ဗျာ။\n၁။ Scene frame တစ်ခု (သို့) Gallery က ပုံ ရွေးပါ\n၂။ ခေါင်းစဉ် (Title) နဲ့ Tagline ရေးပါ — preview ပေါ်မှာ လက်နဲ့ ဆွဲ ရွှေ့လို့ရပါတယ်\n၃။ Style preset / အရောင် / ဘောင် / Format (9:16 Poster သို့ 16:9 Thumbnail) ရွေးပြီး ထုတ်ပါ — Downloads ထဲ သိမ်း / Share လုပ်နိုင်ပါတယ်။ Logo က Step 6 (Overlay) မှာ ထည့်ထားတဲ့ logo ကို သုံးပါတယ်။';
+ if(s.includes('batch'))return 'Batch Queue က Step 7 (Export) screen ကနေ ဝင်ရပါတယ် ခင်ဗျာ — video အများကြီးကို ဒီ project ရဲ့ style (အရောင် / ratio / logo / BGM) အတိုင်း တစ်ခုပြီး တစ်ခု ဆက်တိုက် render ထုတ်ပေးတာပါ။\n⚠️ Batch မှာ မူရင်း video အသံ အတိုင်းပဲ ထွက်ပါတယ် — narration မပါပါ။ Narration ပါချင်ရင် project တစ်ခုချင်းစီ ပုံမှန် လမ်းကြောင်းနဲ့ ထုတ်ပါ။';
+ if(q.includes('အမည်း')||s.includes('fade'))return 'Render မှာ ~၅ စက္ကန့်ခြား အမည်း fade ဝင်နေရင် Step 4 က Transition ကို စစ်ပါ ခင်ဗျာ — Fade Black ဖြစ်နေရင် "မပါ" ပြန် ထားပါ။ အဲဒါမှ မဟုတ်ရင် မူရင်း video ထဲမှာကိုက ပါနေတာပါ။';
+ if((s.includes('render')||q.includes('ထုတ်'))&&(q.includes('နှေး')||q.includes('ကြာ')||q.includes('ပူ')||q.includes('ရပ်')||s.includes('stuck')))return 'Render နှေး/ကြာရင် ဒီလို စမ်းပါ ခင်ဗျာ။\n၁။ အရင် Preview Render (ပထမ ၃ ပိုင်း) နဲ့ စမ်းပြီး မှန်မှ အပြည့် Render လုပ်ပါ\n၂။ Step 4 မှာ 1080p / Original အစား 720p ရွေးရင် အများကြီး ပိုမြန်ပြီး ဖိုင်လည်း ပိုသေးပါတယ် — Original က အကြာဆုံးပါ\n၃။ Render လုပ်နေတုန်း app ကို မပိတ်ပါနဲ့ — ဖုန်း ပူတာက ပုံမှန်ပါ။ Render ပြီးမှ setting ပြင်လိုက်ရင် လိမ္မော် သတိပေးစာ ပေါ်ပါတယ် — အဲ့ဒါဆိုရင် ပြန် Render လုပ်ပါ။';
+ if(s.includes('export')||q.includes('720p')||q.includes('1080p')||s.includes('2k')||s.includes('resolution')||q.includes('အရည်အသွေး'))return 'Export က Step 7 (ထုတ်မယ်) မှာပါ ခင်ဗျာ — Render လုပ်တဲ့အခါ Smart Sync နဲ့ အသံကို အဓိက (master) ထားပြီး video ကို အသံ အရှည်နဲ့ ကိုက်အောင် အလိုအလျောက် ညှိပေးပါတယ်။\nအရည်အသွေး (resolution) 720p / 1080p / 2K / Original ရွေးလို့ရပါတယ် — 720p က အမြန်ဆုံးပါ။\nRender ပြီးရင် Step 7 ကနေပဲ Downloads ထဲ သိမ်း (သို့) Share လုပ်ပါ။';
+ if(s.includes('vpn')||q.includes('internet လို'))return 'VPN မလိုပါဘူး ခင်ဗျာ — Edge အသံ, Gemini TTS နဲ့ Gemini AI အားလုံးကို app က relay ကနေ VPN မလိုဘဲ ချိတ်ပေးပါတယ်၊ internet ချိတ်ထားဖို့ပဲ လိုပါတယ်။\nOffline ရတာတွေက Whisper (model ဒေါင်းပြီးရင်), ပြင်ဆင်တာနဲ့ Render တို့ပါ။ အသံ ထုတ် မရရင် အရင် internet ချိတ်ဆက်မှု စစ်ပါ။';
+ if(s.includes('dark')||q.includes('theme')||q.includes('အရောင် ပြောင်း'))return 'Settings မှာ ပြောင်းရပါတယ် ခင်ဗျာ — အသွင် (Appearance) 🌙 Dark / ☀️ Light, App အရောင် ၈ မျိုး, ဘာသာစကား မြန်မာ / English အားလုံး နှိပ်လိုက်တာနဲ့ တန်း ပြောင်းပါတယ်၊ app ပြန် ဖွင့်စရာ မလိုပါ။';
+ if(s.includes('recap')||q.includes('ဘယ်လို သုံး')||q.includes('သုံးနည်း'))return 'CyborgRecapMM က အဆင့် ၇ ဆင့် wizard ပါ ခင်ဗျာ — ၁ Video (video ရွေး၊ Scene Trim နဲ့ scene ရွေးလို့ရ) → ၂ Script (SRT / AI စာသား) → ၃ အသံ → ၄ Style ပုံ (ratio 9:16 / 16:9, resolution) → ၅ Style စစ် → ၆ Overlay (ခေါင်းစဉ် / Logo / Blur Box) → ၇ ထုတ်မယ် (Export)။\nHome မှာ Project အသစ် ခလုတ်နဲ့ စပြီး အဆင့်တွေ အတိုင်း လိုက်လုပ်ရုံပါပဲ။\nအပြည့်အစုံကို ဒီ website ရဲ့ "Recap App" tab က Manual (PDF) မှာ ပုံနှင့်တကွ ရှင်းပြထားပါတယ်။';
+ // ── existing generic Studio rules (unchanged) ──
+ if(s.includes('credit')||s.includes('point')||q.includes('ဝယ်'))return '1 Point = ၁ ကျပ် ပါ။ Credit Points ကို KBZPay / WavePay / AYA Pay နဲ့ ဝယ်လို့ရပါတယ်။ Points က အသံထုတ် ၁ ကြိမ်, Recap ၁ ကြိမ် စသဖြင့် သုံးတဲ့အပေါ် မူတည်ပြီး ဖြတ်ပါတယ် 🙏';
+ if(q.includes('ဈေး')||s.includes('price'))return 'အခမဲ့ အစီအစဉ်မှာ နေ့တိုင်း အခမဲ့ quota ရပါတယ်။ ပိုသုံးချင်ရင် Credit Points ဝယ်သုံးရုံပါပဲ — 1 Point = ၁ ကျပ်၊ လစဉ် subscription မလိုပါဘူး။';
  if(q.includes('အသံ')||s.includes('tts'))return 'အသံထုတ်နည်းက လွယ်ပါတယ် — ၁။ TTS Studio ဖွင့် ၂။ စာရိုက် ၃။ အသံ chip ရွေး ၄။ အသံ ထုတ်မယ် နှိပ် ၅။ MP3 Download ဆွဲရုံပါပဲ။';
  if(s.includes('recap'))return 'Auto Recap မှာ ဗီဒီယိုတင်ပြီး (သို့) YouTube/TikTok link ထည့်၊ ပြောမယ့်အသံနဲ့ Ratio (9:16 / 16:9) ရွေးပြီး Start Recap နှိပ်ရုံပါပဲ။';
  if(s.includes('clone'))return 'Voice Clone မှာ ကိုယ့်အသံ sample (၁–၅ မိနစ်) တင်ပြီး နာမည်ပေးလိုက်ရင် clone အသံ ရပါပြီ။ ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံ ပဲ clone လုပ်ပါ။';
@@ -566,9 +1657,295 @@ function botReply(q){const s=q.toLowerCase();
 function pushMsg(t,me){const b=document.getElementById('botBody');const d=document.createElement('div');d.className='msg '+(me?'me':'bot');d.textContent=t;b.appendChild(d);b.scrollTop=b.scrollHeight}
 function askBot(q){if(!document.getElementById('botPanel').classList.contains('on'))toggleBot();pushMsg(q,true);setTimeout(()=>pushMsg(botReply(q),false),550)}
 function sendBot(){const i=document.getElementById('botInput');const q=i.value.trim();if(!q)return;i.value='';pushMsg(q,true);setTimeout(()=>pushMsg(botReply(q),false),550)}
+
+// ===== Converters (100% client-side; files never leave the device) =====
+function fmtBytes(b){if(!b&&b!==0)return '';if(b<1024)return b+' B';if(b<1048576)return (b/1024).toFixed(1)+' KB';return (b/1048576).toFixed(2)+' MB'}
+function dirOf(group){const c=document.querySelector(`.chips[data-group="${group}"] .sel`);return c?c.dataset.dir:''}
+function dropZone(id,inputId,pick){const d=document.getElementById(id);if(!d)return;['dragover','dragenter'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.add('over')}));['dragleave','drop'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.remove('over')}));d.addEventListener('drop',e=>{const f=e.dataTransfer.files&&e.dataTransfer.files[0];if(f){const i=document.getElementById(inputId);const dt=new DataTransfer();dt.items.add(f);i.files=dt.files;pick(i)}})}
+// --- Photo: JPG <-> PNG via Canvas ---
+let pImg=null,pName='';
+function pPick(input){const f=input.files&&input.files[0];if(!f)return;const isPng=/png/i.test(f.type)||/\.png$/i.test(f.name);const target=isPng?'png2jpg':'jpg2png';document.querySelectorAll('.chips[data-group="pdir"] .chip').forEach(c=>c.classList.toggle('sel',c.dataset.dir===target));pName=f.name.replace(/\.[^.]+$/,'');const url=URL.createObjectURL(f);const img=new Image();img.onload=()=>{pImg=img;const im=document.getElementById('pIn');im.src=url;im.style.display='block';document.getElementById('pInfo').textContent=`${f.name} · ${fmtBytes(f.size)} · ${img.naturalWidth}×${img.naturalHeight}px → ${isPng?'JPG':'PNG'} ပြောင်းမယ်`;document.getElementById('pQualWrap').style.display=isPng?'block':'none';document.getElementById('pBtn').disabled=false;document.getElementById('pOut').style.display='none';document.getElementById('pDl').style.display='none';document.getElementById('pOutInfo').textContent=''};img.src=url}
+function pConvert(){if(!pImg)return;const toJpg=dirOf('pdir')==='png2jpg';const cv=document.createElement('canvas');cv.width=pImg.naturalWidth;cv.height=pImg.naturalHeight;const cx=cv.getContext('2d');if(toJpg){cx.fillStyle='#ffffff';cx.fillRect(0,0,cv.width,cv.height)}cx.drawImage(pImg,0,0);cv.toBlob(b=>{const url=URL.createObjectURL(b);const out=document.getElementById('pOut');out.src=url;out.style.display='block';const dl=document.getElementById('pDl');dl.href=url;dl.download=pName+(toJpg?'.jpg':'.png');dl.style.display='inline-flex';document.getElementById('pOutInfo').textContent=`${toJpg?'JPG':'PNG'} · ${fmtBytes(b.size)} · ${cv.width}×${cv.height}px`},toJpg?'image/jpeg':'image/png',toJpg?(+document.getElementById('pQual').value)/100:undefined)}
+// --- Audio: MP3 <-> WAV via Web Audio (+ lamejs for MP3 encode) ---
+let aFileObj=null;
+function aPick(input){const f=input.files&&input.files[0];if(!f)return;aFileObj=f;const isWav=/wav/i.test(f.type)||/\.wav$/i.test(f.name);const target=isWav?'wav2mp3':'mp32wav';document.querySelectorAll('.chips[data-group="adir"] .chip').forEach(c=>c.classList.toggle('sel',c.dataset.dir===target));document.getElementById('aInfo').textContent=`${f.name} · ${fmtBytes(f.size)} → ${isWav?'MP3':'WAV'} ပြောင်းမယ်`;const au=document.getElementById('aIn');au.src=URL.createObjectURL(f);au.style.display='block';document.getElementById('aBtn').disabled=false;document.getElementById('aOut').style.display='none';document.getElementById('aDl').style.display='none';document.getElementById('aStatus').textContent=''}
+function wavEncode(ab){const nCh=Math.min(2,ab.numberOfChannels),sr=ab.sampleRate,len=ab.length*nCh*2+44,out=new DataView(new ArrayBuffer(44+ab.length*nCh*2));const ws=(o,s)=>{for(let i=0;i<s.length;i++)out.setUint8(o+i,s.charCodeAt(i))};ws(0,'RIFF');out.setUint32(4,36+ab.length*nCh*2,true);ws(8,'WAVEfmt ');out.setUint32(16,16,true);out.setUint16(20,1,true);out.setUint16(22,nCh,true);out.setUint32(24,sr,true);out.setUint32(28,sr*nCh*2,true);out.setUint16(32,nCh*2,true);out.setUint16(34,16,true);ws(36,'data');out.setUint32(40,ab.length*nCh*2,true);const chs=[];for(let c=0;c<nCh;c++)chs.push(ab.getChannelData(c));let o=44;for(let i=0;i<ab.length;i++)for(let c=0;c<nCh;c++){let v=Math.max(-1,Math.min(1,chs[c][i]));out.setInt16(o,v<0?v*32768:v*32767,true);o+=2}return new Blob([out],{type:'audio/wav'})}
+function mp3Encode(ab){const nCh=Math.min(2,ab.numberOfChannels),sr=ab.sampleRate,enc=new lamejs.Mp3Encoder(nCh,sr,192);const chs=[];for(let c=0;c<nCh;c++){const d=ab.getChannelData(c),i16=new Int16Array(d.length);for(let i=0;i<d.length;i++){const v=Math.max(-1,Math.min(1,d[i]));i16[i]=v<0?v*32768:v*32767}chs.push(i16)}const parts=[];for(let i=0;i<chs[0].length;i+=1152){const l=chs[0].subarray(i,i+1152);const data=nCh>1?enc.encodeBuffer(l,chs[1].subarray(i,i+1152)):enc.encodeBuffer(l);if(data.length)parts.push(new Int8Array(data))}const end=enc.flush();if(end.length)parts.push(new Int8Array(end));return new Blob(parts,{type:'audio/mpeg'})}
+async function aConvert(){if(!aFileObj)return;const st=document.getElementById('aStatus');const toMp3=dirOf('adir')==='wav2mp3';if(toMp3&&typeof lamejs==='undefined'){st.textContent='MP3 encoder library မရသေးပါ — internet ချိတ်ပြီး page ကို ပြန် refresh လုပ်ပြီး စမ်းပါ။';return}st.textContent='ပြောင်းနေတယ်...';try{const buf=await aFileObj.arrayBuffer();const ctx=new (window.AudioContext||window.webkitAudioContext)();const ab=await ctx.decodeAudioData(buf);const blob=toMp3?mp3Encode(ab):wavEncode(ab);const url=URL.createObjectURL(blob);const au=document.getElementById('aOut');au.src=url;au.style.display='block';const dl=document.getElementById('aDl');dl.href=url;dl.download=aFileObj.name.replace(/\.[^.]+$/,'')+(toMp3?'.mp3':'.wav');dl.style.display='inline-flex';st.textContent=`ရပြီ ✓ ${toMp3?'MP3':'WAV'} · ${fmtBytes(blob.size)} · ${ab.duration.toFixed(1)} စက္ကန့်`}catch(e){st.textContent='ဖိုင်ကို ဖတ်လို့ မရပါ — MP3 (သို့) WAV ဖိုင် ဟုတ်ရဲ့လား စစ်ပါ။'}}
+dropZone('pDrop','pFile',pPick);dropZone('aDrop','aFile',aPick);
+// ===== Free Tools bundle (100% client-side) =====
+// --- Zawgyi <-> Unicode (Rabbit) ---
+function zConvert(){const st=document.getElementById('zStatus');const inp=document.getElementById('zIn').value;if(typeof Rabbit==='undefined'){st.textContent='Converter library မရသေးပါ — internet ချိတ်ပြီး page ကို ပြန် refresh လုပ်ပြီး စမ်းပါ။';return}document.getElementById('zOut').value=dirOf('zdir')==='uni2zg'?Rabbit.uni2zg(inp):Rabbit.zg2uni(inp);st.textContent='ပြောင်းပြီး ✓'}
+function zCopy(id){const el=document.getElementById(id);const done=()=>{document.getElementById('zStatus').textContent='Copy ကူးပြီး ✓'};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(el.value).then(done).catch(()=>{el.select();document.execCommand('copy');done()})}else{el.select();document.execCommand('copy');done()}}
+// --- SRT Tool ---
+let sExt='srt';
+function sFmt(ms,sep){ms=Math.max(0,Math.round(ms));const p=(n,l)=>String(n).padStart(l,'0');return p(Math.floor(ms/3600000),2)+':'+p(Math.floor(ms%3600000/60000),2)+':'+p(Math.floor(ms%60000/1000),2)+sep+p(ms%1000,3)}
+function sStatus(t){document.getElementById('sStatus').textContent=t}
+function sPick(input){const f=input.files&&input.files[0];if(!f)return;f.text().then(t=>{document.getElementById('sTxt').value=t;sExt=/\.vtt$/i.test(f.name)?'vtt':'srt';sStatus(f.name+' ဖတ်ပြီး ✓')})}
+function sShift(){const d=parseFloat(document.getElementById('sSec').value)||0;const ta=document.getElementById('sTxt');ta.value=ta.value.replace(/(\d{2}):(\d{2}):(\d{2})([,.])(\d{3})/g,(m,h,mi,s,sep,ms)=>sFmt(((+h)*3600+(+mi)*60+(+s))*1000+(+ms)+d*1000,sep));sStatus('အချိန် '+d+' စက္ကန့် ရွှေ့ပြီး ✓')}
+function sToVtt(){const ta=document.getElementById('sTxt');let v=ta.value.trim();if(!v)return;v=v.replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g,'$1.$2');ta.value='WEBVTT\n\n'+v+'\n';sExt='vtt';sStatus('VTT ပုံစံ ပြောင်းပြီး ✓')}
+function sToSrt(){const ta=document.getElementById('sTxt');let v=ta.value.replace(/^WEBVTT[^\n]*\n+/,'').trim();if(!v)return;v=v.replace(/(\d{2}:\d{2}:\d{2})\.(\d{3})/g,'$1,$2');ta.value=v+'\n';sExt='srt';sStatus('SRT ပုံစံ ပြောင်းပြီး ✓')}
+function sDownload(){const v=document.getElementById('sTxt').value;if(!v.trim())return;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([v],{type:'text/plain'}));a.download='subtitle.'+sExt;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}
+// --- Photo Resize + Ratio ---
+let rImg=null,rName='',rRatio=null;
+function rPick(input){const f=input.files&&input.files[0];if(!f)return;rName=f.name.replace(/\.[^.]+$/,'');const url=URL.createObjectURL(f);const img=new Image();img.onload=()=>{rImg=img;const im=document.getElementById('rIn');im.src=url;im.style.display='block';document.getElementById('rInfo').textContent=`${f.name} · ${fmtBytes(f.size)} · မူရင်း ${img.naturalWidth}×${img.naturalHeight}px`;document.getElementById('rW').value=img.naturalWidth;document.getElementById('rH').value=img.naturalHeight;document.getElementById('rBtn').disabled=false;document.getElementById('rOut').style.display='none';document.getElementById('rDl').style.display='none';document.getElementById('rOutInfo').textContent=''};img.src=url}
+function rAspect(){if(rRatio)return rRatio;if(rImg)return [rImg.naturalWidth,rImg.naturalHeight];return null}
+function rSyncH(){if(!rImg||!document.getElementById('rLock').checked)return;const a=rAspect();if(!a)return;const W=+document.getElementById('rW').value||0;if(W>0)document.getElementById('rH').value=Math.max(1,Math.round(W*a[1]/a[0]))}
+function rSyncW(){if(!rImg||!document.getElementById('rLock').checked)return;const a=rAspect();if(!a)return;const H=+document.getElementById('rH').value||0;if(H>0)document.getElementById('rW').value=Math.max(1,Math.round(H*a[0]/a[1]))}
+function rSetRatio(w,h){rRatio=w?[w,h]:null;rSyncH()}
+function rScale(p){if(!rImg)return;document.getElementById('rW').value=Math.max(1,Math.round(rImg.naturalWidth*p/100));rSyncH()}
+function rConvert(){if(!rImg)return;const W=+document.getElementById('rW').value||0,H=+document.getElementById('rH').value||0;if(W<1||H<1)return;const fmt=dirOf('rfmt')==='png'?'png':'jpg';const mode=dirOf('rmode');const cv=document.createElement('canvas');cv.width=W;cv.height=H;const cx=cv.getContext('2d');const nw=rImg.naturalWidth,nh=rImg.naturalHeight;if(Math.abs(W/H-nw/nh)<0.01){if(fmt==='jpg'){cx.fillStyle='#fff';cx.fillRect(0,0,W,H)}cx.drawImage(rImg,0,0,W,H)}else if(mode==='fit'){cx.fillStyle='#fff';cx.fillRect(0,0,W,H);const s=Math.min(W/nw,H/nh);cx.drawImage(rImg,(W-nw*s)/2,(H-nh*s)/2,nw*s,nh*s)}else{const s=Math.max(W/nw,H/nh);cx.drawImage(rImg,(W-nw*s)/2,(H-nh*s)/2,nw*s,nh*s)}cv.toBlob(b=>{const url=URL.createObjectURL(b);const out=document.getElementById('rOut');out.src=url;out.style.display='block';const dl=document.getElementById('rDl');dl.href=url;dl.download=`${rName}-${W}x${H}.${fmt}`;dl.style.display='inline-flex';document.getElementById('rOutInfo').textContent=`${W}×${H}px · ${fmt.toUpperCase()} · ${fmtBytes(b.size)}`},fmt==='jpg'?'image/jpeg':'image/png',fmt==='jpg'?(+document.getElementById('rQual').value)/100:undefined)}
+// --- Audio Trimmer ---
+let tBuf=null,tName='';
+async function tPick(input){const f=input.files&&input.files[0];if(!f)return;tName=f.name.replace(/\.[^.]+$/,'');try{const ctx=new (window.AudioContext||window.webkitAudioContext)();tBuf=await ctx.decodeAudioData(await f.arrayBuffer());document.getElementById('tInfo').textContent=`${f.name} · ${fmtBytes(f.size)} · စုစုပေါင်း ${tBuf.duration.toFixed(1)} စက္ကန့်`;document.getElementById('tStart').value=0;document.getElementById('tEnd').value=tBuf.duration.toFixed(1);const au=document.getElementById('tIn');au.src=URL.createObjectURL(f);au.style.display='block';document.getElementById('tBtn').disabled=false;document.getElementById('tStatus').textContent=''}catch(e){document.getElementById('tInfo').textContent='ဖိုင်ကို ဖတ်လို့ မရပါ — MP3/WAV ဖိုင် ဟုတ်ရဲ့လား စစ်ပါ။'}}
+function tConvert(){if(!tBuf)return;const st=document.getElementById('tStatus');const s=parseFloat(document.getElementById('tStart').value)||0,e=parseFloat(document.getElementById('tEnd').value)||0;if(!(e>s)||s<0||e>tBuf.duration+0.05){st.textContent='အစ/အဆုံး အချိန် မှားနေတယ် — စ < ဆုံး ဖြစ်ပြီး စုစုပေါင်း အချိန်ထက် မကျော်ရပါ။';return}const toMp3=dirOf('tfmt')==='mp3';if(toMp3&&typeof lamejs==='undefined'){st.textContent='MP3 encoder library မရသေးပါ — internet ချိတ်ပြီး ပြန် refresh လုပ်ပါ (သို့) WAV ရွေးပါ။';return}const sr=tBuf.sampleRate,from=Math.floor(s*sr),to=Math.min(tBuf.length,Math.ceil(e*sr));const actx=new (window.AudioContext||window.webkitAudioContext)();const nb=actx.createBuffer(tBuf.numberOfChannels,to-from,sr);for(let c=0;c<tBuf.numberOfChannels;c++){nb.copyToChannel(tBuf.getChannelData(c).subarray(from,to),c)}const fl=Math.min(Math.floor(sr*0.8),Math.floor(nb.length/2));
+if(tFades.in&&fl>0)for(let ci=0;ci<nb.numberOfChannels;ci++){const dd=nb.getChannelData(ci);for(let i=0;i<fl;i++)dd[i]*=i/fl}
+if(tFades.out&&fl>0)for(let ci=0;ci<nb.numberOfChannels;ci++){const dd=nb.getChannelData(ci);for(let i=0;i<fl;i++)dd[nb.length-1-i]*=i/fl}
+const blob=toMp3?mp3Encode(nb):wavEncode(nb);const url=URL.createObjectURL(blob);const au=document.getElementById('tOut');au.src=url;au.style.display='block';const dl=document.getElementById('tDl');dl.href=url;dl.download=tName+'_trim.'+(toMp3?'mp3':'wav');dl.style.display='inline-flex';st.textContent=`ရပြီ ✓ ${(e-s).toFixed(1)} စက္ကန့် · ${fmtBytes(blob.size)}`}
+// --- Video Frame Grab ---
+let fName='';
+function fPick(input){const f=input.files&&input.files[0];if(!f)return;fName=f.name.replace(/\.[^.]+$/,'');const v=document.getElementById('fVid');v.src=URL.createObjectURL(f);v.style.display='block';v.onloadedmetadata=()=>{document.getElementById('fInfo').textContent=`${f.name} · ${fmtBytes(f.size)} · ${v.videoWidth}×${v.videoHeight} · ${v.duration.toFixed(1)} စက္ကန့်`;const sk=document.getElementById('fSeek');sk.max=v.duration;sk.value=0;document.getElementById('fBtn').disabled=false};v.ontimeupdate=()=>{document.getElementById('fTime').textContent=v.currentTime.toFixed(1)+'s';document.getElementById('fSeek').value=v.currentTime}}
+function fSeekTo(el){const v=document.getElementById('fVid');if(v.src)v.currentTime=+el.value}
+function fGrab(){const v=document.getElementById('fVid');if(!v.videoWidth)return;const fmt=dirOf('ffmt')==='jpg'?'jpg':'png';const cv=document.createElement('canvas');cv.width=v.videoWidth;cv.height=v.videoHeight;cv.getContext('2d').drawImage(v,0,0);cv.toBlob(b=>{const url=URL.createObjectURL(b);const out=document.getElementById('fOut');out.src=url;out.style.display='block';const dl=document.getElementById('fDl');dl.href=url;dl.download=fName+'_frame_'+v.currentTime.toFixed(1)+'s.'+fmt;dl.style.display='inline-flex';document.getElementById('fOutInfo').textContent=`${cv.width}×${cv.height}px · ${fmt.toUpperCase()} · ${fmtBytes(b.size)} · @ ${v.currentTime.toFixed(1)}s`},fmt==='jpg'?'image/jpeg':'image/png',0.92)}
+// --- QR Generator ---
+function qGen(){const st=document.getElementById('qStatus');const txt=document.getElementById('qTxt').value.trim();if(!txt){st.textContent='Link (သို့) စာသား အရင် ထည့်ပါ။';return}if(typeof QRCode==='undefined'){st.textContent='QR library မရသေးပါ — internet ချိတ်ပြီး page ကို ပြန် refresh လုပ်ပြီး စမ်းပါ။';return}const box=document.getElementById('qBox');box.innerHTML='';box.style.display='inline-block';new QRCode(box,{text:txt,width:230,height:230,colorDark:'#0b1526',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});setTimeout(()=>{const cv=box.querySelector('canvas');if(cv){const dl=document.getElementById('qDl');dl.href=cv.toDataURL('image/png');dl.style.display='inline-flex';st.textContent='ရပြီ ✓'}},120)}
+// --- Edge TTS (Thiha / Nilar) — browser WebSocket to Microsoft Edge readaloud ---
+function eUuid(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return (c==='x'?r:(r&0x3|0x8)).toString(16)})}
+async function eGen(){const st=document.getElementById('eStatus');const btn=document.getElementById('eBtn');const text=document.getElementById('eTxt').value.trim();if(!text){st.textContent='စာသား အရင် ရိုက်ပါ။';return}if([...text].length>500){st.textContent='Free tool မို့ တစ်ခါထုတ် စာလုံး ၅၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။';return}const voice=dirOf('evoice')||'my-MM-ThihaNeural';btn.disabled=true;st.textContent='အသံ ထုတ်နေတယ်...';try{const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),60000);const res=await fetch('https://cyborg-edge-tts.lovinggas.workers.dev/web-tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:text,voice:voice}),signal:ctl.signal});clearTimeout(timer);if(!res.ok){let msg='';try{const j=await res.json();msg=j.detail||''}catch(_){}throw new Error(msg||('HTTP '+res.status))}const blob=await res.blob();const url=URL.createObjectURL(blob);const au=document.getElementById('eOut');au.src=url;au.style.display='block';const dl=document.getElementById('eDl');dl.href=url;dl.download=(voice.indexOf('Nilar')>-1?'nilar':'thiha')+'_edge_tts.mp3';dl.style.display='inline-flex';st.textContent='ရပြီ ✓ MP3 · '+fmtBytes(blob.size)}catch(e){st.textContent='အသံ ထုတ်လို့ မရပါ — server ခဏ အလုပ်များနေနိုင်တယ်၊ ခဏနေမှ ပြန်စမ်းကြည့်ပါ။'}btn.disabled=false}
+// --- Whisper STT (Transformers.js, in-browser) ---
+let wPipe=null,wModel='',wFileObj=null;
+function wPick(input){const f=input.files&&input.files[0];if(!f)return;wFileObj=f;document.getElementById('wInfo').textContent=`${f.name} · ${fmtBytes(f.size)}`;document.getElementById('wBtn').disabled=false;document.getElementById('wDl').style.display='none';document.getElementById('wStatus').textContent=''}
+async function wRun(){if(!wFileObj)return;const st=document.getElementById('wStatus');const btn=document.getElementById('wBtn');const model=dirOf('wmodel');btn.disabled=true;
+try{
+ st.textContent='Model ပြင်ဆင်နေတယ်... (ပထမဆုံး အကြိမ် ဆိုရင် download ခဏ စောင့်ရမယ်)';
+ if(!wPipe||wModel!==model){if(wPipe&&wPipe.dispose){try{await wPipe.dispose()}catch(_){}}const mod=await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.2/+esm');wPipe=await mod.pipeline('automatic-speech-recognition',model,{dtype:'q8',progress_callback:(p)=>{if(p.status==='progress'&&p.progress!=null)st.textContent='Model download: '+(p.file||'')+' '+Math.round(p.progress)+'%';else if(p.status==='ready')st.textContent='Model ရပြီ ✓'}});wModel=model}
+ st.textContent='အသံ ဖတ်နေတယ်...';
+ const actx=new (window.AudioContext||window.webkitAudioContext)();const abuf=await actx.decodeAudioData(await wFileObj.arrayBuffer());
+ const off=new OfflineAudioContext(1,Math.max(1,Math.ceil(abuf.duration*16000)),16000);const src=off.createBufferSource();src.buffer=abuf;src.connect(off.destination);src.start();const rendered=await off.startRendering();const audio=rendered.getChannelData(0);
+ st.textContent='စာသား ပြောင်းနေတယ်... (device ပေါ် မူတည်ပြီး ခဏ ကြာနိုင်တယ်)';
+ const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5});
+ document.getElementById('wOut').value=(out.text||'').trim();
+ let srt='',i=1;(out.chunks||[]).forEach(c=>{if(!c.timestamp||c.timestamp[0]==null)return;const a=c.timestamp[0],b=(c.timestamp[1]==null?a+2:c.timestamp[1]);srt+=i+++'\n'+sFmt(a*1000,',')+' --> '+sFmt(b*1000,',')+'\n'+(c.text||'').trim()+'\n\n'});
+ if(srt){const dl=document.getElementById('wDl');dl.href=URL.createObjectURL(new Blob([srt],{type:'text/plain'}));dl.download=wFileObj.name.replace(/\.[^.]+$/,'')+'.srt';dl.style.display='inline-flex'}
+ st.textContent='ရပြီ ✓';
+}catch(e){st.textContent='မရပါ — internet ချိတ်ထားရဲ့လား စစ်ပြီး ပြန်စမ်းပါ။ (ပထမဆုံး အကြိမ် model download လိုပါတယ်)'}
+btn.disabled=false}
+dropZone('sDrop','sFile',sPick);dropZone('rDrop','rFile',rPick);dropZone('tDrop','tFile',tPick);dropZone('fDrop','fFile',fPick);dropZone('wDrop','wFile',wPick);
+/* ================= Free Tools Wave 2 ================= */
+async function auDec(f){const ctx=new (window.AudioContext||window.webkitAudioContext)();return await ctx.decodeAudioData(await f.arrayBuffer())}
+function sliceBuf(buf,s,e){const sr=buf.sampleRate,from=Math.max(0,Math.floor(s*sr)),to=Math.min(buf.length,Math.ceil(e*sr));const ac=new (window.AudioContext||window.webkitAudioContext)();const nb=ac.createBuffer(buf.numberOfChannels,Math.max(1,to-from),sr);for(let c=0;c<buf.numberOfChannels;c++)nb.copyToChannel(buf.getChannelData(c).subarray(from,to),c);return nb}
+function mmss(sec){sec=Math.max(0,Math.round(sec));return Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0')}
+
+/* --- Trim extras: presets + fades --- */
+const tFades={in:false,out:false};
+function tFadeTog(which){tFades[which]=!tFades[which];document.getElementById(which==='in'?'tFadeIn':'tFadeOut').classList.toggle('sel',tFades[which])}
+function tPreset(sec){if(!tBuf)return;const s=parseFloat(document.getElementById('tStart').value)||0;document.getElementById('tEnd').value=Math.min(tBuf.duration,s+sec).toFixed(1)}
+
+/* --- Sermon Splitter --- */
+let spBuf=null,spName='sermon';
+async function spPick(input){const f=input.files&&input.files[0];if(!f)return;spName=f.name.replace(/\.[^.]+$/,'');try{spBuf=await auDec(f);document.getElementById('spInfo').textContent=f.name+' · '+fmtBytes(f.size)+' · စုစုပေါင်း '+mmss(spBuf.duration);document.getElementById('spBtn').disabled=false;document.getElementById('spParts').innerHTML='';document.getElementById('spStatus').textContent=''}catch(e){document.getElementById('spInfo').textContent='ဖိုင်ကို ဖတ်လို့ မရပါ — MP3/WAV ဖိုင် ဟုတ်ရဲ့လား စစ်ပါ။'}}
+async function spGo(){if(!spBuf)return;const fmt=dirOf('spfmt');if(fmt==='mp3'&&typeof lamejs==='undefined'){document.getElementById('spStatus').textContent='MP3 encoder library မရသေးပါ — WAV ရွေးပါ။';return}const mins=parseInt(dirOf('spmin'))||15,partSec=mins*60,n=Math.ceil(spBuf.duration/partSec);const box=document.getElementById('spParts');box.innerHTML='';const st=document.getElementById('spStatus');st.textContent='✂️ '+n+' ပိုင်း ခွဲနေတယ်'+(fmt==='mp3'?' (MP3 က ကြာနိုင်တယ်)…':'…');for(let i=0;i<n;i++){const s=i*partSec,e=Math.min(spBuf.duration,(i+1)*partSec);const sub=sliceBuf(spBuf,s,e);const blob=fmt==='mp3'?mp3Encode(sub):wavEncode(sub);const url=URL.createObjectURL(blob);const row=document.createElement('div');row.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line)';const info=document.createElement('div');info.innerHTML='<b>Part '+(i+1)+'</b><div class="hint">'+mmss(s)+' – '+mmss(e)+' · '+fmtBytes(blob.size)+'</div>';const a=document.createElement('a');a.className='dlbtn';a.href=url;a.download=spName+'_part'+(i+1)+'.'+fmt;a.textContent='⬇ Part '+(i+1);a.style.display='inline-flex';row.appendChild(info);row.appendChild(a);box.appendChild(row);await new Promise(r=>setTimeout(r,20))}st.textContent='✅ '+n+' ပိုင်း ရပြီ — တစ်ခုချင်း download လုပ်ပါ'}
+
+/* --- Voice Clear / Normalize + Smart Audio --- */
+let vcBuf=null,vcName='voice';const vcT={norm:true,comp:true};
+function vcTog(k){vcT[k]=!vcT[k];document.getElementById(k==='norm'?'vcNormT':'vcCompT').classList.toggle('sel',vcT[k])}
+function vcPreset(){document.getElementById('vcManual').style.display=dirOf('vpreset')==='manual'?'block':'none'}
+function vcParams(){const pr=dirOf('vpreset');if(pr==='smart')return{sp:1.06,det:100,label:'Smart Audio (1.06x, pitch +1)'};if(pr==='manual'){const sp=parseFloat(document.getElementById('vcSpeed').value)||1,det=(parseFloat(document.getElementById('vcPitch').value)||0)*100;return{sp:sp,det:det,label:'Manual ('+sp.toFixed(2)+'x, pitch '+(det/100)+')'}}if(pr==='orig')return{sp:1,det:0,label:'မူရင်း'};const sp=parseFloat(pr)||1;return{sp:sp,det:0,label:sp+'x'}}
+async function vcPick(input){const f=input.files&&input.files[0];if(!f)return;vcName=f.name.replace(/\.[^.]+$/,'');try{vcBuf=await auDec(f);document.getElementById('vcInfo').textContent=f.name+' · '+fmtBytes(f.size)+' · '+mmss(vcBuf.duration);const b=document.getElementById('vcBefore');b.src=URL.createObjectURL(f);b.style.display='block';document.getElementById('vcBtn').disabled=false;document.getElementById('vcStatus').textContent=''}catch(e){document.getElementById('vcInfo').textContent='ဖိုင်ကို ဖတ်လို့ မရပါ — MP3/WAV ဖိုင် ဟုတ်ရဲ့လား စစ်ပါ။'}}
+async function vcGo(){if(!vcBuf)return;const fmt=dirOf('vfmt');if(fmt==='mp3'&&typeof lamejs==='undefined'){document.getElementById('vcStatus').textContent='MP3 encoder library မရသေးပါ — WAV ရွေးပါ။';return}const prm=vcParams();const st=document.getElementById('vcStatus');st.textContent='🎚️ ရှင်းနေတယ်…';await new Promise(r=>setTimeout(r,30));try{let gain=1;if(vcT.norm){let peak=0;for(let c=0;c<vcBuf.numberOfChannels;c++){const d=vcBuf.getChannelData(c);for(let i=0;i<d.length;i+=7){const a=Math.abs(d[i]);if(a>peak)peak=a}}if(peak>0.001)gain=Math.min(0.89/peak,4)}const sr=vcBuf.sampleRate,outLen=Math.max(1,Math.ceil(vcBuf.length/prm.sp));const off=new OfflineAudioContext(vcBuf.numberOfChannels,outLen,sr);const src=off.createBufferSource();src.buffer=vcBuf;src.playbackRate.value=prm.sp;if(prm.det)src.detune.value=prm.det;try{src.preservesPitch=true}catch(e){}let node=src;if(vcT.comp){const comp=off.createDynamicsCompressor();comp.threshold.value=-18;comp.knee.value=24;comp.ratio.value=4;comp.attack.value=0.003;comp.release.value=0.25;src.connect(comp);node=comp}const g=off.createGain();g.gain.value=gain;node.connect(g);g.connect(off.destination);src.start();const rendered=await off.startRendering();const blob=fmt==='mp3'?mp3Encode(rendered):wavEncode(rendered);const url=URL.createObjectURL(blob);const au=document.getElementById('vcAfter');au.src=url;au.style.display='block';const dl=document.getElementById('vcDl');dl.href=url;dl.download=vcName+'_clear.'+fmt;dl.style.display='inline-flex';st.textContent='✅ ရပြီ — '+prm.label+(vcT.norm&&gain>1.05?(' · အသံ +'+(20*Math.log10(gain)).toFixed(1)+' dB မြှင့်'):'')+' · '+mmss(rendered.duration)+' · '+fmtBytes(blob.size)}catch(e){st.textContent='⚠️ မအောင်မြင်ဘူး — နောက်တစ်ဖိုင် စမ်းကြည့်ပါ'}}
+
+/* --- Dhamma Thumbnail --- */
+let dhBgImg=null,dhLogoImg=null,dhMonkImg=null;
+function dhImg(input,cb){const f=input.files&&input.files[0];if(!f)return;const i=new Image();i.onload=()=>cb(i);i.src=URL.createObjectURL(f)}
+function dhBgPick(input){dhImg(input,i=>{dhBgImg=i;dhDraw()})}
+function dhLogoPick(input){dhImg(input,i=>{dhLogoImg=i;dhDraw()})}
+function dhMonkPick(input){dhImg(input,i=>{dhMonkImg=i;dhDraw()})}
+function dhScene(ctx,W,H){const g=dirOf('dhgrad');const gr=ctx.createLinearGradient(0,0,0,H);let glow;if(g==='morning'){gr.addColorStop(0,'#f7b733');gr.addColorStop(.55,'#d4880f');gr.addColorStop(1,'#8a5200');glow=['rgba(255,236,170,0.55)',W*0.28,H*0.2]}else if(g==='evening'){gr.addColorStop(0,'#6d4c41');gr.addColorStop(.6,'#4e342e');gr.addColorStop(1,'#241611');glow=['rgba(255,170,90,0.35)',W*0.7,H*0.25]}else if(g==='nature'){gr.addColorStop(0,'#2e7d32');gr.addColorStop(.6,'#1b5e20');gr.addColorStop(1,'#0b2e13');glow=['rgba(190,255,190,0.30)',W*0.5,H*0.12]}else{gr.addColorStop(0,'#12275e');gr.addColorStop(.6,'#0a1734');gr.addColorStop(1,'#04070f');glow=['rgba(120,170,255,0.28)',W*0.75,H*0.18]}ctx.fillStyle=gr;ctx.fillRect(0,0,W,H);const rg=ctx.createRadialGradient(glow[1],glow[2],10,glow[1],glow[2],W*0.55);rg.addColorStop(0,glow[0]);rg.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=rg;ctx.fillRect(0,0,W,H);const vg=ctx.createRadialGradient(W/2,H/2,H*0.35,W/2,H/2,W*0.72);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,0.38)');ctx.fillStyle=vg;ctx.fillRect(0,0,W,H)}
+function dhDraw(){const cv=document.getElementById('dhCv');if(!cv)return;const ctx=cv.getContext('2d');const W=1280,H=720;
+ if(dhBgImg){const sc=Math.max(W/dhBgImg.naturalWidth,H/dhBgImg.naturalHeight);const w=dhBgImg.naturalWidth*sc,hh=dhBgImg.naturalHeight*sc;ctx.drawImage(dhBgImg,(W-w)/2,(H-hh)/2,w,hh);ctx.fillStyle='rgba(0,0,0,0.15)';ctx.fillRect(0,0,W,H)}
+ else dhScene(ctx,W,H);
+ let textCx=W/2;
+ if(dhMonkImg){const d=H*(parseInt(document.getElementById('dhMonkSize').value)||40)/100;const pos=dirOf('dhmonkpos');const cxm=pos==='left'?46+d/2:W-46-d/2;const cym=H/2;ctx.beginPath();ctx.arc(cxm,cym,d/2+9,0,6.3);ctx.fillStyle='rgba(0,0,0,0.30)';ctx.fill();ctx.save();ctx.beginPath();ctx.arc(cxm,cym,d/2,0,6.3);ctx.clip();const sc2=Math.max(d/dhMonkImg.naturalWidth,d/dhMonkImg.naturalHeight);const w2=dhMonkImg.naturalWidth*sc2,h2=dhMonkImg.naturalHeight*sc2;ctx.drawImage(dhMonkImg,cxm-w2/2,cym-h2/2,w2,h2);ctx.restore();ctx.beginPath();ctx.arc(cxm,cym,d/2,0,6.3);ctx.lineWidth=9;ctx.strokeStyle='#FFD740';ctx.stroke();textCx=pos==='left'?(46+d+30+W-16)/2:(16+W-46-d-30)/2}
+ const stack=(getComputedStyle(document.documentElement).getPropertyValue('--mmfont')||"'Pyidaungsu'").trim()||"'Pyidaungsu'";
+ const size=parseInt(document.getElementById('dhSize').value)||96;
+ const title=(document.getElementById('dhTitle').value||'').split('\n').map(s=>s.trim()).filter(Boolean);
+ const sub=(document.getElementById('dhSub').value||'').trim();
+ ctx.textAlign='center';ctx.textBaseline='middle';
+ const lh=size*1.55,subH=sub?size*0.62:0,total=title.length*lh+subH;let y=(H-total)/2+lh/2;
+ ctx.font='800 '+size+'px '+stack;ctx.lineWidth=Math.max(4,size/11);ctx.strokeStyle='rgba(0,0,0,0.65)';ctx.shadowColor='rgba(0,0,0,0.85)';ctx.shadowBlur=18;ctx.fillStyle=dirOf('dhcolor');
+ title.forEach(ln=>{ctx.strokeText(ln,textCx,y);ctx.fillText(ln,textCx,y);y+=lh});
+ if(sub){ctx.font='600 '+Math.round(size*0.42)+'px '+stack;ctx.lineWidth=4;ctx.strokeText(sub,textCx,y+subH/2-8);ctx.fillText(sub,textCx,y+subH/2-8)}
+ ctx.shadowBlur=0;
+ if(dhLogoImg){const lw=W*(parseInt(document.getElementById('dhLogoSize').value)||16)/100;const lh2=lw*dhLogoImg.naturalHeight/dhLogoImg.naturalWidth;const m=34;const pos=dirOf('dhcorner');let x=m,yy=m;if(pos==='tr'||pos==='br')x=W-lw-m;if(pos==='bl'||pos==='br')yy=H-lh2-m;ctx.drawImage(dhLogoImg,x,yy,lw,lh2)}
+ const stEl=document.getElementById('dhStatus');if(stEl)stEl.textContent='Preview အဆင်သင့် — 1280×720'}
+function dhDl(){document.getElementById('dhCv').toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='dhamma-thumbnail.png';a.click()},'image/png')}
+
+/* --- Audio Merge --- */
+let mgBufs=[];
+async function mgPick(input){const files=input.files?Array.from(input.files):[];mgBufs=[];const list=document.getElementById('mgList');list.innerHTML='';let tot=0;for(const f of files){try{const b=await auDec(f);mgBufs.push(b);tot+=b.duration;const d=document.createElement('div');d.className='hint';d.textContent='🎵 '+f.name+' — '+mmss(b.duration);list.appendChild(d)}catch(e){const d=document.createElement('div');d.className='hint';d.textContent='⚠️ '+f.name+' ဖတ်မရဘူး';list.appendChild(d)}}document.getElementById('mgInfo').textContent=mgBufs.length?('စုစုပေါင်း '+mgBufs.length+' ဖိုင် · '+mmss(tot)):'';document.getElementById('mgBtn').disabled=!mgBufs.length}
+async function mgGo(){if(!mgBufs.length)return;const fmt=dirOf('mgfmt');if(fmt==='mp3'&&typeof lamejs==='undefined'){document.getElementById('mgStatus').textContent='MP3 encoder library မရသေးပါ — WAV ရွေးပါ။';return}const sr=mgBufs[0].sampleRate;const ch=Math.min(2,Math.max.apply(null,mgBufs.map(b=>b.numberOfChannels)));let total=0;mgBufs.forEach(b=>total+=b.length);const ac=new (window.AudioContext||window.webkitAudioContext)();const out=ac.createBuffer(ch,total,sr);let off=0;mgBufs.forEach(b=>{for(let c=0;c<ch;c++)out.getChannelData(c).set(b.getChannelData(Math.min(c,b.numberOfChannels-1)),off);off+=b.length});const blob=fmt==='mp3'?mp3Encode(out):wavEncode(out);const url=URL.createObjectURL(blob);const au=document.getElementById('mgOut');au.src=url;au.style.display='block';const dl=document.getElementById('mgDl');dl.href=url;dl.download='merged.'+fmt;dl.style.display='inline-flex';document.getElementById('mgStatus').textContent='✅ ပေါင်းပြီးပြီ — '+mmss(out.duration)+' · '+fmtBytes(blob.size)}
+
+/* --- Number -> Myanmar words --- */
+const NW_D=['သုည','တစ်','နှစ်','သုံး','လေး','ငါး','ခြောက်','ခုနစ်','ရှစ်','ကိုး'];
+function mmChunk(n){let out='';const P=[[1000,'ထောင်'],[100,'ရာ'],[10,'ဆယ်']];for(let k=0;k<P.length;k++){const v=P[k][0];if(n>=v){const d=Math.floor(n/v);out+=NW_D[d]+P[k][1];n%=v;if(v===10&&n>0)out+='့';if(v===100&&n>0&&n<10)out+='့'}}if(n>0)out+=NW_D[n];return out}
+function mmChunkFull(n){let out='';const th=Math.floor(n/10000);if(th){out+=NW_D[th]+'\u101E\u1031\u102C\u1004\u103A\u1038';n%=10000}return out+mmChunk(n)}
+function numToMm(n){n=Math.floor(Math.abs(n));if(n===0)return NW_D[0];if(n>=10000000){const hi=Math.floor(n/10000000),lo=n%10000000;return numToMm(hi)+'ကုဋေ'+(lo?numToMm(lo):'')}if(n>=100000){const hi=Math.floor(n/100000),lo=n%100000;return mmChunkFull(hi)+'သိန်း'+(lo?mmChunkFull(lo):'')}return mmChunkFull(n)}
+function nwDigits(s){return s.replace(/[၀-၉]/g,d=>'၀၁၂၃၄၅၆၇၈၉'.indexOf(d))}
+function numToMmStr(s){const p=s.split('.');let out=numToMm(parseInt(p[0]||'0',10));if(p.length>1&&p[1])out+='ဒသမ'+p[1].split('').map(ch=>NW_D[parseInt(ch,10)]).join('');return out.normalize('NFC')}
+function nwConvert(){const raw=document.getElementById('nwNum').value.trim();const norm=nwDigits(raw).replace(/[,\s]/g,'');if(!/^\d+(\.\d+)?$/.test(norm)){document.getElementById('nwOut').textContent='⚠️ ဂဏန်း မှန်အောင် ရိုက်ပါ (ဥပမာ 123456)';return}document.getElementById('nwOut').textContent=numToMmStr(norm)}
+function nwTextGo(){const t=document.getElementById('nwTxt').value;const out=t.replace(/\d[\d,]*(\.\d+)?|[၀-၉][၀-၉,]*(\.[၀-၉]+)?/g,tok=>{const norm=nwDigits(tok).replace(/,/g,'');return /^\d+(\.\d+)?$/.test(norm)?numToMmStr(norm):tok});document.getElementById('nwTxtOut').value=out}
+
+/* --- Reading time --- */
+function rtCalc(){const t=document.getElementById('rtTxt').value;const chars=t.length;const words=t.trim()?t.trim().split(/\s+/).filter(Boolean).length:0;const sents=(t.match(/[။.!?]+/g)||[]).length||(chars?1:0);const cpm=parseInt(dirOf('rtspeed'))||780;const mins=chars/cpm;const mm=Math.floor(mins),ss=Math.round((mins-mm)*60);document.getElementById('rtOut').innerHTML='စာလုံး <b>'+chars.toLocaleString()+'</b> · စကားလုံး <b>'+words.toLocaleString()+'</b> · ဝါကျ <b>'+sents+'</b><br>🎙️ ခန့်မှန်း ကြာချိန်: <b>'+(mm?mm+' မိနစ် ':'')+ss+' စက္ကန့်</b> ('+cpm+' လုံး/မိနစ်)'}
+
+/* --- Watermark --- */
+let wmBaseImg=null,wmLogoImg=null;
+function wmImg(input,which){const f=input.files&&input.files[0];if(!f)return;const i=new Image();i.onload=()=>{if(which==='base')wmBaseImg=i;else wmLogoImg=i;wmDraw()};i.src=URL.createObjectURL(f)}
+function wmPickBase(input){wmImg(input,'base')}
+function wmPickLogo(input){wmImg(input,'logo')}
+function wmDraw(){if(!wmBaseImg)return;const cv=document.getElementById('wmCv');cv.width=wmBaseImg.naturalWidth;cv.height=wmBaseImg.naturalHeight;const ctx=cv.getContext('2d');ctx.drawImage(wmBaseImg,0,0);if(wmLogoImg){const W=cv.width,H=cv.height;const lw=W*(parseInt(document.getElementById('wmSize').value)||20)/100;const lh=lw*wmLogoImg.naturalHeight/wmLogoImg.naturalWidth;const m=Math.round(W*0.03);const pos=dirOf('wmpos');let x=m,y=m;if(pos==='tr')x=W-lw-m;if(pos==='bl')y=H-lh-m;if(pos==='br'){x=W-lw-m;y=H-lh-m}if(pos==='c'){x=(W-lw)/2;y=(H-lh)/2}ctx.globalAlpha=(parseInt(document.getElementById('wmOp').value)||80)/100;ctx.drawImage(wmLogoImg,x,y,lw,lh);ctx.globalAlpha=1}document.getElementById('wmStatus').textContent='အဆင်သင့် — '+cv.width+'×'+cv.height}
+function wmExport(){if(!wmBaseImg){alert('အရင် ပုံ ရွေးပါ');return}const fmt=dirOf('wmfmt');document.getElementById('wmCv').toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='watermarked.'+(fmt==='png'?'png':'jpg');a.click()},fmt==='png'?'image/png':'image/jpeg',0.92)}
+
+/* --- Images -> PDF --- */
+async function p2Go(input){const files=input.files?Array.from(input.files):[];if(!files.length)return;const st=document.getElementById('p2Status');if(typeof window.jspdf==='undefined'){st.textContent='⚠️ PDF library မရသေးဘူး — internet စစ်ပြီး ပြန်စမ်းပါ';return}st.textContent='📄 PDF လုပ်နေတယ်…';try{const jsPDF=window.jspdf.jsPDF;let doc=null;for(let i=0;i<files.length;i++){const url=URL.createObjectURL(files[i]);const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=url});const w=img.naturalWidth,h=img.naturalHeight;const cnv=document.createElement('canvas');cnv.width=w;cnv.height=h;cnv.getContext('2d').drawImage(img,0,0);const data=cnv.toDataURL('image/jpeg',0.92);const o=w>h?'landscape':'portrait';if(!doc)doc=new jsPDF({orientation:o,unit:'px',format:[w,h],hotfix:'px_scaling'});else doc.addPage([w,h],o);doc.addImage(data,'JPEG',0,0,w,h);st.textContent='📄 '+(i+1)+'/'+files.length+' ပုံ ထည့်ပြီး…'}doc.save('images.pdf');st.textContent='✅ PDF ရပြီ — '+files.length+' ပုံ'}catch(e){st.textContent='⚠️ မအောင်မြင်ဘူး — ပုံဖိုင်တွေ စစ်ကြည့်ပါ'}}
+
+/* --- SFX Soundboard (all synthesized, no audio files) --- */
+const sfxCache={};let sfxCtx=null;
+function sfxAC(){if(!sfxCtx)sfxCtx=new (window.AudioContext||window.webkitAudioContext)();if(sfxCtx.state==='suspended')sfxCtx.resume();return sfxCtx}
+function sfxTone(off,o){const t0=o.t||0;const osc=off.createOscillator();osc.type=o.type||'sine';osc.frequency.setValueAtTime(o.f,t0);if(o.f1)osc.frequency.exponentialRampToValueAtTime(Math.max(1,o.f1),t0+o.dur);const g=off.createGain();g.gain.setValueAtTime(0.0001,t0);g.gain.exponentialRampToValueAtTime(o.vol||0.5,t0+(o.att||0.005));g.gain.exponentialRampToValueAtTime(0.0001,t0+o.dur);osc.connect(g);g.connect(off.destination);osc.start(t0);osc.stop(t0+o.dur+0.05)}
+function sfxNoiseBuf(off,sec){const sr=off.sampleRate;const buf=off.createBuffer(1,Math.ceil(sec*sr),sr);const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;return buf}
+function sfxNoise(off,o){const t0=o.t||0;const src=off.createBufferSource();src.buffer=sfxNoiseBuf(off,o.dur+0.1);const fl=off.createBiquadFilter();fl.type=o.ft||'bandpass';fl.Q.value=o.q||1;fl.frequency.setValueAtTime(o.f||800,t0);if(o.f1)fl.frequency.exponentialRampToValueAtTime(o.f1,t0+o.dur);const g=off.createGain();g.gain.setValueAtTime(0.0001,t0);g.gain.exponentialRampToValueAtTime(o.vol||0.5,t0+(o.att||0.01));g.gain.exponentialRampToValueAtTime(0.0001,t0+o.dur);src.connect(fl);fl.connect(g);g.connect(off.destination);src.start(t0);src.stop(t0+o.dur+0.1)}
+const SFXD={bell:2.8,gong:3.6,ding:1.2,success:1.0,whoosh:1.1,sweepup:0.7,sweepdown:0.7,pop:0.2,coin:0.4,drum:0.5,error:0.45,laser:0.35};
+function sfxBuild(name,off){
+ if(name==='bell'){[1,2.02,2.74,3.76,5.4].forEach((r,i)=>sfxTone(off,{f:660*r,dur:2.8/(1+i*0.7),vol:0.42/(1+i*0.9),att:0.003}))}
+ else if(name==='gong'){[1,1.48,2.09,2.94,4.2].forEach((r,i)=>sfxTone(off,{f:98*r,dur:3.6/(1+i*0.5),vol:0.4/(1+i*0.8),att:0.08}))}
+ else if(name==='ding'){sfxTone(off,{f:1568,dur:1.1,vol:0.5});sfxTone(off,{f:2093,dur:0.8,vol:0.22})}
+ else if(name==='success'){[523.25,659.25,783.99].forEach((f,i)=>sfxTone(off,{f:f,t:i*0.12,dur:0.55,vol:0.45}));sfxTone(off,{f:1046.5,t:0.36,dur:0.6,vol:0.3})}
+ else if(name==='whoosh'){sfxNoise(off,{dur:1.05,f:400,f1:2400,q:1.4,vol:0.65,att:0.3})}
+ else if(name==='sweepup'){sfxTone(off,{f:200,f1:1200,type:'sawtooth',dur:0.65,vol:0.28})}
+ else if(name==='sweepdown'){sfxTone(off,{f:1200,f1:200,type:'sawtooth',dur:0.65,vol:0.28})}
+ else if(name==='pop'){sfxTone(off,{f:620,f1:110,dur:0.16,vol:0.6,att:0.002})}
+ else if(name==='coin'){sfxTone(off,{f:988,type:'square',dur:0.08,vol:0.32});sfxTone(off,{f:1319,type:'square',t:0.08,dur:0.3,vol:0.32})}
+ else if(name==='drum'){sfxNoise(off,{dur:0.22,ft:'lowpass',f:900,vol:0.5,att:0.002});sfxTone(off,{f:150,f1:45,dur:0.42,vol:0.85,att:0.002})}
+ else if(name==='error'){sfxTone(off,{f:150,type:'square',dur:0.4,vol:0.3});sfxTone(off,{f:155,type:'square',dur:0.4,vol:0.3})}
+ else if(name==='laser'){sfxTone(off,{f:1800,f1:120,type:'sawtooth',dur:0.3,vol:0.3})}
+}
+async function sfxRender(name){if(sfxCache[name])return sfxCache[name];const sr=44100;const off=new OfflineAudioContext(2,Math.ceil(SFXD[name]*sr),sr);sfxBuild(name,off);const buf=await off.startRendering();sfxCache[name]=buf;return buf}
+async function sfxPlay(name){try{const buf=await sfxRender(name);const ctx=sfxAC();const src=ctx.createBufferSource();src.buffer=buf;const g=ctx.createGain();g.gain.value=(parseInt(document.getElementById('sfxVol').value)||80)/100;src.connect(g);g.connect(ctx.destination);src.start();document.getElementById('sfxStatus').textContent='🔊 ဖွင့်နေတယ်…'}catch(e){document.getElementById('sfxStatus').textContent='⚠️ အသံ ဖွင့်မရဘူး — browser အသံ ခွင့်ပြုချက် စစ်ပါ'}}
+async function sfxDl(name,ev){if(ev)ev.stopPropagation();const fmt=dirOf('sfxfmt');if(fmt==='mp3'&&typeof lamejs==='undefined'){document.getElementById('sfxStatus').textContent='MP3 encoder library မရသေးပါ — WAV ရွေးပါ။';return}const buf=await sfxRender(name);const blob=fmt==='mp3'?mp3Encode(buf):wavEncode(buf);const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sfx-'+name+'.'+fmt;a.click();document.getElementById('sfxStatus').textContent='⬇ sfx-'+name+'.'+fmt+' ဆွဲနေပြီ'}
+
+dropZone('spDrop','spFile',spPick);dropZone('vcDrop','vcFile',vcPick);dropZone('mgDrop','mgFile',mgPick);
+dropZone('dhBgDrop','dhBgFile',dhBgPick);dropZone('dhLogoDrop','dhLogoFile',dhLogoPick);dropZone('dhMonkDrop','dhMonkFile',dhMonkPick);
+dropZone('wmBaseDrop','wmBaseFile',wmPickBase);dropZone('wmLogoDrop','wmLogoFile',wmPickLogo);dropZone('p2Drop','p2File',p2Go);
+try{dhDraw()}catch(e){}
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{try{dhDraw()}catch(e){}});
+
+
+// ===== AI Text — Translate & Recap (BYOK Gemini via the Worker proxy) =====
+let atBase='',atDlName='ai-text.txt';
+function atStatus(t){document.getElementById('atStatus').textContent=t}
+function atGetKey(){let k='';try{k=(localStorage.getItem('csmm-gemini-key')||'').trim()}catch(e){}if(!k){const a=document.getElementById('atKey'),g=document.getElementById('gKey');k=((a&&a.value)||(g&&g.value)||'').trim()}return k}
+function atKeyUi(){const has=!!atGetKey();document.getElementById('atKeyWrap').style.display=has?'none':'block'}
+(function(){
+  const inp=document.getElementById('atKey'),g=document.getElementById('gKey');
+  try{const saved=(localStorage.getItem('csmm-gemini-key')||'').trim();if(saved){inp.value=saved;if(g&&!g.value)g.value=saved}}catch(e){}
+  inp.addEventListener('input',()=>{const v=inp.value.trim();try{localStorage.setItem('csmm-gemini-key',v)}catch(e){}if(g)g.value=v;if(v)document.getElementById('atKeyWrap').style.display='none'});
+  document.getElementById('atKeyEye').addEventListener('click',()=>{inp.type=inp.type==='password'?'text':'password';document.getElementById('atKeyEye').textContent=inp.type==='password'?'👁️':'🙈'});
+  document.querySelector('.chips[data-group="atmode"]').addEventListener('click',()=>{document.getElementById('atLenWrap').style.display=dirOf('atmode')==='recap'?'block':'none'});
+  atKeyUi();
+})();
+function atPick(input){const f=input.files&&input.files[0];if(!f)return;atBase=f.name.replace(/\.[^.]+$/,'');f.text().then(t=>{document.getElementById('atIn').value=t;atCount();atStatus(f.name+' ဖတ်ပြီး ✓')})}
+dropZone('atDrop','atFile',atPick);
+// --- SRT/VTT parsing (cue pattern: a line containing "start --> end") ---
+function atNormTs(ts){ts=String(ts).trim().replace('.',',');if(ts.split(':').length===2)ts='00:'+ts;const seg=ts.split(',');const hms=seg[0].split(':').map(x=>x.padStart(2,'0'));const ms=((seg[1]||'0')+'000').slice(0,3);return hms.join(':')+','+ms}
+function atParseSrt(text){const t=String(text||'').replace(/\r\n?/g,'\n').trim();if(!/-->\s*\d/.test(t))return null;const body=t.replace(/^WEBVTT[^\n]*\n+/,'');const tsRe=/(\d{1,2}:\d{2}(?::\d{2})?[.,]\d{1,3})\s*-->\s*(\d{1,2}:\d{2}(?::\d{2})?[.,]\d{1,3})/;const cues=[];body.split(/\n\s*\n/).forEach(b=>{const lines=b.split('\n').filter(x=>x.trim()!=='');if(!lines.length)return;let idx=-1,m=null;for(let i=0;i<lines.length;i++){const mm=lines[i].match(tsRe);if(mm){idx=i;m=mm;break}}if(idx<0||!m)return;const txt=lines.slice(idx+1).join('\n').trim();if(!txt)return;cues.push({start:atNormTs(m[1]),end:atNormTs(m[2]),text:txt})});return cues.length?cues:null}
+function atCount(){const v=document.getElementById('atIn').value;const el=document.getElementById('atInfo');if(!v.trim()){el.textContent='';return}const cues=atParseSrt(v);const n=[...v].length.toLocaleString();el.textContent=cues?('Subtitle အဖြစ် ဖတ်ပြီး — cue '+cues.length+' ကြောင်း · စာလုံး '+n):('စာရိုးရိုး စာသား — စာလုံး '+n)}
+// --- Gemini call through the proxy (visitor's own key, pass-through only) ---
+async function atGemini(prompt,jsonMode){
+  const key=atGetKey();if(!key)throw{at:'nokey'};
+  const payload={contents:[{parts:[{text:prompt}]}]};
+  if(jsonMode)payload.generationConfig={responseMimeType:'application/json'};
+  let res;try{res=await fetch(TTS_API+'/web-gemini-generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey:key,model:'gemini-2.5-flash',payload:payload})})}catch(e){throw{at:'net'}}
+  let data=null;try{data=await res.json()}catch(e){}
+  if(!res.ok||!data||data.error)throw{at:'api',status:res.status,err:(data&&data.error)||null};
+  const cand=data.candidates&&data.candidates[0];const parts=(cand&&cand.content&&cand.content.parts)||[];
+  const text=parts.map(p=>p.text||'').join('');
+  if(!text.trim())throw{at:'empty'};
+  return text;
+}
+function atErrMsg(e){
+  if(!e||!e.at)return 'တစ်ခုခု မှားသွားပါတယ် — ခဏနေမှ ပြန်စမ်းကြည့်ပါ။';
+  if(e.at==='nokey')return 'အရင် ကိုယ့် Gemini API Key ထည့်ပေးပါ (အပေါ်က Key ကတ်ထဲမှာ)။';
+  if(e.at==='net')return 'Server နဲ့ ချိတ်လို့ မရပါ — internet စစ်ပြီး ပြန်စမ်းကြည့်ပါ။';
+  if(e.at==='long')return 'စာသား ရှည်လွန်းပါတယ် — တစ်ခါတည်း စာလုံး ၁၂,၀၀၀ အောက် ခွဲပြီး ထည့်ပေးပါ။';
+  if(e.at==='empty')return 'Gemini က စာသား ပြန်မပေးပါ — ခဏနေမှ ပြန်စမ်းကြည့်ပါ။';
+  if(e.at==='mismatch')return 'Gemini က စာကြောင်း အရေအတွက် မတူတာ ပြန်ပေးလို့ မအောင်မြင်ပါ (အပိုင်း '+e.chunk+'/'+e.total+') — ပြန်စမ်းကြည့်ပါ။';
+  if(e.at==='api'){
+    const msg=((e.err&&(e.err.status||''))+' '+((e.err&&e.err.message)||'')).trim();
+    if(/api key|API_KEY/i.test(msg)){document.getElementById('atKeyWrap').style.display='block';return 'API Key မမှန်ပါ — Key ကို ပြန်စစ်ပြီး ပြန်ထည့်ပေးပါ။'}
+    if(e.status===429||/RESOURCE_EXHAUSTED|quota/i.test(msg))return 'Gemini quota ပြည့်သွားပါပြီ — ခဏ စောင့်ပြီး ပြန်စမ်းကြည့်ပါ။';
+    return 'Gemini server က ပြန်ဖြေတာ မအောင်မြင်ပါ ('+(e.err&&e.err.status?e.err.status:'HTTP '+e.status)+') — ခဏနေမှ ပြန်စမ်းကြည့်ပါ။';
+  }
+  return 'တစ်ခုခု မှားသွားပါတယ် — ခဏနေမှ ပြန်စမ်းကြည့်ပါ။';
+}
+function atParseArr(s){
+  let t=String(s||'').replace(/```(?:json)?/gi,'').trim();
+  const a=t.indexOf('['),b=t.lastIndexOf(']');if(a>-1&&b>a)t=t.slice(a,b+1);
+  try{const v=JSON.parse(t);return Array.isArray(v)?v:null}catch(e){return null}
+}
+async function atTranslateChunk(cues,ci,total){
+  const texts=cues.map(c=>c.text);
+  const prompt='You are a professional subtitle translator. Translate each of the following subtitle cues into natural, spoken Burmese (Myanmar) suitable for a movie-recap voice-over. Keep each translation concise so it fits the original timing.\nRules: reply with a JSON array of strings ONLY — no markdown fences, no commentary — containing EXACTLY '+texts.length+' strings, one per cue, in the same order. Do not include timestamps or cue numbers.\n\nCues (JSON array of strings):\n'+JSON.stringify(texts);
+  for(let attempt=0;attempt<2;attempt++){
+    const reply=await atGemini(prompt,true);
+    const arr=atParseArr(reply);
+    if(arr&&arr.length===texts.length)return arr.map((s,i)=>{const v=String(s==null?'':s).replace(/\s*\n\s*/g,' ').trim();return v||texts[i]});
+  }
+  throw{at:'mismatch',chunk:ci+1,total:total};
+}
+async function atRun(){
+  const btn=document.getElementById('atBtn'),raw=document.getElementById('atIn').value;
+  if(!raw.trim()){atStatus('အရင် စာသား ထည့်ပေးပါ (သို့) ဖိုင် ရွေးပေးပါ။');return}
+  if(!atGetKey()){atKeyUi();document.getElementById('atKeyWrap').scrollIntoView({behavior:'smooth',block:'center'});atStatus('အရင် ကိုယ့် Gemini API Key ထည့်ပေးပါ (အပေါ်က Key ကတ်ထဲမှာ)။');return}
+  const mode=dirOf('atmode')||'translate';
+  const cues=atParseSrt(raw);
+  btn.disabled=true;
+  try{
+    if(mode==='translate'&&cues){
+      const groups=[];for(let i=0;i<cues.length;i+=40)groups.push(cues.slice(i,i+40));
+      const out=[];
+      for(let i=0;i<groups.length;i++){atStatus('ဘာသာပြန်နေတယ်... အပိုင်း '+(i+1)+'/'+groups.length);const arr=await atTranslateChunk(groups[i],i,groups.length);for(const s of arr)out.push(s)}
+      document.getElementById('atOut').value=cues.map((c,i)=>(i+1)+'\n'+c.start+' --> '+c.end+'\n'+out[i]).join('\n\n')+'\n';
+      atDlName=(atBase||'translated')+'_my.srt';
+      atStatus('ဘာသာပြန်ပြီး ✓ cue '+cues.length+' ကြောင်း — မူရင်း အချိန်တွေ အတိုင်း .srt ဖိုင် Download ဆွဲလို့ရပါပြီ။');
+    }else if(mode==='translate'){
+      const src=raw.trim();if([...src].length>12000)throw{at:'long'};
+      atStatus('ဘာသာပြန်နေတယ်...');
+      const t=await atGemini('Translate the following text into natural, spoken Burmese (Myanmar). Output ONLY the translated text — no notes, no headings.\n\nText:\n"""\n'+src+'\n"""',false);
+      document.getElementById('atOut').value=t.trim();
+      atDlName=(atBase||'translated')+'.txt';
+      atStatus('ဘာသာပြန်ပြီး ✓');
+    }else{
+      const src=(cues?cues.map(c=>c.text).join('\n'):raw).trim();if([...src].length>12000)throw{at:'long'};
+      const pct=dirOf('atlen')||'50';
+      atStatus('Recap စာသား ထုတ်နေတယ်...');
+      const prompt='You are an expert Burmese movie-recap scriptwriter for a popular Myanmar recap channel. Based ONLY on the source transcript below, write an engaging spoken-Burmese (Myanmar) movie-recap narration script.\nRules:\n- Start with a strong hook in the first 1-2 sentences.\n- Tell the story in chronological order with natural, expressive storytelling, as if narrating aloud to listeners.\n- Target length: about '+pct+'% of the source text length.\n- Do NOT invent scenes, characters, names, dialogue or facts that are not in the source.\n- Output ONLY the Burmese narration script as plain text — no headings, no notes, no timestamps.\n\nSource transcript:\n"""\n'+src+'\n"""';
+      const t=await atGemini(prompt,false);
+      document.getElementById('atOut').value=t.trim();
+      atDlName=(atBase||'recap')+'_recap.txt';
+      atStatus('Recap စာသား ရပြီ ✓ — "TTS မှာ သုံးမယ်" နှိပ်ရင် အသံ တန်း ထုတ်လို့ရပါတယ်။');
+    }
+  }catch(e){atStatus(atErrMsg(e))}
+  btn.disabled=false;
+}
+function atCopy(){const el=document.getElementById('atOut');if(!el.value.trim()){atStatus('အရင် AI နဲ့ စာသား ထုတ်ပါ။');return}const done=()=>atStatus('Copy ကူးပြီး ✓');if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(el.value).then(done).catch(()=>{el.select();document.execCommand('copy');done()})}else{el.select();document.execCommand('copy');done()}}
+function atDownload(){const v=document.getElementById('atOut').value;if(!v.trim()){atStatus('အရင် AI နဲ့ စာသား ထုတ်ပါ။');return}const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([v],{type:'text/plain;charset=utf-8'}));a.download=atDlName;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}
+function atSendTts(){const v=document.getElementById('atOut').value;if(!v.trim()){atStatus('အရင် AI နဲ့ စာသား ထုတ်ပါ။');return}const t=document.getElementById('txt');t.value=v;if(typeof updCount==='function')updCount();show('tts');ttsSetStatus('AI စာသား tool ကနေ စာသား ရောက်လာပါပြီ ✓ — အသံ ရွေးပြီး "အသံ ထုတ်မယ်" နှိပ်နိုင်ပါပြီ။')}
+
 // EN/MM toggle (key strings)
 let en=false;const orig=new Map();
 function toggleLang(){en=!en;document.getElementById('langBtn').textContent=en?'MM':'EN';document.querySelectorAll('[data-en]').forEach(el=>{if(!orig.has(el))orig.set(el,el.textContent);el.textContent=en?el.dataset.en:orig.get(el)})}
 </script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e5f400ef3da2405684e34a543114307e"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
