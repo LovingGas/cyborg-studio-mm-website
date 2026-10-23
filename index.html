@@ -227,7 +227,11 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 .pill{background:rgba(255,143,46,.22);color:#ffd740;border-color:rgba(255,215,64,.45)}
 .stats span{color:#ffd740}
 .btn-cyan{background:var(--grad);box-shadow:0 14px 30px rgba(0,184,217,.30),0 10px 26px rgba(255,77,141,.28)}
-.btn-ghost{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.06)}
+.btn-ghost{border:1.5px solid var(--line);color:var(--ink);background:var(--card)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue2);background:var(--hover)}
+[data-theme="day"] .btn-ghost{border-color:#9fd0ef}
+.hero .btn-ghost{border-color:rgba(255,255,255,.55);color:#fff;background:rgba(255,255,255,.06)}
+.hero .btn-ghost:hover{border-color:rgba(255,255,255,.85);color:#fff;background:rgba(255,255,255,.14)}
 .wave i{background:linear-gradient(180deg,#2fd4d9,#448aff 55%,#ff4d8d)}
 .play{background:var(--grad);box-shadow:0 8px 18px rgba(255,77,141,.28)}
 .prow .tag{color:#ffd740;border-color:rgba(255,215,64,.40)}
