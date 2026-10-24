@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Cyborg Studio MM is a single-page site: the homepage is the only real URL.
+       Tab addresses (/pos, /studio, /recap, /management, /guide) are JS views, not
+       separate pages, so they are deliberately NOT listed here. -->
+  <url>
+    <loc>https://cyborgstudiomm.com/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
