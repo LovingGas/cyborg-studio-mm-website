@@ -313,7 +313,6 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <button class="hideM" onclick="show('recap',this)">Recap App</button>
     <button class="hideM" onclick="show('guide',this)">📖 Guide</button>
     <button class="hideM" onclick="show('mgmt',this)">Management</button>
-    <button class="hideM" onclick="showPoints()" style="display:none">Credit Points</button>
     <div class="themesw" role="group" aria-label="Theme"><button data-t="day" class="on" onclick="setTheme('day')" title="Day">☀️</button><button data-t="night" onclick="setTheme('night')" title="Night">🌙</button><button data-t="neon" onclick="setTheme('neon')" title="Neon">⚡</button></div>
     <div class="themesw fontsw" role="group" aria-label="Font"><button data-f="pyidaungsu" class="on" onclick="setFont('pyidaungsu')" title="Pyidaungsu">ပြည်ထောင်စု</button><button data-f="padauk" onclick="setFont('padauk')" title="Padauk">Padauk</button><button data-f="noto" onclick="setFont('noto')" title="Noto Sans Myanmar">Noto</button></div>
     <button class="lang" id="langBtn" onclick="toggleLang()">EN</button>
@@ -346,7 +345,6 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <div class="prow" style="cursor:pointer" onclick="show('studio')"><div class="play">🎙️</div><div><b>AI Voice Studio</b><span>TTS · Clone · Recap · SRT</span></div><span class="tag">/studio</span></div>
       <div class="prow" style="cursor:pointer" onclick="show('recap')"><div class="play">🎬</div><div><b>CyborgRecapMM</b><span>ဖုန်းထဲ Recap လုပ်တဲ့ Android app</span></div><span class="tag">/recap</span></div>
       <div class="prow" style="cursor:pointer" onclick="show('mgmt')"><div class="play">🧰</div><div><b>Management Tools</b><span>HR · Clinic · School အပါ ၈ မျိုး (မကြာမီ)</span></div><span class="tag">/management</span></div>
-      <div class="prow" style="display:none"><div class="play">🪙</div><div><b>Credit Points</b><span>Pay as you go · 1 Point = ၁ ကျပ်</span></div><span class="tag">PAYG</span></div>
     </div>
   </div>
 
@@ -426,20 +424,6 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     </div>
   </section>
 
-  <section class="blk" id="points" style="display:none"><!-- Points section hidden for now (all tools free) — restore by removing style="display:none" -->
-    <div class="sec-h">Credit Points — Pay as you go</div>
-    <div class="sec-s">လစဉ် subscription မဟုတ်ဘူး။ Points ဝယ်ထားပြီး သုံးသလောက်ပဲ ဖြတ်တယ်။</div>
-    <div class="steps">
-      <div class="stepc"><div class="num">🪙</div><div><h3>1 Point = ၁ ကျပ်</h3><p>KBZPay / WavePay / AYA Pay နဲ့ Points ဝယ်လို့ရတယ်။ ဝယ်ထားတဲ့ Points က သက်တမ်း မကုန်ဘူး။</p></div></div>
-      <div class="stepc"><div class="num">👁️</div><div><h3>မနှိပ်ခင် အရင်ပြ</h3><p>Tool တစ်ခုစီမှာ ကုန်မယ့် Points ကို Generate ခလုတ်မှာ အရင်ပြထားတယ် — ဥပမာ Recap ၁ ပုဒ် = Points ဘယ်လောက် ဆိုတာ သိပြီးမှ နှိပ်ရုံပဲ။ (Tool အလိုက် ဖြတ်နှုန်းတွေ မကြာမီ ကြေညာမယ်)</p></div></div>
-      <div class="stepc"><div class="num">↩️</div><div><h3>Fail ရင် ပြန်ဝင်</h3><p>အလုပ် မအောင်မြင်ရင် ဖြတ်ထားတဲ့ Points အလိုလို ပြန်ဝင်တယ်။ ဆုံးရှုံးစရာ မရှိဘူး။</p></div></div>
-    </div>
-    <div class="ptshelp">
-      <span>💬 Points ဝယ်ယူဖို့နဲ့ အကူအညီ လိုရင် ဆက်သွယ်ပါ:</span>
-      <a class="soc" href="https://m.me/cyborgstudiomm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.549 1.797 6.701 4.615 8.684V24l3.923-2.156c1.09.301 2.246.46 3.462.46 6.627 0 12-4.974 12-11.111C24 4.974 18.627 0 12 0zm1.266 15.626l-3.2-3.417-6.241 3.417 6.865-7.292 3.268 3.417 6.173-3.417-6.865 7.292z"/></svg>Messenger</a>
-      <a class="soc" href="https://t.me/cyborgstudiomm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>
-    </div>
-  </section>
 
   <div class="ctaband">
     <h2 data-en="Make your first voice today — free">ဒီနေ့ပဲ ပထမဆုံး အသံ ထုတ်ကြည့်ပါ — အခမဲ့</h2>
@@ -1683,7 +1667,6 @@ function icGo(){
     <div class="msg bot">မင်္ဂလာပါ ခင်ဗျာ 🙏 ကျွန်တော် Cyborg Studio MM ရဲ့ Customer Service ကပါ။ ဘာများ ကူညီပေးရပါ့မလဲ သိချင်တာရှိရင် အားမနာတမ်း မေးမြန်းနိုင်ပါတယ်။</div>
   </div>
   <div class="bot-q">
-    <button onclick="askBot('Credit Points ဘယ်လို ဝယ်ရမလဲ?')" style="display:none">Credit Points ဝယ်နည်း</button>
     <button onclick="askBot('အသံ ဘယ်လို ထုတ်ရမလဲ?')">အသံ ထုတ်နည်း</button>
     <button onclick="askBot('ဈေးနှုန်း သိချင်တယ်')">ဈေးနှုန်း</button>
     <button onclick="askBot('Recap ဘယ်လို လုပ်ရမလဲ?')">Recap လုပ်နည်း</button>
@@ -1741,7 +1724,6 @@ const w=document.getElementById('wave');let wh='';
 for(let i=0;i<36;i++){const h=18+Math.round(Math.abs(Math.sin(i*.55))*44);wh+=`<i style="height:${h}px;animation-delay:${(i%9)*.09}s"></i>`}
 w.innerHTML=wh;
 // screens
-function showPoints(){show('studio');setTimeout(()=>{const el=document.getElementById('points');if(el)el.scrollIntoView({behavior:'smooth'})},80)}
 function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('csmm-theme',t)}catch(e){}document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t))}
 (function(){var t=document.documentElement.getAttribute('data-theme')||'day';document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t))})();
 function setFont(f){document.documentElement.setAttribute('data-font',f);try{localStorage.setItem('csmm-font',f)}catch(e){}document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))}
