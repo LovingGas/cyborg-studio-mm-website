@@ -1412,6 +1412,100 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   </section>
 </div>
 
+<!-- ============ 🎵 အသံ + ပုံ → Video (Audiogram) ============ -->
+<div class="screen" id="scr-audiogram">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🎵 အသံ + ပုံ → Video</div>
+    <div class="sec-s">MP3 အသံ + ပုံ ၁ ပုံ ထည့်ရုံနဲ့ waveform လှုပ်နေတဲ့ video ထုတ်ပေးတယ် — တရား, Podcast, Recap အသံကို YouTube / Facebook မှာ တင်ဖို့ — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">၁။ ပုံ ရွေးပါ (Poster / Thumbnail)</div>
+      <div class="drop" onclick="document.getElementById('agImg').click()">
+        <b>ပုံ ရွေးရန် နှိပ်ပါ</b><br>JPG / PNG — ပုံ မရွေးရင် gradient နောက်ခံ သုံးမယ်
+        <input type="file" id="agImg" accept="image/*" hidden onchange="agPickImg(this)">
+      </div>
+      <div class="glabel" style="margin-top:14px">၂။ အသံ ရွေးပါ</div>
+      <div class="drop" onclick="document.getElementById('agAud').click()">
+        <b>MP3 / WAV ရွေးရန် နှိပ်ပါ</b><br>အသံ အရှည်အတိုင်း video ထွက်မယ်
+        <input type="file" id="agAud" accept=".mp3,.wav,audio/*" hidden onchange="agPickAud(this)">
+      </div>
+      <div id="agInfo" class="hint" style="margin-top:8px"></div>
+      <div class="glabel" style="margin-top:14px">Video အချိုး</div>
+      <div class="chips" data-group="agratio">
+        <button class="chip sel" data-dir="916">9:16 · Reels / Shorts / TikTok</button>
+        <button class="chip" data-dir="11">1:1 · Square</button>
+        <button class="chip" data-dir="169">16:9 · YouTube</button>
+      </div>
+      <div class="glabel" style="margin-top:14px">Video ပေါ်က ခေါင်းစဉ် (မထည့်လဲ ရတယ်)</div>
+      <input type="text" id="agTitle" class="tin" placeholder="ဥပမာ: ရုပ်ရှင် Recap — အပိုင်း ၁" oninput="agDraw(0)">
+      <div style="margin-top:14px"><canvas id="agCv" width="720" height="1280" style="width:100%;max-width:360px;border-radius:14px;background:#0A101E;display:block"></canvas></div>
+      <div id="agStatus" class="hint" style="margin-top:10px"></div>
+      <audio id="agPlayer" style="width:100%;margin-top:10px;display:none" controls></audio>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
+        <button class="genbtn" id="agBtn" onclick="agGo()" disabled>Video ထုတ်မယ် 🎬</button>
+        <button class="btn btn-ghost" onclick="agPreview()">▶ အစမ်း ကြည့်မယ်</button>
+        <a class="dlbtn" id="agDl" style="display:none" download>⬇ Video Download ဆွဲမယ်</a>
+      </div>
+      <div class="hint" style="margin-top:10px">ထွက်လာတဲ့ ဖိုင်က <b>WebM</b> ပါ — YouTube / Facebook မှာ တန်းတင်လို့ရတယ်။ TikTok အတွက် MP4 လိုချင်ရင် converter နဲ့ ပြောင်းပါ။ အသံနဲ့ ပုံက သင့် browser ထဲမှာပဲ ရှိတယ်, server မတက်ဘူး။</div>
+    </div>
+  </section>
+</div>
+<script>
+// --- Audiogram: audio + image -> waveform video (client-side only) ---
+let agImgObj=null,agAudUrl='',agAudName='',agCtx=null,agAn=null,agSrc=null,agDrawId=null;
+function agDir(){const b=document.querySelector('[data-group="agratio"] .chip.sel');return b?b.getAttribute('data-dir'):'916'}
+function agSize(){const d=agDir();if(d==='11')return[720,720];if(d==='169')return[1280,720];return[720,1280]}
+function agDraw(level){
+  const cv=document.getElementById('agCv');if(!cv)return;const ctx=cv.getContext('2d');
+  const s=agSize();if(cv.width!==s[0]||cv.height!==s[1]){cv.width=s[0];cv.height=s[1]}
+  const W=s[0],H=s[1];
+  if(agImgObj){const r=Math.max(W/agImgObj.width,H/agImgObj.height);const w=agImgObj.width*r,h=agImgObj.height*r;ctx.drawImage(agImgObj,(W-w)/2,(H-h)/2,w,h)}
+  else{const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#0A101E');g.addColorStop(1,'#1B2A4A');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.fillStyle='#2FD4D9';ctx.font='bold '+Math.round(W*0.09)+'px sans-serif';ctx.textAlign='center';ctx.fillText('Cyborg Studio MM',W/2,H/2)}
+  ctx.fillStyle='rgba(0,0,0,0.45)';ctx.fillRect(0,H-Math.round(H*0.30),W,Math.round(H*0.30));
+  const t=(document.getElementById('agTitle').value||'').trim();
+  if(t){ctx.fillStyle='#fff';ctx.font='bold '+Math.round(W*0.055)+'px sans-serif';ctx.textAlign='center';const words=t.split(' ');let line='',y=H-Math.round(H*0.24);const maxW=W*0.88;for(const wd of words){const test=line?line+' '+wd:wd;if(ctx.measureText(test).width>maxW&&line){ctx.fillText(line,W/2,y);y+=Math.round(W*0.07);line=wd}else line=test}if(line)ctx.fillText(line,W/2,y)}
+  const bw=Math.round(H*0.12),by=H-Math.round(H*0.13),n=28,step=W/(n+1);
+  for(let i=0;i<n;i++){const v=level?0.25+Math.abs(Math.sin(i*0.9+level*8))*0.75:0.3;const h=bw*v;ctx.fillStyle='#2FD4D9';ctx.fillRect(Math.round(step*(i+1)-W*0.012),by-h,W*0.024,h)}
+}
+function agPickImg(input){const f=input.files&&input.files[0];if(!f)return;const img=new Image();img.onload=function(){agImgObj=img;agDraw(0);document.getElementById('agInfo').textContent='ပုံ ရပြီ ✓ — '+f.name;agCheck()};img.src=URL.createObjectURL(f)}
+function agPickAud(input){const f=input.files&&input.files[0];if(!f)return;agAudUrl=URL.createObjectURL(f);agAudName=f.name.replace(/\.[^.]+$/,'');const p=document.getElementById('agPlayer');p.src=agAudUrl;p.style.display='block';document.getElementById('agInfo').textContent='အသံ ရပြီ ✓ — '+f.name;agCheck()}
+function agCheck(){document.getElementById('agBtn').disabled=!agAudUrl}
+function agSetupAudio(){
+  const p=document.getElementById('agPlayer');
+  if(!agCtx)agCtx=new (window.AudioContext||window.webkitAudioContext)();
+  if(agCtx.state==='suspended')agCtx.resume();
+  if(!agSrc){agSrc=agCtx.createMediaElementSource(p);agAn=agCtx.createAnalyser();agAn.fftSize=64;agSrc.connect(agAn);agAn.connect(agCtx.destination)}
+  return p;
+}
+function agPreview(){const p=agSetupAudio();p.currentTime=0;p.play();const data=new Uint8Array(agAn.frequencyBinCount);(function loop(){if(p.paused||p.ended){agDraw(0);return}agAn.getByteFrequencyData(data);let s=0;for(let i=0;i<data.length;i++)s+=data[i];agDraw(s/data.length/255);requestAnimationFrame(loop)})()}
+async function agGo(){
+  const st=document.getElementById('agStatus');const btn=document.getElementById('agBtn');
+  if(!agAudUrl){st.textContent='အသံ အရင် ရွေးပါ။';return}
+  if(!window.MediaRecorder){st.textContent='ဒီ browser က video record မလုပ်နိုင်ပါ — Chrome / Edge နဲ့ စမ်းပါ။';return}
+  btn.disabled=true;st.textContent='Video ထုတ်နေတယ်... အသံ ဆုံးတာနဲ့ Download ပေါ်လာမယ်။';
+  try{
+    const p=agSetupAudio();p.currentTime=0;
+    const cv=document.getElementById('agCv');const stream=cv.captureStream(30);
+    const dest=agCtx.createMediaStreamDestination();agSrc.connect(dest);
+    const mixed=new MediaStream([...stream.getVideoTracks(),...dest.stream.getAudioTracks()]);
+    let mime='';for(const m of ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm']){if(MediaRecorder.isTypeSupported(m)){mime=m;break}}
+    const rec=new MediaRecorder(mixed,mime?{mimeType:mime}:undefined);const chunks=[];
+    rec.ondataavailable=function(e){if(e.data.size)chunks.push(e.data)};
+    rec.onstop=function(){
+      const blob=new Blob(chunks,{type:'video/webm'});const url=URL.createObjectURL(blob);
+      const dl=document.getElementById('agDl');dl.href=url;dl.download=(agAudName||'audiogram')+'.webm';dl.style.display='inline-flex';
+      st.textContent='ရပြီ ✓ WebM video — Download ဆွဲမယ် နှိပ်ပါ။';btn.disabled=false;
+    };
+    const data=new Uint8Array(agAn.frequencyBinCount);
+    p.onended=function(){try{rec.stop()}catch(e){}};
+    rec.start();await p.play();
+    (function loop(){if(rec.state!=='recording')return;agAn.getByteFrequencyData(data);let s=0;for(let i=0;i<data.length;i++)s+=data[i];agDraw(s/data.length/255);requestAnimationFrame(loop)})();
+  }catch(e){st.textContent='Video ထုတ်လို့ မရပါ — '+e.message;btn.disabled=false}
+}
+document.addEventListener('click',function(e){const b=e.target.closest&&e.target.closest('[data-group="agratio"] .chip');if(!b)return;document.querySelectorAll('[data-group="agratio"] .chip').forEach(c=>c.classList.remove('sel'));b.classList.add('sel');agDraw(0)});
+agDraw(0);
+</script>
+
 <footer>
   <div class="socrow">
     <a class="soc" href="https://www.facebook.com/cyborgstudiomm" target="_blank" rel="noopener" aria-label="Cyborg Studio MM on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a>
@@ -1464,8 +1558,8 @@ const tools=[
  {t:'တရား အပိုင်းခွဲ',e:'Sermon Splitter',d:'အသံရှည် ကို ၁၀/၁၅/၂၀/၃၀ မိနစ် အပိုင်းခွဲ — အခမဲ့',go:'split',ic:'<circle cx="6" cy="7" r="2.5"/><circle cx="6" cy="17" r="2.5"/><path d="M8.2 8.6 20 19M8.2 15.4 20 5"/>'},
  {t:'အသံရှင်း / Normalize',e:'Voice Clear',d:'အသံ ညှိ + Smart Audio preset + speed/pitch — အခမဲ့',go:'voiceclear',ic:'<path d="M5 7h8M17 7h2M5 12h2M11 12h8M5 17h10"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/>'},
  {t:'SFX Soundboard',e:'SFX Soundboard',d:'Bell, Gong, Whoosh effect ၁၂ မျိုး ဖန်တီး + download — အခမဲ့',go:'sfx',ic:'<path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9ZM10.2 20a2 2 0 0 0 3.6 0"/>'},
- {t:'အသံမှ စာသား',e:'Speech to Text',d:'အသံ/ဗီဒီယို တင်လိုက်တာနဲ့ စာသားနဲ့ SRT အလိုလို ရမယ် — Whisper နဲ့ browser ထဲမှာပဲ၊ အခမဲ့',go:'stt',ic:'<path d="M4 6h16M4 12h10M4 18h13"/>'},
  {t:'အသံမှ စာသား (Whisper)',e:'Whisper STT',d:'အသံဖိုင်ကနေ စာသား + SRT ထုတ် — browser ထဲမှာ AI မောင်းတယ်၊ အခမဲ့',go:'stt',ic:'<path d="M9 11a3 3 0 0 0 6 0V6a3 3 0 0 0-6 0z"/><path d="M6.5 11a5.5 5.5 0 0 0 11 0M12 16.5V20M16 12h5M16 16h5"/>'},
+ {t:'အသံ + ပုံ → Video',e:'Audiogram',d:'MP3 အသံ + ပုံ ၁ ပုံ ထည့်ရုံနဲ့ waveform ပါတဲ့ video ထုတ် — YouTube / FB တင်ဖို့, အခမဲ့',go:'audiogram',ic:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 12v3M8 9v6M12 6v9M16 10v4M20 12v2"/>'},
  {t:'AI စာသား — Translate & Recap',e:'AI Text — Translate & Recap',d:'SRT/စာသားကို Gemini နဲ့ မြန်မာ ဘာသာပြန် + Recap စာသား အလိုလို ထုတ် — ကိုယ့် key (BYOK) နဲ့၊ VPN မလို',go:'aitext',ic:'<path d="M4 5h16M4 10h10M4 15h13"/><path d="M17.8 14.6l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>'},
  {t:'SRT Tool',e:'SRT Tool',d:'Subtitle အချိန် ရွှေ့, SRT ↔ VTT ပြောင်း — အခမဲ့',go:'srt',ic:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/>'},
  {t:'SRT ဘာသာပြန်',e:'SRT Translator',d:'Timing မပျက်၊ စာကြောင်းနံပါတ် မပျက် မြန်မာလို ပြန်ပေးတယ် — AI စာသား tool နဲ့၊ ကိုယ့် Gemini key (BYOK) နဲ့',go:'aitext',ic:'<path d="M4 6h9M8.5 4v2c0 3.5-2 6.5-4 8M6 9.5c.8 2 2.7 4 4.8 5M13 20l4.5-10L22 20M14.8 16.5h5.4"/>'},
