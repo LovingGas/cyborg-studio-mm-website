@@ -1678,7 +1678,7 @@ function icGo(){
     <div class="msg bot">မင်္ဂလာပါ ခင်ဗျာ 🙏 ကျွန်တော် Cyborg Studio MM ရဲ့ Customer Service ကပါ။ ဘာများ ကူညီပေးရပါ့မလဲ သိချင်တာရှိရင် အားမနာတမ်း မေးမြန်းနိုင်ပါတယ်။</div>
   </div>
   <div class="bot-q">
-    <button onclick="askBot('Credit Points ဘယ်လို ဝယ်ရမလဲ?')">Credit Points ဝယ်နည်း</button>
+    <button onclick="askBot('Credit Points ဘယ်လို ဝယ်ရမလဲ?')" style="display:none">Credit Points ဝယ်နည်း</button>
     <button onclick="askBot('အသံ ဘယ်လို ထုတ်ရမလဲ?')">အသံ ထုတ်နည်း</button>
     <button onclick="askBot('ဈေးနှုန်း သိချင်တယ်')">ဈေးနှုန်း</button>
     <button onclick="askBot('Recap ဘယ်လို လုပ်ရမလဲ?')">Recap လုပ်နည်း</button>
@@ -1907,8 +1907,8 @@ function botReply(q){const s=q.toLowerCase();
  if(s.includes('dark')||q.includes('theme')||q.includes('အရောင် ပြောင်း'))return 'Settings မှာ ပြောင်းရပါတယ် ခင်ဗျာ — အသွင် (Appearance) 🌙 Dark / ☀️ Light, App အရောင် ၈ မျိုး, ဘာသာစကား မြန်မာ / English အားလုံး နှိပ်လိုက်တာနဲ့ တန်း ပြောင်းပါတယ်၊ app ပြန် ဖွင့်စရာ မလိုပါ။';
  if(s.includes('recap')||q.includes('ဘယ်လို သုံး')||q.includes('သုံးနည်း'))return 'CyborgRecapMM က အဆင့် ၇ ဆင့် wizard ပါ ခင်ဗျာ — ၁ Video (video ရွေး၊ Scene Trim နဲ့ scene ရွေးလို့ရ) → ၂ Script (SRT / AI စာသား) → ၃ အသံ → ၄ Style ပုံ (ratio 9:16 / 16:9, resolution) → ၅ Style စစ် → ၆ Overlay (ခေါင်းစဉ် / Logo / Blur Box) → ၇ ထုတ်မယ် (Export)။\nHome မှာ Project အသစ် ခလုတ်နဲ့ စပြီး အဆင့်တွေ အတိုင်း လိုက်လုပ်ရုံပါပဲ။\nအပြည့်အစုံကို ဒီ website ရဲ့ "Recap App" tab က Manual (PDF) မှာ ပုံနှင့်တကွ ရှင်းပြထားပါတယ်။';
  // ── existing generic Studio rules (unchanged) ──
- if(s.includes('credit')||s.includes('point')||q.includes('ဝယ်'))return '1 Point = ၁ ကျပ် ပါ။ Credit Points ကို KBZPay / WavePay / AYA Pay နဲ့ ဝယ်လို့ရပါတယ်။ Points က အသံထုတ် ၁ ကြိမ်, Recap ၁ ကြိမ် စသဖြင့် သုံးတဲ့အပေါ် မူတည်ပြီး ဖြတ်ပါတယ် 🙏';
- if(q.includes('ဈေး')||s.includes('price'))return 'အခမဲ့ အစီအစဉ်မှာ နေ့တိုင်း အခမဲ့ quota ရပါတယ်။ ပိုသုံးချင်ရင် Credit Points ဝယ်သုံးရုံပါပဲ — 1 Point = ၁ ကျပ်၊ လစဉ် subscription မလိုပါဘူး။';
+ if(s.includes('credit')||s.includes('point')||q.includes('ဝယ်'))return 'အခု Tool တွေ အခမဲ့ သုံးလို့ရပါတယ် ခင်ဗျာ — Credit Points စနစ် စတင်မှ ဝယ်လို့ရမယ်၊ ကြေညာပေးမယ် 🙏';
+ if(q.includes('ဈေး')||s.includes('price'))return 'အခု Tool တွေ အခမဲ့ သုံးလို့ရပါတယ် ခင်ဗျာ — Credit Points စနစ် စတင်မှ ကြေညာပေးမယ် 🙏';
  if(q.includes('အသံ')||s.includes('tts'))return 'အသံထုတ်နည်းက လွယ်ပါတယ် — ၁။ TTS Studio ဖွင့် ၂။ စာရိုက် ၃။ အသံ chip ရွေး ၄။ အသံ ထုတ်မယ် နှိပ် ၅။ MP3 Download ဆွဲရုံပါပဲ။';
  if(s.includes('recap'))return 'Auto Recap မှာ ဗီဒီယိုတင်ပြီး (သို့) YouTube/TikTok link ထည့်၊ ပြောမယ့်အသံနဲ့ Ratio (9:16 / 16:9) ရွေးပြီး Start Recap နှိပ်ရုံပါပဲ။';
  if(s.includes('clone'))return 'Voice Clone မှာ ကိုယ့်အသံ sample (၁–၅ မိနစ်) တင်ပြီး နာမည်ပေးလိုက်ရင် clone အသံ ရပါပြီ။ ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံ ပဲ clone လုပ်ပါ။';
