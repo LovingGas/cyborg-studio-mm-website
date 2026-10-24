@@ -308,7 +308,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <button class="hideM" onclick="show('recap',this)">Recap App</button>
     <button class="hideM" onclick="show('guide',this)">📖 Guide</button>
     <button class="hideM" onclick="show('mgmt',this)">Management</button>
-    <button class="hideM" onclick="showPoints()">Credit Points</button>
+    <button class="hideM" onclick="showPoints()" style="display:none">Credit Points</button>
     <div class="themesw" role="group" aria-label="Theme"><button data-t="day" class="on" onclick="setTheme('day')" title="Day">☀️</button><button data-t="night" onclick="setTheme('night')" title="Night">🌙</button><button data-t="neon" onclick="setTheme('neon')" title="Neon">⚡</button></div>
     <div class="themesw fontsw" role="group" aria-label="Font"><button data-f="pyidaungsu" class="on" onclick="setFont('pyidaungsu')" title="Pyidaungsu">ပြည်ထောင်စု</button><button data-f="padauk" onclick="setFont('padauk')" title="Padauk">Padauk</button><button data-f="noto" onclick="setFont('noto')" title="Noto Sans Myanmar">Noto</button></div>
     <button class="lang" id="langBtn" onclick="toggleLang()">EN</button>
@@ -415,13 +415,13 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div class="sec-h" data-en="How it works">ဘယ်လို အလုပ်လုပ်လဲ</div>
     <div class="sec-s" data-en="Three steps. No technical setup.">အဆင့် ၃ ဆင့်ပဲ။ နည်းပညာ ပြင်ဆင်စရာ မလိုဘူး။</div>
     <div class="steps">
-      <div class="stepc"><div class="num">1</div><div><h3 data-en="Create account">အကောင့် ဖွင့်ပါ</h3><p data-en="Free quota every day — top up with Credit Points (1 Point = 1 Ks) when you need more.">နေ့တိုင်း အခမဲ့ quota ရမယ်၊ လိုရင် Credit Points နဲ့ ဆက်သုံးလို့ရတယ် (1 Point = ၁ ကျပ်)။</p></div></div>
+      <div class="stepc"><div class="num">1</div><div><h3 data-en="Create account">အကောင့် ဖွင့်ပါ</h3><p data-en="Free to use right now.">အခု အခမဲ့ သုံးလို့ရတယ်။</p></div></div>
       <div class="stepc"><div class="num">2</div><div><h3 data-en="Pick a tool & voice">Tool နဲ့ အသံ ရွေးပါ</h3><p data-en="Type text or upload a file, choose a voice with chips.">စာရိုက်/ဖိုင်တင်၊ အသံကို chip လေးတွေနဲ့ ရွေး။</p></div></div>
       <div class="stepc"><div class="num">3</div><div><h3 data-en="Generate & download">ထုတ်ပြီး Download ဆွဲပါ</h3><p data-en="MP3 / MP4 / SRT ready in minutes.">မိနစ်ပိုင်းအတွင်း MP3 / MP4 / SRT အသင့်ရမယ်။</p></div></div>
     </div>
   </section>
 
-  <section class="blk" id="points">
+  <section class="blk" id="points" style="display:none"><!-- Points section hidden for now (all tools free) — restore by removing style="display:none" -->
     <div class="sec-h">Credit Points — Pay as you go</div>
     <div class="sec-s">လစဉ် subscription မဟုတ်ဘူး။ Points ဝယ်ထားပြီး သုံးသလောက်ပဲ ဖြတ်တယ်။</div>
     <div class="steps">
@@ -438,7 +438,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 
   <div class="ctaband">
     <h2 data-en="Make your first voice today — free">ဒီနေ့ပဲ ပထမဆုံး အသံ ထုတ်ကြည့်ပါ — အခမဲ့</h2>
-    <p data-en="Pay with Credit Points — 1 Point = 1 Ks. Daily free quota included.">Credit Points နဲ့ သုံးလို့ရတယ် — 1 Point = ၁ ကျပ်။ နေ့တိုင်း အခမဲ့ quota ပါတယ်။</p>
+    <p data-en="Free to use right now.">အခု အခမဲ့ သုံးလို့ရတယ်။</p>
     <button class="btn" style="background:#fff;color:var(--blue2)" onclick="show('tts')" data-en="Open TTS Studio →">TTS Studio ဖွင့်မယ် →</button>
   </div>
 </div>
