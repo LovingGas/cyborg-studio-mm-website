@@ -345,7 +345,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <div class="prow" style="cursor:pointer" onclick="show('studio')"><div class="play">🎙️</div><div><b>AI Voice Studio</b><span>TTS · Clone · Recap · SRT</span></div><span class="tag">/studio</span></div>
       <div class="prow" style="cursor:pointer" onclick="show('recap')"><div class="play">🎬</div><div><b>CyborgRecapMM</b><span>ဖုန်းထဲ Recap လုပ်တဲ့ Android app</span></div><span class="tag">/recap</span></div>
       <div class="prow" style="cursor:pointer" onclick="show('mgmt')"><div class="play">🧰</div><div><b>Management Tools</b><span>HR · Clinic · School အပါ ၈ မျိုး (မကြာမီ)</span></div><span class="tag">/management</span></div>
-      <div class="prow"><div class="play">🪙</div><div><b>Credit Points</b><span>Pay as you go · 1 Point = ၁ ကျပ်</span></div><span class="tag">PAYG</span></div>
+      <div class="prow" style="display:none"><div class="play">🪙</div><div><b>Credit Points</b><span>Pay as you go · 1 Point = ၁ ကျပ်</span></div><span class="tag">PAYG</span></div>
     </div>
   </div>
 
@@ -356,13 +356,13 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <div class="prodcard" onclick="show('pos')">
         <div class="purl">cyborgstudiomm.com/pos</div>
         <h3>🛒 CyborgMM POS</h3>
-        <p>ဆိုင်အမျိုးအစား ၂၄ မျိုးအတွက် offline POS — stock, အကြွေးစာအုပ်, လက်ကား/လက်လီ, receipt ပုံနှိပ်, report အားလုံး internet မလိုဘူး။</p>
+        <p>ဆိုင်အမျိုးအစား ၂၅ မျိုးအတွက် offline POS — stock, အကြွေးစာအုပ်, လက်ကား/လက်လီ, receipt ပုံနှိပ်, report အားလုံး internet မလိုဘူး။</p>
         <span class="open">POS ကဏ္ဍ ဖွင့်မယ် →</span>
       </div>
       <div class="prodcard" onclick="show('studio')">
         <div class="purl">cyborgstudiomm.com/studio</div>
         <h3>🎙️ AI Voice Studio</h3>
-        <p>Faceless creator တွေအတွက် web စတူဒီယို — အသံထုတ်, Voice Clone, Auto Recap, SRT ဘာသာပြန်။ Credit Points နဲ့ သုံးသလောက်ပဲ ပေးရမယ်။</p>
+        <p>Faceless creator တွေအတွက် web စတူဒီယို — အသံထုတ်, Voice Clone, Auto Recap, SRT ဘာသာပြန်။ အခု အခမဲ့ သုံးလို့ရတယ်။</p>
         <span class="open">Studio ဖွင့်မယ် →</span>
       </div>
       <div class="prodcard" onclick="show('recap')">
@@ -460,9 +460,9 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div>
       <div class="card">
         <h3><span class="n">1</span><span data-en="Type your text">စာသား ရိုက်ပါ</span></h3>
-        <div class="hint" data-en="Myanmar or English — up to 5,000 characters per generate.">မြန်မာ / English ရတယ် — တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ။</div>
+        <div class="hint" data-en="Myanmar or English — up to 1,000 characters per generate (Free and Gemini voices).">မြန်မာ / English ရတယ် — တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ (Free အသံရော Gemini အသံရော)။</div>
         <textarea id="txt" oninput="updCount()" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — တစ်ခါတုန်းက ရွာလေးတစ်ရွာမှာ...">တစ်ခါတုန်းက တောင်ပေါ်ရွာလေးတစ်ရွာမှာ မောင်နှမ နှစ်ယောက် နေထိုင်ကြတယ်။ တစ်နေ့မှာတော့ သူတို့ဘဝကို ပြောင်းလဲသွားစေမယ့် ဖြစ်ရပ်တစ်ခု ဖြစ်ပွားခဲ့ပါတယ်။</textarea>
-        <div class="meta"><span id="ccount">0 / 5,000</span><span id="dur" data-en="Est. ~0 sec">ခန့်မှန်း ~၀ စက္ကန့်</span></div>
+        <div class="meta"><span id="ccount">0 / 1,000</span><span id="dur" data-en="Est. ~0 sec">ခန့်မှန်း ~၀ စက္ကန့်</span></div>
       </div>
       <div class="card">
         <h3><span class="n">2</span><span data-en="Choose a voice">အသံ ရွေးပါ</span></h3>
@@ -560,7 +560,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div>
       <span class="badge">🛒 cyborgstudiomm.com/pos</span>
       <h1>CyborgMM <span class="grad">POS</span></h1>
-      <p>မြန်မာဆိုင်တွေအတွက် offline-first POS — internet ပြတ်လည်း အရောင်း မရပ်ဘူး။ မြန်မာ/English နှစ်ဘာသာ၊ ဆိုင်အမျိုးအစား ၂၄ မျိုး။</p>
+      <p>မြန်မာဆိုင်တွေအတွက် offline-first POS — internet ပြတ်လည်း အရောင်း မရပ်ဘူး။ မြန်မာ/English နှစ်ဘာသာ၊ ဆိုင်အမျိုးအစား ၂၅ မျိုး။</p>
       <div class="hbtns">
         <button class="btn btn-cyan" onclick="alert('နမူနာ mockup ပါ — တကယ့် version မှာ APK download ဒီမှာ ရမယ်')">📥 APK Download ဆွဲမယ်</button>
         <button class="btn btn-ghost" onclick="toggleBot()">မေးစရာ မေးမယ်</button>
@@ -581,17 +581,17 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   </div>
 
   <section class="blk">
-    <div class="sec-h">ဆိုင်အမျိုးအစား ကဏ္ဍများ — ၂၄ မျိုး</div>
+    <div class="sec-h">ဆိုင်အမျိုးအစား ကဏ္ဍများ — ၂၅ မျိုး</div>
     <div class="sec-s">✓ စိမ်းနေတာတွေက အသင့်ရပြီးသား ကဏ္ဍတွေ၊ ကျန်တာတွေ အစီအစဉ်အတိုင်း လာမယ်။ ဆိုင်ရှင်ကိုယ်တိုင် ပစ္စည်းအမျိုးအစား အကန့်အသတ်မရှိ ထပ်ထည့်လို့ရတယ်။</div>
     <div class="prodgrid">
       <div class="prodcard"><h3>🍜 အစားအသောက်</h3><div class="catchips">
         <span class="done">Food & Restaurant ✓</span><span class="done">Tea & Traditional Snacks ✓</span><span class="done">Beverage · Café ✓</span><span class="done">KTV Bar ✓</span><span class="done">Bar & Club ✓</span><span class="done">Hotel and Bar ✓</span>
       </div></div>
       <div class="prodcard"><h3>🛍️ လက်လီ ဆိုင်များ</h3><div class="catchips">
-        <span class="done">Grocery ✓</span><span>Online Shop</span><span>Pharmacy</span><span>Toy Shop</span><span>Gold & Jewelry</span><span>Travel & Tours</span><span>+ အခြား</span>
+        <span class="done">Grocery ✓</span><span class="done">Online Shop ✓</span><span class="done">Liquor Shop ✓</span><span>Pharmacy</span><span>Toy Shop</span><span>Gold & Jewelry</span><span>Travel & Tours</span><span>+ အခြား</span>
       </div></div>
       <div class="prodcard"><h3>🧰 ဝန်ဆောင်မှု & အခြား</h3><div class="catchips">
-        <span>Beauty + Salon/Spa</span><span>Pawnshop · အပေါင်ဆိုင်</span><span>Car Workshop/Garage</span><span>+ ကဏ္ဍ စုစုပေါင်း ၂၄ မျိုး</span>
+        <span>Beauty + Salon/Spa</span><span>Pawnshop · အပေါင်ဆိုင်</span><span>Car Workshop/Garage</span><span>+ ကဏ္ဍ စုစုပေါင်း ၂၅ မျိုး</span>
       </div></div>
     </div>
   </section>
@@ -1091,12 +1091,12 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <audio id="vcBefore" controls style="width:100%;margin-top:10px;display:none"></audio>
       <div class="glabel" style="margin-top:14px">Preset</div>
       <div class="chips" data-group="vpreset">
-        <button class="chip sel" data-dir="orig" onclick="vcPreset()">မူရင်း (1x)</button>
-        <button class="chip" data-dir="0.75" onclick="vcPreset()">0.75x နှေး</button>
-        <button class="chip" data-dir="1.25" onclick="vcPreset()">1.25x</button>
-        <button class="chip" data-dir="1.5" onclick="vcPreset()">1.5x မြန်</button>
-        <button class="chip" data-dir="smart" onclick="vcPreset()">⚡ Smart Audio</button>
-        <button class="chip" data-dir="manual" onclick="vcPreset()">🎛️ Manual</button>
+        <button class="chip sel" data-dir="orig" onclick="setTimeout(vcPreset,0)">မူရင်း (1x)</button>
+        <button class="chip" data-dir="0.75" onclick="setTimeout(vcPreset,0)">0.75x နှေး</button>
+        <button class="chip" data-dir="1.25" onclick="setTimeout(vcPreset,0)">1.25x</button>
+        <button class="chip" data-dir="1.5" onclick="setTimeout(vcPreset,0)">1.5x မြန်</button>
+        <button class="chip" data-dir="smart" onclick="setTimeout(vcPreset,0)">⚡ Smart Audio</button>
+        <button class="chip" data-dir="manual" onclick="setTimeout(vcPreset,0)">🎛️ Manual</button>
       </div>
       <div class="hint" style="margin-top:8px">⚡ Smart Audio ဆိုတာ standard smart-audio processing ပုံစံပါ — speed 1.06x + pitch +1 semitone နဲ့ အသံကို ပိုကြည်လင် သွက်လက်အောင် လုပ်ပေးတယ်။</div>
       <div id="vcManual" style="display:none;margin-top:12px">
@@ -1138,10 +1138,10 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       </div>
       <div class="glabel" style="margin-top:14px">Background — Auto Mix (အဆင်သင့် နောက်ခံများ)</div>
       <div class="chips" data-group="dhgrad">
-        <button class="chip sel" data-dir="morning" onclick="dhDraw()">🌅 ရွှေရောင် နံနက်</button>
-        <button class="chip" data-dir="evening" onclick="dhDraw()">🌇 အညို ညနေ</button>
-        <button class="chip" data-dir="nature" onclick="dhDraw()">🌿 စိမ်း သဘာဝ</button>
-        <button class="chip" data-dir="night" onclick="dhDraw()">🌌 မှောင်ပြာ ည</button>
+        <button class="chip sel" data-dir="morning" onclick="setTimeout(dhDraw,0)">🌅 ရွှေရောင် နံနက်</button>
+        <button class="chip" data-dir="evening" onclick="setTimeout(dhDraw,0)">🌇 အညို ညနေ</button>
+        <button class="chip" data-dir="nature" onclick="setTimeout(dhDraw,0)">🌿 စိမ်း သဘာဝ</button>
+        <button class="chip" data-dir="night" onclick="setTimeout(dhDraw,0)">🌌 မှောင်ပြာ ည</button>
       </div>
       <div class="glabel" style="margin-top:16px">ဆရာတော် ပုံ (Monk Photo — ရွေးချယ်နိုင်)</div>
       <div class="drop" id="dhMonkDrop" onclick="document.getElementById('dhMonkFile').click()">
@@ -1152,8 +1152,8 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <div>
           <div class="glabel">Monk နေရာ</div>
           <div class="chips" data-group="dhmonkpos">
-            <button class="chip sel" data-dir="left" onclick="dhDraw()">ဘယ်</button>
-            <button class="chip" data-dir="right" onclick="dhDraw()">ညာ</button>
+            <button class="chip sel" data-dir="left" onclick="setTimeout(dhDraw,0)">ဘယ်</button>
+            <button class="chip" data-dir="right" onclick="setTimeout(dhDraw,0)">ညာ</button>
           </div>
         </div>
         <div style="flex:1;min-width:160px">
@@ -1169,8 +1169,8 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <input type="range" id="dhSize" min="60" max="150" value="96" style="width:100%" oninput="dhDraw()">
       <div class="glabel" style="margin-top:10px">စာသား အရောင်</div>
       <div class="chips" data-group="dhcolor">
-        <button class="chip sel" data-dir="#FFD740" onclick="dhDraw()">ရွှေ</button>
-        <button class="chip" data-dir="#FFFFFF" onclick="dhDraw()">အဖြူ</button>
+        <button class="chip sel" data-dir="#FFD740" onclick="setTimeout(dhDraw,0)">ရွှေ</button>
+        <button class="chip" data-dir="#FFFFFF" onclick="setTimeout(dhDraw,0)">အဖြူ</button>
       </div>
       <div class="glabel" style="margin-top:16px">Channel Logo (ရွေးချယ်နိုင်)</div>
       <div class="drop" id="dhLogoDrop" onclick="document.getElementById('dhLogoFile').click()">
@@ -1181,10 +1181,10 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <div>
           <div class="glabel">Logo နေရာ</div>
           <div class="chips" data-group="dhcorner">
-            <button class="chip" data-dir="tl" onclick="dhDraw()">ဘယ်အပေါ်</button>
-            <button class="chip" data-dir="tr" onclick="dhDraw()">ညာအပေါ်</button>
-            <button class="chip" data-dir="bl" onclick="dhDraw()">ဘယ်အောက်</button>
-            <button class="chip sel" data-dir="br" onclick="dhDraw()">ညာအောက်</button>
+            <button class="chip" data-dir="tl" onclick="setTimeout(dhDraw,0)">ဘယ်အပေါ်</button>
+            <button class="chip" data-dir="tr" onclick="setTimeout(dhDraw,0)">ညာအပေါ်</button>
+            <button class="chip" data-dir="bl" onclick="setTimeout(dhDraw,0)">ဘယ်အောက်</button>
+            <button class="chip sel" data-dir="br" onclick="setTimeout(dhDraw,0)">ညာအောက်</button>
           </div>
         </div>
         <div style="flex:1;min-width:160px">
@@ -1264,9 +1264,9 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <textarea id="rtTxt" rows="7" placeholder="စာသား ကူးထည့်ပါ" oninput="rtCalc()"></textarea>
       <div class="glabel" style="margin-top:12px">ဖတ် မြန်နှုန်း</div>
       <div class="chips" data-group="rtspeed">
-        <button class="chip" data-dir="600" onclick="rtCalc()">နှေး (600/မိနစ်)</button>
-        <button class="chip sel" data-dir="780" onclick="rtCalc()">ပုံမှန် (780/မိနစ်)</button>
-        <button class="chip" data-dir="950" onclick="rtCalc()">မြန် (950/မိနစ်)</button>
+        <button class="chip" data-dir="600" onclick="setTimeout(rtCalc,0)">နှေး (600/မိနစ်)</button>
+        <button class="chip sel" data-dir="780" onclick="setTimeout(rtCalc,0)">ပုံမှန် (780/မိနစ်)</button>
+        <button class="chip" data-dir="950" onclick="setTimeout(rtCalc,0)">မြန် (950/မိနစ်)</button>
       </div>
       <div id="rtOut" class="hint" style="margin-top:12px;font-size:15px"></div>
     </div>
@@ -1291,11 +1291,11 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       </div>
       <div class="glabel" style="margin-top:14px">နေရာ</div>
       <div class="chips" data-group="wmpos">
-        <button class="chip" data-dir="tl" onclick="wmDraw()">ဘယ်အပေါ်</button>
-        <button class="chip" data-dir="tr" onclick="wmDraw()">ညာအပေါ်</button>
-        <button class="chip" data-dir="bl" onclick="wmDraw()">ဘယ်အောက်</button>
-        <button class="chip sel" data-dir="br" onclick="wmDraw()">ညာအောက်</button>
-        <button class="chip" data-dir="c" onclick="wmDraw()">အလယ်</button>
+        <button class="chip" data-dir="tl" onclick="setTimeout(wmDraw,0)">ဘယ်အပေါ်</button>
+        <button class="chip" data-dir="tr" onclick="setTimeout(wmDraw,0)">ညာအပေါ်</button>
+        <button class="chip" data-dir="bl" onclick="setTimeout(wmDraw,0)">ဘယ်အောက်</button>
+        <button class="chip sel" data-dir="br" onclick="setTimeout(wmDraw,0)">ညာအောက်</button>
+        <button class="chip" data-dir="c" onclick="setTimeout(wmDraw,0)">အလယ်</button>
       </div>
       <div class="glabel" style="margin-top:12px">Logo အရွယ်အစား (%)</div>
       <input type="range" id="wmSize" min="5" max="50" value="20" style="width:100%" oninput="wmDraw()">
@@ -1590,7 +1590,7 @@ agDraw(0);
   <section class="blk">
     <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
     <div class="sec-h" style="margin-top:14px">🔢 စာလုံး ရေတွက်မယ်</div>
-    <div class="sec-s">စာရိုက်တာနဲ့ စာလုံး / စကားလုံး / စာကြောင်း ချက်ချင်း ရေတွက်ပေးတယ် — TTS limit (1000 / 5,000) ကျော်လား စစ်ဖို့ — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
+    <div class="sec-s">စာရိုက်တာနဲ့ စာလုံး / စကားလုံး / စာကြောင်း ချက်ချင်း ရေတွက်ပေးတယ် — TTS limit 1000 ကျော်လား စစ်ဖို့ — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
     <div class="card">
       <div class="glabel">စာသား</div>
       <textarea id="cntIn" rows="8" placeholder="စာသား ဒီမှာ ရိုက်ပါ / ကူးထည့်ပါ..." oninput="cntGo()"></textarea>
@@ -1647,7 +1647,7 @@ function cntGo(){
   const lines=v?v.split('\n').length:0;
   const wrap=document.getElementById('cntOut');
   wrap.innerHTML='<div class="chip sel">စာလုံး: '+chars.toLocaleString()+'</div><div class="chip sel">စကားလုံး: '+words.toLocaleString()+'</div><div class="chip sel">စာကြောင်း: '+lines+'</div>';
-  document.getElementById('cntNote').textContent=chars>5000?'⚠️ TTS limit 5,000 ကျော်နေပြီ — ခွဲပြီး ထုတ်ပါ။':chars>1000?'ℹ️ Edge TTS free 1000 limit ကျော်နေတယ် — Gemini TTS (ကိုယ့် key နဲ့) သုံးပါ။':'✓ Edge TTS free 1000 အတွင်း ရှိတယ်။';
+  document.getElementById('cntNote').textContent=chars>1000?'⚠️ TTS limit 1000 ကျော်နေပြီ — ခွဲပြီး ထုတ်ပါ။':'✓ TTS 1000 အတွင်း ရှိတယ်။';
 }
 let icImgObj=null,icFileName='';
 function icPick(input){const f=input.files&&input.files[0];if(!f)return;icFileName=f.name.replace(/\.[^.]+$/,'');const img=new Image();img.onload=function(){icImgObj=img;document.getElementById('icInfo').textContent='ပုံ ရပြီ ✓ — '+f.name+' ('+Math.round(f.size/1024)+' KB, '+img.width+'×'+img.height+')';document.getElementById('icBtn').disabled=false};img.src=URL.createObjectURL(f)}
@@ -1750,7 +1750,7 @@ function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classLis
 document.querySelectorAll('.chips').forEach(g=>{g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');updGen()})});
 function selText(group){const g=document.querySelector(`.chips[data-group="${group}"] .sel`);return g?g.textContent.replace('▶','').trim().split('·')[0].trim():''}
 function updGen(){const v=selText('voice'),s=selText('speed');if(v||s)document.getElementById('genVoice').textContent=`${v||'ကောင်း'} · ${s||'1.0x'}`}
-function updCount(){const t=document.getElementById('txt').value;document.getElementById('ccount').textContent=`${t.length.toLocaleString()} / 5,000`;const sec=Math.max(1,Math.round(t.length/13));document.getElementById('dur').textContent=`ခန့်မှန်း ~${sec} စက္ကန့်`}
+function updCount(){const t=document.getElementById('txt').value;document.getElementById('ccount').textContent=`${t.length.toLocaleString()} / 1,000`;const sec=Math.max(1,Math.round(t.length/13));document.getElementById('dur').textContent=`ခန့်မှန်း ~${sec} စက္ကန့်`}
 updCount();
 let playing=false;
 function playSample(el){playing=!playing;const old=el.textContent;el.textContent=playing?'❚❚':'▶';setTimeout(()=>{el.textContent=old==='▶'||old.includes('Listen')?'▶':old;playing=false},1600)}
