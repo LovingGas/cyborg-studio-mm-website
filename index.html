@@ -1586,7 +1586,7 @@ agDraw(0);
   <section class="blk">
     <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
     <div class="sec-h" style="margin-top:14px">🔢 စာလုံး ရေတွက်မယ်</div>
-    <div class="sec-s">စာရိုက်တာနဲ့ စာလုံး / စကားလုံး / စာကြောင်း ချက်ချင်း ရေတွက်ပေးတယ် — TTS limit (500 / 5,000) ကျော်လား စစ်ဖို့ — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
+    <div class="sec-s">စာရိုက်တာနဲ့ စာလုံး / စကားလုံး / စာကြောင်း ချက်ချင်း ရေတွက်ပေးတယ် — TTS limit (1000 / 5,000) ကျော်လား စစ်ဖို့ — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
     <div class="card">
       <div class="glabel">စာသား</div>
       <textarea id="cntIn" rows="8" placeholder="စာသား ဒီမှာ ရိုက်ပါ / ကူးထည့်ပါ..." oninput="cntGo()"></textarea>
@@ -1643,7 +1643,7 @@ function cntGo(){
   const lines=v?v.split('\n').length:0;
   const wrap=document.getElementById('cntOut');
   wrap.innerHTML='<div class="chip sel">စာလုံး: '+chars.toLocaleString()+'</div><div class="chip sel">စကားလုံး: '+words.toLocaleString()+'</div><div class="chip sel">စာကြောင်း: '+lines+'</div>';
-  document.getElementById('cntNote').textContent=chars>5000?'⚠️ TTS limit 5,000 ကျော်နေပြီ — ခွဲပြီး ထုတ်ပါ။':chars>500?'ℹ️ Edge TTS free 500 limit ကျော်နေတယ် — Gemini TTS (5,000 အထိ) သုံးပါ။':'✓ Edge TTS free 500 အတွင်း ရှိတယ်။';
+  document.getElementById('cntNote').textContent=chars>5000?'⚠️ TTS limit 5,000 ကျော်နေပြီ — ခွဲပြီး ထုတ်ပါ။':chars>1000?'ℹ️ Edge TTS free 1000 limit ကျော်နေတယ် — Gemini TTS (ကိုယ့် key နဲ့) သုံးပါ။':'✓ Edge TTS free 1000 အတွင်း ရှိတယ်။';
 }
 let icImgObj=null,icFileName='';
 function icPick(input){const f=input.files&&input.files[0];if(!f)return;icFileName=f.name.replace(/\.[^.]+$/,'');const img=new Image();img.onload=function(){icImgObj=img;document.getElementById('icInfo').textContent='ပုံ ရပြီ ✓ — '+f.name+' ('+Math.round(f.size/1024)+' KB, '+img.width+'×'+img.height+')';document.getElementById('icBtn').disabled=false};img.src=URL.createObjectURL(f)}
@@ -1866,7 +1866,7 @@ async function generate(){
     if(gb)gb.disabled=false;return;
   }
   // Free voices (Thiha / Nilar) via /web-tts — same pattern as eGen()
-  if([...text].length>500){ttsSetStatus('Free အသံ မို့ တစ်ခါထုတ် စာလုံး ၅၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+  if([...text].length>1000){ttsSetStatus('Free အသံ မို့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
   const vapi=ttsSel.name==='နီလာ'?'my-MM-NilarNeural':'my-MM-ThihaNeural';
   const stop=ttsProgress();if(gb)gb.disabled=true;
   try{
@@ -1971,7 +1971,7 @@ function fGrab(){const v=document.getElementById('fVid');if(!v.videoWidth)return
 function qGen(){const st=document.getElementById('qStatus');const txt=document.getElementById('qTxt').value.trim();if(!txt){st.textContent='Link (သို့) စာသား အရင် ထည့်ပါ။';return}if(typeof QRCode==='undefined'){st.textContent='QR library မရသေးပါ — internet ချိတ်ပြီး page ကို ပြန် refresh လုပ်ပြီး စမ်းပါ။';return}const box=document.getElementById('qBox');box.innerHTML='';box.style.display='inline-block';new QRCode(box,{text:txt,width:230,height:230,colorDark:'#0b1526',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});setTimeout(()=>{const cv=box.querySelector('canvas');if(cv){const dl=document.getElementById('qDl');dl.href=cv.toDataURL('image/png');dl.style.display='inline-flex';st.textContent='ရပြီ ✓'}},120)}
 // --- Edge TTS (Thiha / Nilar) — browser WebSocket to Microsoft Edge readaloud ---
 function eUuid(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return (c==='x'?r:(r&0x3|0x8)).toString(16)})}
-async function eGen(){const st=document.getElementById('eStatus');const btn=document.getElementById('eBtn');const text=document.getElementById('eTxt').value.trim();if(!text){st.textContent='စာသား အရင် ရိုက်ပါ။';return}if([...text].length>500){st.textContent='Free tool မို့ တစ်ခါထုတ် စာလုံး ၅၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။';return}const voice=dirOf('evoice')||'my-MM-ThihaNeural';btn.disabled=true;st.textContent='အသံ ထုတ်နေတယ်...';try{const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),60000);const res=await fetch('https://cyborg-edge-tts.lovinggas.workers.dev/web-tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:text,voice:voice}),signal:ctl.signal});clearTimeout(timer);if(!res.ok){let msg='';try{const j=await res.json();msg=j.detail||''}catch(_){}throw new Error(msg||('HTTP '+res.status))}const blob=await res.blob();const url=URL.createObjectURL(blob);const au=document.getElementById('eOut');au.src=url;au.style.display='block';const dl=document.getElementById('eDl');dl.href=url;dl.download=(voice.indexOf('Nilar')>-1?'nilar':'thiha')+'_edge_tts.mp3';dl.style.display='inline-flex';st.textContent='ရပြီ ✓ MP3 · '+fmtBytes(blob.size)}catch(e){st.textContent='အသံ ထုတ်လို့ မရပါ — server ခဏ အလုပ်များနေနိုင်တယ်၊ ခဏနေမှ ပြန်စမ်းကြည့်ပါ။'}btn.disabled=false}
+async function eGen(){const st=document.getElementById('eStatus');const btn=document.getElementById('eBtn');const text=document.getElementById('eTxt').value.trim();if(!text){st.textContent='စာသား အရင် ရိုက်ပါ။';return}if([...text].length>1000){st.textContent='Free tool မို့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။';return}const voice=dirOf('evoice')||'my-MM-ThihaNeural';btn.disabled=true;st.textContent='အသံ ထုတ်နေတယ်...';try{const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),60000);const res=await fetch('https://cyborg-edge-tts.lovinggas.workers.dev/web-tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:text,voice:voice}),signal:ctl.signal});clearTimeout(timer);if(!res.ok){let msg='';try{const j=await res.json();msg=j.detail||''}catch(_){}throw new Error(msg||('HTTP '+res.status))}const blob=await res.blob();const url=URL.createObjectURL(blob);const au=document.getElementById('eOut');au.src=url;au.style.display='block';const dl=document.getElementById('eDl');dl.href=url;dl.download=(voice.indexOf('Nilar')>-1?'nilar':'thiha')+'_edge_tts.mp3';dl.style.display='inline-flex';st.textContent='ရပြီ ✓ MP3 · '+fmtBytes(blob.size)}catch(e){st.textContent='အသံ ထုတ်လို့ မရပါ — server ခဏ အလုပ်များနေနိုင်တယ်၊ ခဏနေမှ ပြန်စမ်းကြည့်ပါ။'}btn.disabled=false}
 // --- Whisper STT (Transformers.js, in-browser) ---
 let wPipe=null,wModel='',wFileObj=null;
 function wPick(input){const f=input.files&&input.files[0];if(!f)return;wFileObj=f;document.getElementById('wInfo').textContent=`${f.name} · ${fmtBytes(f.size)}`;document.getElementById('wBtn').disabled=false;document.getElementById('wDl').style.display='none';document.getElementById('wStatus').textContent=''}
