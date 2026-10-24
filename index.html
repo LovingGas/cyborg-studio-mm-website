@@ -2287,6 +2287,9 @@ function atSendTts(){const v=document.getElementById('atOut').value;if(!v.trim()
 // EN/MM toggle (key strings)
 let en=false;const orig=new Map();
 function toggleLang(){en=!en;document.getElementById('langBtn').textContent=en?'MM':'EN';document.querySelectorAll('[data-en]').forEach(el=>{if(!orig.has(el))orig.set(el,el.textContent);el.textContent=en?el.dataset.en:orig.get(el)})}
+
+// 404-tab redirect: a /pos-type link lands on its tab instead of Home
+try{var _t=sessionStorage.getItem('csmm-tab');if(_t){sessionStorage.removeItem('csmm-tab');if(document.getElementById('scr-'+_t)){show(_t);document.querySelectorAll('nav button').forEach(function(b){var o=b.getAttribute('onclick')||'';if(o.indexOf("'"+_t+"'")>=0){b.classList.add('on')}else{b.classList.remove('on')}})}} }catch(e){}
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e5f400ef3da2405684e34a543114307e"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
