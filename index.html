@@ -1334,7 +1334,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   <section class="blk">
     <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
     <div class="sec-h" style="margin-top:14px">🔊 SFX Soundboard (အသံ Effect များ)</div>
-    <div class="sec-s">အသံ Effect ၁၂ မျိုး — အားလုံး Web Audio နဲ့ browser ထဲမှာ ဖန်တီးထားတာ (အသံဖိုင် မပါ၊ copyright pack မဟုတ်)။ Pad နှိပ်ရင် ဖွင့်၊ ⬇ နှိပ်ရင် download — <b>အခမဲ့</b>။</div>
+    <div class="sec-s">အသံ Effect ၅၄ မျိုး — UI / Comedy / Horror / Ambient Loop / Foley — အားလုံး Web Audio နဲ့ browser ထဲမှာ ဖန်တီးထားတာ (အသံဖိုင် မပါ၊ Kenny CC0 ပုံစံ လိုအပ်တဲ့ အသံတွေ)။ Pad နှိပ်ရင် ဖွင့်၊ ⬇ နှိပ်ရင် download — Ambient Loop တွေက ထပ်နှိပ်ရင် ရပ်မယ် — <b>အခမဲ့</b>။</div>
     <div class="card">
       <div class="glabel">အသံ အတိုးအကျယ် (Volume): <span id="sfxVolVal">80%</span></div>
       <input type="range" id="sfxVol" min="10" max="100" value="80" style="width:100%" oninput="document.getElementById('sfxVolVal').textContent=this.value+'%'">
@@ -1343,19 +1343,71 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <button class="chip sel" data-dir="wav">WAV</button>
         <button class="chip" data-dir="mp3">MP3</button>
       </div>
+      <div class="glabel" style="margin-top:12px">အမျိုးအစား</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost" onclick="sfxFilter('all')">အားလုံး</button>
+        <button class="btn btn-ghost" onclick="sfxFilter('base')">အခြေခံ</button>
+        <button class="btn btn-ghost" onclick="sfxFilter('ui')">UI / App</button>
+        <button class="btn btn-ghost" onclick="sfxFilter('comedy')">Comedy</button>
+        <button class="btn btn-ghost" onclick="sfxFilter('horror')">Horror</button>
+        <button class="btn btn-ghost" onclick="sfxFilter('ambient')">Ambient Loop</button>
+        <button class="btn btn-ghost" onclick="sfxFilter('foley')">Foley</button>
+      </div>
       <div class="sfxgrid">
-        <div class="sfxpad" onclick="sfxPlay('bell')">🔔<span>ကြေးစည် · Bell</span><button class="sfxdl" title="Download" onclick="sfxDl('bell',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('gong')">🛎️<span>Gong</span><button class="sfxdl" title="Download" onclick="sfxDl('gong',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('ding')">✨<span>Ding · အသိပေး</span><button class="sfxdl" title="Download" onclick="sfxDl('ding',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('success')">🎉<span>Success Chime</span><button class="sfxdl" title="Download" onclick="sfxDl('success',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('whoosh')">💨<span>Whoosh</span><button class="sfxdl" title="Download" onclick="sfxDl('whoosh',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('sweepup')">📈<span>Sweep Up</span><button class="sfxdl" title="Download" onclick="sfxDl('sweepup',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('sweepdown')">📉<span>Sweep Down</span><button class="sfxdl" title="Download" onclick="sfxDl('sweepdown',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('pop')">🫧<span>Pop</span><button class="sfxdl" title="Download" onclick="sfxDl('pop',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('coin')">🪙<span>Coin</span><button class="sfxdl" title="Download" onclick="sfxDl('coin',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('drum')">🥁<span>Drum Hit</span><button class="sfxdl" title="Download" onclick="sfxDl('drum',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('error')">🚫<span>Error Buzz</span><button class="sfxdl" title="Download" onclick="sfxDl('error',event)">⬇</button></div>
-        <div class="sfxpad" onclick="sfxPlay('laser')">🔫<span>Laser</span><button class="sfxdl" title="Download" onclick="sfxDl('laser',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('bell')">🔔<span>ကြေးစည် · Bell</span><button class="sfxdl" title="Download" onclick="sfxDl('bell',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('gong')">🛎️<span>Gong</span><button class="sfxdl" title="Download" onclick="sfxDl('gong',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('ding')">✨<span>Ding · အသိပေး</span><button class="sfxdl" title="Download" onclick="sfxDl('ding',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('success')">🎉<span>Success Chime</span><button class="sfxdl" title="Download" onclick="sfxDl('success',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('whoosh')">💨<span>Whoosh</span><button class="sfxdl" title="Download" onclick="sfxDl('whoosh',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('sweepup')">📈<span>Sweep Up</span><button class="sfxdl" title="Download" onclick="sfxDl('sweepup',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('sweepdown')">📉<span>Sweep Down</span><button class="sfxdl" title="Download" onclick="sfxDl('sweepdown',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('pop')">🫧<span>Pop</span><button class="sfxdl" title="Download" onclick="sfxDl('pop',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('coin')">🪙<span>Coin</span><button class="sfxdl" title="Download" onclick="sfxDl('coin',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('drum')">🥁<span>Drum Hit</span><button class="sfxdl" title="Download" onclick="sfxDl('drum',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('error')">🚫<span>Error Buzz</span><button class="sfxdl" title="Download" onclick="sfxDl('error',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="base" onclick="sfxPlay('laser')">🔫<span>Laser</span><button class="sfxdl" title="Download" onclick="sfxDl('laser',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_click')">🖱️<span>Click</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_click',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_tap')">👆<span>Tap</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_tap',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_toggle')">🔀<span>Toggle</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_toggle',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_type')">⌨️<span>Keyboard Type</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_type',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_swipe')">↔️<span>Swipe</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_swipe',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_refresh')">🔄<span>Refresh</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_refresh',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_download')">⬇️<span>Download Done</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_download',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_unlock')">🔓<span>Unlock</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_unlock',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_lock')">🔒<span>Lock</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_lock',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ui" onclick="sfxPlay('ui_trash')">🗑️<span>Trash / Delete</span><button class="sfxdl" title="Download" onclick="sfxDl('ui_trash',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('boing')">🌀<span>Boing</span><button class="sfxdl" title="Download" onclick="sfxDl('boing',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('whistle')">🎶<span>Slide Whistle</span><button class="sfxdl" title="Download" onclick="sfxDl('whistle',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('splat')">💦<span>Splat</span><button class="sfxdl" title="Download" onclick="sfxDl('splat',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('cymbal')">🥁<span>Crash Cymbal</span><button class="sfxdl" title="Download" onclick="sfxDl('cymbal',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('scratch')">💿<span>Record Scratch</span><button class="sfxdl" title="Download" onclick="sfxDl('scratch',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('trombone')">🎺<span>Sad Trombone</span><button class="sfxdl" title="Download" onclick="sfxDl('trombone',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('zip')">⚡<span>Zip</span><button class="sfxdl" title="Download" onclick="sfxDl('zip',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('bounce')">🏀<span>Bounce</span><button class="sfxdl" title="Download" onclick="sfxDl('bounce',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('gulp')">🥤<span>Gulp</span><button class="sfxdl" title="Download" onclick="sfxDl('gulp',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="comedy" onclick="sfxPlay('fanfare')">🎺<span>Fanfare</span><button class="sfxdl" title="Download" onclick="sfxDl('fanfare',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="horror" onclick="sfxPlay('creak')">🚪<span>Door Creak</span><button class="sfxdl" title="Download" onclick="sfxDl('creak',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="horror" onclick="sfxPlay('slam')">🚪<span>Door Slam</span><button class="sfxdl" title="Download" onclick="sfxDl('slam',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="horror" onclick="sfxPlay('heartbeat')">❤️<span>Heartbeat</span><button class="sfxdl" title="Download" onclick="sfxDl('heartbeat',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="horror" onclick="sfxPlay('thunder')">⛈️<span>Thunder</span><button class="sfxdl" title="Download" onclick="sfxDl('thunder',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="horror" onclick="sfxPlay('wind')">🌬️<span>Wind Howl</span><button class="sfxdl" title="Download" onclick="sfxDl('wind',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="horror" onclick="sfxPlay('footwood')">👣<span>Footsteps Wood</span><button class="sfxdl" title="Download" onclick="sfxDl('footwood',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="horror" onclick="sfxPlay('whisper')">👻<span>Whisper</span><button class="sfxdl" title="Download" onclick="sfxDl('whisper',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="horror" onclick="sfxPlay('drone')">🌑<span>Ghost Drone</span><button class="sfxdl" title="Download" onclick="sfxDl('drone',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ambient" onclick="sfxPlay('rain')">🌧️<span>Rain Loop 🔁</span><button class="sfxdl" title="Download" onclick="sfxDl('rain',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ambient" onclick="sfxPlay('vinyl')">💿<span>Vinyl Crackle 🔁</span><button class="sfxdl" title="Download" onclick="sfxDl('vinyl',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ambient" onclick="sfxPlay('birds')">🐦<span>Birds 🔁</span><button class="sfxdl" title="Download" onclick="sfxDl('birds',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ambient" onclick="sfxPlay('waves')">🌊<span>Waves 🔁</span><button class="sfxdl" title="Download" onclick="sfxDl('waves',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ambient" onclick="sfxPlay('fire')">🔥<span>Fire Crackle 🔁</span><button class="sfxdl" title="Download" onclick="sfxDl('fire',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="ambient" onclick="sfxPlay('clock')">🕰️<span>Clock Tick 🔁</span><button class="sfxdl" title="Download" onclick="sfxDl('clock',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="foley" onclick="sfxPlay('footstone')">👣<span>Footsteps Stone</span><button class="sfxdl" title="Download" onclick="sfxDl('footstone',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="foley" onclick="sfxPlay('footsand')">👣<span>Footsteps Sand</span><button class="sfxdl" title="Download" onclick="sfxDl('footsand',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="foley" onclick="sfxPlay('foottile')">👣<span>Footsteps Tile</span><button class="sfxdl" title="Download" onclick="sfxDl('foottile',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="foley" onclick="sfxPlay('page')">📖<span>Page Turn</span><button class="sfxdl" title="Download" onclick="sfxDl('page',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="foley" onclick="sfxPlay('shutter')">📷<span>Camera Shutter</span><button class="sfxdl" title="Download" onclick="sfxDl('shutter',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="foley" onclick="sfxPlay('applause')">👏<span>Applause</span><button class="sfxdl" title="Download" onclick="sfxDl('applause',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="foley" onclick="sfxPlay('glass')">🥂<span>Glass Break</span><button class="sfxdl" title="Download" onclick="sfxDl('glass',event)">⬇</button></div>
+        <div class="sfxpad" data-cat="foley" onclick="sfxPlay('phone')">📞<span>Phone Ring</span><button class="sfxdl" title="Download" onclick="sfxDl('phone',event)">⬇</button></div>
       </div>
       <div id="sfxStatus" class="hint" style="margin-top:12px">Pad တစ်ခု နှိပ်လိုက်ရင် အသံ ထွက်မယ် — ပထမဆုံး နှိပ်မှုမှာ browser က အသံ ခွင့်ပြုချက် လိုနိုင်တယ်။</div>
     </div>
@@ -1506,6 +1558,107 @@ document.addEventListener('click',function(e){const b=e.target.closest&&e.target
 agDraw(0);
 </script>
 
+<!-- ============ 📝 SRT → စာသား သပ်သပ် ============ -->
+<div class="screen" id="scr-srttext">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">📝 SRT → စာသား သပ်သပ်</div>
+    <div class="sec-s">SRT / VTT ဖိုင်ကနေ အချိန် + စာကြောင်းနံပါတ် ဖြုတ်ပြီး စာသားချည်း ထုတ်ပေးတယ် — TTS / Recap script အဖြစ် ပြန်သုံးဖို့ — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" onclick="document.getElementById('stxFile').click()">
+        <b>.srt / .vtt ဖိုင် ရွေးရန် နှိပ်ပါ</b><br>စာသား တိုက်ရိုက် ကူးထည့်လို့လည်း ရတယ်
+        <input type="file" id="stxFile" accept=".srt,.vtt,text/plain" hidden onchange="stxPick(this)">
+      </div>
+      <div class="glabel" style="margin-top:14px">SRT စာသား</div>
+      <textarea id="stxIn" rows="8" placeholder="SRT စာသား ဒီမှာ ကူးထည့်ပါ..." oninput="stxGo()"></textarea>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center">
+        <button class="genbtn" onclick="stxGo()">စာသားချည်း ထုတ်မယ် 📝</button>
+        <button class="btn btn-ghost" onclick="stxCopy()">📋 Copy ကူးမယ်</button>
+        <button class="dlbtn" onclick="stxDl()">⬇ .txt Download</button>
+      </div>
+      <div class="glabel" style="margin-top:16px">ထွက်လာတဲ့ စာသား</div>
+      <textarea id="stxOut" rows="8" placeholder="စာသားချည်း ဒီမှာ ထွက်လာပါမယ်"></textarea>
+      <div id="stxStatus" class="hint" style="margin-top:8px"></div>
+    </div>
+  </section>
+</div>
+<!-- ============ 🔢 စာလုံး ရေတွက်မယ် ============ -->
+<div class="screen" id="scr-counter">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🔢 စာလုံး ရေတွက်မယ်</div>
+    <div class="sec-s">စာရိုက်တာနဲ့ စာလုံး / စကားလုံး / စာကြောင်း ချက်ချင်း ရေတွက်ပေးတယ် — TTS limit (500 / 5,000) ကျော်လား စစ်ဖို့ — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="glabel">စာသား</div>
+      <textarea id="cntIn" rows="8" placeholder="စာသား ဒီမှာ ရိုက်ပါ / ကူးထည့်ပါ..." oninput="cntGo()"></textarea>
+      <div id="cntOut" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"></div>
+      <div id="cntNote" class="hint" style="margin-top:10px"></div>
+    </div>
+  </section>
+</div>
+<!-- ============ 🗜️ ပုံ ဖိုင် သေးအောင် လျှော့မယ် ============ -->
+<div class="screen" id="scr-imgcompress">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+    <div class="sec-h" style="margin-top:14px">🗜️ ပုံ ဖိုင် သေးအောင် လျှော့မယ်</div>
+    <div class="sec-s">JPG quality ချိန်ပြီး ပုံဖိုင် MB လျှော့ပေးတယ် — ပုံအရွယ် မပြောင်းဘူး, upload မြန်အောင် — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
+    <div class="card">
+      <div class="drop" onclick="document.getElementById('icFile').click()">
+        <b>ပုံ ရွေးရန် နှိပ်ပါ</b><br>JPG / PNG
+        <input type="file" id="icFile" accept="image/*" hidden onchange="icPick(this)">
+      </div>
+      <div id="icInfo" class="hint" style="margin-top:8px"></div>
+      <div class="glabel" style="margin-top:14px">Quality: <span id="icQVal">80%</span></div>
+      <input type="range" id="icQ" min="30" max="95" value="80" style="width:100%" oninput="document.getElementById('icQVal').textContent=this.value+'%'">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center">
+        <button class="genbtn" id="icBtn" onclick="icGo()" disabled>သေးအောင် လျှော့မယ် 🗜️</button>
+        <a class="dlbtn" id="icDl" style="display:none" download>⬇ Download ဆွဲမယ်</a>
+      </div>
+      <div id="icStatus" class="hint" style="margin-top:10px"></div>
+    </div>
+  </section>
+</div>
+<script>
+// --- SRT to Text / Counter / Image Compressor (client-side only) ---
+function stxPick(input){const f=input.files&&input.files[0];if(!f)return;f.text().then(t=>{document.getElementById('stxIn').value=t;stxGo()})}
+function stxGo(){
+  const v=document.getElementById('stxIn').value;if(!v.trim()){document.getElementById('stxOut').value='';return}
+  const lines=v.replace(/\r\n?/g,'\n').split('\n');const out=[];
+  for(const ln of lines){
+    const t=ln.trim();
+    if(!t)continue;
+    if(/^\d+$/.test(t))continue;
+    if(/-->/.test(t))continue;
+    if(/^WEBVTT/i.test(t))continue;
+    out.push(t);
+  }
+  document.getElementById('stxOut').value=out.join(' ');
+  document.getElementById('stxStatus').textContent='စာကြောင်း '+out.length+' ကြောင်း ထုတ်ပြီး ✓';
+}
+function stxCopy(){const o=document.getElementById('stxOut');o.select();document.execCommand('copy')}
+function stxDl(){const o=document.getElementById('stxOut').value;if(!o.trim())return;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([o],{type:'text/plain'}));a.download='subtitle-text.txt';a.click()}
+function cntGo(){
+  const v=document.getElementById('cntIn').value;
+  const chars=[...v].length;
+  const words=v.trim()?v.trim().split(/\s+/).length:0;
+  const lines=v?v.split('\n').length:0;
+  const wrap=document.getElementById('cntOut');
+  wrap.innerHTML='<div class="chip sel">စာလုံး: '+chars.toLocaleString()+'</div><div class="chip sel">စကားလုံး: '+words.toLocaleString()+'</div><div class="chip sel">စာကြောင်း: '+lines+'</div>';
+  document.getElementById('cntNote').textContent=chars>5000?'⚠️ TTS limit 5,000 ကျော်နေပြီ — ခွဲပြီး ထုတ်ပါ။':chars>500?'ℹ️ Edge TTS free 500 limit ကျော်နေတယ် — Gemini TTS (5,000 အထိ) သုံးပါ။':'✓ Edge TTS free 500 အတွင်း ရှိတယ်။';
+}
+let icImgObj=null,icFileName='';
+function icPick(input){const f=input.files&&input.files[0];if(!f)return;icFileName=f.name.replace(/\.[^.]+$/,'');const img=new Image();img.onload=function(){icImgObj=img;document.getElementById('icInfo').textContent='ပုံ ရပြီ ✓ — '+f.name+' ('+Math.round(f.size/1024)+' KB, '+img.width+'×'+img.height+')';document.getElementById('icBtn').disabled=false};img.src=URL.createObjectURL(f)}
+function icGo(){
+  if(!icImgObj)return;const q=parseInt(document.getElementById('icQ').value)/100;
+  const cv=document.createElement('canvas');cv.width=icImgObj.width;cv.height=icImgObj.height;
+  const ctx=cv.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,cv.width,cv.height);ctx.drawImage(icImgObj,0,0);
+  cv.toBlob(function(blob){
+    const url=URL.createObjectURL(blob);const dl=document.getElementById('icDl');dl.href=url;dl.download=icFileName+'-compressed.jpg';dl.style.display='inline-flex';
+    document.getElementById('icStatus').textContent='ရပြီ ✓ — '+Math.round(blob.size/1024)+' KB (Quality '+document.getElementById('icQ').value+'%)';
+  },'image/jpeg',q);
+}
+</script>
+
 <footer>
   <div class="socrow">
     <a class="soc" href="https://www.facebook.com/cyborgstudiomm" target="_blank" rel="noopener" aria-label="Cyborg Studio MM on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a>
@@ -1557,18 +1710,20 @@ const tools=[
  {t:'အသံ ပေါင်းရန်',e:'Audio Merge',d:'အသံဖိုင် အများ ဆက်ပြီး တစ်ခုတည်း ဖြစ် — အခမဲ့',go:'merge',ic:'<path d="M8 5v5a4 4 0 0 0 4 4h4"/><path d="m13.5 11 3 3-3 3"/>'},
  {t:'တရား အပိုင်းခွဲ',e:'Sermon Splitter',d:'အသံရှည် ကို ၁၀/၁၅/၂၀/၃၀ မိနစ် အပိုင်းခွဲ — အခမဲ့',go:'split',ic:'<circle cx="6" cy="7" r="2.5"/><circle cx="6" cy="17" r="2.5"/><path d="M8.2 8.6 20 19M8.2 15.4 20 5"/>'},
  {t:'အသံရှင်း / Normalize',e:'Voice Clear',d:'အသံ ညှိ + Smart Audio preset + speed/pitch — အခမဲ့',go:'voiceclear',ic:'<path d="M5 7h8M17 7h2M5 12h2M11 12h8M5 17h10"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/>'},
- {t:'SFX Soundboard',e:'SFX Soundboard',d:'Bell, Gong, Whoosh effect ၁၂ မျိုး ဖန်တီး + download — အခမဲ့',go:'sfx',ic:'<path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9ZM10.2 20a2 2 0 0 0 3.6 0"/>'},
+ {t:'SFX Soundboard',e:'SFX Soundboard',d:'Bell, Gong, Whoosh, UI, Comedy, Horror, Ambient, Foley effect ၅၄ မျိုး ဖန်တီး + download — အခမဲ့',go:'sfx',ic:'<path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9ZM10.2 20a2 2 0 0 0 3.6 0"/>'},
  {t:'အသံမှ စာသား (Whisper)',e:'Whisper STT',d:'အသံဖိုင်ကနေ စာသား + SRT ထုတ် — browser ထဲမှာ AI မောင်းတယ်၊ အခမဲ့',go:'stt',ic:'<path d="M9 11a3 3 0 0 0 6 0V6a3 3 0 0 0-6 0z"/><path d="M6.5 11a5.5 5.5 0 0 0 11 0M12 16.5V20M16 12h5M16 16h5"/>'},
  {t:'အသံ + ပုံ → Video',e:'Audiogram',d:'MP3 အသံ + ပုံ ၁ ပုံ ထည့်ရုံနဲ့ waveform ပါတဲ့ video ထုတ် — YouTube / FB တင်ဖို့, အခမဲ့',go:'audiogram',ic:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 12v3M8 9v6M12 6v9M16 10v4M20 12v2"/>'},
  {t:'AI စာသား — Translate & Recap',e:'AI Text — Translate & Recap',d:'SRT/စာသားကို Gemini နဲ့ မြန်မာ ဘာသာပြန် + Recap စာသား အလိုလို ထုတ် — ကိုယ့် key (BYOK) နဲ့၊ VPN မလို',go:'aitext',ic:'<path d="M4 5h16M4 10h10M4 15h13"/><path d="M17.8 14.6l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>'},
+ {t:'စာလုံး ရေတွက်မယ်',e:'Character Counter',d:'စာလုံး / စကားလုံး / စာကြောင်း ချက်ချင်း ရေ — TTS limit စစ်ဖို့, အခမဲ့',go:'counter',ic:'<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>'},
  {t:'SRT Tool',e:'SRT Tool',d:'Subtitle အချိန် ရွှေ့, SRT ↔ VTT ပြောင်း — အခမဲ့',go:'srt',ic:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/>'},
- {t:'SRT ဘာသာပြန်',e:'SRT Translator',d:'Timing မပျက်၊ စာကြောင်းနံပါတ် မပျက် မြန်မာလို ပြန်ပေးတယ် — AI စာသား tool နဲ့၊ ကိုယ့် Gemini key (BYOK) နဲ့',go:'aitext',ic:'<path d="M4 6h9M8.5 4v2c0 3.5-2 6.5-4 8M6 9.5c.8 2 2.7 4 4.8 5M13 20l4.5-10L22 20M14.8 16.5h5.4"/>'},
+ {t:'SRT → စာသား သပ်သပ်',e:'SRT to Text',d:'SRT ကနေ အချိန် + နံပါတ် ဖြုတ်ပြီး စာသားချည်း ထုတ် — TTS / Recap အတွက်, အခမဲ့',go:'srttext',ic:'<path d="M4 6h16M4 12h10M4 18h13"/><path d="M18 6l-3 3 3 3"/>'},
  {t:'Auto Recap',e:'Auto Recap',d:'ရုပ်ရှင်/ဒရမ်မာကို recap video အဖြစ် အလိုလို ထုတ်ပေးတယ်',go:'',soon:true,ic:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5l5 2.5-5 2.5z"/>'},
  {t:'Zawgyi ↔ Unicode',e:'Zawgyi Unicode Converter',d:'ဇော်ဂျီ ⇄ ယူနီကုဒ် စာသား ပြောင်းလို့ရတယ် — အခမဲ့',go:'zawgyi',ic:'<path d="M7 4L3 8l4 4M3 8h14M17 12l4 4-4 4M21 16H7"/>'},
  {t:'ဂဏန်း → မြန်မာ စာလုံး',e:'Number to Words',d:'123456 → တစ်သိန်း… TTS စာသား ပြင်ဖို့ — အခမဲ့',go:'numwords',ic:'<path d="M4.5 17V8.5L3 10M10 8.4c.6-1.1 3.6-1.1 3.6.7 0 1.8-3.6 2.4-3.6 4.6h4M16.5 9h4M16.5 13h4M16.5 17h4"/>'},
  {t:'စာဖတ် ကြာချိန်',e:'Reading Time',d:'စာသား ဘယ်နှစ်မိနစ် ဖတ်ရမလဲ ခန့်မှန်း — အခမဲ့',go:'readtime',ic:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'},
  {t:'ဓာတ်ပုံ Converter',e:'Photo Converter',d:'JPG ↔ PNG ပြောင်းလို့ရတယ် — ဖိုင် server မတက်ဘူး၊ browser ထဲမှာပဲ၊ အခမဲ့',go:'photo',ic:'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-4 3 3 3-3 5 4"/>'},
  {t:'ဓာတ်ပုံ Resize',e:'Photo Resize',d:'အရွယ် ပြောင်း + Ratio ညှိ (16:9, 9:16, 1:1 စသဖြင့်) — အခမဲ့',go:'resize',ic:'<path d="M4 9V4h5M20 15v5h-5M4 4l6 6M20 20l-6-6"/>'},
+ {t:'ပုံ ဖိုင် သေးအောင် လျှော့မယ်',e:'Image Compressor',d:'JPG quality ချိန်ပြီး ပုံဖိုင် MB လျှော့ — အရွယ်မပြောင်း, upload မြန်အောင်, အခမဲ့',go:'imgcompress',ic:'<path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/>'},
  {t:'Video Frame ဖမ်း',e:'Video Frame Grab',d:'ဗီဒီယို frame ကို ဓာတ်ပုံအဖြစ် ထုတ် — အခမဲ့',go:'frame',ic:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 5v14M17 5v14"/>'},
  {t:'တရား Thumbnail',e:'Dhamma Thumbnail',d:'1280×720 ပုံ + ဆရာတော် ပုံ + စာသား — အခမဲ့',go:'dhamma',ic:'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5.5-5 3.5 3 3-2.5L20 18"/>'},
  {t:'Watermark တပ်',e:'Watermark',d:'ပုံပေါ် logo/တံဆိပ် တင်ထုတ် — အခမဲ့',go:'watermark',ic:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="m4 15.5 5-4 3.5 2.8L15 12l5 3.5"/><circle cx="9" cy="9" r="1.3"/>'},
@@ -1921,7 +2076,7 @@ function sfxAC(){if(!sfxCtx)sfxCtx=new (window.AudioContext||window.webkitAudioC
 function sfxTone(off,o){const t0=o.t||0;const osc=off.createOscillator();osc.type=o.type||'sine';osc.frequency.setValueAtTime(o.f,t0);if(o.f1)osc.frequency.exponentialRampToValueAtTime(Math.max(1,o.f1),t0+o.dur);const g=off.createGain();g.gain.setValueAtTime(0.0001,t0);g.gain.exponentialRampToValueAtTime(o.vol||0.5,t0+(o.att||0.005));g.gain.exponentialRampToValueAtTime(0.0001,t0+o.dur);osc.connect(g);g.connect(off.destination);osc.start(t0);osc.stop(t0+o.dur+0.05)}
 function sfxNoiseBuf(off,sec){const sr=off.sampleRate;const buf=off.createBuffer(1,Math.ceil(sec*sr),sr);const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;return buf}
 function sfxNoise(off,o){const t0=o.t||0;const src=off.createBufferSource();src.buffer=sfxNoiseBuf(off,o.dur+0.1);const fl=off.createBiquadFilter();fl.type=o.ft||'bandpass';fl.Q.value=o.q||1;fl.frequency.setValueAtTime(o.f||800,t0);if(o.f1)fl.frequency.exponentialRampToValueAtTime(o.f1,t0+o.dur);const g=off.createGain();g.gain.setValueAtTime(0.0001,t0);g.gain.exponentialRampToValueAtTime(o.vol||0.5,t0+(o.att||0.01));g.gain.exponentialRampToValueAtTime(0.0001,t0+o.dur);src.connect(fl);fl.connect(g);g.connect(off.destination);src.start(t0);src.stop(t0+o.dur+0.1)}
-const SFXD={bell:2.8,gong:3.6,ding:1.2,success:1.0,whoosh:1.1,sweepup:0.7,sweepdown:0.7,pop:0.2,coin:0.4,drum:0.5,error:0.45,laser:0.35};
+const SFXD={bell:2.8,gong:3.6,ding:1.2,success:1.0,whoosh:1.1,sweepup:0.7,sweepdown:0.7,pop:0.2,coin:0.4,drum:0.5,error:0.45,laser:0.35,ui_click:0.1,ui_tap:0.12,ui_toggle:0.25,ui_type:0.5,ui_swipe:0.3,ui_refresh:0.5,ui_download:0.6,ui_unlock:0.35,ui_lock:0.35,ui_trash:0.4,boing:0.6,whistle:0.9,splat:0.5,cymbal:1.8,scratch:0.5,trombone:1.6,zip:0.25,bounce:0.9,gulp:0.4,fanfare:0.8,creak:0.9,slam:0.5,heartbeat:1.1,thunder:2.8,wind:2.5,footwood:0.2,whisper:0.9,drone:3.0,rain:8,vinyl:8,birds:6,waves:8,fire:8,clock:4,footstone:0.2,footsand:0.2,foottile:0.2,page:0.4,shutter:0.3,applause:1.8,glass:0.6,phone:1.6};const SFXLOOP={rain:1,vinyl:1,birds:1,waves:1,fire:1,clock:1};
 function sfxBuild(name,off){
  if(name==='bell'){[1,2.02,2.74,3.76,5.4].forEach((r,i)=>sfxTone(off,{f:660*r,dur:2.8/(1+i*0.7),vol:0.42/(1+i*0.9),att:0.003}))}
  else if(name==='gong'){[1,1.48,2.09,2.94,4.2].forEach((r,i)=>sfxTone(off,{f:98*r,dur:3.6/(1+i*0.5),vol:0.4/(1+i*0.8),att:0.08}))}
@@ -1935,9 +2090,61 @@ function sfxBuild(name,off){
  else if(name==='drum'){sfxNoise(off,{dur:0.22,ft:'lowpass',f:900,vol:0.5,att:0.002});sfxTone(off,{f:150,f1:45,dur:0.42,vol:0.85,att:0.002})}
  else if(name==='error'){sfxTone(off,{f:150,type:'square',dur:0.4,vol:0.3});sfxTone(off,{f:155,type:'square',dur:0.4,vol:0.3})}
  else if(name==='laser'){sfxTone(off,{f:1800,f1:120,type:'sawtooth',dur:0.3,vol:0.3})}
+ else if(name==='ui_click'){sfxNoise(off,{dur:0.05,ft:'highpass',f:2000,vol:0.6,att:0.001});sfxTone(off,{f:1400,dur:0.05,vol:0.3})}
+ else if(name==='ui_tap'){sfxTone(off,{f:900,f1:500,dur:0.08,vol:0.5,att:0.001})}
+ else if(name==='ui_toggle'){sfxTone(off,{f:800,dur:0.06,vol:0.45});sfxTone(off,{f:1400,t:0.07,dur:0.08,vol:0.45})}
+ else if(name==='ui_type'){[0,0.08,0.16,0.24].forEach(t=>sfxNoise(off,{t:t,dur:0.04,ft:'bandpass',f:2200,q:2,vol:0.5,att:0.001}))}
+ else if(name==='ui_swipe'){sfxNoise(off,{dur:0.25,f:500,f1:2600,q:1.5,vol:0.5,att:0.02})}
+ else if(name==='ui_refresh'){sfxTone(off,{f:400,f1:1400,type:'sawtooth',dur:0.4,vol:0.22});sfxTone(off,{f:1400,dur:0.15,vol:0.3})}
+ else if(name==='ui_download'){[660,880,1320].forEach((f,i)=>sfxTone(off,{f:f,t:i*0.12,dur:0.25,vol:0.4}))}
+ else if(name==='ui_unlock'){sfxTone(off,{f:500,f1:900,dur:0.15,vol:0.4});sfxTone(off,{f:2200,t:0.12,dur:0.2,vol:0.25})}
+ else if(name==='ui_lock'){sfxTone(off,{f:900,f1:500,dur:0.15,vol:0.4});sfxNoise(off,{t:0.12,dur:0.06,ft:'bandpass',f:1800,vol:0.5})}
+ else if(name==='ui_trash'){sfxNoise(off,{dur:0.3,ft:'lowpass',f:700,vol:0.6,att:0.01});sfxTone(off,{f:300,f1:80,dur:0.3,vol:0.4})}
+ else if(name==='boing'){sfxTone(off,{f:160,f1:420,dur:0.18,vol:0.5});sfxTone(off,{f:420,f1:90,t:0.18,dur:0.4,vol:0.5})}
+ else if(name==='whistle'){sfxTone(off,{f:600,f1:1700,dur:0.45,vol:0.35});sfxTone(off,{f:1700,f1:700,t:0.45,dur:0.4,vol:0.35})}
+ else if(name==='splat'){sfxNoise(off,{dur:0.4,ft:'lowpass',f:500,vol:0.7,att:0.005});sfxTone(off,{f:220,f1:60,dur:0.4,vol:0.5})}
+ else if(name==='cymbal'){sfxNoise(off,{dur:1.7,ft:'highpass',f:6000,vol:0.55,att:0.002})}
+ else if(name==='scratch'){sfxNoise(off,{dur:0.2,f:800,f1:2500,q:3,vol:0.5});sfxNoise(off,{t:0.2,dur:0.25,f:2500,f1:600,q:3,vol:0.5})}
+ else if(name==='trombone'){[233,220,196,175].forEach((f,i)=>sfxTone(off,{f:f,type:'sawtooth',t:i*0.38,dur:0.36,vol:0.28}))}
+ else if(name==='zip'){sfxNoise(off,{dur:0.22,f:300,f1:3200,q:2,vol:0.55,att:0.01})}
+ else if(name==='bounce'){[0,0.25,0.5].forEach((t,i)=>sfxTone(off,{f:420-i*90,f1:180-i*40,t:t,dur:0.22,vol:0.5}))}
+ else if(name==='gulp'){sfxTone(off,{f:500,f1:140,dur:0.25,vol:0.5});sfxNoise(off,{t:0.2,dur:0.15,ft:'lowpass',f:400,vol:0.4})}
+ else if(name==='fanfare'){[523,659,784,1047].forEach((f,i)=>sfxTone(off,{f:f,t:i*0.14,dur:0.3,vol:0.4}))}
+ else if(name==='creak'){sfxTone(off,{f:190,f1:120,type:'sawtooth',dur:0.85,vol:0.25});sfxNoise(off,{dur:0.85,ft:'bandpass',f:900,q:4,vol:0.2})}
+ else if(name==='slam'){sfxTone(off,{f:95,f1:38,dur:0.4,vol:0.8,att:0.001});sfxNoise(off,{dur:0.3,ft:'lowpass',f:300,vol:0.6,att:0.001})}
+ else if(name==='heartbeat'){sfxTone(off,{f:65,f1:40,dur:0.18,vol:0.9,att:0.001});sfxTone(off,{f:60,f1:40,t:0.3,dur:0.18,vol:0.8,att:0.001});sfxTone(off,{f:65,f1:40,t:0.65,dur:0.18,vol:0.9,att:0.001})}
+ else if(name==='thunder'){sfxNoise(off,{dur:2.7,ft:'lowpass',f:180,vol:0.8,att:0.4});sfxNoise(off,{dur:1.2,ft:'lowpass',f:400,vol:0.6,att:0.02})}
+ else if(name==='wind'){sfxNoise(off,{dur:2.4,f:350,f1:900,q:1,vol:0.45,att:0.5});sfxNoise(off,{dur:2.4,f:900,f1:350,q:1,vol:0.3,att:0.5})}
+ else if(name==='footwood'){sfxTone(off,{f:130,f1:60,dur:0.12,vol:0.7,att:0.001});sfxNoise(off,{dur:0.1,ft:'lowpass',f:350,vol:0.4})}
+ else if(name==='whisper'){sfxNoise(off,{dur:0.85,ft:'bandpass',f:1600,q:1.5,vol:0.28,att:0.1})}
+ else if(name==='drone'){sfxTone(off,{f:55,dur:2.9,vol:0.4});sfxTone(off,{f:55.6,dur:2.9,vol:0.4});sfxTone(off,{f:110,dur:2.9,vol:0.15})}
+ else if(name==='rain'){sfxNoise(off,{dur:7.9,ft:'bandpass',f:2400,q:0.6,vol:0.32,att:0.4})}
+ else if(name==='vinyl'){sfxNoise(off,{dur:7.9,ft:'bandpass',f:1100,q:0.8,vol:0.18,att:0.3});[0.5,1.7,2.9,4.4,5.8,7.1].forEach(t=>sfxNoise(off,{t:t,dur:0.03,ft:'highpass',f:3000,vol:0.3}))}
+ else if(name==='birds'){[0,1.2,2.4,3.6,4.8].forEach(t=>{sfxTone(off,{f:2600,f1:3600,t:t,dur:0.18,vol:0.3});sfxTone(off,{f:3600,f1:2400,t:t+0.18,dur:0.15,vol:0.25})})}
+ else if(name==='waves'){sfxNoise(off,{dur:7.9,ft:'lowpass',f:500,vol:0.45,att:1.5});sfxNoise(off,{dur:7.9,ft:'lowpass',f:300,vol:0.3,att:2.5})}
+ else if(name==='fire'){sfxNoise(off,{dur:7.9,ft:'bandpass',f:900,q:0.7,vol:0.3,att:0.3});[0.4,1.1,2.0,3.3,4.7,6.0,7.2].forEach(t=>sfxNoise(off,{t:t,dur:0.06,ft:'bandpass',f:2000,vol:0.35}))}
+ else if(name==='clock'){[0,0.5,1.0,1.5,2.0,2.5,3.0,3.5].forEach((t,i)=>sfxTone(off,{f:i%2?1500:2100,t:t,dur:0.05,vol:0.5,att:0.001}))}
+ else if(name==='footstone'){sfxNoise(off,{dur:0.1,ft:'bandpass',f:1300,q:2,vol:0.6});sfxTone(off,{f:110,f1:70,dur:0.1,vol:0.5})}
+ else if(name==='footsand'){sfxNoise(off,{dur:0.16,ft:'lowpass',f:850,vol:0.45,att:0.01})}
+ else if(name==='foottile'){sfxNoise(off,{dur:0.07,ft:'bandpass',f:2600,q:3,vol:0.6});sfxTone(off,{f:190,f1:120,dur:0.08,vol:0.4})}
+ else if(name==='page'){sfxNoise(off,{dur:0.35,f:700,f1:2100,q:1.5,vol:0.45,att:0.02})}
+ else if(name==='shutter'){sfxNoise(off,{dur:0.05,ft:'bandpass',f:2000,vol:0.6});sfxNoise(off,{t:0.13,dur:0.05,ft:'bandpass',f:1600,vol:0.6})}
+ else if(name==='applause'){sfxNoise(off,{dur:1.7,ft:'bandpass',f:1100,q:0.5,vol:0.5,att:0.05});sfxNoise(off,{dur:1.7,ft:'bandpass',f:1800,q:0.5,vol:0.3,att:0.05})}
+ else if(name==='glass'){sfxNoise(off,{dur:0.5,ft:'highpass',f:7500,vol:0.6,att:0.001});[3200,4100,2900].forEach((f,i)=>sfxTone(off,{f:f,t:0.05+i*0.07,dur:0.25,vol:0.25}))}
+ else if(name==='phone'){[0,0.8].forEach(t=>{sfxTone(off,{f:1000,t:t,dur:0.35,vol:0.35});sfxTone(off,{f:1250,t:t,dur:0.35,vol:0.3})})}
+
 }
 async function sfxRender(name){if(sfxCache[name])return sfxCache[name];const sr=44100;const off=new OfflineAudioContext(2,Math.ceil(SFXD[name]*sr),sr);sfxBuild(name,off);const buf=await off.startRendering();sfxCache[name]=buf;return buf}
-async function sfxPlay(name){try{const buf=await sfxRender(name);const ctx=sfxAC();const src=ctx.createBufferSource();src.buffer=buf;const g=ctx.createGain();g.gain.value=(parseInt(document.getElementById('sfxVol').value)||80)/100;src.connect(g);g.connect(ctx.destination);src.start();document.getElementById('sfxStatus').textContent='🔊 ဖွင့်နေတယ်…'}catch(e){document.getElementById('sfxStatus').textContent='⚠️ အသံ ဖွင့်မရဘူး — browser အသံ ခွင့်ပြုချက် စစ်ပါ'}}
+let sfxLoopSrc=null,sfxLoopName='';
+function sfxFilter(cat){document.querySelectorAll('#scr-sfx .sfxpad').forEach(p=>{p.style.display=(cat==='all'||p.getAttribute('data-cat')===cat)?'':'none'})}
+async function sfxPlay(name){try{
+ if(SFXLOOP[name]){
+   if(sfxLoopSrc&&sfxLoopName===name){try{sfxLoopSrc.stop()}catch(e){}sfxLoopSrc=null;sfxLoopName='';document.getElementById('sfxStatus').textContent='⏹ Loop ရပ်ပြီ';return}
+   if(sfxLoopSrc){try{sfxLoopSrc.stop()}catch(e){}}
+ }
+ const buf=await sfxRender(name);const ctx=sfxAC();const src=ctx.createBufferSource();src.buffer=buf;src.loop=!!SFXLOOP[name];const g=ctx.createGain();g.gain.value=(parseInt(document.getElementById('sfxVol').value)||80)/100;src.connect(g);g.connect(ctx.destination);src.start();
+ if(SFXLOOP[name]){sfxLoopSrc=src;sfxLoopName=name;document.getElementById('sfxStatus').textContent='🔁 Loop ဖွင့်နေတယ် — ထပ်နှိပ်ရင် ရပ်မယ်'}else document.getElementById('sfxStatus').textContent='🔊 ဖွင့်နေတယ်…'
+}catch(e){document.getElementById('sfxStatus').textContent='⚠️ အသံ ဖွင့်မရဘူး — browser အသံ ခွင့်ပြုချက် စစ်ပါ'}}
 async function sfxDl(name,ev){if(ev)ev.stopPropagation();const fmt=dirOf('sfxfmt');if(fmt==='mp3'&&typeof lamejs==='undefined'){document.getElementById('sfxStatus').textContent='MP3 encoder library မရသေးပါ — WAV ရွေးပါ။';return}const buf=await sfxRender(name);const blob=fmt==='mp3'?mp3Encode(buf):wavEncode(buf);const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sfx-'+name+'.'+fmt;a.click();document.getElementById('sfxStatus').textContent='⬇ sfx-'+name+'.'+fmt+' ဆွဲနေပြီ'}
 
 dropZone('spDrop','spFile',spPick);dropZone('vcDrop','vcFile',vcPick);dropZone('mgDrop','mgFile',mgPick);
