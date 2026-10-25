@@ -15,6 +15,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0A101E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script>(function(){try{var t=localStorage.getItem('csmm-theme');if(t==='night'||t==='neon')document.documentElement.setAttribute('data-theme',t)}catch(e){}try{var f=localStorage.getItem('csmm-font');if(f==='padauk'||f==='noto'||f==='pyidaungsu')document.documentElement.setAttribute('data-font',f)}catch(e){}})();</script>
@@ -392,6 +397,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <div class="hbtns">
         <button class="btn btn-cyan" onclick="show('tts')" data-en="Start Free →">အခမဲ့ စသုံးမယ် →</button>
         <button class="btn btn-ghost" onclick="playSample(this)" data-en="▶ Listen to Samples">▶ အသံနမူနာ နားထောင်မယ်</button>
+        <button class="btn btn-ghost" onclick="pwaOpen()">🏠 Home screen မှာ ထားမယ်</button>
       </div>
       <div class="stats">
         <div><b>30</b><span data-en="Gemini TTS Voices">Gemini TTS အသံများ</span></div>
@@ -2290,7 +2296,42 @@ function toggleLang(){en=!en;document.getElementById('langBtn').textContent=en?'
 
 // 404-tab redirect: a /pos-type link lands on its tab instead of Home
 try{var _t=sessionStorage.getItem('csmm-tab');if(_t){sessionStorage.removeItem('csmm-tab');if(document.getElementById('scr-'+_t)){show(_t);document.querySelectorAll('nav button').forEach(function(b){var o=b.getAttribute('onclick')||'';if(o.indexOf("'"+_t+"'")>=0){b.classList.add('on')}else{b.classList.remove('on')}})}} }catch(e){}
+/* PWA home-screen shortcut: user-initiated only, never an auto popup. */
+var _pwaPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();_pwaPrompt=e;});
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
+function pwaOpen(){
+  var m=document.getElementById('pwaModal');
+  var go=document.getElementById('pwaGoBtn');
+  if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
+    document.getElementById('pwaBody').innerHTML='<p>အခု Home screen shortcut ကတင် ဖွင့်ထားပြီးသားပါ ✅</p>';
+    go.style.display='none';
+  }else{
+    document.getElementById('pwaBody').innerHTML='<p>ဒါက <b>app download မဟုတ်ပါ</b> — cyborgstudiomm.com link ကို Home screen မှာ <b>Shortcut</b> အဖြစ် ထားတာပါ။</p><p>ဖုန်းထဲ ဘာမှ ထည့်မသွင်းဘူး၊ ခွင့်ပြုချက် ဘာမှ မတောင်းဘူး။ Shortcut ကနေ ဖွင့်တိုင်း website ကို internet ကနေ ဆွဲဖွင့်တာပါ။</p>';
+    go.style.display='';
+  }
+  m.style.display='flex';
+}
+function pwaClose(){document.getElementById('pwaModal').style.display='none';}
+function pwaGo(){
+  if(_pwaPrompt){var p=_pwaPrompt;_pwaPrompt=null;p.prompt();p.userChoice.then(function(){pwaClose();});return;}
+  var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  document.getElementById('pwaBody').innerHTML=isIOS
+    ?'<p><b>iPhone (Safari) လုပ်နည်း:</b><br>1. အောက်က Share ခလုတ်နှိပ်ပါ<br>2. “Add to Home Screen” ကို နှိပ်ပါ<br>3. Add ကို နှိပ်ပါ</p>'
+    :'<p><b>Android (Chrome) လုပ်နည်း:</b><br>1. အပေါ်ညာက အစက်သုံးစက် ခလုတ်နှိပ်ပါ<br>2. “Add to Home screen” ကို နှိပ်ပါ<br>3. Add ကို နှိပ်ပါ</p><p>Chrome က prompt မပြသေးရင် ဒီနည်းနဲ့ တိုက်ရိုက်ထားလို့ရပါတယ်။</p>';
+  document.getElementById('pwaGoBtn').style.display='none';
+}
 </script>
+<div id="pwaModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)pwaClose()">
+  <div style="background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:20px;max-width:420px;width:100%;padding:22px">
+    <h3 style="margin-bottom:8px">🏠 Home screen မှာ ထားမယ်</h3>
+    <div id="pwaBody"></div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-cyan" id="pwaGoBtn" onclick="pwaGo()">ဆက်လုပ်မယ်</button>
+      <button class="btn btn-ghost" onclick="pwaClose()">ပိတ်မယ်</button>
+    </div>
+  </div>
+</div>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e5f400ef3da2405684e34a543114307e"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
