@@ -458,13 +458,6 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <div class="card">
         <h3><span class="n">2</span><span data-en="Choose a voice">အသံ ရွေးပါ</span></h3>
         <div class="hint" data-en="Tap a voice chip. Press ▶ to hear a sample.">အသံ chip ကို နှိပ်ရွေးပါ။ ▶ နှိပ်ရင် နမူနာ နားထောင်လို့ရတယ်။</div>
-        <div class="glabel">ElevenLabs · <small style="color:var(--mut);font-weight:500">အရည်အသွေး အကောင်းဆုံး</small></div>
-        <div class="chips" data-group="voice">
-          <button class="chip sel"><span class="ava">က</span>ကောင်း <small>ကျား · ဇာတ်ကြောင်း</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
-          <button class="chip"><span class="ava">မ</span>မိုးမိုး <small>မ · နွေးထွေး</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
-          <button class="chip"><span class="ava">ဇ</span>ဇေယျာ <small>ကျား · တက်ကြွ</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
-          <button class="chip"><span class="ava">ကျ</span>ကျော် <small>ကျား · သတင်း</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
-        </div>
                 <div class="glabel">Gemini TTS · <small style="color:var(--mut);font-weight:500">အသံ ၃၀ လုံး · မြန်၊ ဈေးသက်သာ</small></div>
         <div class="chips" data-group="voice">
           <button class="chip"><span class="ava">Z</span>Zephyr <small>မ · တောက်ပ</small></button>
@@ -500,7 +493,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         </div>
         <div class="glabel"><span data-en="Free voices">အခမဲ့ အသံများ</span> · <small style="color:var(--mut);font-weight:500">Edge TTS</small></div>
         <div class="chips" data-group="voice">
-          <button class="chip"><span class="ava">သီ</span>သီဟ <small>ကျား · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip sel"><span class="ava">သီ</span>သီဟ <small>ကျား · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
           <button class="chip"><span class="ava">နီ</span>နီလာ <small>မ · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
         </div>
         <div class="glabel" data-en="Speed">အသံ အမြန်နှုန်း</div>
@@ -541,7 +534,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
   </div>
   <div class="genbar">
-    <div class="info"><b id="genVoice">ကောင်း · 1.0x</b></div>
+    <div class="info"><b id="genVoice">သီဟ · 1.0x</b></div>
     <button class="genbtn" onclick="generate()" data-en="Generate Voice 🎙️">အသံ ထုတ်မယ် 🎙️</button>
   </div>
 </div>
@@ -1737,20 +1730,20 @@ function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classLis
 // chips: single-select per group + update genbar
 document.querySelectorAll('.chips').forEach(g=>{g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');updGen()})});
 function selText(group){const g=document.querySelector(`.chips[data-group="${group}"] .sel`);return g?g.textContent.replace('▶','').trim().split('·')[0].trim():''}
-function updGen(){const v=selText('voice'),s=selText('speed');if(v||s)document.getElementById('genVoice').textContent=`${v||'ကောင်း'} · ${s||'1.0x'}`}
+function updGen(){const v=selText('voice'),s=selText('speed');if(v||s)document.getElementById('genVoice').textContent=`${v||'သီဟ'} · ${s||'1.0x'}`}
 function updCount(){const t=document.getElementById('txt').value;document.getElementById('ccount').textContent=`${t.length.toLocaleString()} / 1,000`;const sec=Math.max(1,Math.round(t.length/13));document.getElementById('dur').textContent=`ခန့်မှန်း ~${sec} စက္ကန့်`}
 updCount();
 let playing=false;
 function playSample(el){playing=!playing;const old=el.textContent;el.textContent=playing?'❚❚':'▶';setTimeout(()=>{el.textContent=old==='▶'||old.includes('Listen')?'▶':old;playing=false},1600)}
 // ===== Studio TTS: real generation — Gemini BYOK via proxy + Free (Edge) via proxy =====
 const TTS_API='https://cyborg-edge-tts.lovinggas.workers.dev';
-let ttsSel={group:'el',name:'ကောင်း'};
+let ttsSel={group:'free',name:'သီဟ'};
 let ttsAudio=null,ttsUrl='',ttsFile='';
 function ttsSetStatus(m){const s=document.getElementById('ttsStatus');if(s)s.textContent=m||''}
 function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.ava,small,.miniplay').forEach(x=>x.remove());return c.textContent.trim()}
 (function(){
   const groups=document.querySelectorAll('#scr-tts .chips[data-group="voice"]');
-  const kinds=['el','gm','free'];
+  const kinds=['gm','free'];
   groups.forEach((g,i)=>{g.dataset.vgroup=kinds[i]||'';
     g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
       groups.forEach(o=>{if(o!==g)o.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'))});
@@ -1881,7 +1874,7 @@ function botReply(q){const s=q.toLowerCase();
  if((s.includes('recap')||s.includes('app')||/\bpos\b/.test(s))&&(q.includes('ဈေး')||s.includes('price')||q.includes('ဘယ်လောက်')||q.includes('ဝယ်')))return /\bpos\b/.test(s)&&!s.includes('recap')?'POS ရဲ့ ဈေးနှုန်း အသေးစိတ်ကို ဒီမှာ မပြောထားပါဘူး ခင်ဗျာ — Customer Service ကို Messenger / Viber / Telegram ကနေ ဆက်သွယ် မေးပေးပါ 🙏':'Recap app ကို ဒီ website ရဲ့ "Recap App" tab ကနေ ဆွဲလို့ ရပါတယ် ခင်ဗျာ။\nLicense ဈေးနှုန်း အသေးစိတ်ကိုတော့ ဒီမှာ မပြောထားပါဘူး — Customer Service ကို Messenger / Viber / Telegram ကနေ ဆက်သွယ် မေးပေးပါ 🙏';
  // ── Free Tools manuals — Batch 1 (Studio tools) ──
  if(s.includes('free tool'))return 'Free Tools ၂၅ မျိုး လုံး သုံးနည်းကို Bot မှာ မေးလို့ရပါပြီ ခင်ဗျာ — Tool နာမည် ရိုက်မေးပါ။\nဥပမာ: "QR Code သုံးနည်း" လို့ ရိုက်ပါ။';
- if((s.includes('ai အသံ')||s.includes('ai voice')||s.includes('အသံ ဘယ်လို ထုတ်ရမလဲ')||s.includes('tts သုံးနည်း'))&&!s.includes('edge tts'))return 'AI အသံ ထုတ်မယ် (TTS Studio) သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "AI အသံ ထုတ်မယ်" card ဖွင့်\n၂။ စာသား ရိုက် (မြန်မာ / English)\n၃။ အသံ chip ရွေး: Gemini အသံ ၃၀ လုံး (ကိုယ့် Gemini key လို, တစ်ခါ စာလုံး ၁,၀၀၀ အထိ, WAV ထွက်) · Free သီဟ/နီလာ (key မလို, တစ်ခါ စာလုံး ၁,၀၀၀ အထိ, MP3 ထွက်)\n၄။ အမြန်နှုန်း ရွေး → "အသံ ထုတ်မယ်" နှိပ် → နားထောင် / MP3 Download ဆွဲ။\nElevenLabs အသံတွေက website မှာ Studio စတင်ချိန်မှာ ရပါမယ် — အခုတော့ Gemini (ကိုယ့် key နဲ့) ဒါမှမဟုတ် Free အသံ သုံးကြည့်ပါ။';
+ if((s.includes('ai အသံ')||s.includes('ai voice')||s.includes('အသံ ဘယ်လို ထုတ်ရမလဲ')||s.includes('tts သုံးနည်း'))&&!s.includes('edge tts'))return 'AI အသံ ထုတ်မယ် (TTS Studio) သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "AI အသံ ထုတ်မယ်" card ဖွင့်\n၂။ စာသား ရိုက် (မြန်မာ / English)\n၃။ အသံ chip ရွေး: Gemini အသံ ၃၀ လုံး (ကိုယ့် Gemini key လို, တစ်ခါ စာလုံး ၁,၀၀၀ အထိ, WAV ထွက်) · Free သီဟ/နီလာ (key မလို, တစ်ခါ စာလုံး ၁,၀၀၀ အထိ, MP3 ထွက်)\n၄။ အမြန်နှုန်း ရွေး → "အသံ ထုတ်မယ်" နှိပ် → နားထောင် / MP3 Download ဆွဲ။\nအသံ ရွေးတာ: Gemini (ကိုယ့် key နဲ့) ဒါမှမဟုတ် Free အသံ (သီဟ/နီလာ) သုံးကြည့်ပါ။';
  if(s.includes('ai စာသား')||s.includes('ai text'))return 'AI စာသား — Translate & Recap သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "AI စာသား" card ဖွင့်\n၂။ SRT / စာသား paste လုပ် (သို့) ဖိုင်တင်\n၃။ ကိုယ့် Gemini API Key ထည့် (BYOK, browser ထဲမှာပဲ သိမ်း)\n၄။ Mode ရွေး: Translate (ဘာသာပြန်) / Recap (အနှစ်ချုပ်, အရှည် % ရွေး)\n၅။ "AI နဲ့ ထုတ်မယ်" နှိပ် → ရလဒ် Copy / Download ဆွဲ။\nSRT ဘာသာပြန်ရင် မူရင်း အချိန်တွေ အတိုင်း *_my.srt ဖိုင် ရမယ်; စာသားချည်း ဘာသာပြန်ရင် ၁၂,၀၀၀ လုံးအထိ, .txt ဖိုင်; Recap ရင် *_recap.txt ဖိုင်, "TTS မှာ သုံးမယ်" နှိပ်ရင် အသံ တန်း ထုတ်လို့ရပါတယ်။';
  if(s.includes('srt tool')||s.includes('srt သုံးနည်း'))return 'SRT Tool သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "SRT Tool" card ဖွင့်\n၂။ SRT ဖိုင်တင် (သို့) SRT စာသား paste လုပ်\n၃။ လုပ်ချင်တာ ရွေး: အချိန် စက္ကန့် ရွှေ့ (ရှေ့/နောက်) · SRT ↔ VTT ပြောင်း\n၄။ "Download ဆွဲမယ်" နှိပ်ရင် subtitle.srt / subtitle.vtt ဖိုင် ရမယ်။\nSRT ကနေ စာသားချည်း ထုတ်ချင်ရင် "SRT → စာသား သပ်သပ်" Tool သပ်သပ် ရှိပါတယ်။';
  if(s.includes('အသံမှ စာသား')||s.includes('whisper stt')||(s.includes('whisper')&&(s.includes('website')||s.includes('studio')||s.includes('tool')||s.includes('သုံးနည်း'))))return 'အသံမှ စာသား (Whisper, website) သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "အသံမှ စာသား (Whisper)" card ဖွင့်\n၂။ Model ရွေး: Tiny (မြန်, ပေါ့) / Base (ပိုမှန်)\n၃။ MP3 / WAV / M4A ဖိုင်တင် → "စာသား ပြောင်းမယ်" နှိပ်\n၄။ ရလာတဲ့ စာသား + SRT Download ဆွဲလို့ရပါတယ်။\nပထမဆုံး အကြိမ် model download အတွက် internet လိုတယ်, နောက်ပိုင်း browser ထဲမှာပဲ မောင်းတယ်, ဖိုင် server မတက်ဘူး။ သတိ: မြန်မာ တိုက်ရိုက် မှတ်တာ အားနည်းနိုင်တယ် (English က ပိုမှန်) — မြန်မာ SRT လိုရင် AI စာသား Tool နဲ့ ဘာသာပြန်တာ, ဒါမှမဟုတ် Recap app ရဲ့ Whisper Auto-SRT → Gemini Translate လမ်းကြောင်း သုံးပါ။';
