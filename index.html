@@ -589,7 +589,12 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <button type="button" id="mmKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
       <button type="button" id="mmBalBtn" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:0 15px;font-weight:700;cursor:pointer;white-space:nowrap">Balance စစ်မယ်</button>
     </div>
-    <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် Messenger / Viber / Telegram ကနေ တောင်းပါ။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:9px;flex-wrap:wrap">
+      <button type="button" id="mmRegBtn" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer;white-space:nowrap">Trial Key အခမဲ့ ရယူမယ်</button>
+      <button type="button" id="mmRegCopy" style="display:none;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer">Key ကူးမယ် 📋</button>
+      <span id="mmRegText" style="color:var(--mut);font-size:13px"></span>
+    </div>
+    <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Trial Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
   </div>
   <div class="genbar">
     <div class="info"><b id="genVoice">သီဟ · 1.0x</b></div>
@@ -1831,6 +1836,15 @@ function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.av
     try{const r=await fetch(VOX_API+'/balance',{headers:{'X-User-Key':k}});if(!r.ok)throw new Error('http '+r.status);const j=await r.json();t.textContent='Balance: '+j.balance_points.toLocaleString()+' Points · ဒီနေ့ Free ကျန်: '+j.free_remaining_today+' / '+j.free_daily_chars+' စာလုံး';}
     catch(e){t.textContent='Balance စစ်လို့ မရပါ — Key ကို ပြန်စစ်ပြီး ပြန်စမ်းပါ။'}
   });
+  document.getElementById('mmRegBtn').addEventListener('click',async()=>{
+    const t=document.getElementById('mmRegText');const cp=document.getElementById('mmRegCopy');const btn=document.getElementById('mmRegBtn');
+    if(mmInp.value.trim()){t.textContent='Key ရှိပြီးသားပါ — အဟောင်း ဆုံးရှုံးမှာ စိုးလို့ အသစ် မထုတ်ပေးဘူး။ အသစ် လိုရင် အရင် Key ကို ကူးသိမ်းပြီး ဖျက်ပြီးမှ နှိပ်ပါ။';return}
+    btn.disabled=true;t.textContent='Trial Key ထုတ်နေတယ်...';
+    try{const r=await fetch(VOX_API+'/register',{method:'POST'});if(r.status===429){t.textContent='ဒီနေ့ Trial Key ၃ ခု ပြည့်သွားပြီ — မနက် ပြန်စမ်းပါ။';btn.disabled=false;return}if(!r.ok)throw new Error('http '+r.status);const j=await r.json();mmInp.value=j.user_key;try{localStorage.setItem('csmm-voice-key',j.user_key)}catch(e){};mmInp.type='text';t.textContent='ရပြီ ✓ Trial Key: '+j.user_key+' — ကူးပြီး သိမ်းထားပါ / screenshot ရိုက်ထားပါ။ Browser data ရှင်းရင် ပြန်ရမှာ မဟုတ်ဘူး (server မှာ hash ဘဲ ရှိလို့)။';cp.style.display='inline-block';}
+    catch(e){t.textContent='Key ထုတ်လို့ မရပါ — ခဏနေမှ ပြန်စမ်းပါ။'}
+    btn.disabled=false;
+  });
+  document.getElementById('mmRegCopy').addEventListener('click',async()=>{const t=document.getElementById('mmRegText');try{await navigator.clipboard.writeText(mmInp.value.trim());t.textContent='Key ကူးပြီးပြီ ✓ — သိမ်းထားပါ။';}catch(e){mmInp.type='text';mmInp.select();t.textContent='Key ကို ရွေးပြီး ကူးပါ။';}});
   const lb=document.getElementById('btnListen'),rp=document.getElementById('btnPlayRow');
   const togglePlay=()=>{if(!ttsAudio)return;if(ttsAudio.paused)ttsAudio.play();else ttsAudio.pause()};
   lb.addEventListener('click',togglePlay);
