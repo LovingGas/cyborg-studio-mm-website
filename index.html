@@ -1965,7 +1965,7 @@ async function generate(){
           else ttsSetStatus('Server error — ခဏနေမှာ ပြန်စမ်းကြည့်ပါ။'+(d?' ('+d.slice(0,120)+')':''));
           if(gb)gb.disabled=false;return}
         const blob=await res.blob();stop(true);
-        ttsWire(blob,'cyborgmm_'+vid+'.mp3','MP3');
+        ttsWire(blob,'cyborgmm_'+vid+'.wav','WAV');
         ttsSetStatus('ရပြီ ✓ CyborgMM ('+ttsSel.name+') နဲ့ ထုတ်ပြီးပြီ။');
         try{const br=await fetch('https://cyborg-voxcpm-proxy.lovinggas.workers.dev/balance',{headers:{'X-User-Key':key}});if(br.ok){const bj=await br.json();document.getElementById('mmBalText').textContent='Balance: '+bj.balance_points.toLocaleString()+' Points · ဒီနေ့ Free ကျန်: '+bj.free_remaining_today+' / '+bj.free_daily_chars+' စာလုံး';}}catch(e){}
         if(gb)gb.disabled=false;return;
