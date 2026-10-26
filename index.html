@@ -416,7 +416,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 
   <section class="blk">
     <div class="sec-h">🎙️ CyborgMM Burmese Voices — အသံ နမူနာများ</div>
-    <div class="sec-s">ကိုယ်ပိုင် အသံ ၂၀ လုံး — အသံနာမည်ဘေးက ▶ နှိပ်ပြီး နမူနာ နားထောင်လို့ရပါတယ်။ ကိုယ်တိုင် ထုတ်လုပ်ထားတဲ့ အသံများဖြစ်လို့၊ တခြားသူ၏ အသံကို ယူပြီး clone လုပ်ထားခြင်း မရှိပါ။</div>
+    <div class="sec-s">ကိုယ်ပိုင် အသံ ၂၀ လုံး — အသံနာမည်ဘေးက ▶ နှိပ်ပြီး နမူနာ နားထောင်လို့ရပါတယ်။ ကိုယ်တိုင် ထုတ်လုပ်ထားတဲ့ အသံများဖြစ်လို့၊ တခြားသူ၏ အသံကို ယူပြီး clone လုပ်ထားခြင်း မရှိပါ။ Commercial Rights ကို Cyborg Studio MM က ပိုင်ဆိုင်တာမို့၊ ဒီအသံတွေနဲ့ ထုတ်တဲ့ အသံဖိုင်တွေကို YouTube၊ TikTok၊ Facebook ဗီဒီယို၊ ကြော်ငြာတွေမှာ စိတ်ချစွာ သုံးနိုင်ပါတယ်။ တခြားသူက ဖျက်လို့၊ ပြန်သိမ်းလို့ မရဘူး။</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:14px">
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><b style="font-size:15.5px">ကိုစိုးမိုး</b><span style="color:var(--mut);font-size:13px">ဇာတ်ကြောင်းပြောသူ</span></div><audio class="mmvoice" controls preload="none" src="voices/narrator.mp3" style="width:100%;margin-top:8px"></audio></div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><b style="font-size:15.5px">မောင်လင်းထက်</b><span style="color:var(--mut);font-size:13px">လူငယ် ကျား</span></div><audio class="mmvoice" controls preload="none" src="voices/young_male.mp3" style="width:100%;margin-top:8px"></audio></div>
@@ -479,14 +479,14 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div>
       <div class="card">
         <h3><span class="n">1</span><span data-en="Type your text">စာသား ရိုက်ပါ</span></h3>
-        <div class="hint" data-en="Myanmar or English — up to 1,000 characters per generate (Free and Gemini voices).">မြန်မာ / English ရတယ် — တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ (Free အသံရော Gemini အသံရော)။</div>
+        <div class="hint" data-en="Myanmar or English — up to 1,000 characters per generate (Free and Gemini voices).">မြန်မာ / English ရတယ် — တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ (Free, Gemini, CyborgMM အသံအားလုံး)။</div>
         <textarea id="txt" oninput="updCount()" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — တစ်ခါတုန်းက ရွာလေးတစ်ရွာမှာ...">တစ်ခါတုန်းက တောင်ပေါ်ရွာလေးတစ်ရွာမှာ မောင်နှမ နှစ်ယောက် နေထိုင်ကြတယ်။ တစ်နေ့မှာတော့ သူတို့ဘဝကို ပြောင်းလဲသွားစေမယ့် ဖြစ်ရပ်တစ်ခု ဖြစ်ပွားခဲ့ပါတယ်။</textarea>
         <div class="meta"><span id="ccount">0 / 1,000</span><span id="dur" data-en="Est. ~0 sec">ခန့်မှန်း ~၀ စက္ကန့်</span></div>
       </div>
       <div class="card">
         <h3><span class="n">2</span><span data-en="Choose a voice">အသံ ရွေးပါ</span></h3>
         <div class="hint" data-en="Tap a voice chip. Press ▶ to hear a sample.">အသံ chip ကို နှိပ်ရွေးပါ။ ▶ နှိပ်ရင် နမူနာ နားထောင်လို့ရတယ်။</div>
-                <div class="glabel">Gemini TTS · <small style="color:var(--mut);font-weight:500">အသံ ၃၀ လုံး · မြန်၊ ဈေးသက်သာ</small></div>
+                <div class="glabel">Gemini TTS · <small style="color:var(--mut);font-weight:500">အသံ ၃၀ လုံး</small></div>
         <div class="chips" data-group="voice">
           <button class="chip"><span class="ava">Z</span>Zephyr <small>မ · တောက်ပ</small></button>
           <button class="chip"><span class="ava">P</span>Puck <small>ကျား · တက်ကြွ</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
@@ -524,6 +524,29 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
           <button class="chip sel"><span class="ava">သီ</span>သီဟ <small>ကျား · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
           <button class="chip"><span class="ava">နီ</span>နီလာ <small>မ · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
         </div>
+        <div class="glabel">CyborgMM Burmese Voices · <small style="color:var(--mut);font-weight:500">ကိုယ်ပိုင် အသံ ၂၀ လုံး · User Key လို</small></div>
+        <div class="chips" data-group="voice">
+          <button class="chip" data-vid="narrator">ကိုစိုးမိုး <small>ဇာတ်ကြောင်းပြောသူ</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'narrator')">▶</span></button>
+          <button class="chip" data-vid="young_male">မောင်လင်းထက် <small>လူငယ် ကျား</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'young_male')">▶</span></button>
+          <button class="chip" data-vid="young_female">သီရိမေ <small>လူငယ် မ</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'young_female')">▶</span></button>
+          <button class="chip" data-vid="middle_male">ဦးကျော်ဇင် <small>လူလတ် ကျား</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'middle_male')">▶</span></button>
+          <button class="chip" data-vid="middle_female">ဒေါ်မေသစ် <small>လူလတ် မ</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'middle_female')">▶</span></button>
+          <button class="chip" data-vid="grandpa">အဘိုးထွန်း <small>အဘိုး</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'grandpa')">▶</span></button>
+          <button class="chip" data-vid="grandma">အဖွားမြ <small>အဖွား</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'grandma')">▶</span></button>
+          <button class="chip" data-vid="kid_male">မောင်ပိုင် <small>ကျောင်းသားကောင်လေး</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'kid_male')">▶</span></button>
+          <button class="chip" data-vid="kid_female">ရတနာ <small>ကျောင်းသူလေး</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'kid_female')">▶</span></button>
+          <button class="chip" data-vid="news">အောင်နိုင် <small>သတင်း</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'news')">▶</span></button>
+          <button class="chip" data-vid="dhamma">ဦးသုခ <small>တရား</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'dhamma')">▶</span></button>
+          <button class="chip" data-vid="arrogant_male">ကိုမာန် <small>မာန်ကြီး ကျား</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'arrogant_male')">▶</span></button>
+          <button class="chip" data-vid="arrogant_female">မမာန် <small>မာန်ကြီး မ</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'arrogant_female')">▶</span></button>
+          <button class="chip" data-vid="ghost">အရိပ် <small>သရဲ</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'ghost')">▶</span></button>
+          <button class="chip" data-vid="villain">ကိုမိုက် <small>ဗီလိန်</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'villain')">▶</span></button>
+          <button class="chip" data-vid="comedy">ကိုရယ် <small>ဟာသ</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'comedy')">▶</span></button>
+          <button class="chip" data-vid="sad">မလွမ်း <small>ဝမ်းနည်း</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'sad')">▶</span></button>
+          <button class="chip" data-vid="teacher">ဆရာထွန်း <small>ဆရာ</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'teacher')">▶</span></button>
+          <button class="chip" data-vid="teacher_sweet">ဆရာမချို <small>ဆရာမ</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'teacher_sweet')">▶</span></button>
+          <button class="chip" data-vid="robot">မောင်စက် <small>စက်ရုပ်</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'robot')">▶</span></button>
+        </div>
         <div class="glabel" data-en="Speed">အသံ အမြန်နှုန်း</div>
         <div class="chips" data-group="speed">
           <button class="chip">0.5x</button><button class="chip">0.75x</button><button class="chip sel">1.0x <small>ပုံမှန်</small></button><button class="chip">1.25x</button><button class="chip">1.5x</button>
@@ -560,6 +583,15 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <button type="button" id="gKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
     </div>
     <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
+  </div>
+  <div class="card" id="mmKeyWrap" style="display:none;margin-bottom:14px">
+    <h3><span class="n">🔑</span>CyborgMM User Key <small style="color:var(--mut);font-weight:500">ကိုယ်ပိုင် အသံ ထုတ်မယ်</small></h3>
+    <div style="display:flex;gap:8px;align-items:stretch">
+      <input type="password" id="mmKey" class="tin" placeholder="CyborgMM User Key ထည့်ပါ" autocomplete="off" spellcheck="false">
+      <button type="button" id="mmKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
+      <button type="button" id="mmBalBtn" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:0 15px;font-weight:700;cursor:pointer;white-space:nowrap">Balance စစ်မယ်</button>
+    </div>
+    <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် Messenger / Viber / Telegram ကနေ တောင်းပါ။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
   </div>
   <div class="genbar">
     <div class="info"><b id="genVoice">သီဟ · 1.0x</b></div>
@@ -1763,6 +1795,8 @@ function updCount(){const t=document.getElementById('txt').value;document.getEle
 updCount();
 let playing=false;
 function playSample(el){playing=!playing;const old=el.textContent;el.textContent=playing?'❚❚':'▶';setTimeout(()=>{el.textContent=old==='▶'||old.includes('Listen')?'▶':old;playing=false},1600)}
+let mmSampleAudio=null,mmSampleBtn=null;
+function playMMVoice(el,vid){try{if(mmSampleAudio&&!mmSampleAudio.paused&&mmSampleBtn===el){mmSampleAudio.pause();el.textContent='▶';return}if(mmSampleAudio)mmSampleAudio.pause();document.querySelectorAll('.miniplay').forEach(b=>{if(b!==el&&b.textContent==='❚❚')b.textContent='▶'});mmSampleAudio=new Audio('voices/'+vid+'.mp3');mmSampleBtn=el;el.textContent='❚❚';mmSampleAudio.addEventListener('ended',()=>{el.textContent='▶'});mmSampleAudio.addEventListener('pause',()=>{el.textContent='▶'});mmSampleAudio.play().catch(()=>{el.textContent='▶'})}catch(e){el.textContent='▶'}}
 // ===== Studio TTS: real generation — Gemini BYOK via proxy + Free (Edge) via proxy =====
 const TTS_API='https://cyborg-edge-tts.lovinggas.workers.dev';
 let ttsSel={group:'free',name:'သီဟ'};
@@ -1771,20 +1805,34 @@ function ttsSetStatus(m){const s=document.getElementById('ttsStatus');if(s)s.tex
 function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.ava,small,.miniplay').forEach(x=>x.remove());return c.textContent.trim()}
 (function(){
   const groups=document.querySelectorAll('#scr-tts .chips[data-group="voice"]');
-  const kinds=['gm','free'];
+  const kinds=['gm','free','mm'];
   groups.forEach((g,i)=>{g.dataset.vgroup=kinds[i]||'';
     g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
       groups.forEach(o=>{if(o!==g)o.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'))});
-      ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(c)};
+      ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(c),vid:c.dataset.vid||''};
       document.getElementById('gkeyWrap').style.display=ttsSel.group==='gm'?'block':'none';
+      document.getElementById('mmKeyWrap').style.display=ttsSel.group==='mm'?'block':'none';
     })});
   const sel=document.querySelector('#scr-tts .chips[data-group="voice"] .chip.sel');
   if(sel){const g=sel.closest('.chips');if(g&&g.dataset.vgroup)ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(sel)}}
   document.getElementById('gkeyWrap').style.display=ttsSel.group==='gm'?'block':'none';
+  document.getElementById('mmKeyWrap').style.display=ttsSel.group==='mm'?'block':'none';
   const inp=document.getElementById('gKey');
   try{const saved=localStorage.getItem('csmm-gemini-key');if(saved)inp.value=saved}catch(e){}
   inp.addEventListener('input',()=>{try{localStorage.setItem('csmm-gemini-key',inp.value.trim())}catch(e){}});
   document.getElementById('gKeyEye').addEventListener('click',()=>{inp.type=inp.type==='password'?'text':'password';document.getElementById('gKeyEye').textContent=inp.type==='password'?'👁️':'🙈'});
+  const VOX_API='https://cyborg-voxcpm-proxy.lovinggas.workers.dev';
+  const mmInp=document.getElementById('mmKey');
+  try{const s=localStorage.getItem('csmm-voice-key');if(s)mmInp.value=s}catch(e){}
+  mmInp.addEventListener('input',()=>{try{localStorage.setItem('csmm-voice-key',mmInp.value.trim())}catch(e){}});
+  document.getElementById('mmKeyEye').addEventListener('click',()=>{mmInp.type=mmInp.type==='password'?'text':'password';document.getElementById('mmKeyEye').textContent=mmInp.type==='password'?'👁️':'🙈'});
+  document.getElementById('mmBalBtn').addEventListener('click',async()=>{
+    const k=mmInp.value.trim();const t=document.getElementById('mmBalText');
+    if(!k){t.textContent='Key အရင် ထည့်ပေးပါ။';return}
+    t.textContent='Balance စစ်နေတယ်...';
+    try{const r=await fetch(VOX_API+'/balance',{headers:{'X-User-Key':k}});if(!r.ok)throw new Error('http '+r.status);const j=await r.json();t.textContent='Balance: '+j.balance_points.toLocaleString()+' Points · ဒီနေ့ Free ကျန်: '+j.free_remaining_today+' / '+j.free_daily_chars+' စာလုံး';}
+    catch(e){t.textContent='Balance စစ်လို့ မရပါ — Key ကို ပြန်စစ်ပြီး ပြန်စမ်းပါ။'}
+  });
   const lb=document.getElementById('btnListen'),rp=document.getElementById('btnPlayRow');
   const togglePlay=()=>{if(!ttsAudio)return;if(ttsAudio.paused)ttsAudio.play();else ttsAudio.pause()};
   lb.addEventListener('click',togglePlay);
@@ -1879,6 +1927,38 @@ async function generate(){
     }catch(e){stop(false);ttsSetStatus('ချိတ်ဆက်လို့ မရပါ — internet စစ်ပြီး ပြန်စမ်းပါ။')}
     if(gb)gb.disabled=false;return;
   }
+  // CyborgMM Burmese Voices via Points proxy — key-gated, cold-start retry
+  if(ttsSel.group==='mm'){
+    const n=[...text].length;
+    if(n>1000){ttsSetStatus('CyborgMM အသံ မို့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+    const key=document.getElementById('mmKey').value.trim();
+    if(!key){const w=document.getElementById('mmKeyWrap');w.scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('mmKey').focus({preventScroll:true});ttsSetStatus('CyborgMM အသံ သုံးဖို့ ကိုယ့် User Key အရင် ထည့်ပေးပါ (Key ကတ်ထဲမှာ)။');return}
+    const vid=ttsSel.vid||'narrator';
+    const stop=ttsProgress();if(gb)gb.disabled=true;
+    let lastErr='';
+    for(let attempt=0;attempt<2;attempt++){
+      try{
+        if(attempt>0)ttsSetStatus('Server ပူနေတယ် (cold start), ပြန်စမ်းနေတယ် — ၁–၂ မိနစ် စောင့်ပါ...');
+        const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),150000);
+        const res=await fetch('https://cyborg-voxcpm-proxy.lovinggas.workers.dev/tts',{method:'POST',headers:{'Content-Type':'application/json','X-User-Key':key},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
+        clearTimeout(timer);
+        if(res.status===524||res.status===504){lastErr='cold start';if(attempt===0)continue;throw new Error('cold start')}
+        if(!res.ok){let d='';try{d=(await res.json()).detail||''}catch(_){}
+          stop(false);
+          if(res.status===401)ttsSetStatus('Key မှားနေပါတယ် — Key ကို ပြန်စစ်ပါ (သို့) Messenger / Viber / Telegram ကနေ Key ပြန်တောင်းပါ။');
+          else if(res.status===402)ttsSetStatus('Points မလုံလောက်ဘူး — Balance စစ်ပြီး Points ထည့်ခိုင်းပါ (Messenger / Viber / Telegram)။');
+          else if(res.status===400)ttsSetStatus('အသံ / စာသား မှားနေပါတယ် — အသံ ပြန်ရွေး၊ စာသား ၁,၀၀၀ အတွင်း ရှိလား စစ်ပါ။');
+          else ttsSetStatus('Server error — ခဏနေမှာ ပြန်စမ်းကြည့်ပါ။'+(d?' ('+d.slice(0,120)+')':''));
+          if(gb)gb.disabled=false;return}
+        const blob=await res.blob();stop(true);
+        ttsWire(blob,'cyborgmm_'+vid+'.mp3','MP3');
+        ttsSetStatus('ရပြီ ✓ CyborgMM ('+ttsSel.name+') နဲ့ ထုတ်ပြီးပြီ။');
+        try{const br=await fetch('https://cyborg-voxcpm-proxy.lovinggas.workers.dev/balance',{headers:{'X-User-Key':key}});if(br.ok){const bj=await br.json();document.getElementById('mmBalText').textContent='Balance: '+bj.balance_points.toLocaleString()+' Points · ဒီနေ့ Free ကျန်: '+bj.free_remaining_today+' / '+bj.free_daily_chars+' စာလုံး';}}catch(e){}
+        if(gb)gb.disabled=false;return;
+      }catch(e){if(attempt===0&&(e.name==='AbortError'||lastErr==='cold start')){await new Promise(r=>setTimeout(r,3000));continue}stop(false);ttsSetStatus('ချိတ်ဆက်လို့ မရပါ / Server ပူနေတယ် — ခဏနေမှ ပြန်စမ်းကြည့်ပါ (အောင်မြင်ရင် Points ဖြတ်မှာ မဟုတ်ဘူး၊ မအောင်ရင် Points မဖြတ်ဘူး)။');if(gb)gb.disabled=false;return}
+    }
+    if(gb)gb.disabled=false;return;
+  }
   // Free voices (Thiha / Nilar) via /web-tts — same pattern as eGen()
   if([...text].length>1000){ttsSetStatus('Free အသံ မို့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
   const vapi=ttsSel.name==='နီလာ'?'my-MM-NilarNeural':'my-MM-ThihaNeural';
@@ -1943,6 +2023,7 @@ function botReply(q){const s=q.toLowerCase();
  if((q.includes('စာတန်း')||s.includes('subtitle'))&&(q.includes('ပိတ်')||q.includes('ပုံစံ')||s.includes('font')||q.includes('အရွယ်')||s.includes('player')||s.includes('burn')))return 'စာတန်း ၃ မျိုး တစ်ပြိုင်တည်း ထွက်ပါတယ် ခင်ဗျာ — ၁။ Burn-in (video ထဲ မြှုပ်ထား၊ ပုံစံ အမြဲ မှန်) ၂။ SRT ဖိုင် သပ်သပ် (YouTube အတွက်) ၃။ Embedded "Myanmar" track (MX Player / VLC ရဲ့ subtitle menu မှာ ဖွင့်/ပိတ် လို့ရ)။\nVideo ထဲ စာတန်း လုံးဝ မပါချင်ရင် Step 5 မှာ Subtitle ကို ပိတ်ထားပါ (SRT ဖိုင်ကတော့ သပ်သပ် ရနေမှာပါ)။\nFont (Pyidaungsu မူရင်း / Padauk / Noto) နဲ့ စာလုံး အရွယ်ကိုလည်း Step 5 မှာပဲ ချိန်ရပါတယ်။';
  if(q.includes('စာတန်း')||s.includes('subtitle')||(s.includes('srt')&&(s.includes('recap')||q.includes('ဗီဒီယို')||q.includes('step'))))return 'စာတန်း (SRT) ရနည်း ၃ ခု ရှိပါတယ် ခင်ဗျာ။\n၁။ SRT ဖိုင် ရှိရင် — Step 1 မှာ video နဲ့ တွဲ ထည့်ပါ (သို့) Step 2 မှာ SRT စာသားကို paste လုပ်ပြီး "SRT ဖတ်မယ်" နှိပ်ပါ\n၂။ SRT မရှိရင် — Step 2 ရဲ့ Auto-SRT (Whisper) က video အသံကနေ စာတန်း အလိုအလျောက် ထုတ်ပေးပါတယ်\n၃။ ပြီးရင် Step 2 မှာပဲ Gemini "မြန်မာ ပြန်မယ်" နဲ့ ဘာသာပြန် (သို့) "AI Recap ရေးမယ်" နဲ့ recap script ရေးလို့ ရပါတယ်။';
  if(s.includes('fish')||s.includes('my voices')||(s.includes('clone')&&s.includes('recap')))return 'App ထဲ Clone က Step 3 ရဲ့ My Voices မှာပါ ခင်ဗျာ — Fish Audio (သို့) ElevenLabs နဲ့ နမူနာ အသံ (၁၀ စက္ကန့် – ၁ မိနစ်) တင် (သို့) Mic နဲ့ တိုက်ရိုက် သွင်းပြီး clone လုပ်လို့ရပါတယ်။\nSettings မှာ သက်ဆိုင်ရာ key အရင် ထည့်ထားရပါမယ်၊ clone အသံ ထုတ်တာလည်း internet လိုပါတယ်။ ထုတ်ပြီးသား အပိုင်းတွေကတော့ cache ဖြစ်သွားပါတယ်။';
+ if((q.includes('အသံ ၃၀')||q.includes('အသံ 30')||(s.includes('gemini')&&(q.includes('ဘယ် အသံ')||q.includes('ဘာအတွက်')))||q.includes('ဘယ် အသံက ဘာအတွက်')))return 'Gemini အသံ ၃၀ မျိုး လမ်းညွှန် ခင်ဗျာ — App ရဲ့ AI Help အတိုင်းပဲ၊ ကျား ၁၆ မျိုး အရင်၊ မ ၁၄ မျိုး နောက် စီထားပါတယ်။\n• သတင်း တင်ဆက်မှု: Charon, Rasalgethi, Sadaltager, Iapetus, Erinome\n• ကြော်ငြာ: Puck, Laomedeia, Sadachbia, Autonoe, Zephyr, Leda, Pulcherrima\n• ဇာတ်လမ်း / Recap narration: Kore, Orus, Alnilam, Schedar, Gacrux, Despina, Vindemiatrix, Sulafat, Achernar\n• ပေါ့ပေါ့ပါးပါး / လူငယ်: Umbriel, Callirrhoe, Zubenelgenubi, Fenrir, Aoede\n• ဇာတ်ကောင် / အသံထူး: Algenib, Algieba, Achird, Enceladus\nအကြံပြုချက်သာ ဖြစ်ပါတယ် — ကိုယ်ကြိုက်တဲ့ အသံကို ရွေးနိုင်ပါတယ်။ App ထဲမှာတော့ Step 3 မှာ အသံ ရွေးတာနဲ့ အဲ့အသံရဲ့ အသုံးဝင်ပုံကို တန်း မြင်ရပါတယ်။';
  if(q.includes('နီလာ')||q.includes('သီဟ')||s.includes('elevenlabs')||s.includes('azure')||(q.includes('အသံ')&&(q.includes('မထွက်')||q.includes('မရ')||q.includes('ရွေး'))))return 'Step 3 မှာ အသံ မိသားစု ရွေးပြီး segment တွေအတွက် အသံ ထုတ်ရပါတယ် ခင်ဗျာ — Off (narration မပါ) · Edge TTS သီဟ/နီလာ (internet လို) · Gemini TTS (Gemini key လို) · ElevenLabs / Azure (ကိုယ်ပိုင် key လို) · My Voices clone (internet လို)။\nထုတ်ပြီးသား segment က cache ဖြစ်တာမို့ ပြန် မထုတ်ရပါ။ အသံ မထွက်ရင် internet ချိတ်ထားတာနဲ့ ရွေးထားတဲ့ အသံရဲ့ key ကို Settings မှာ စစ်ပါ။\nသီဟ/နီလာက online အသံတွေပါ — ဒေါင်းပြီး offline သုံးလို့ မရပါဘူး။ နီလာက English စာလုံး မပီရင် မြန်မာ အသံထွက်နဲ့ ရေးပါ (ဥပမာ Cyborg → ဆိုက်ဘာဂ်)။';
  if(s.includes('poster')||q.includes('ပိုစတာ')||s.includes('thumbnail'))return 'Poster / Thumbnail က Step 7 (Export) screen ရဲ့ Poster ခလုတ် (သို့) Home မှာ project card ရဲ့ menu ကနေ ဝင်ရပါတယ် ခင်ဗျာ။\n၁။ Scene frame တစ်ခု (သို့) Gallery က ပုံ ရွေးပါ\n၂။ ခေါင်းစဉ် (Title) နဲ့ Tagline ရေးပါ — preview ပေါ်မှာ လက်နဲ့ ဆွဲ ရွှေ့လို့ရပါတယ်\n၃။ Style preset / အရောင် / ဘောင် / Format (9:16 Poster သို့ 16:9 Thumbnail) ရွေးပြီး ထုတ်ပါ — Downloads ထဲ သိမ်း / Share လုပ်နိုင်ပါတယ်။ Logo က Step 6 (Overlay) မှာ ထည့်ထားတဲ့ logo ကို သုံးပါတယ်။';
  if(s.includes('batch'))return 'Batch Queue က Step 7 (Export) screen ကနေ ဝင်ရပါတယ် ခင်ဗျာ — video အများကြီးကို ဒီ project ရဲ့ style (အရောင် / ratio / logo / BGM) အတိုင်း တစ်ခုပြီး တစ်ခု ဆက်တိုက် render ထုတ်ပေးတာပါ။\n⚠️ Batch မှာ မူရင်း video အသံ အတိုင်းပဲ ထွက်ပါတယ် — narration မပါပါ။ Narration ပါချင်ရင် project တစ်ခုချင်းစီ ပုံမှန် လမ်းကြောင်းနဲ့ ထုတ်ပါ။';
