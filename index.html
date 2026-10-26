@@ -1793,7 +1793,7 @@ function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classLis
 // chips: single-select per group + update genbar
 document.querySelectorAll('.chips').forEach(g=>{g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');updGen()})});
 function selText(group){const g=document.querySelector(`.chips[data-group="${group}"] .sel`);return g?g.textContent.replace('▶','').trim().split('·')[0].trim():''}
-function updGen(){const v=selText('voice'),s=selText('speed');if(v||s)document.getElementById('genVoice').textContent=`${v||'သီဟ'} · ${s||'1.0x'}`}
+function updGen(){const v=(typeof ttsSel!=='undefined'&&ttsSel.name)?ttsSel.name:selText('voice'),s=selText('speed');if(v||s)document.getElementById('genVoice').textContent=`${v||'သီဟ'} · ${s||'1.0x'}`}
 function updCount(){const t=document.getElementById('txt').value;document.getElementById('ccount').textContent=`${t.length.toLocaleString()} / 1,000`;const sec=Math.max(1,Math.round(t.length/13));document.getElementById('dur').textContent=`ခန့်မှန်း ~${sec} စက္ကန့်`}
 updCount();
 let playing=false;
@@ -1802,7 +1802,7 @@ let mmSampleAudio=null,mmSampleBtn=null;
 function playMMVoice(el,vid){try{if(mmSampleAudio&&!mmSampleAudio.paused&&mmSampleBtn===el){mmSampleAudio.pause();el.textContent='▶';return}if(mmSampleAudio)mmSampleAudio.pause();document.querySelectorAll('.miniplay').forEach(b=>{if(b!==el&&b.textContent==='❚❚')b.textContent='▶'});mmSampleAudio=new Audio('voices/'+vid+'.mp3');mmSampleBtn=el;el.textContent='❚❚';mmSampleAudio.addEventListener('ended',()=>{el.textContent='▶'});mmSampleAudio.addEventListener('pause',()=>{el.textContent='▶'});mmSampleAudio.play().catch(()=>{el.textContent='▶'})}catch(e){el.textContent='▶'}}
 // ===== Studio TTS: real generation — Gemini BYOK via proxy + Free (Edge) via proxy =====
 const TTS_API='https://cyborg-edge-tts.lovinggas.workers.dev';
-let ttsSel={group:'free',name:'သီဟ'};
+var ttsSel={group:'free',name:'သီဟ'};
 let ttsAudio=null,ttsUrl='',ttsFile='';
 function ttsSetStatus(m){const s=document.getElementById('ttsStatus');if(s)s.textContent=m||''}
 function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.ava,small,.miniplay').forEach(x=>x.remove());return c.textContent.trim()}
@@ -1815,6 +1815,7 @@ function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.av
       ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(c),vid:c.dataset.vid||''};
       document.getElementById('gkeyWrap').style.display=ttsSel.group==='gm'?'block':'none';
       document.getElementById('mmKeyWrap').style.display=ttsSel.group==='mm'?'block':'none';
+      updGen();
     })});
   const sel=document.querySelector('#scr-tts .chips[data-group="voice"] .chip.sel');
   if(sel){const g=sel.closest('.chips');if(g&&g.dataset.vgroup)ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(sel)}}
