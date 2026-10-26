@@ -1730,6 +1730,7 @@ function icGo(){
   </div>
   <div class="bot-q">
     <button onclick="askBot('အသံ ဘယ်လို ထုတ်ရမလဲ?')">အသံ ထုတ်နည်း</button>
+    <button onclick="askBot('CyborgMM Burmese Voices ဆိုတာ ဘာလဲ?')">CyborgMM အသံ ၂၀</button>
     <button onclick="askBot('ဈေးနှုန်း သိချင်တယ်')">ဈေးနှုန်း</button>
     <button onclick="askBot('Recap ဘယ်လို လုပ်ရမလဲ?')">Recap လုပ်နည်း</button>
     <button onclick="askBot('Recap app ဘယ်လို သုံးရမလဲ')">Recap app သုံးနည်း</button>
@@ -1994,6 +1995,9 @@ function guideSeek(t){const v=document.getElementById('guideVid');if(!v)return;v
 function botReply(q){const s=q.toLowerCase();
  // Recap App / POS price guard — never state a price for either product
  if((s.includes('recap')||s.includes('app')||/\bpos\b/.test(s))&&(q.includes('ဈေး')||s.includes('price')||q.includes('ဘယ်လောက်')||q.includes('ဝယ်')))return /\bpos\b/.test(s)&&!s.includes('recap')?'POS ရဲ့ ဈေးနှုန်း အသေးစိတ်ကို ဒီမှာ မပြောထားပါဘူး ခင်ဗျာ — Customer Service ကို Messenger / Viber / Telegram ကနေ ဆက်သွယ် မေးပေးပါ 🙏':'Recap app ကို ဒီ website ရဲ့ "Recap App" tab ကနေ ဆွဲလို့ ရပါတယ် ခင်ဗျာ။\nLicense ဈေးနှုန်း အသေးစိတ်ကိုတော့ ဒီမှာ မပြောထားပါဘူး — Customer Service ကို Messenger / Viber / Telegram ကနေ ဆက်သွယ် မေးပေးပါ 🙏';
+ // ── CyborgMM Burmese Voices — intro (chip + general questions; rights
+ // keywords still fall through to the rights rule below) ──
+ if((s.includes('cyborgmm')||s.includes('burmese voices'))&&!(q.includes('မူပိုင်')||s.includes('commercial')||s.includes('copyright')))return 'CyborgMM Burmese Voices အကြောင်း ခင်ဗျာ —\nCyborg Studio MM က ကိုယ်တိုင် ထုတ်လုပ်ထားတဲ့ မြန်မာ အသံ ၂၀ လုံးပါ။ ဇာတ်ကြောင်းပြောသူ၊ တရား၊ သတင်း၊ ဆရာ/ဆရာမ၊ လူငယ်၊ အဘိုး/အဖွား စတဲ့ အသံ အမျိုးမျိုး ပါတယ်။\n🎁 အခမဲ့ စမ်းလို့ရတဲ့ ၃ သံ — ကိုစိုးမိုး (ဇာတ်ကြောင်းပြောသူ)၊ ဦးသုခ (တရား)၊ ဆရာမချို (ဆရာမ)။ တစ်နေ့ စာလုံး ၅၀၀ အထိ အခမဲ့ စမ်းနိုင်ပါတယ်။\n✅ Commercial Rights ကို Cyborg Studio MM က ပိုင်ဆိုင်တာမို့ ဒီအသံတွေနဲ့ ထုတ်တဲ့ အသံဖိုင်တွေကို YouTube၊ TikTok၊ Facebook ဗီဒီယို၊ ကြော်ငြာတွေမှာ စိတ်ချစွာ သုံးနိုင်ပါတယ်။\n🌐 စမ်းကြည့်ရန် — ဒီ page ရဲ့ Studio → CyborgMM Burmese Voices မှာ အသံ နမူနာတွေ နားထောင်ပြီး၊ Trial Key အခမဲ့ ယူပြီး အသံ ထုတ်ကြည့်လို့ရပါတယ် ခင်ဗျာ 🙏';
  // ── CyborgMM Burmese Voices — ownership / commercial rights ──
  if(s.includes('cyborgmm burmese')||s.includes('burmese voices')||q.includes('မူပိုင်')||s.includes('commercial')||s.includes('copyright')||q.includes('ကိုယ်ပိုင် အသံ')||q.includes('အသံ မူပိုင်'))return 'CyborgMM Burmese Voices အကြောင်း ခင်ဗျာ —\nဒီအသံ ၂၀ လုံးဟာ Cyborg Studio MM က ကိုယ်တိုင် ထုတ်လုပ်ထားတဲ့ အသံများဖြစ်ပါတယ်။ အခြား Voice Over အနုပညာရှင်များ၏ အသံကို ခွင့်ပြုချက်မရှိဘဲ ယူသုံး၊ Voice Clone လုပ်ထားခြင်း မရှိပါ။\nCommercial Rights ကို Cyborg Studio MM က ပိုင်ဆိုင်တာမို့၊ ဒီအသံတွေနဲ့ ထုတ်တဲ့ အသံဖိုင်တွေကို YouTube၊ TikTok၊ Facebook ဗီဒီယို၊ ကြော်ငြာတွေမှာ စိတ်ချစွာ သုံးနိုင်ပါတယ်။\nတခြားသူက ဖျက်လို့၊ ပြန်သိမ်းလို့ မရဘူး — သင့်အလုပ်ကို ရေရှည် စိတ်ချစွာ တည်ဆောက်နိုင်ပါတယ် ခင်ဗျာ 🙏';
  // ── Free Tools manuals — Batch 1 (Studio tools) ──
