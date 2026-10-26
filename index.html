@@ -408,6 +408,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div class="player">
       <div class="ttl"><span data-en="Voice Samples">အသံ နမူနာများ</span><span class="pill">LIVE PREVIEW</span></div>
       <div class="wave" id="wave"></div>
+      <div class="prow"><button class="play" onclick="playMMVoice(this,'narrator')">▶</button><div><b>ကိုစိုးမိုး</b><span data-en="CyborgMM · Free">CyborgMM · အခမဲ့</span></div><span class="tag">CyborgMM</span></div>
       <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>သီဟ</b><span data-en="Male · Free">ကျား · အခမဲ့</span></div><span class="tag">Free</span></div>
       <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>နီလာ</b><span data-en="Female · Free">မ · အခမဲ့</span></div><span class="tag">Free</span></div>
       <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>Gemini</b><span data-en="30 Voices">အသံ ၃၀ လုံး</span></div><span class="tag">Gemini TTS</span></div>
@@ -1801,7 +1802,7 @@ updCount();
 let playing=false;
 function playSample(el){playing=!playing;const old=el.textContent;el.textContent=playing?'❚❚':'▶';setTimeout(()=>{el.textContent=old==='▶'||old.includes('Listen')?'▶':old;playing=false},1600)}
 let mmSampleAudio=null,mmSampleBtn=null;
-function playMMVoice(el,vid){try{if(mmSampleAudio&&!mmSampleAudio.paused&&mmSampleBtn===el){mmSampleAudio.pause();el.textContent='▶';return}if(mmSampleAudio)mmSampleAudio.pause();document.querySelectorAll('.miniplay').forEach(b=>{if(b!==el&&b.textContent==='❚❚')b.textContent='▶'});mmSampleAudio=new Audio('voices/'+vid+'.mp3');mmSampleBtn=el;el.textContent='❚❚';mmSampleAudio.addEventListener('ended',()=>{el.textContent='▶'});mmSampleAudio.addEventListener('pause',()=>{el.textContent='▶'});mmSampleAudio.play().catch(()=>{el.textContent='▶'})}catch(e){el.textContent='▶'}}
+function playMMVoice(el,vid){try{if(mmSampleAudio&&!mmSampleAudio.paused&&mmSampleBtn===el){mmSampleAudio.pause();el.textContent='▶';return}if(mmSampleAudio)mmSampleAudio.pause();document.querySelectorAll('.miniplay,.play').forEach(b=>{if(b!==el&&b.textContent==='❚❚')b.textContent='▶'});mmSampleAudio=new Audio('voices/'+vid+'.mp3');mmSampleBtn=el;el.textContent='❚❚';mmSampleAudio.addEventListener('ended',()=>{el.textContent='▶'});mmSampleAudio.addEventListener('pause',()=>{el.textContent='▶'});mmSampleAudio.play().catch(()=>{el.textContent='▶'})}catch(e){el.textContent='▶'}}
 // ===== Studio TTS: real generation — Gemini BYOK via proxy + Free (Edge) via proxy =====
 const TTS_API='https://cyborg-edge-tts.lovinggas.workers.dev';
 var ttsSel={group:'free',name:'သီဟ'};
