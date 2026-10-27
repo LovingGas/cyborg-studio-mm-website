@@ -1955,8 +1955,8 @@ async function generate(){
     let lastErr='';
     for(let attempt=0;attempt<2;attempt++){
       try{
-        if(attempt>0)ttsSetStatus('Server ပူနေတယ် (cold start), ပြန်စမ်းနေတယ် — ၁–၂ မိနစ် စောင့်ပါ...');
-        const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),150000);
+        if(attempt>0)ttsSetStatus('Server ပူနေတယ် (cold start), ပြန်စမ်းနေတယ် — ၃–၅ မိနစ် စောင့်ပါ...');
+        const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),300000);
         const res=await fetch('https://cyborg-voxcpm-proxy.lovinggas.workers.dev/tts',{method:'POST',headers:{'Content-Type':'application/json','X-User-Key':key},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
         clearTimeout(timer);
         if(res.status===524||res.status===504){lastErr='cold start';if(attempt===0)continue;throw new Error('cold start')}
