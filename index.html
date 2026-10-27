@@ -521,13 +521,13 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         </div>
         <div class="glabel"><span data-en="Free voices">အခမဲ့ အသံများ</span> · <small style="color:var(--mut);font-weight:500">Edge TTS</small></div>
         <div class="chips" data-group="voice">
-          <button class="chip sel"><span class="ava">သီ</span>သီဟ <small>ကျား · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
+          <button class="chip"><span class="ava">သီ</span>သီဟ <small>ကျား · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
           <button class="chip"><span class="ava">နီ</span>နီလာ <small>မ · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
         </div>
         <div class="glabel">CyborgMM Burmese Voices · <small style="color:var(--mut);font-weight:500">ကိုယ်ပိုင် အသံ ၂၀ လုံး · User Key လို</small></div>
         <div class="hint" style="margin-bottom:9px">အခမဲ့ ၃ သံ: ကိုစိုးမိုး · ဦးသုခ · ဆရာမချို (တစ်နေ့ ၁၅၀၀ စာလုံး အခမဲ့) — ကျန် ၁၇ သံက Points နဲ့ ထုတ်ရပါတယ်။</div>
         <div class="chips" data-group="voice">
-          <button class="chip" data-vid="narrator">ကိုစိုးမိုး <small>ဇာတ်ကြောင်းပြောသူ · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'narrator')">▶</span></button>
+          <button class="chip sel" data-vid="narrator">ကိုစိုးမိုး <small>ဇာတ်ကြောင်းပြောသူ · အခမဲ့</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'narrator')">▶</span></button>
           <button class="chip" data-vid="young_male">မောင်လင်းထက် <small>လူငယ် ကျား</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'young_male')">▶</span></button>
           <button class="chip" data-vid="young_female">သီရိမေ <small>လူငယ် မ</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'young_female')">▶</span></button>
           <button class="chip" data-vid="middle_male">ဦးကျော်ဇင် <small>လူလတ် ကျား</small><span class="miniplay" onclick="event.stopPropagation();playMMVoice(this,'middle_male')">▶</span></button>
@@ -566,7 +566,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <div class="meta" id="barmeta" style="display:none"><span data-en="Generating...">ထုတ်နေတယ်...</span><span id="barpct">0%</span></div>
         <div class="dl">
           <button id="btnListen" disabled data-en="▶ Listen">▶ နားထောင်မယ်</button>
-          <button class="pri" id="btnDl" disabled data-en="Download MP3">MP3 Download</button>
+          <button class="pri" id="btnDl" disabled data-en="Download WAV">WAV Download</button>
         </div>
         <div class="hint" id="ttsStatus" style="margin-top:10px"></div>
       </div>
@@ -600,7 +600,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Trial Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
   </div>
   <div class="genbar">
-    <div class="info"><b id="genVoice">သီဟ · 1.0x</b></div>
+    <div class="info"><b id="genVoice">ကိုစိုးမိုး · 1.0x</b></div>
     <button class="genbtn" onclick="generate()" data-en="Generate Voice 🎙️">အသံ ထုတ်မယ် 🎙️</button>
   </div>
 </div>
@@ -1806,7 +1806,7 @@ let mmSampleAudio=null,mmSampleBtn=null;
 function playMMVoice(el,vid){try{if(mmSampleAudio&&!mmSampleAudio.paused&&mmSampleBtn===el){mmSampleAudio.pause();el.textContent='▶';return}if(mmSampleAudio)mmSampleAudio.pause();document.querySelectorAll('.miniplay,.play').forEach(b=>{if(b!==el&&b.textContent==='❚❚')b.textContent='▶'});mmSampleAudio=new Audio('voices/'+vid+'.mp3');mmSampleBtn=el;el.textContent='❚❚';mmSampleAudio.addEventListener('ended',()=>{el.textContent='▶'});mmSampleAudio.addEventListener('pause',()=>{el.textContent='▶'});mmSampleAudio.play().catch(()=>{el.textContent='▶'})}catch(e){el.textContent='▶'}}
 // ===== Studio TTS: real generation — Gemini BYOK via proxy + Free (Edge) via proxy =====
 const TTS_API='https://cyborg-edge-tts.lovinggas.workers.dev';
-var ttsSel={group:'free',name:'သီဟ'};
+var ttsSel={group:'mm',name:'ကိုစိုးမိုး',vid:'narrator'};
 let ttsAudio=null,ttsUrl='',ttsFile='';
 function ttsSetStatus(m){const s=document.getElementById('ttsStatus');if(s)s.textContent=m||''}
 function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.ava,small,.miniplay').forEach(x=>x.remove());return c.textContent.trim()}
@@ -1822,7 +1822,7 @@ function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.av
       updGen();
     })});
   const sel=document.querySelector('#scr-tts .chips[data-group="voice"] .chip.sel');
-  if(sel){const g=sel.closest('.chips');if(g&&g.dataset.vgroup)ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(sel)}}
+  if(sel){const g=sel.closest('.chips');if(g&&g.dataset.vgroup)ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(sel),vid:sel.dataset.vid||''}}
   document.getElementById('gkeyWrap').style.display=ttsSel.group==='gm'?'block':'none';
   document.getElementById('mmKeyWrap').style.display=ttsSel.group==='mm'?'block':'none';
   const inp=document.getElementById('gKey');
