@@ -599,7 +599,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     </div>
     <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Trial Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
   </div>
-  <div class="hint" style="margin-bottom:10px">⏳ ပထမဆုံး အကြိမ် ထုတ်ရင် server နိုးရလို့ ၃–၅ မိနစ် ကြာနိုင်တယ် — စောင့်ပေးပါ။ Server ပူသွားရင် နောက်အကြိမ်တွေ စက္ကန့်ပိုင်းပဲ မြန်တယ်။</div>
+  <div class="hint" style="margin-bottom:10px">⏳ သုံးသူမရှိချိန် 1st request server run ဖို့ ၅ မိနစ်က ၈ မိနစ် ထိ စောင့်ပေးပါ — ပထမတစ်ကြိမ်ဘဲ စောင့်ရတာ၊ နောက်အကြိမ်တွေ လျင်မြန်စွာ ထုတ်နိုင်ပါတယ်။ Server Fail ဖြစ်ရင် နောက်တစ်ကြိမ် ထပ်ထုတ်ပါ။</div>
   <div class="genbar">
     <div class="info"><b id="genVoice">ကိုစိုးမိုး · 1.0x</b></div>
     <button class="genbtn" onclick="generate()" data-en="Generate Voice 🎙️">အသံ ထုတ်မယ် 🎙️</button>
@@ -1956,7 +1956,7 @@ async function generate(){
     let lastErr='';
     for(let attempt=0;attempt<2;attempt++){
       try{
-        if(attempt>0)ttsSetStatus('warm နေတယ် (cold start), ပြန်စမ်းနေတယ် — ၃–၅ မိနစ် စောင့်ပါ...');
+        if(attempt>0)ttsSetStatus('warm နေတယ် (cold start), ပြန်စမ်းနေတယ် — ၅–၈ မိနစ် စောင့်ပါ...');
         const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),300000);
         const res=await fetch('https://cyborg-voxcpm-proxy.lovinggas.workers.dev/tts',{method:'POST',headers:{'Content-Type':'application/json','X-User-Key':key},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
         clearTimeout(timer);
