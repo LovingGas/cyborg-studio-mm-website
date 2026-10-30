@@ -1954,15 +1954,17 @@ async function generate(){
     const vid=ttsSel.vid||'narrator';
     const stop=ttsProgress();if(gb)gb.disabled=true;
     let lastErr='';
-    for(let attempt=0;attempt<5;attempt++){
+    let attempt=0;
+    while(true){
       try{
         lastErr='';
-        if(attempt>0)ttsSetStatus('warm နေတယ် (cold start), ပြန်စမ်းနေတယ် ('+(attempt+1)+'/5) — ၅–၈ မိနစ် စောင့်ပါ...');
+        if(attempt>0)ttsSetStatus('warm နေတယ် (cold start), ပြန်စမ်းနေတယ် — စာမျက်နှာ မပိတ်ဘဲ စောင့်ပါ...');
         const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),300000);
         const res=await fetch('https://cyborg-voxcpm-proxy.lovinggas.workers.dev/tts',{method:'POST',headers:{'Content-Type':'application/json','X-User-Key':key},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
         clearTimeout(timer);
-        if(res.status===524||res.status===504){lastErr='cold start';if(attempt<4)continue;throw new Error('cold start')}
+        if(res.status===524||res.status===504){lastErr='cold start';attempt++;await new Promise(r=>setTimeout(r,3000));continue}
         if(!res.ok){let d='';try{d=(await res.json()).detail||''}catch(_){}
+          if(res.status>=500){attempt++;await new Promise(r=>setTimeout(r,3000));continue}
           stop(false);
           if(res.status===401)ttsSetStatus('Key မှားနေပါတယ် — Key ကို ပြန်စစ်ပါ (သို့) Messenger / Viber / Telegram ကနေ Key ပြန်တောင်းပါ။');
           else if(res.status===402)ttsSetStatus('Points မလုံလောက်ဘူး — Balance စစ်ပြီး Points ထည့်ခိုင်းပါ (Messenger / Viber / Telegram)။');
@@ -1974,7 +1976,7 @@ async function generate(){
         ttsSetStatus('ရပြီ ✓ CyborgMM ('+ttsSel.name+') နဲ့ ထုတ်ပြီးပြီ။');
         try{const br=await fetch('https://cyborg-voxcpm-proxy.lovinggas.workers.dev/balance',{headers:{'X-User-Key':key}});if(br.ok){const bj=await br.json();document.getElementById('mmBalText').textContent='Balance: '+bj.balance_points.toLocaleString()+' Points · ဒီနေ့ Free ကျန်: '+bj.free_remaining_today+' / '+bj.free_daily_chars+' စာလုံး';}}catch(e){}
         if(gb)gb.disabled=false;return;
-      }catch(e){if(attempt<4&&(e.name==='AbortError'||lastErr==='cold start')){await new Promise(r=>setTimeout(r,3000));continue}stop(false);ttsSetStatus('ချိတ်ဆက်လို့ မရပါ / warm နေတယ် — ခဏနေမှ ပြန်စမ်းကြည့်ပါ (အောင်မြင်ရင် Points ဖြတ်မှာ မဟုတ်ဘူး၊ မအောင်ရင် Points မဖြတ်ဘူး)။');if(gb)gb.disabled=false;return}
+      }catch(e){if(e.name==='AbortError'||e.name==='TypeError'||lastErr==='cold start'){attempt++;await new Promise(r=>setTimeout(r,3000));continue}stop(false);ttsSetStatus('ချိတ်ဆက်လို့ မရပါ / warm နေတယ် — ခဏနေမှ ပြန်စမ်းကြည့်ပါ (အောင်မြင်ရင် Points ဖြတ်မှာ မဟုတ်ဘူး၊ မအောင်ရင် Points မဖြတ်ဘူး)။');if(gb)gb.disabled=false;return}
     }
     if(gb)gb.disabled=false;return;
   }
