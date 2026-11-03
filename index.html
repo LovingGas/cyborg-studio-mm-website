@@ -1997,7 +1997,7 @@ async function generate(){
     }catch(e){stop(false);ttsSetStatus('ချိတ်ဆက်လို့ မရပါ — internet စစ်ပြီး ပြန်စမ်းပါ။')}
     if(gb)gb.disabled=false;return;
   }
-  // FAST DIRECT 2026-11-03 until 21:00 destroy: CyborgMM via Ireland Secure Fast Server tunnel DIRECT from the visitor browser, bypassing the Worker (Worker->Quick Tunnel is blocked 403). No key, no caps, no Points during this window. REVERT at 21:00: restore Worker /tts + key gate + balance refresh (backup: hidden_files/website-index-modal-backup-2026-11-01.html).
+  // FAST DIRECT 2026-11-03 until 21:00 destroy: CyborgMM via Thai Fast Server tunnel DIRECT from the visitor browser, bypassing the Worker (Worker->Quick Tunnel is blocked 403). No key, no caps, no Points during this window. REVERT at 21:00: restore Worker /tts + key gate + balance refresh (backup: hidden_files/website-index-modal-backup-2026-11-01.html).
   if(ttsSel.group==='mm'){
     const n=[...text].length;
     if(n>1000){ttsSetStatus('CyborgMM အသံ မို့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
@@ -2010,7 +2010,7 @@ async function generate(){
         lastErr='';
         if(attempt>0)ttsSetStatus('warm နေတယ် (cold start), ပြန်စမ်းနေတယ် — စာမျက်နှာ မပိတ်ဘဲ စောင့်ပါ...');
         const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),300000);
-        const res=await fetch('https://freebsd-clearly-gas-approx.trycloudflare.com/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
+        const res=await fetch('https://assure-wish-concluded-whats.trycloudflare.com/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
         clearTimeout(timer);
         if(res.status===524||res.status===504){lastErr='cold start';attempt++;await new Promise(r=>setTimeout(r,3000));continue}
         if(!res.ok){let d='';try{d=(await res.json()).detail||''}catch(_){}
