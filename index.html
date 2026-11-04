@@ -1989,12 +1989,10 @@ async function generate(){
     }catch(e){stop(false);ttsSetStatus('ချိတ်ဆက်လို့ မရပါ — internet စစ်ပြီး ပြန်စမ်းပါ။')}
     if(gb)gb.disabled=false;return;
   }
-  // CyborgMM Burmese Voices via Points proxy — key-gated, cold-start retry
+  // FAST DIRECT 2026-11-04 until 21:00 destroy: CyborgMM via Thai Fast Server tunnel DIRECT from the visitor browser, bypassing the Worker (Worker->Quick Tunnel is blocked 403). No key, no caps, no Points during this window. REVERT at 21:00: restore Worker /tts + key gate + balance refresh (backup: hidden_files/website-index-modal-backup-2026-11-01.html).
   if(ttsSel.group==='mm'){
     const n=[...text].length;
     if(n>1000){ttsSetStatus('CyborgMM အသံ မို့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
-    const key=document.getElementById('mmKey').value.trim();
-    if(!key){const w=document.getElementById('mmKeyWrap');w.scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('mmKey').focus({preventScroll:true});ttsSetStatus('CyborgMM အသံ သုံးဖို့ ကိုယ့် User Key အရင် ထည့်ပေးပါ (Key ကတ်ထဲမှာ)။');return}
     const vid=ttsSel.vid||'narrator';
     const stop=ttsProgress();if(gb)gb.disabled=true;
     let lastErr='';
@@ -2004,7 +2002,7 @@ async function generate(){
         lastErr='';
         if(attempt>0)ttsSetStatus('warm နေတယ် (cold start), ပြန်စမ်းနေတယ် — စာမျက်နှာ မပိတ်ဘဲ စောင့်ပါ...');
         const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),300000);
-        const res=await fetch('https://cyborg-voxcpm-proxy.lovinggas.workers.dev/tts',{method:'POST',headers:{'Content-Type':'application/json','X-User-Key':key},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
+        const res=await fetch('https://staffing-observation-seeks-jesse.trycloudflare.com/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
         clearTimeout(timer);
         if(res.status===524||res.status===504){lastErr='cold start';attempt++;await new Promise(r=>setTimeout(r,3000));continue}
         if(!res.ok){let d='';try{d=(await res.json()).detail||''}catch(_){}
