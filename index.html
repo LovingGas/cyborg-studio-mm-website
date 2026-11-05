@@ -2217,7 +2217,7 @@ try{
  const actx=new (window.AudioContext||window.webkitAudioContext)();const abuf=await actx.decodeAudioData(await wFileObj.arrayBuffer());
  const off=new OfflineAudioContext(1,Math.max(1,Math.ceil(abuf.duration*16000)),16000);const src=off.createBufferSource();src.buffer=abuf;src.connect(off.destination);src.start();const rendered=await off.startRendering();const audio=rendered.getChannelData(0);
  st.textContent='စာသား ပြောင်းနေတယ်... (device ပေါ် မူတည်ပြီး ခဏ ကြာနိုင်တယ်)';
- const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:dirOf('wlang')||'english'});
+ const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:dirOf('wlang')||'english',task:'transcribe'});
  document.getElementById('wOut').value=(out.text||'').trim();
  let srt='',i=1;(out.chunks||[]).forEach(c=>{if(!c.timestamp||c.timestamp[0]==null)return;const a=c.timestamp[0],b=(c.timestamp[1]==null?a+2:c.timestamp[1]);srt+=i+++'\n'+sFmt(a*1000,',')+' --> '+sFmt(b*1000,',')+'\n'+(c.text||'').trim()+'\n\n'});
  if(srt){const dl=document.getElementById('wDl');dl.href=URL.createObjectURL(new Blob([srt],{type:'text/plain'}));dl.download=wFileObj.name.replace(/\.[^.]+$/,'')+'.srt';dl.style.display='inline-flex'}
@@ -2235,7 +2235,7 @@ async function whisperTranscribe(file,st){const model=dirOf('wmodel');
  const actx=new (window.AudioContext||window.webkitAudioContext)();const abuf=await actx.decodeAudioData(await file.arrayBuffer());
  const off=new OfflineAudioContext(1,Math.max(1,Math.ceil(abuf.duration*16000)),16000);const src=off.createBufferSource();src.buffer=abuf;src.connect(off.destination);src.start();const rendered=await off.startRendering();const audio=rendered.getChannelData(0);
  st.textContent='စာသား ပြောင်းနေတယ်... (device ပေါ် မူတည်ပြီး ခဏ ကြာနိုင်တယ်)';
- const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:dirOf('wlang')||'english'});
+ const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:dirOf('wlang')||'english',task:'transcribe'});
  return (out.text||'').trim()}
 function ttsPutText(t,src){const tx=document.getElementById('txt');tx.value=t;updCount();const st=document.getElementById(src==='av'?'ttsAvStatus':'ttsDocStatus');st.textContent='✅ စာသား '+t.length.toLocaleString()+' လုံး TTS box ထဲ ထည့်ပြီးပြီ'+(t.length>1000?' — ⚠️ ၁,၀၀၀ ကျော်နေတယ်, တစ်ခါထုတ် ၁,၀၀၀ အထိပဲ, အပိုင်းခွဲထုတ်ပါ':'')}
 async function ttsAvRun(){if(!ttsAvFileObj)return;const st=document.getElementById('ttsAvStatus');const btn=document.getElementById('ttsAvBtn');btn.disabled=true;
