@@ -130,7 +130,7 @@ function delSeg(i){segs.splice(i,1);render();}
 function updateTotals(){
   const total=segs.reduce((a,s)=>a+s.text.length,0);
   document.getElementById('totals').innerHTML=
-    `စုစုပေါင်း: <b>${total} စာလုံး</b>, ${segs.length} segments, ခန့်မှန်း အချိန် ~${Math.round(total/938*60)} စက္ကန့် (3090 မှာ ~938 စာလုံး/မိနစ်) — Free key တစ်နေ့စာ ၁,၅၀၀ ကျော်ရင် Points လိုမယ်။`;
+    `စုစုပေါင်း: <b>${total} စာလုံး</b>, ${segs.length} segments, ခန့်မှန်း အချိန် ~${Math.round(total/938*60)} စက္ကန့် — Free key တစ်နေ့စာ ၁,၅၀၀ ကျော်ရင် Points လိုမယ်။`;
 }
 // ---- Chunking: split long text into <=1000-char chunks at sentence boundaries ----
 function chunkText(text){
