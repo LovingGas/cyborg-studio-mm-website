@@ -513,7 +513,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     </div>
   </div>
   <script>
-  var MV_FAST_URL='https://fast.cyborgstudiomm.com';
+  var MV_FAST_URL='';
   try{if(MV_FAST_URL) localStorage.setItem('cyborgmm-fast-url',MV_FAST_URL); else localStorage.removeItem('cyborgmm-fast-url');}catch(e){}
   function mvToggle(){var b=document.getElementById('mvBody'),t=document.getElementById('mvToggleBtn');var open=b.style.display==='none';b.style.display=open?'block':'none';t.textContent=open?'ပိတ်မယ် ▴':'ဖွင့်မယ် ▾';}
   window.addEventListener('message',function(e){
@@ -2052,10 +2052,12 @@ async function generate(){
     }catch(e){stop(false);ttsSetStatus('ချိတ်ဆက်လို့ မရပါ — internet စစ်ပြီး ပြန်စမ်းပါ။')}
     if(gb)gb.disabled=false;return;
   }
-  // FAST DIRECT named tunnel 2026-11-05 night test: CyborgMM via fast.cyborgstudiomm.com DIRECT from the visitor browser, bypassing the Worker. No key, no caps, no Points during this test. REVERT after test: restore Worker /tts + key gate + balance refresh.
+  // CyborgMM Burmese Voices via Points proxy — key-gated, cold-start retry
   if(ttsSel.group==='mm'){
     const n=[...text].length;
     if(n>1000){ttsSetStatus('CyborgMM အသံ မို့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+    const key=document.getElementById('mmKey').value.trim();
+    if(!key){const w=document.getElementById('mmKeyWrap');w.scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('mmKey').focus({preventScroll:true});ttsSetStatus('CyborgMM အသံ သုံးဖို့ ကိုယ့် User Key အရင် ထည့်ပေးပါ (Key ကတ်ထဲမှာ)။');return}
     const vid=ttsSel.vid||'narrator';
     const stop=ttsProgress();if(gb)gb.disabled=true;
     let lastErr='';
@@ -2065,7 +2067,7 @@ async function generate(){
         lastErr='';
         if(attempt>0)ttsSetStatus('warm နေတယ် (cold start), ပြန်စမ်းနေတယ် — စာမျက်နှာ မပိတ်ဘဲ စောင့်ပါ...');
         const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),300000);
-        const res=await fetch('https://fast.cyborgstudiomm.com/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
+        const res=await fetch('https://cyborg-voxcpm-proxy.lovinggas.workers.dev/tts',{method:'POST',headers:{'Content-Type':'application/json','X-User-Key':key},body:JSON.stringify({voice_id:vid,text:text}),signal:ctl.signal});
         clearTimeout(timer);
         if(res.status===524||res.status===504){lastErr='cold start';attempt++;await new Promise(r=>setTimeout(r,3000));continue}
         if(!res.ok){let d='';try{d=(await res.json()).detail||''}catch(_){}
