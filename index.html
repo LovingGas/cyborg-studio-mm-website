@@ -677,15 +677,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       </div>
     </div>
   </div>
-  <div class="card" id="gkeyWrap" style="display:none;margin-bottom:14px">
-    <h3><span class="n">🔑</span>Gemini API Key <small style="color:var(--mut);font-weight:500">ကိုယ့် key နဲ့ အသံ ထုတ်မယ်</small></h3>
-    <div style="display:flex;gap:8px;align-items:stretch">
-      <input type="password" id="gKey" class="tin" placeholder="Gemini API Key ထည့်ပါ (AIza...)" autocomplete="off" spellcheck="false">
-      <button type="button" id="gKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
-    </div>
-    <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
-  </div>
-  <div class="card" id="mmKeyWrap" style="display:none;margin-bottom:14px">
+  <div class="card" id="mmKeyWrap" style="margin-bottom:14px">
     <h3><span class="n">🔑</span>CyborgMM User Key <small style="color:var(--mut);font-weight:500">ကိုယ်ပိုင် အသံ ထုတ်မယ်</small></h3>
     <div style="display:flex;gap:8px;align-items:stretch">
       <input type="password" id="mmKey" class="tin" placeholder="CyborgMM User Key ထည့်ပါ" autocomplete="off" spellcheck="false">
@@ -698,6 +690,14 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <span id="mmRegText" style="color:var(--mut);font-size:13px"></span>
     </div>
     <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Trial Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
+  </div>
+  <div class="card" id="gkeyWrap" style="margin-bottom:14px">
+    <h3><span class="n">🔑</span>Gemini API Key <small style="color:var(--mut);font-weight:500">ကိုယ့် key နဲ့ အသံ ထုတ်မယ်</small></h3>
+    <div style="display:flex;gap:8px;align-items:stretch">
+      <input type="password" id="gKey" class="tin" placeholder="Gemini API Key ထည့်ပါ (AIza...)" autocomplete="off" spellcheck="false">
+      <button type="button" id="gKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
+    </div>
+    <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
   </div>
 </div>
 <!-- ============ POS (cyborgstudiomm.com/pos) ============ -->
@@ -1929,14 +1929,10 @@ function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.av
     g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
       groups.forEach(o=>{if(o!==g)o.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'))});
       ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(c),vid:c.dataset.vid||''};
-      document.getElementById('gkeyWrap').style.display=ttsSel.group==='gm'?'block':'none';
-      document.getElementById('mmKeyWrap').style.display=ttsSel.group==='mm'?'block':'none';
       updGen();
     })});
   const sel=document.querySelector('#scr-tts .chips[data-group="voice"] .chip.sel');
   if(sel){const g=sel.closest('.chips');if(g&&g.dataset.vgroup)ttsSel={group:g.dataset.vgroup,name:ttsVoiceName(sel),vid:sel.dataset.vid||''}}
-  document.getElementById('gkeyWrap').style.display=ttsSel.group==='gm'?'block':'none';
-  document.getElementById('mmKeyWrap').style.display=ttsSel.group==='mm'?'block':'none';
   const inp=document.getElementById('gKey');
   try{const saved=localStorage.getItem('csmm-gemini-key');if(saved)inp.value=saved}catch(e){}
   inp.addEventListener('input',()=>{try{localStorage.setItem('csmm-gemini-key',inp.value.trim())}catch(e){}});
