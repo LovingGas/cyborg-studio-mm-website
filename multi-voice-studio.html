@@ -124,6 +124,7 @@ function render(){
     box.appendChild(d);
   });
   updateTotals();
+  if(typeof postHeight==='function') postHeight();
 }
 function addSeg(voice='narrator',text=''){segs.push({voice,text});render();}
 function delSeg(i){segs.splice(i,1);render();}
@@ -250,6 +251,14 @@ function listProjects(){
 }
 addSeg('narrator','မင်္ဂလာပါ။ ကျွန်တော်က ကိုစိုးမိုး ဖြစ်ပါတယ်။');
 addSeg('news_female','ဒီနေ့ သတင်းကတော့ ဒါပါပဲ။ ကျွန်မ မသံလွင် ပါ။');
+// ---- Embedded in TTS Studio (iframe ?embed=1): hide back link, report height to parent ----
+if(new URLSearchParams(location.search).get('embed')){
+  const tb=document.querySelector('.topbar'); if(tb) tb.style.display='none';
+}
+function postHeight(){ if(window.parent!==window) window.parent.postMessage({type:'mvHeight',h:document.documentElement.scrollHeight},'*'); }
+if('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
+window.addEventListener('load',postHeight);
+
 </script>
 </body>
 </html>

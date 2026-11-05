@@ -670,6 +670,19 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div class="info"><b id="genVoice">ကိုစိုးမိုး · 1.0x</b></div>
     <button class="genbtn" onclick="generate()" data-en="Generate Voice 🎙️">အသံ ထုတ်မယ် 🎙️</button>
   </div>
+  <div class="card" style="margin-top:14px">
+    <h3>🎙️ Multi-Voice + Document Studio</h3>
+    <div class="hint">အသံ အများကြီး တစ်ပိုင်းချင်း ပြောင်းပြီး ဇာတ်လမ်း / စာအုပ် တစ်အုပ်လုံး အသံထုတ်မယ် — Document (TXT / DOCX / EPUB / PDF) တင်ပြီး Segment တွေ အလိုအလျောက် ခွဲပေးတယ်။ CyborgMM အသံ ၃၁ သံချည်းပဲ သုံးတယ်။</div>
+    <iframe id="mvFrame" src="multi-voice-studio.html?embed=1" style="width:100%;height:1500px;border:0;display:block" title="CyborgMM Multi-Voice + Document Studio" loading="lazy"></iframe>
+  </div>
+  <script>
+  window.addEventListener('message',function(e){
+    if(e.data&&e.data.type==='mvHeight'){
+      var f=document.getElementById('mvFrame');
+      if(f) f.style.height=Math.max(600,e.data.h+20)+'px';
+    }
+  });
+  </script>
 </div>
 <!-- ============ POS (cyborgstudiomm.com/pos) ============ -->
 <div class="screen" id="scr-pos">
