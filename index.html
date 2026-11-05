@@ -514,7 +514,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
             <input type="file" id="ttsAvFile" accept=".mp3,.wav,.m4a,.mp4,.mov,.webm,audio/*,video/*" hidden onchange="ttsAvPick(this)"></div>
           <div id="ttsAvInfo" class="hint" style="margin-top:8px"></div>
           <div id="ttsAvStatus" class="hint"></div>
-          <div class="hint">Model က STT Tool မှာ ရွေးထားတဲ့ Tiny / Base ကို သုံးတယ် — browser ထဲမှာပဲ မောင်းတယ်, ဖိုင် server မတက်ဘူး။</div>
+          <div class="hint">Model + ဘာသာစကားက STT Tool မှာ ရွေးထားတဲ့တို ကို သုံးတယ် — browser ထဲမှာပဲ မောင်းတယ်, ဖိုင် server မတက်ဘူး။</div>
           <button class="genbtn" id="ttsAvBtn" onclick="ttsAvRun()" disabled style="margin-top:10px">စာသား ပြောင်းပြီး ဒီ box ထဲ ထည့် 🎧</button>
         </div>
         <div id="ttsSrcDoc" style="display:none;margin-top:12px">
@@ -1136,9 +1136,19 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div class="card">
       <div class="glabel">Model ရွေးပါ</div>
       <div class="chips" data-group="wmodel">
-        <button class="chip sel" data-dir="onnx-community/whisper-tiny">Tiny <small>မြန်၊ ပေါ့</small></button>
-        <button class="chip" data-dir="onnx-community/whisper-base">Base <small>ပိုမှန်</small></button>
+        <button class="chip" data-dir="onnx-community/whisper-tiny">Tiny <small>မြန်၊ ပေါ့</small></button>
+        <button class="chip sel" data-dir="onnx-community/whisper-base">Base <small>ပိုမှန်</small></button>
       </div>
+      <div class="glabel" style="margin-top:14px">ဘာသာစကား ရွေးပါ</div>
+      <div class="chips" data-group="wlang">
+        <button class="chip sel" data-dir="english">English</button>
+        <button class="chip" data-dir="burmese">မြန်မာ</button>
+        <button class="chip" data-dir="korean">한국어 · Korean</button>
+        <button class="chip" data-dir="thai">ไทย · Thai</button>
+        <button class="chip" data-dir="chinese">中文 · Chinese</button>
+        <button class="chip" data-dir="japanese">日本語 · Japanese</button>
+      </div>
+      <div class="hint">Video/အသံရဲ့ ဘာသာစကား အရင်ရွေးပါ — မရွေးထားရင် English လို့ မှတ်ပြီး ပြောင်းမယ်။ မှားတဲ့ဘာသာစကား ရွေးမိရင် စာသားမှားထွက်မယ်။</div>
       <div class="drop" id="wDrop" style="margin-top:16px" onclick="document.getElementById('wFile').click()">
         <b>အသံ / Video ဖိုင် ရွေးရန် နှိပ်ပါ</b><br>MP3 / WAV / M4A / MP4 / MOV ဖိုင် ဆွဲချလို့လည်း ရတယ် (အများဆုံး 1 GB)
         <input type="file" id="wFile" accept=".mp3,.wav,.m4a,.mp4,.mov,.webm,audio/*,video/*" hidden onchange="wPick(this)">
@@ -2079,7 +2089,7 @@ function botReply(q){const s=q.toLowerCase();
  if((s.includes('ai အသံ')||s.includes('ai voice')||s.includes('အသံ ဘယ်လို ထုတ်ရမလဲ')||s.includes('tts သုံးနည်း'))&&!s.includes('edge tts'))return 'AI အသံ ထုတ်မယ် (TTS Studio) သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "AI အသံ ထုတ်မယ်" card ဖွင့်\n၂။ စာသား ရိုက် (မြန်မာ / English)\n၃။ အသံ chip ရွေး: Gemini အသံ ၃၀ လုံး (ကိုယ့် Gemini key လို, တစ်ခါ စာလုံး ၁,၀၀၀ အထိ, WAV ထွက်) · Free သီဟ/နီလာ (key မလို, တစ်ခါ စာလုံး ၁,၀၀၀ အထိ, MP3 ထွက်)\n၄။ အမြန်နှုန်း ရွေး → "အသံ ထုတ်မယ်" နှိပ် → နားထောင် / MP3 Download ဆွဲ။\nအသံ ရွေးတာ: Gemini (ကိုယ့် key နဲ့) ဒါမှမဟုတ် Free အသံ (သီဟ/နီလာ) သုံးကြည့်ပါ။';
  if(s.includes('ai စာသား')||s.includes('ai text'))return 'AI စာသား — Translate & Recap သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "AI စာသား" card ဖွင့်\n၂။ SRT / စာသား paste လုပ် (သို့) ဖိုင်တင်\n၃။ ကိုယ့် Gemini API Key ထည့် (BYOK, browser ထဲမှာပဲ သိမ်း)\n၄။ Mode ရွေး: Translate (ဘာသာပြန်) / Recap (အနှစ်ချုပ်, အရှည် % ရွေး)\n၅။ "AI နဲ့ ထုတ်မယ်" နှိပ် → ရလဒ် Copy / Download ဆွဲ။\nSRT ဘာသာပြန်ရင် မူရင်း အချိန်တွေ အတိုင်း *_my.srt ဖိုင် ရမယ်; စာသားချည်း ဘာသာပြန်ရင် ၁၂,၀၀၀ လုံးအထိ, .txt ဖိုင်; Recap ရင် *_recap.txt ဖိုင်, "TTS မှာ သုံးမယ်" နှိပ်ရင် အသံ တန်း ထုတ်လို့ရပါတယ်။';
  if(s.includes('srt tool')||s.includes('srt သုံးနည်း'))return 'SRT Tool သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "SRT Tool" card ဖွင့်\n၂။ SRT ဖိုင်တင် (သို့) SRT စာသား paste လုပ်\n၃။ လုပ်ချင်တာ ရွေး: အချိန် စက္ကန့် ရွှေ့ (ရှေ့/နောက်) · SRT ↔ VTT ပြောင်း\n၄။ "Download ဆွဲမယ်" နှိပ်ရင် subtitle.srt / subtitle.vtt ဖိုင် ရမယ်။\nSRT ကနေ စာသားချည်း ထုတ်ချင်ရင် "SRT → စာသား သပ်သပ်" Tool သပ်သပ် ရှိပါတယ်။';
- if(s.includes('အသံမှ စာသား')||s.includes('whisper stt')||(s.includes('whisper')&&(s.includes('website')||s.includes('studio')||s.includes('tool')||s.includes('သုံးနည်း'))))return 'အသံမှ စာသား (Whisper, website) သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "အသံမှ စာသား (Whisper)" card ဖွင့်\n၂။ Model ရွေး: Tiny (မြန်, ပေါ့) / Base (ပိုမှန်)\n၃။ MP3 / WAV / M4A / MP4 ဖိုင်တင် (1 GB အထိ) → "စာသား ပြောင်းမယ်" နှိပ်\n၄။ ရလာတဲ့ စာသား + SRT Download ဆွဲလို့ရပါတယ်။\nပထမဆုံး အကြိမ် model download အတွက် internet လိုတယ်, နောက်ပိုင်း browser ထဲမှာပဲ မောင်းတယ်, ဖိုင် server မတက်ဘူး။ သတိ: မြန်မာ တိုက်ရိုက် မှတ်တာ အားနည်းနိုင်တယ် (English က ပိုမှန်) — မြန်မာ SRT လိုရင် AI စာသား Tool နဲ့ ဘာသာပြန်တာ, ဒါမှမဟုတ် Recap app ရဲ့ Whisper Auto-SRT → Gemini Translate လမ်းကြောင်း သုံးပါ။';
+ if(s.includes('အသံမှ စာသား')||s.includes('whisper stt')||(s.includes('whisper')&&(s.includes('website')||s.includes('studio')||s.includes('tool')||s.includes('သုံးနည်း'))))return 'အသံမှ စာသား (Whisper, website) သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "အသံမှ စာသား (Whisper)" card ဖွင့်\n၂။ Model ရွေး: Tiny (မြန်, ပေါ့) / Base (ပိုမှန်)\n၃။ ဘာသာစကားကရွေးပြီး MP3 / WAV / M4A / MP4 ဖိုင်တင် (1 GB အထိ) → "စာသား ပြောင်းမယ်" နှိပ်\n၄။ ရလာတဲ့ စာသား + SRT Download ဆွဲလို့ရပါတယ်။\nပထမဆုံး အကြိမ် model download အတွက် internet လိုတယ်, နောက်ပိုင်း browser ထဲမှာပဲ မောင်းတယ်, ဖိုင် server မတက်ဘူး။ သတိ: မြန်မာ တိုက်ရိုက် မှတ်တာ အားနည်းနိုင်တယ် (English က ပိုမှန်) — မြန်မာ SRT လိုရင် AI စာသား Tool နဲ့ ဘာသာပြန်တာ, ဒါမှမဟုတ် Recap app ရဲ့ Whisper Auto-SRT → Gemini Translate လမ်းကြောင်း သုံးပါ။';
  if(s.includes('အသံရှင်း')||s.includes('voice clear')||s.includes('normalize'))return 'အသံရှင်း / Normalize သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "အသံရှင်း / Normalize" card ဖွင့်\n၂။ MP3 / WAV ဖိုင်တင်\n၃။ Preset ရွေး: မူရင်း (1x) · 0.75x နှေး · 1.25x · 1.5x မြန် · ⚡ Smart Audio (1.06x + pitch +1 semitone, ပိုကြည်လင် သွက်လက်) · Manual (speed 0.9–1.2x, pitch -2..+2)\n၄။ Normalize (−1 dB) toggle ဖွင့်/ပိတ် → ရှင်းပြီး Download ဆွဲ (MP3 / WAV, *_clear ဖိုင်)။\nBrowser ထဲမှာပဲ, အခမဲ့။';
  if(s.includes('photo resize')||s.includes('ဓာတ်ပုံ resize')||s.includes('resize သုံးနည်း'))return 'ဓာတ်ပုံ Resize သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "ဓာတ်ပုံ Resize" card ဖွင့်\n၂။ JPG / PNG ပုံတင်\n၃။ Ratio ရွေး: မူရင်း / 16:9 / 9:16 / 1:1 / 4:5 / 3:2\n၄။ ဖြတ်ထည့် (crop) / အပြည့်ထည့် (fit, နောက်ခံ အဖြူ) ရွေး\n၅။ အနံ / အလျား px ရိုက် (🔒 အချိုး ထိန်းထား) (သို့) % နဲ့ ရွေး (25% / 50% …) → Download ဆွဲ။\nBrowser ထဲမှာပဲ, ဖိုင် server မတက်ဘူး, အခမဲ့။';
  // ── Free Tools manuals — Batch 2 (Studio tools) ──
@@ -2204,7 +2214,7 @@ try{
  const actx=new (window.AudioContext||window.webkitAudioContext)();const abuf=await actx.decodeAudioData(await wFileObj.arrayBuffer());
  const off=new OfflineAudioContext(1,Math.max(1,Math.ceil(abuf.duration*16000)),16000);const src=off.createBufferSource();src.buffer=abuf;src.connect(off.destination);src.start();const rendered=await off.startRendering();const audio=rendered.getChannelData(0);
  st.textContent='စာသား ပြောင်းနေတယ်... (device ပေါ် မူတည်ပြီး ခဏ ကြာနိုင်တယ်)';
- const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5});
+ const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:dirOf('wlang')||'english'});
  document.getElementById('wOut').value=(out.text||'').trim();
  let srt='',i=1;(out.chunks||[]).forEach(c=>{if(!c.timestamp||c.timestamp[0]==null)return;const a=c.timestamp[0],b=(c.timestamp[1]==null?a+2:c.timestamp[1]);srt+=i+++'\n'+sFmt(a*1000,',')+' --> '+sFmt(b*1000,',')+'\n'+(c.text||'').trim()+'\n\n'});
  if(srt){const dl=document.getElementById('wDl');dl.href=URL.createObjectURL(new Blob([srt],{type:'text/plain'}));dl.download=wFileObj.name.replace(/\.[^.]+$/,'')+'.srt';dl.style.display='inline-flex'}
@@ -2222,7 +2232,7 @@ async function whisperTranscribe(file,st){const model=dirOf('wmodel');
  const actx=new (window.AudioContext||window.webkitAudioContext)();const abuf=await actx.decodeAudioData(await file.arrayBuffer());
  const off=new OfflineAudioContext(1,Math.max(1,Math.ceil(abuf.duration*16000)),16000);const src=off.createBufferSource();src.buffer=abuf;src.connect(off.destination);src.start();const rendered=await off.startRendering();const audio=rendered.getChannelData(0);
  st.textContent='စာသား ပြောင်းနေတယ်... (device ပေါ် မူတည်ပြီး ခဏ ကြာနိုင်တယ်)';
- const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5});
+ const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:dirOf('wlang')||'english'});
  return (out.text||'').trim()}
 function ttsPutText(t,src){const tx=document.getElementById('txt');tx.value=t;updCount();const st=document.getElementById(src==='av'?'ttsAvStatus':'ttsDocStatus');st.textContent='✅ စာသား '+t.length.toLocaleString()+' လုံး TTS box ထဲ ထည့်ပြီးပြီ'+(t.length>1000?' — ⚠️ ၁,၀၀၀ ကျော်နေတယ်, တစ်ခါထုတ် ၁,၀၀၀ အထိပဲ, အပိုင်းခွဲထုတ်ပါ':'')}
 async function ttsAvRun(){if(!ttsAvFileObj)return;const st=document.getElementById('ttsAvStatus');const btn=document.getElementById('ttsAvBtn');btn.disabled=true;
