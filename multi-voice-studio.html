@@ -12,7 +12,6 @@ h1{font-size:22px} h2{font-size:18px;margin-top:28px}
 textarea{width:100%;min-height:80px} select,input[type=text]{padding:6px}
 button{padding:8px 14px;margin:4px 4px 4px 0;cursor:pointer}
 .note{background:#fff8e1;border:1px solid #f0c36d;border-radius:8px;padding:10px}
-.warn{color:#b00020} .ok{color:#0a7a42}
 #log{white-space:pre-wrap;background:#111;color:#eee;padding:10px;border-radius:8px;min-height:80px}
 .topbar{margin-bottom:8px}
 .topbar a{color:#0b5fff;text-decoration:none;font-weight:700}
@@ -36,7 +35,6 @@ Project သိမ်းတာက ဒီ browser ထဲမှာပဲ (localStor
 <h2>၁။ အသံထုတ်လမ်း (Generation route)</h2>
 <label><input type="checkbox" id="fastOnly" checked> Fast window ချိန်ပဲ သုံးလို့ရအောင် lock လုပ် (Mon–Fri 17:00–21:00, Sat–Sun 15:00–21:00 Myanmar Time)</label>
 </div>
-<div id="fastStatus"></div>
 
 <h2>၂။ Document တင် → Segment ဖြစ်</h2>
 <input type="file" id="docFile" accept=".txt,.md,.docx,.epub,.pdf">
@@ -94,17 +92,11 @@ function fastWindowInfo(now=new Date()){
   const start=isWeekend?15*60:17*60, end=21*60;
   return {open:mins>=start&&mins<end,start,end,mins,dow};
 }
+// Fast-window lock only: enable/disable the Generate All button. No status text — window times are in the note above.
 function updateFastStatus(){
   const info=fastWindowInfo(); const locked=document.getElementById('fastOnly').checked;
   const genBtn=[...document.querySelectorAll('button')].find(b=>b.textContent.includes('အားလုံး အစဉ်လိုက် ထုတ်'));
-  const st=document.getElementById('fastStatus');
-  if(!locked){ st.innerHTML='<span class="ok">🔓 Fast lock ပိတ်ထားတယ် — အချိန်မရွေး ထုတ်လို့ရတယ် (Modal/Worker လမ်းကြောင်း အလုပ်လုပ်မှ)</span>'; if(genBtn) genBtn.disabled=false; return; }
-  if(info.open){ st.innerHTML='<span class="ok">⚡ Fast window ဖွင့်နေပြီ — ထုတ်လို့ရတယ်</span>'; if(genBtn) genBtn.disabled=false; }
-  else {
-    const next= info.mins<info.start ? `ဒီနေ့ ${String(Math.floor(info.start/60)).padStart(2,'0')}:00` : 'မနက်ဖြန် window စချိန်';
-    st.innerHTML=`<span class="warn">⏳ Fast window ပိတ်နေတယ် — ${next} မှ ထုတ်လို့ရမယ် (Generate ခလုတ် ပိတ်ထားတယ်)</span>`;
-    if(genBtn) genBtn.disabled=true;
-  }
+  if(genBtn) genBtn.disabled=locked&&!info.open;
 }
 document.getElementById('fastOnly').onchange=updateFastStatus;
 setInterval(updateFastStatus,30000); updateFastStatus();
