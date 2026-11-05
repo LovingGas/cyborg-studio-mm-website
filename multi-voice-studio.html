@@ -32,13 +32,15 @@ Project သိမ်းတာက ဒီ browser ထဲမှာပဲ (localStor
 ⚡ <b>အသံထုတ်တာက Fast Server window ချိန်မှာပဲ ရတယ်</b> (တနင်္လာ–သောကြာ 17:00–21:00, စနေ–တနင်္ဂနွေ 15:00–21:00 Myanmar Time) — Normal Server (Modal) ပြန်ရမှ Worker + Key လမ်းကြောင်းလည်း ပြန်ရမယ်။
 </div>
 
+<div id="routeSec">
 <h2>၁။ အသံထုတ်လမ်း (Generation route)</h2>
 <label><input type="checkbox" id="fastOnly" checked> Fast window ချိန်ပဲ သုံးလို့ရအောင် lock လုပ် (Mon–Fri 17:00–21:00, Sat–Sun 15:00–21:00 Myanmar Time)</label>
-<div id="fastStatus"></div>
 <label><input type="radio" name="route" value="worker" checked> Worker + Key (Modal ပြန်ရမှ)</label>
 <label><input type="radio" name="route" value="fast"> Fast Tunnel URL (ည Fast window)</label><br>
 Key: <input type="text" id="userKey" placeholder="csmm_..." style="width:300px">
 Fast URL: <input type="text" id="fastUrl" placeholder="Fast window မှာ tunnel URL ထည့်ပါ" style="width:300px">
+</div>
+<div id="fastStatus"></div>
 
 <h2>၂။ Document တင် → Segment ဖြစ်</h2>
 <input type="file" id="docFile" accept=".txt,.md,.docx,.epub,.pdf">
@@ -251,10 +253,21 @@ function listProjects(){
 }
 addSeg('narrator','မင်္ဂလာပါ။ ကျွန်တော်က ကိုစိုးမိုး ဖြစ်ပါတယ်။');
 addSeg('news_female','ဒီနေ့ သတင်းကတော့ ဒါပါပဲ။ ကျွန်မ မသံလွင် ပါ။');
-// ---- Embedded in TTS Studio (iframe ?embed=1): hide back link, report height to parent ----
+// ---- Key: pick up the saved CyborgMM user key (main TTS page saves it as csmm-voice-key) ----
+try{const sk=localStorage.getItem('csmm-voice-key')||''; if(sk) document.getElementById('userKey').value=sk;}catch(e){}
+// ---- Embedded in TTS Studio (iframe ?embed=1): hide back link + route section, ask parent for Fast URL ----
 if(new URLSearchParams(location.search).get('embed')){
   const tb=document.querySelector('.topbar'); if(tb) tb.style.display='none';
+  const rs=document.getElementById('routeSec'); if(rs) rs.style.display='none';
 }
+function askRoute(){ if(window.parent!==window) window.parent.postMessage({type:'mvNeedRoute'},'*'); }
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.type==='mvRoute'&&e.data.fastUrl){
+    document.getElementById('fastUrl').value=e.data.fastUrl;
+    const fr=document.querySelector('input[name=route][value=fast]'); if(fr) fr.checked=true;
+  }
+});
+askRoute(); setTimeout(askRoute,1000);
 function postHeight(){ if(window.parent!==window) window.parent.postMessage({type:'mvHeight',h:document.documentElement.scrollHeight},'*'); }
 if('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
 window.addEventListener('load',postHeight);
