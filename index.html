@@ -514,9 +514,9 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
             <input type="file" id="ttsAvFile" accept=".mp3,.wav,.m4a,.mp4,.mov,.webm,audio/*,video/*" hidden onchange="ttsAvPick(this)"></div>
           <div id="ttsAvInfo" class="hint" style="margin-top:8px"></div>
           <div id="ttsAvStatus" class="hint"></div>
-          <div class="hint">Model + ဘာသာစကားက STT Tool မှာ ရွေးထားတဲ့တို ကို သုံးတယ် — browser ထဲမှာပဲ မောင်းတယ်, ဖိုင် server မတက်ဘူး။</div>
+          <div class="hint">Model + ဘာသာစကားက STT Tool မှာ ရွေးထားတာကို သုံးတယ် — browser ထဲမှာပဲ မောင်းတယ်, ဖိုင် server မတက်ဘူး။</div>
           <button class="genbtn" id="ttsAvBtn" onclick="ttsAvRun()" disabled style="margin-top:10px">စာသား ပြောင်းပြီး ဒီ box ထဲ ထည့် 🎧</button>
-          <button class="genbtn" id="ttsAvGemBtn" onclick="ttsAvGemFix()" style="margin-top:10px">Gemini နင့် မြန်မာလု ပြင်မျမ်မ်ယ် ✨</button>
+          <button class="genbtn" id="ttsAvGemBtn" onclick="ttsAvGemFix()" style="margin-top:10px">Gemini နဲ့ မြန်မာလို ပြင်မယ် ✨</button>
         </div>
         <div id="ttsSrcDoc" style="display:none;margin-top:12px">
           <div class="drop" id="ttsDocDrop" onclick="document.getElementById('ttsDocFile').click()"><b>Document ဖိုင် ရွေးပါ</b><br>TXT / MD / DOCX / EPUB / PDF (စာသားပါတဲ့ PDF ပဲ)
@@ -1155,14 +1155,14 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <input type="file" id="wFile" accept=".mp3,.wav,.m4a,.mp4,.mov,.webm,audio/*,video/*" hidden onchange="wPick(this)">
       </div>
       <div id="wInfo" class="hint" style="margin-top:10px"></div>
-      <div class="hint" style="margin-top:10px">ℹ️ ပထမဆုံး အကြိမ် model download လိုတယ် (internet လိုတယ်) — နောက်ပိုင်း device ထဲမှာပဲ မောင်းတယ်။ ဖိုင် အများဆုံး 1 GB — အရှည်ကြီးတဲ့ video ဆိုရင် ပြောင်းဖို့ ကြာနိုင်တယ်, ဖုန်း RAM နည်းရင် ရပ်သွားနိုင်တယ်။ မြန်မာ တိုက်ရိုက် အသံမှတ်ဉာဏ် အားနည်းနိုင်သေးတယ် — SRT Tool / Gemini ဘာသာပြန် နဲ့ တွဲသုံးရင် ပိုကောင်းတယ်။ Gemini key ရှိရင် စာသားထွက်ပြီးပြီး "Gemini နင့် မြန်မာလု ပြင်မျမ်မ်ယ်" နှိပ်ပြီး မှာန်အောင် ပြင်လို့ရတယ်။</div>
+      <div class="hint" style="margin-top:10px">ℹ️ ပထမဆုံး အကြိမ် model download လိုတယ် (internet လိုတယ်) — နောက်ပိုင်း device ထဲမှာပဲ မောင်းတယ်။ ဖိုင် အများဆုံး 1 GB — အရှည်ကြီးတဲ့ video ဆိုရင် ပြောင်းဖို့ ကြာနိုင်တယ်, ဖုန်း RAM နည်းရင် ရပ်သွားနိုင်တယ်။ မြန်မာ တိုက်ရိုက် အသံမှတ်ဉာဏ် အားနည်းနိုင်သေးတယ် — SRT Tool / Gemini ဘာသာပြန် နဲ့ တွဲသုံးရင် ပိုကောင်းတယ်။ Gemini key ရှိရင် စာသားထွက်ပြီးရင် "Gemini နဲ့ မြန်မာလို ပြင်မယ်" နှိပ်ပြီး မှန်အောင် ပြင်လို့ရတယ်။</div>
       <div id="wStatus" class="hint" style="margin-top:10px"></div>
       <div class="glabel" style="margin-top:14px">ရလာတဲ့ စာသား</div>
       <textarea id="wOut" rows="6" readonly placeholder="စာသား ဒီမှာ ပေါ်မယ်"></textarea>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
         <button class="genbtn" id="wBtn" onclick="wRun()" disabled>စာသား ပြောင်းမယ် 🎧</button>
         <a class="dlbtn" id="wDl" style="display:none" download>⬇ SRT Download ဆွဲမယ်</a>
-        <button class="genbtn" id="wGemBtn" onclick="wGemFix()" disabled>Gemini နင့် မြန်မာလို ပြင်မျမ်မ်ယ် ✨</button>
+        <button class="genbtn" id="wGemBtn" onclick="wGemFix()" disabled>Gemini နဲ့ မြန်မာလို ပြင်မယ် ✨</button>
       </div>
     </div>
   </section>
