@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="my" data-theme="day" data-font="pyidaungsu">
+<html lang="my" data-theme="glassy" data-font="pyidaungsu">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,11 +22,18 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<script>(function(){try{var t=localStorage.getItem('csmm-theme');if(t==='night'||t==='neon')document.documentElement.setAttribute('data-theme',t)}catch(e){}try{var f=localStorage.getItem('csmm-font');if(f==='padauk'||f==='noto'||f==='pyidaungsu')document.documentElement.setAttribute('data-font',f)}catch(e){}})();</script>
+<script>(function(){try{var t=localStorage.getItem('csmm-theme');if(t==='night'||t==='neon'||t==='glassy')document.documentElement.setAttribute('data-theme',t)}catch(e){}try{var f=localStorage.getItem('csmm-font');if(f==='padauk'||f==='noto'||f==='pyidaungsu')document.documentElement.setAttribute('data-font',f)}catch(e){}})();</script>
 <style>
 :root{--bg:#eaf6ff;--card:#fff;--ink:#0b1526;--mut:#5d6f8a;--line:#d6e9f8;--blue:#0096d6;--blue2:#0070d1;--cyan:#00b8d9;--pink:#ff4d8d;--orange:#ff8f2e;--red:#ff5252;--purple:#b388ff;--vivid-blue:#448aff;--teal:#2fd4d9;--green:#4fd964;--gold:#ffd740;--grad:linear-gradient(135deg,#00b8d9 0%,#448aff 48%,#ff4d8d 100%);--grad-warm:linear-gradient(135deg,#ff8f2e 0%,#ff5252 55%,#ff4d8d 100%);--soft:#e2f5ff;--radius:20px;--shadow:0 12px 32px rgba(0,150,214,.13),0 3px 10px rgba(255,77,141,.06);--hdr:rgba(255,255,255,.88);--hover:#eaf4ff;--field:#f7fcff;--track:#dbeeff;--num-n:#e2f0ff;--botbg:#f2f9ff;color-scheme:light}
 [data-theme="night"]{--bg:#0a101e;--card:#131c2f;--ink:#f3f8ff;--mut:#a7bad6;--line:#263a5c;--blue:#2fd4d9;--blue2:#7fd4ea;--cyan:#ff4d8d;--soft:#1b2a47;--shadow:0 14px 36px rgba(0,0,0,.48),0 4px 16px rgba(255,77,141,.08);--hdr:rgba(10,16,30,.88);--hover:#1a2a49;--field:#0d1729;--track:#263a5c;--num-n:#24365a;--botbg:#0c1526;color-scheme:dark}
 [data-theme="neon"]{--bg:#05060f;--card:#0a1024;--ink:#eefaff;--mut:#93aee0;--line:#1d3a6e;--blue:#00e5ff;--blue2:#8ef4ff;--cyan:#ff3df0;--grad:linear-gradient(135deg,#00e5ff 0%,#448aff 45%,#ff3df0 100%);--grad-warm:linear-gradient(135deg,#ffb300 0%,#ff5252 52%,#ff3df0 100%);--soft:#0d2149;--shadow:0 12px 34px rgba(0,229,255,.13),0 3px 18px rgba(255,61,240,.12);--hdr:rgba(5,6,15,.89);--hover:#101a3a;--field:#060a1a;--track:#1d3a6e;--num-n:#12234a;--botbg:#060a18;color-scheme:dark}
+[data-theme="glassy"]{--bg:#0a0f1e;--card:rgba(255,255,255,.09);--ink:#f2f7ff;--mut:#b9c8e2;--line:rgba(255,255,255,.16);--blue:#38bdf8;--blue2:#7dd3fc;--cyan:#22d3ee;--pink:#ff4d8d;--orange:#ff8f2e;--red:#ff5252;--purple:#b388ff;--vivid-blue:#448aff;--teal:#2fd4d9;--green:#4fd964;--gold:#ffd740;--grad:linear-gradient(135deg,#22d3ee 0%,#448aff 48%,#ff4d8d 100%);--grad-warm:linear-gradient(135deg,#ff8f2e 0%,#ff5252 55%,#ff4d8d 100%);--soft:rgba(255,255,255,.08);--radius:20px;--shadow:0 18px 44px rgba(2,6,23,.55),0 2px 10px rgba(56,189,248,.12);--hdr:rgba(10,15,30,.55);--hover:rgba(255,255,255,.10);--field:rgba(255,255,255,.07);--track:rgba(255,255,255,.12);--num-n:rgba(255,255,255,.14);--botbg:rgba(10,15,30,.62);color-scheme:dark}
+/* Glassy theme (glassmorphism, default 2026-11-06): frosted-glass panels over a fixed colourful gradient — backdrop blur + glossy top highlight. */
+[data-theme="glassy"] body{background:radial-gradient(900px 480px at 85% -5%,rgba(34,211,238,.38),transparent 60%),radial-gradient(800px 500px at 5% 18%,rgba(68,138,255,.34),transparent 60%),radial-gradient(760px 520px at 50% 108%,rgba(255,77,141,.30),transparent 60%),linear-gradient(180deg,#0a0f1e 0%,#0d1b3a 55%,#0a0f1e 100%);background-attachment:fixed}
+[data-theme="glassy"] .card,[data-theme="glassy"] .tool,[data-theme="glassy"] .stepc,[data-theme="glassy"] .tcard,[data-theme="glassy"] .prodcard,[data-theme="glassy"] .chip,[data-theme="glassy"] .stp,[data-theme="glassy"] .botpanel,[data-theme="glassy"] .ptshelp,[data-theme="glassy"] .chap,[data-theme="glassy"] .soc,[data-theme="glassy"] .bot-in{backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.18)}
+[data-theme="glassy"] .hero{box-shadow:0 22px 55px rgba(3,8,20,.5),inset 0 1px 0 rgba(255,255,255,.22)}
+[data-theme="glassy"] textarea{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+[data-theme="glassy"] .themesw button.on{background:linear-gradient(135deg,#22d3ee,#448aff);box-shadow:0 0 14px rgba(34,211,238,.55)}
 .themesw{display:flex;gap:2px;background:var(--hover);border:1.5px solid var(--line);border-radius:999px;padding:3px;flex:none}
 .themesw button{width:34px;height:30px;border-radius:999px;font-size:15px;display:grid;place-items:center;padding:0!important;line-height:1;color:var(--ink)}
 .themesw button.on{background:var(--blue);box-shadow:0 4px 12px rgba(2,132,199,.35)}
@@ -324,7 +331,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <button class="hideM" onclick="show('guide',this)">📖 Guide</button>
     <button class="hideM" onclick="show('mgmt',this)">Management</button>
     <button class="hideM" onclick="show('pos',this)">POS</button>
-    <div class="themesw" role="group" aria-label="Theme"><button data-t="day" class="on" onclick="setTheme('day')" title="Day">☀️</button><button data-t="night" onclick="setTheme('night')" title="Night">🌙</button><button data-t="neon" onclick="setTheme('neon')" title="Neon">⚡</button></div>
+    <div class="themesw" role="group" aria-label="Theme"><button data-t="glassy" class="on" onclick="setTheme('glassy')" title="Glassy">🫧</button><button data-t="day" onclick="setTheme('day')" title="Day">☀️</button><button data-t="night" onclick="setTheme('night')" title="Night">🌙</button><button data-t="neon" onclick="setTheme('neon')" title="Neon">⚡</button></div>
     <div class="themesw fontsw" role="group" aria-label="Font"><button data-f="pyidaungsu" class="on" onclick="setFont('pyidaungsu')" title="Pyidaungsu">ပြည်ထောင်စု</button><button data-f="padauk" onclick="setFont('padauk')" title="Padauk">Padauk</button><button data-f="noto" onclick="setFont('noto')" title="Noto Sans Myanmar">Noto</button></div>
     <button class="lang" id="langBtn" onclick="toggleLang()">EN</button>
     <button class="cta" onclick="show('studio')">အခမဲ့ စသုံးမယ်</button>
