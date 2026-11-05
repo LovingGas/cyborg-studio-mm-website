@@ -29,7 +29,7 @@ button{padding:8px 14px;margin:4px 4px 4px 0;cursor:pointer}
 အလုပ်လုပ်ပုံ: Segment တစ်ခု = အသံတစ်သံ + စာသား → တစ်ပိုင်းချင်း (၁,၀၀၀ စာလုံးအတွင်း) ထုတ် → WAV တစ်ခုတည်း ဆက်ပေး။
 Document တင်ရင် browser ထဲမှာပဲ စာသားထုတ်ပြီး အပိုင်းခွဲပေးတယ် (server ကို ဖိုင်မတင်ဘူး)။
 Project သိမ်းတာက ဒီ browser ထဲမှာပဲ (localStorage) — member cloud save က နောက်အဆင့်။<br>
-⚡ <b>အသံထုတ်တာက Fast Server window ချိန်မှာပဲ ရတယ်</b> (တနင်္လာ–သောကြာ 17:00–21:00, စနေ–တနင်္ဂနွေ 15:00–21:00 Myanmar Time) — Normal Server (Modal) ပြန်ရမှ Worker + Key လမ်းကြောင်းလည်း ပြန်ရမယ်။
+⚡ <b>အသံထုတ်တာက Fast Server window ချိန်မှာပဲ ရတယ်</b> (တနင်္လာ–သောကြာ 17:00–21:00, စနေ–တနင်္ဂနွေ 15:00–21:00 Myanmar Time)။
 </div>
 
 <div id="routeSec">
@@ -38,7 +38,6 @@ Project သိမ်းတာက ဒီ browser ထဲမှာပဲ (localStor
 <label><input type="radio" name="route" value="worker" checked> Worker + Key (Modal ပြန်ရမှ)</label>
 <label><input type="radio" name="route" value="fast"> Fast Tunnel URL (ည Fast window)</label><br>
 Key: <input type="text" id="userKey" placeholder="csmm_..." style="width:300px">
-Fast URL: <input type="text" id="fastUrl" placeholder="Fast window မှာ tunnel URL ထည့်ပါ" style="width:300px">
 </div>
 <div id="fastStatus"></div>
 
@@ -81,6 +80,7 @@ const VOICES=[
 ["storytelling_female3","မတိမ်ညို"]];
 const MAX_CHARS=1000; // CyborgMM per-generate cap (member 5000 = launch-time change, 3 layers)
 const WORKER="https://cyborg-voxcpm-proxy.lovinggas.workers.dev";
+let fastUrlVal=''; // Fast tunnel URL: supplied by parent (embed) or shared localStorage — never typed in a box
 const logEl=document.getElementById('log');
 function log(m){logEl.textContent+=m+"\n";}
 function voiceOptions(sel,cur){sel.innerHTML=VOICES.map(v=>`<option value="${v[0]}" ${v[0]===cur?'selected':''}>${v[1]}</option>`).join('');}
@@ -203,7 +203,9 @@ function silentWav(seconds=1,rate=48000){
 // ---- Generation (one segment = one existing /tts call, sequential) ----
 async function genOne(voice,text){
   const route=document.querySelector('input[name=route]:checked').value;
-  const url= route==='worker' ? WORKER+'/tts' : document.getElementById('fastUrl').value.replace(/\/$/,'')+'/tts';
+  let url;
+  if(route==='worker'){ url=WORKER+'/tts'; }
+  else { if(!fastUrlVal) throw new Error('Fast URL မရှိသေးဘူး — Fast window ဖွင့်ချိန်မှ ရမယ်'); url=fastUrlVal.replace(/\/$/,'')+'/tts'; }
   const headers={'Content-Type':'application/json'};
   if(route==='worker') headers['X-User-Key']=document.getElementById('userKey').value.trim();
   const r=await fetch(url,{method:'POST',headers,body:JSON.stringify({voice_id:voice,text})});
@@ -259,15 +261,23 @@ try{const sk=localStorage.getItem('csmm-voice-key')||''; if(sk) document.getElem
 if(new URLSearchParams(location.search).get('embed')){
   const tb=document.querySelector('.topbar'); if(tb) tb.style.display='none';
   const rs=document.getElementById('routeSec'); if(rs) rs.style.display='none';
+  // visible sections were 2,3,4 (Step 1 hidden) -> renumber 1,2,3 in order
+  [['၂','၁'],['၃','၂'],['၄','၃']].forEach(function(p){
+    document.querySelectorAll('h2').forEach(function(h){
+      if(h.textContent.charAt(0)===p[0]) h.textContent=p[1]+h.textContent.slice(1);
+    });
+  });
 }
 function askRoute(){ if(window.parent!==window) window.parent.postMessage({type:'mvNeedRoute'},'*'); }
 window.addEventListener('message',function(e){
   if(e.data&&e.data.type==='mvRoute'&&e.data.fastUrl){
-    document.getElementById('fastUrl').value=e.data.fastUrl;
+    fastUrlVal=e.data.fastUrl;
+    try{localStorage.setItem('cyborgmm-fast-url',fastUrlVal);}catch(e){}
     const fr=document.querySelector('input[name=route][value=fast]'); if(fr) fr.checked=true;
   }
 });
 askRoute(); setTimeout(askRoute,1000);
+try{const fu=localStorage.getItem('cyborgmm-fast-url')||''; if(fu&&!fastUrlVal){fastUrlVal=fu; const fr=document.querySelector('input[name=route][value=fast]'); if(fr) fr.checked=true;}}catch(e){}
 function postHeight(){ if(window.parent!==window) window.parent.postMessage({type:'mvHeight',h:document.documentElement.scrollHeight},'*'); }
 if('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);
 window.addEventListener('load',postHeight);

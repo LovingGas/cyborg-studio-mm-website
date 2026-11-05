@@ -508,12 +508,16 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   </div>
   <script>
   var MV_FAST_URL='';
+  try{if(MV_FAST_URL) localStorage.setItem('cyborgmm-fast-url',MV_FAST_URL); else localStorage.removeItem('cyborgmm-fast-url');}catch(e){}
   function mvToggle(){var b=document.getElementById('mvBody'),t=document.getElementById('mvToggleBtn');var open=b.style.display==='none';b.style.display=open?'block':'none';t.textContent=open?'ပိတ်မယ် ▴':'ဖွင့်မယ် ▾';}
   window.addEventListener('message',function(e){
     if(!e.data) return;
     if(e.data.type==='mvHeight'){var f=document.getElementById('mvFrame');if(f) f.style.height=Math.max(600,e.data.h+20)+'px';}
     if(e.data.type==='mvNeedRoute'){var f=document.getElementById('mvFrame');if(f&&f.contentWindow) f.contentWindow.postMessage({type:'mvRoute',fastUrl:MV_FAST_URL},'*');}
   });
+  function mvOpenFromHash(){ if(location.hash==='#tts-mv'){ if(typeof show==='function') show('tts'); var b=document.getElementById('mvBody'); if(b&&b.style.display==='none') mvToggle(); var s=document.getElementById('mvSection'); if(s) setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},80); try{history.replaceState(null,'',location.pathname+location.search);}catch(e){} } }
+  window.addEventListener('hashchange',mvOpenFromHash);
+  window.addEventListener('load',mvOpenFromHash);
   </script>
   <div class="tts-grid">
     <div>
@@ -1879,7 +1883,7 @@ const tools=[
  {t:'Watermark တပ်',e:'Watermark',d:'ပုံပေါ် logo/တံဆိပ် တင်ထုတ် — အခမဲ့',go:'watermark',ic:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="m4 15.5 5-4 3.5 2.8L15 12l5 3.5"/><circle cx="9" cy="9" r="1.3"/>'},
  {t:'ပုံများ → PDF',e:'Images to PDF',d:'ပုံ အများ ကို PDF တစ်ဖိုင် ပေါင်းထုတ် — အခမဲ့',go:'img2pdf',ic:'<path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v4h4M9.5 13h5M9.5 17h5"/>'},
  {t:'QR Code ထုတ်',e:'QR Generator',d:'Link/စာသား ကနေ QR ပုံ ထုတ် — အခမဲ့',go:'qr',ic:'<rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h3v3h-3zM20 17v3h-3"/>'},
- {t:'Multi-Voice + Document Studio',e:'Multi-Voice Studio',d:'အသံ ၂–၃ သံနဲ့ ဇာတ်လမ်းတစ်ပုဒ် + စာအုပ် (TXT/DOCX/EPUB/PDF) ကို အသံထုတ် — CyborgMM ၃၁ သံချည်းပဲ, Fast window ချိန်သုံး',go:'',url:'multi-voice-studio.html',ic:'<path d="M12 3a3 3 0 0 1 3 3v4a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
+ {t:'Multi-Voice + Document Studio',e:'Multi-Voice Studio',d:'အသံ ၂–၃ သံနဲ့ ဇာတ်လမ်းတစ်ပုဒ် + စာအုပ် (TXT/DOCX/EPUB/PDF) ကို အသံထုတ် — CyborgMM ၃၁ သံချည်းပဲ, Fast window ချိန်သုံး',go:'',url:'#tts-mv',ic:'<path d="M12 3a3 3 0 0 1 3 3v4a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
 ];
 document.getElementById('tools').innerHTML=tools.map(x=>`<div class="tool" onclick="${x.url?`location.href='${x.url}'`:x.go?`show('${x.go}')`:`alert('ဒီ Tool က မကြာမီ ပါလာမယ် — အခု TTS Studio နဲ့ Converter တွေ သုံးလို့ရတယ်')`}">${x.soon?`<span class="soon-badge">မကြာမီ</span>`:''}<div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${x.ic}</svg></div><h3>${x.t}</h3><p>${x.d}</p><span class="open${x.soon?' soon':''}">${x.soon?'မကြာမီ':'ဖွင့်မယ် →'}</span></div>`).join('');
 // waveform
