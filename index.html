@@ -502,9 +502,30 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   <div class="tts-grid">
     <div>
       <div class="card">
-        <h3><span class="n">1</span><span data-en="Type your text">စာသား ရိုက်ပါ</span></h3>
+        <h3><span class="n">1</span><span data-en="Add your text">စာသား ထည့်ပါ</span></h3>
         <div class="hint" data-en="Myanmar or English — up to 1,000 characters per generate (Free and Gemini voices).">မြန်မာ / English ရတယ် — တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ (Free, Gemini, CyborgMM အသံအားလုံး)။</div>
-        <textarea id="txt" oninput="updCount()" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — တစ်ခါတုန်းက ရွာလေးတစ်ရွာမှာ...">တစ်ခါတုန်းက တောင်ပေါ်ရွာလေးတစ်ရွာမှာ မောင်နှမ နှစ်ယောက် နေထိုင်ကြတယ်။ တစ်နေ့မှာတော့ သူတို့ဘဝကို ပြောင်းလဲသွားစေမယ့် ဖြစ်ရပ်တစ်ခု ဖြစ်ပွားခဲ့ပါတယ်။</textarea>
+                <div class="chips" data-group="ttssrc">
+          <button class="chip sel" onclick="ttsSrc('type')">✍️ စာရိုက်</button>
+          <button class="chip" onclick="ttsSrc('av')">🎧 Video / အသံ → စာသား</button>
+          <button class="chip" onclick="ttsSrc('doc')">📄 Document → စာသား</button>
+        </div>
+        <div id="ttsSrcAv" style="display:none;margin-top:12px">
+          <div class="drop" id="ttsAvDrop" onclick="document.getElementById('ttsAvFile').click()"><b>အသံ / Video ဖိုင် ရွေးပါ</b><br>MP3 / WAV / M4A / MP4 / MOV ဖိုင် ဆွဲချလို့လည်း ရတယ် (အများဆုံး 1 GB)
+            <input type="file" id="ttsAvFile" accept=".mp3,.wav,.m4a,.mp4,.mov,.webm,audio/*,video/*" hidden onchange="ttsAvPick(this)"></div>
+          <div id="ttsAvInfo" class="hint" style="margin-top:8px"></div>
+          <div id="ttsAvStatus" class="hint"></div>
+          <div class="hint">Model က STT Tool မှာ ရွေးထားတဲ့ Tiny / Base ကို သုံးတယ် — browser ထဲမှာပဲ မောင်းတယ်, ဖိုင် server မတက်ဘူး။</div>
+          <button class="genbtn" id="ttsAvBtn" onclick="ttsAvRun()" disabled style="margin-top:10px">စာသား ပြောင်းပြီး ဒီ box ထဲ ထည့် 🎧</button>
+        </div>
+        <div id="ttsSrcDoc" style="display:none;margin-top:12px">
+          <div class="drop" id="ttsDocDrop" onclick="document.getElementById('ttsDocFile').click()"><b>Document ဖိုင် ရွေးပါ</b><br>TXT / MD / DOCX / EPUB / PDF (စာသားပါတဲ့ PDF ပဲ)
+            <input type="file" id="ttsDocFile" accept=".txt,.md,.docx,.epub,.pdf" hidden onchange="ttsDocPick(this)"></div>
+          <div id="ttsDocInfo" class="hint" style="margin-top:8px"></div>
+          <div id="ttsDocStatus" class="hint"></div>
+          <div class="hint">Browser ထဲမှာပဲ စာသားထုတ်တယ် — ဖိုင် server မတက်ဘူး။ စာသား ၁,၀၀၀ ကျော်ရင် အပိုင်းခွဲထုတ်ဖို့ လိုမယ်။</div>
+          <button class="genbtn" id="ttsDocBtn" onclick="ttsDocRun()" disabled style="margin-top:10px">စာသား ထုတ်ပြီး ဒီ box ထဲ ထည့် 📄</button>
+        </div>
+<textarea id="txt" oninput="updCount()" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — တစ်ခါတုန်းက ရွာလေးတစ်ရွာမှာ...">တစ်ခါတုန်းက တောင်ပေါ်ရွာလေးတစ်ရွာမှာ မောင်နှမ နှစ်ယောက် နေထိုင်ကြတယ်။ တစ်နေ့မှာတော့ သူတို့ဘဝကို ပြောင်းလဲသွားစေမယ့် ဖြစ်ရပ်တစ်ခု ဖြစ်ပွားခဲ့ပါတယ်။</textarea>
         <div class="meta"><span id="ccount">0 / 1,000</span><span id="dur" data-en="Est. ~0 sec">ခန့်မှန်း ~၀ စက္ကန့်</span></div>
       </div>
       <div class="card">
@@ -1798,6 +1819,8 @@ function icGo(){
 <script src="https://cdn.jsdelivr.net/npm/rabbit-node@1.0.4/dist/rabbit.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 const tools=[
  {t:'AI အသံ ထုတ်မယ်',e:'AI Voice Generation',d:'စာရိုက်လိုက်တာနဲ့ အသံထွက်မယ်၊ Gemini အသံ ၃၀ လုံးထဲက ရွေးလို့ရတယ်',go:'tts',ic:'<path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
@@ -2188,7 +2211,36 @@ try{
  st.textContent='ရပြီ ✓';
 }catch(e){st.textContent='မရပါ — internet ချိတ်ထားရဲ့လား စစ်ပြီး ပြန်စမ်းပါ။ (ပထမဆုံး အကြိမ် model download လိုပါတယ်) Video ဖိုင်ဆိုရင် browser က အသံထုတ်မရတဲ့ format ဖြစ်နိုင်ပါတယ်။'}
 btn.disabled=false}
-dropZone('sDrop','sFile',sPick);dropZone('rDrop','rFile',rPick);dropZone('tDrop','tFile',tPick);dropZone('fDrop','fFile',fPick);dropZone('wDrop','wFile',wPick);
+// ---- TTS Studio input sources: Video/Audio -> text, Document -> text (into #txt) ----
+function ttsSrc(which){document.getElementById('ttsSrcAv').style.display=which==='av'?'block':'none';document.getElementById('ttsSrcDoc').style.display=which==='doc'?'block':'none'}
+let ttsAvFileObj=null,ttsDocFileObj=null;
+function ttsAvPick(input){const f=input.files&&input.files[0];if(!f)return;if(f.size>1073741824){document.getElementById('ttsAvInfo').textContent='⚠️ ဖိုင်က 1 GB ထက် ကြီးနေတယ် ('+fmtBytes(f.size)+') — 1 GB အောက် ဖိုင်ပဲ တင်ပါ';document.getElementById('ttsAvBtn').disabled=true;return}ttsAvFileObj=f;document.getElementById('ttsAvInfo').textContent=f.name+' · '+fmtBytes(f.size);document.getElementById('ttsAvBtn').disabled=false;document.getElementById('ttsAvStatus').textContent=''}
+async function whisperTranscribe(file,st){const model=dirOf('wmodel');
+ st.textContent='Model ပြင်ဆင်နေတယ်... (ပထမဆုံး အကြိမ် ဆိုရင် download ခဏ စောင့်ရမယ်)';
+ if(!wPipe||wModel!==model){if(wPipe&&wPipe.dispose){try{await wPipe.dispose()}catch(_){}}const mod=await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.2/+esm');wPipe=await mod.pipeline('automatic-speech-recognition',model,{dtype:'q8',progress_callback:(p)=>{if(p.status==='progress'&&p.progress!=null)st.textContent='Model download: '+(p.file||'')+' '+Math.round(p.progress)+'%';else if(p.status==='ready')st.textContent='Model ရပြီ ✓'}});wModel=model}
+ st.textContent=(/\.(mp4|mov|webm|mkv)$/i.test(file.name)||(file.type||'').indexOf('video/')===0)?'Video ကနေ အသံ ထုတ်နေတယ်...':'အသံ ဖတ်နေတယ်...';
+ const actx=new (window.AudioContext||window.webkitAudioContext)();const abuf=await actx.decodeAudioData(await file.arrayBuffer());
+ const off=new OfflineAudioContext(1,Math.max(1,Math.ceil(abuf.duration*16000)),16000);const src=off.createBufferSource();src.buffer=abuf;src.connect(off.destination);src.start();const rendered=await off.startRendering();const audio=rendered.getChannelData(0);
+ st.textContent='စာသား ပြောင်းနေတယ်... (device ပေါ် မူတည်ပြီး ခဏ ကြာနိုင်တယ်)';
+ const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5});
+ return (out.text||'').trim()}
+function ttsPutText(t,src){const tx=document.getElementById('txt');tx.value=t;updCount();const st=document.getElementById(src==='av'?'ttsAvStatus':'ttsDocStatus');st.textContent='✅ စာသား '+t.length.toLocaleString()+' လုံး TTS box ထဲ ထည့်ပြီးပြီ'+(t.length>1000?' — ⚠️ ၁,၀၀၀ ကျော်နေတယ်, တစ်ခါထုတ် ၁,၀၀၀ အထိပဲ, အပိုင်းခွဲထုတ်ပါ':'')}
+async function ttsAvRun(){if(!ttsAvFileObj)return;const st=document.getElementById('ttsAvStatus');const btn=document.getElementById('ttsAvBtn');btn.disabled=true;
+try{const t=await whisperTranscribe(ttsAvFileObj,st);if(!t){st.textContent='စာသား မထွက်ဘူး — အသံ ပါတဲ့ ဖိုင်ဟုတ်ရဲ့လား စစ်ပါ';btn.disabled=false;return}ttsPutText(t,'av')}catch(e){st.textContent='မရပါ — internet ချိတ်ထားရဲ့လား စစ်ပြီး ပြန်စမ်းပါ။ Video ဖိုင်ဆိုရင် browser က အသံထုတ်မရတဲ့ format ဖြစ်နိုင်ပါတယ်။'}
+btn.disabled=false}
+function ttsDocPick(input){const f=input.files&&input.files[0];if(!f)return;ttsDocFileObj=f;document.getElementById('ttsDocInfo').textContent=f.name+' · '+fmtBytes(f.size);document.getElementById('ttsDocBtn').disabled=false;document.getElementById('ttsDocStatus').textContent=''}
+async function ttsDocRun(){if(!ttsDocFileObj)return;const f=ttsDocFileObj;const st=document.getElementById('ttsDocStatus');const btn=document.getElementById('ttsDocBtn');btn.disabled=true;st.textContent='စာသား ထုတ်နေတယ်...';
+try{let text='';
+ if(/\.txt$|\.md$/i.test(f.name)){text=await f.text()}
+ else if(/\.docx$/i.test(f.name)){if(typeof JSZip==='undefined')throw new Error('JSZip library မရသေးဘူး');const zip=await JSZip.loadAsync(f);const xml=await zip.file('word/document.xml').async('string');text=xml.replace(/<\/w:p>/g,'\n').replace(/<[^>]+>/g,'')}
+ else if(/\.epub$/i.test(f.name)){if(typeof JSZip==='undefined')throw new Error('JSZip library မရသေးဘူး');const zip=await JSZip.loadAsync(f);const names=Object.keys(zip.files).filter(n=>/\.(xhtml|html)$/i.test(n));for(const n of names){const h=await zip.file(n).async('string');text+=h.replace(/<[^>]+>/g,' ')+'\n'}}
+ else if(/\.pdf$/i.test(f.name)){if(typeof pdfjsLib==='undefined')throw new Error('PDF library မရသေးဘူး');const buf=await f.arrayBuffer();const pdf=await pdfjsLib.getDocument({data:buf}).promise;let pages=[];for(let i=1;i<=pdf.numPages;i++){const p=await pdf.getPage(i);const c=await p.getTextContent();pages.push(c.items.map(x=>x.str).join(' '))}text=pages.join('\n');if(!text.trim()){st.textContent='ဒီ PDF မှာ စာသား� layer မရှိဘူး (scan PDF ဖြစ်နိုင်တယ်) — OCR လိုမယ်';btn.disabled=false;return}}
+ else{st.textContent='TXT / MD / DOCX / EPUB / PDF ပဲ ရတယ်';btn.disabled=false;return}
+ text=text.replace(/\r/g,'').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n').trim();
+ if(!text){st.textContent='စာသား မတွေ့ဘူး — ဖိုင် အလွတ်ဖြစ်နေလား စစ်ပါ';btn.disabled=false;return}
+ ttsPutText(text,'doc')}catch(e){st.textContent='မရပါ: '+e.message}
+btn.disabled=false}
+dropZone('sDrop','sFile',sPick);dropZone('rDrop','rFile',rPick);dropZone('tDrop','tFile',tPick);dropZone('fDrop','fFile',fPick);dropZone('wDrop','wFile',wPick);dropZone('ttsAvDrop','ttsAvFile',ttsAvPick);dropZone('ttsDocDrop','ttsDocFile',ttsDocPick);
 /* ================= Free Tools Wave 2 ================= */
 async function auDec(f){const ctx=new (window.AudioContext||window.webkitAudioContext)();return await ctx.decodeAudioData(await f.arrayBuffer())}
 function sliceBuf(buf,s,e){const sr=buf.sampleRate,from=Math.max(0,Math.floor(s*sr)),to=Math.min(buf.length,Math.ceil(e*sr));const ac=new (window.AudioContext||window.webkitAudioContext)();const nb=ac.createBuffer(buf.numberOfChannels,Math.max(1,to-from),sr);for(let c=0;c<buf.numberOfChannels;c++)nb.copyToChannel(buf.getChannelData(c).subarray(from,to),c);return nb}
