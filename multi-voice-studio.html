@@ -6,16 +6,23 @@
 <meta name="description" content="CyborgMM အသံ ၃၁ သံနဲ့ Multi-Voice ဇာတ်လမ်း + Document (TXT/DOCX/EPUB/PDF) ကို အသံထုတ်ပေးတဲ့ Studio — Cyborg Studio MM">
 <title>CyborgMM Multi-Voice + Document Studio — Cyborg Studio MM</title>
 <style>
-body{font-family:system-ui,sans-serif;max-width:900px;margin:0 auto;padding:16px;line-height:1.6}
+/* Theme variables — same palette as the main site (day/night/neon). The iframe is a separate document, so it needs its own copy. */
+:root{--bg:#eaf6ff;--card:#fff;--ink:#0b1526;--mut:#5d6f8a;--line:#d6e9f8;--blue:#0096d6;--blue2:#0070d1;--cyan:#00b8d9;--soft:#e2f5ff;--field:#f7fcff;--note-bg:#fff8e1;--note-line:#f0c36d;color-scheme:light}
+[data-theme="night"]{--bg:#0a101e;--card:#131c2f;--ink:#f3f8ff;--mut:#a7bad6;--line:#263a5c;--blue:#2fd4d9;--blue2:#7fd4ea;--cyan:#ff4d8d;--soft:#1b2a47;--field:#0d1729;--note-bg:#1b2a47;--note-line:#263a5c;color-scheme:dark}
+[data-theme="neon"]{--bg:#05060f;--card:#0a1024;--ink:#eefaff;--mut:#93aee0;--line:#1d3a6e;--blue:#00e5ff;--blue2:#8ef4ff;--cyan:#ff3df0;--soft:#0d2149;--field:#060a1a;--note-bg:#0d2149;--note-line:#1d3a6e;color-scheme:dark}
+body{font-family:system-ui,sans-serif;max-width:900px;margin:0 auto;padding:16px;line-height:1.6;background:var(--card);color:var(--ink)}
 h1{font-size:22px} h2{font-size:18px;margin-top:28px}
-.seg{border:1px solid #ccc;border-radius:10px;padding:12px;margin:10px 0}
-textarea{width:100%;min-height:80px} select,input[type=text]{padding:6px}
-button{padding:8px 14px;margin:4px 4px 4px 0;cursor:pointer}
-.note{background:#fff8e1;border:1px solid #f0c36d;border-radius:8px;padding:10px}
+.seg{border:1px solid var(--line);background:var(--field);border-radius:10px;padding:12px;margin:10px 0}
+textarea{width:100%;min-height:80px;background:var(--field);color:var(--ink);border:1px solid var(--line);border-radius:8px} select,input[type=text]{padding:6px;background:var(--field);color:var(--ink);border:1px solid var(--line);border-radius:8px}
+button{padding:8px 14px;margin:4px 4px 4px 0;cursor:pointer;background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:8px}
+button:disabled{opacity:.55;cursor:not-allowed}
+.note{background:var(--note-bg);border:1px solid var(--note-line);border-radius:8px;padding:10px}
 #log{white-space:pre-wrap;background:#111;color:#eee;padding:10px;border-radius:8px;min-height:80px}
 .topbar{margin-bottom:8px}
-.topbar a{color:#0b5fff;text-decoration:none;font-weight:700}
+.topbar a{color:var(--blue2);text-decoration:none;font-weight:700}
+small{color:var(--mut)}
 </style>
+<script>(function(){try{var t=localStorage.getItem('csmm-theme');if(t==='night'||t==='neon')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <!-- Document parsers (CDN, only used when a file is uploaded) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -264,8 +271,10 @@ window.addEventListener('message',function(e){
     fastUrlVal=e.data.fastUrl;
     try{localStorage.setItem('cyborgmm-fast-url',fastUrlVal);}catch(e){}
   }
+  if(e.data&&e.data.type==='mvTheme'){var t=e.data.theme;document.documentElement.setAttribute('data-theme',(t==='night'||t==='neon')?t:'day');}
 });
-askRoute(); setTimeout(askRoute,1000);
+function askTheme(){ if(window.parent!==window) window.parent.postMessage({type:'mvNeedTheme'},'*'); }
+askRoute(); setTimeout(askRoute,1000); askTheme();
 try{const fu=localStorage.getItem('cyborgmm-fast-url')||''; if(fu&&!fastUrlVal){fastUrlVal=fu;}}catch(e){}
 function postHeight(){ if(window.parent!==window) window.parent.postMessage({type:'mvHeight',h:document.documentElement.scrollHeight},'*'); }
 if('ResizeObserver' in window) new ResizeObserver(postHeight).observe(document.body);

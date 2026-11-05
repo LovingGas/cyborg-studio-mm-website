@@ -520,6 +520,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     if(!e.data) return;
     if(e.data.type==='mvHeight'){var f=document.getElementById('mvFrame');if(f) f.style.height=Math.max(600,e.data.h+20)+'px';}
     if(e.data.type==='mvNeedRoute'){var f=document.getElementById('mvFrame');if(f&&f.contentWindow) f.contentWindow.postMessage({type:'mvRoute',fastUrl:MV_FAST_URL},'*');}
+    if(e.data.type==='mvNeedTheme'){var f=document.getElementById('mvFrame');if(f&&f.contentWindow) f.contentWindow.postMessage({type:'mvTheme',theme:document.documentElement.getAttribute('data-theme')||'day'},'*');}
   });
   function mvOpenFromHash(){ if(location.hash==='#tts-mv'){ if(typeof show==='function') show('tts'); var b=document.getElementById('mvBody'); if(b&&b.style.display==='none') mvToggle(); var s=document.getElementById('mvSection'); if(s) setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},80); try{history.replaceState(null,'',location.pathname+location.search);}catch(e){} } }
   window.addEventListener('hashchange',mvOpenFromHash);
@@ -1899,7 +1900,7 @@ const w=document.getElementById('wave');let wh='';
 for(let i=0;i<36;i++){const h=18+Math.round(Math.abs(Math.sin(i*.55))*44);wh+=`<i style="height:${h}px;animation-delay:${(i%9)*.09}s"></i>`}
 w.innerHTML=wh;
 // screens
-function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('csmm-theme',t)}catch(e){}document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t))}
+function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('csmm-theme',t)}catch(e){}document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t));var f=document.getElementById('mvFrame');if(f&&f.contentWindow)f.contentWindow.postMessage({type:'mvTheme',theme:t},'*');}
 (function(){var t=document.documentElement.getAttribute('data-theme')||'day';document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t))})();
 function setFont(f){document.documentElement.setAttribute('data-font',f);try{localStorage.setItem('csmm-font',f)}catch(e){}document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))}
 (function(){var f=document.documentElement.getAttribute('data-font')||'pyidaungsu';document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))})();
