@@ -124,6 +124,12 @@ textarea{width:100%;min-height:150px;border:1.5px solid var(--line);border-radiu
 textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(2,132,199,.12)}
 .meta{display:flex;justify-content:space-between;color:var(--mut);font-size:13px;margin-top:6px}
 .glabel{font-weight:700;font-size:14.5px;margin:16px 0 8px}
+.minisw{position:relative;display:inline-block;width:38px;height:22px;vertical-align:middle;margin-left:8px;cursor:pointer;flex:none}
+.minisw input{position:absolute;opacity:0;width:0;height:0}
+.minisw i{position:absolute;inset:0;background:#cbd5e1;border-radius:999px;transition:.2s}
+.minisw i:before{content:'';position:absolute;width:18px;height:18px;left:2px;top:2px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.minisw input:checked+i{background:#2563eb}
+.minisw input:checked+i:before{transform:translateX(16px)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{display:flex;align-items:center;gap:9px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px 8px 8px;border-radius:999px;font-weight:600;font-size:14.5px;transition:.15s}
 .chip:hover{border-color:#7dd3fc}
@@ -552,7 +558,8 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <div class="card">
         <h3><span class="n">2</span><span data-en="Choose a voice">အသံ ရွေးပါ</span></h3>
         <div class="hint" data-en="Tap a voice chip. Press ▶ to hear a sample.">အသံ chip ကို နှိပ်ရွေးပါ။ ▶ နှိပ်ရင် နမူနာ နားထောင်လို့ရတယ်။</div>
-                <div class="glabel">Gemini TTS · <small style="color:var(--mut);font-weight:500">အသံ ၃၀ လုံး</small></div>
+                <div class="glabel">Gemini TTS · <small style="color:var(--mut);font-weight:500">အသံ ၃၀ လုံး</small> <label class="minisw" title="Gemini အသံတွေ ပြမယ် / ဖျောက်မယ်"><input type="checkbox" onchange="gmToggle(this.checked)"><i></i></label></div>
+        <div id="gmVoiceWrap" style="display:none">
         <div class="chips" data-group="voice">
           <button class="chip"><span class="ava">Z</span>Zephyr <small>မ · တောက်ပ</small></button>
           <button class="chip"><span class="ava">P</span>Puck <small>ကျား · တက်ကြွ</small><span class="miniplay" onclick="event.stopPropagation();playSample(this)">▶</span></button>
@@ -584,6 +591,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
           <button class="chip"><span class="ava">S</span>Sadaltager <small>ကျား · အသိပညာ</small></button>
           <button class="chip"><span class="ava">S</span>Sulafat <small>မ · နွေးထွေး</small></button>
           <button class="chip"><span class="ava">A</span>Achernar <small>မ · ငြိမ်သက်</small></button>
+        </div>
         </div>
         <div class="glabel"><span data-en="Free voices">အခမဲ့ အသံများ</span> · <small style="color:var(--mut);font-weight:500">Edge TTS</small></div>
         <div class="chips" data-group="voice">
@@ -1901,6 +1909,7 @@ document.querySelectorAll('.chips').forEach(g=>{g.addEventListener('click',e=>{c
 function selText(group){const g=document.querySelector(`.chips[data-group="${group}"] .sel`);return g?g.textContent.replace('▶','').trim().split('·')[0].trim():''}
 function updGen(){const v=(typeof ttsSel!=='undefined'&&ttsSel.name)?ttsSel.name:selText('voice'),s=selText('speed');if(v||s)document.getElementById('genVoice').textContent=`${v||'သီဟ'} · ${s||'1.0x'}`;const db=document.getElementById('btnDl');if(db&&db.disabled){const fmt=(typeof ttsSel!=='undefined'&&(ttsSel.group==='mm'||ttsSel.group==='gm'))?'WAV':'MP3';const lbl=(typeof ttsSel!=='undefined'&&ttsSel.group==='mm')?'48kHz quality wave':fmt+' Download';db.dataset.en=lbl;db.textContent=(typeof en!=='undefined'&&en)?db.dataset.en:lbl;if(typeof orig!=='undefined'&&orig.has(db))orig.set(db,lbl)}}
 function updCount(){const t=document.getElementById('txt').value;document.getElementById('ccount').textContent=`${t.length.toLocaleString()} / 1,000`;const sec=Math.max(1,Math.round(t.length/13));document.getElementById('dur').textContent=`ခန့်မှန်း ~${sec} စက္ကန့်`}
+function gmToggle(on){var w=document.getElementById('gmVoiceWrap');if(w)w.style.display=on?'block':'none';}
 updCount();
 let playing=false;
 function playSample(el){playing=!playing;const old=el.textContent;el.textContent=playing?'❚❚':'▶';setTimeout(()=>{el.textContent=old==='▶'||old.includes('Listen')?'▶':old;playing=false},1600)}
