@@ -516,6 +516,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
           <div id="ttsAvStatus" class="hint"></div>
           <div class="hint">Model + ဘာသာစကားက STT Tool မှာ ရွေးထားတဲ့တို ကို သုံးတယ် — browser ထဲမှာပဲ မောင်းတယ်, ဖိုင် server မတက်ဘူး။</div>
           <button class="genbtn" id="ttsAvBtn" onclick="ttsAvRun()" disabled style="margin-top:10px">စာသား ပြောင်းပြီး ဒီ box ထဲ ထည့် 🎧</button>
+          <button class="genbtn" id="ttsAvGemBtn" onclick="ttsAvGemFix()" style="margin-top:10px">Gemini နင့် မြန်မာလု ပြင်မျမ်မ်ယ် ✨</button>
         </div>
         <div id="ttsSrcDoc" style="display:none;margin-top:12px">
           <div class="drop" id="ttsDocDrop" onclick="document.getElementById('ttsDocFile').click()"><b>Document ဖိုင် ရွေးပါ</b><br>TXT / MD / DOCX / EPUB / PDF (စာသားပါတဲ့ PDF ပဲ)
@@ -1154,13 +1155,14 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <input type="file" id="wFile" accept=".mp3,.wav,.m4a,.mp4,.mov,.webm,audio/*,video/*" hidden onchange="wPick(this)">
       </div>
       <div id="wInfo" class="hint" style="margin-top:10px"></div>
-      <div class="hint" style="margin-top:10px">ℹ️ ပထမဆုံး အကြိမ် model download လိုတယ် (internet လိုတယ်) — နောက်ပိုင်း device ထဲမှာပဲ မောင်းတယ်။ ဖိုင် အများဆုံး 1 GB — အရှည်ကြီးတဲ့ video ဆိုရင် ပြောင်းဖို့ ကြာနိုင်တယ်, ဖုန်း RAM နည်းရင် ရပ်သွားနိုင်တယ်။ မြန်မာ တိုက်ရိုက် အသံမှတ်ဉာဏ် အားနည်းနိုင်သေးတယ် — SRT Tool / Gemini ဘာသာပြန် နဲ့ တွဲသုံးရင် ပိုကောင်းတယ်။</div>
+      <div class="hint" style="margin-top:10px">ℹ️ ပထမဆုံး အကြိမ် model download လိုတယ် (internet လိုတယ်) — နောက်ပိုင်း device ထဲမှာပဲ မောင်းတယ်။ ဖိုင် အများဆုံး 1 GB — အရှည်ကြီးတဲ့ video ဆိုရင် ပြောင်းဖို့ ကြာနိုင်တယ်, ဖုန်း RAM နည်းရင် ရပ်သွားနိုင်တယ်။ မြန်မာ တိုက်ရိုက် အသံမှတ်ဉာဏ် အားနည်းနိုင်သေးတယ် — SRT Tool / Gemini ဘာသာပြန် နဲ့ တွဲသုံးရင် ပိုကောင်းတယ်။ Gemini key ရှိရင် စာသားထွက်ပြီးပြီး "Gemini နင့် မြန်မာလု ပြင်မျမ်မ်ယ်" နှိပ်ပြီး မှာန်အောင် ပြင်လို့ရတယ်။</div>
       <div id="wStatus" class="hint" style="margin-top:10px"></div>
       <div class="glabel" style="margin-top:14px">ရလာတဲ့ စာသား</div>
       <textarea id="wOut" rows="6" readonly placeholder="စာသား ဒီမှာ ပေါ်မယ်"></textarea>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center">
         <button class="genbtn" id="wBtn" onclick="wRun()" disabled>စာသား ပြောင်းမယ် 🎧</button>
         <a class="dlbtn" id="wDl" style="display:none" download>⬇ SRT Download ဆွဲမယ်</a>
+        <button class="genbtn" id="wGemBtn" onclick="wGemFix()" disabled>Gemini နင့် မြန်မာလို ပြင်မျမ်မ်ယ် ✨</button>
       </div>
     </div>
   </section>
@@ -1675,6 +1677,7 @@ async function agGo(){
       const blob=new Blob(chunks,{type:'video/webm'});const url=URL.createObjectURL(blob);
       const dl=document.getElementById('agDl');dl.href=url;dl.download=(agAudName||'audiogram')+'.webm';dl.style.display='inline-flex';
       st.textContent='ရပြီ ✓ WebM video — Download ဆွဲမယ် နှိပ်ပါ။';btn.disabled=false;
+ document.getElementById('wGemBtn').disabled=false;
     };
     const data=new Uint8Array(agAn.frequencyBinCount);
     p.onended=function(){try{rec.stop()}catch(e){}};
@@ -2205,7 +2208,7 @@ function eUuid(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c
 async function eGen(){const st=document.getElementById('eStatus');const btn=document.getElementById('eBtn');const text=document.getElementById('eTxt').value.trim();if(!text){st.textContent='စာသား အရင် ရိုက်ပါ။';return}if([...text].length>1000){st.textContent='Free tool မို့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။';return}const voice=dirOf('evoice')||'my-MM-ThihaNeural';btn.disabled=true;st.textContent='အသံ ထုတ်နေတယ်...';try{const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),60000);const res=await fetch('https://cyborg-edge-tts.lovinggas.workers.dev/web-tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:text,voice:voice}),signal:ctl.signal});clearTimeout(timer);if(!res.ok){let msg='';try{const j=await res.json();msg=j.detail||''}catch(_){}throw new Error(msg||('HTTP '+res.status))}const blob=await res.blob();const url=URL.createObjectURL(blob);const au=document.getElementById('eOut');au.src=url;au.style.display='block';const dl=document.getElementById('eDl');dl.href=url;dl.download=(voice.indexOf('Nilar')>-1?'nilar':'thiha')+'_edge_tts.mp3';dl.style.display='inline-flex';st.textContent='ရပြီ ✓ MP3 · '+fmtBytes(blob.size)}catch(e){st.textContent='အသံ ထုတ်လို့ မရပါ — server ခဏ အလုပ်များနေနိုင်တယ်၊ ခဏနေမှ ပြန်စမ်းကြည့်ပါ။'}btn.disabled=false}
 // --- Whisper STT (Transformers.js, in-browser) ---
 let wPipe=null,wModel='',wFileObj=null;
-function wPick(input){const f=input.files&&input.files[0];if(!f)return;if(f.size>1073741824){document.getElementById('wInfo').textContent='⚠️ ဖိုင်က 1 GB ထက် ကြီးနေတယ် ('+fmtBytes(f.size)+') — 1 GB အောက် ဖိုင်ပဲ တင်ပါ';document.getElementById('wBtn').disabled=true;return}wFileObj=f;document.getElementById('wInfo').textContent=`${f.name} · ${fmtBytes(f.size)}`;document.getElementById('wBtn').disabled=false;document.getElementById('wDl').style.display='none';document.getElementById('wStatus').textContent=''}
+function wPick(input){const f=input.files&&input.files[0];if(!f)return;if(f.size>1073741824){document.getElementById('wInfo').textContent='⚠️ ဖိုင်က 1 GB ထက် ကြီးနေတယ် ('+fmtBytes(f.size)+') — 1 GB အောက် ဖိုင်ပဲ တင်ပါ';document.getElementById('wBtn').disabled=true;return}wFileObj=f;document.getElementById('wInfo').textContent=`${f.name} · ${fmtBytes(f.size)}`;document.getElementById('wBtn').disabled=false;document.getElementById('wDl').style.display='none';document.getElementById('wGemBtn').disabled=true;document.getElementById('wStatus').textContent=''}
 async function wRun(){if(!wFileObj)return;const st=document.getElementById('wStatus');const btn=document.getElementById('wBtn');const model=dirOf('wmodel');btn.disabled=true;
 try{
  st.textContent='Model ပြင်ဆင်နေတယ်... (ပထမဆုံး အကြိမ် ဆိုရင် download ခဏ စောင့်ရမယ်)';
@@ -2250,6 +2253,20 @@ try{let text='';
  if(!text){st.textContent='စာသား မတွေ့ဘူး — ဖိုင် အလွတ်ဖြစ်နေလား စစ်ပါ';btn.disabled=false;return}
  ttsPutText(text,'doc')}catch(e){st.textContent='မရပါ: '+e.message}
 btn.disabled=false}
+// ---- Gemini fix: Whisper စာသားအကြမ်း -> မြန်မာလို မှန်အောင် ပြင်မယ် (visitor's own Gemini key, via atGemini) ----
+async function wGemFixText(text,st,btn){
+ const t=(text||'').trim();if(!t){st.textContent='အရင် စာသား ပြောင်းပြီးမှ ပြင်လို့ရမယ်';return null}
+ if([...t].length>12000){st.textContent='⚠️ '+atErrMsg({at:'long'});return null}
+ btn.disabled=true;st.textContent='Gemini ပြင်နေတယ်...';
+ try{
+  const prompt='You are a Burmese language expert. The text below was auto-transcribed by Whisper and may contain recognition errors. Rewrite it as natural, correct, spoken Burmese (Myanmar) — fix errors, keep the original meaning and order. If the text is already Burmese, only fix the errors. If it is in another language, translate it into natural spoken Burmese. Reply with the corrected Burmese text ONLY — no explanations, no markdown, no quotation marks.\n\nText:\n'+t;
+  const out=await atGemini(prompt,false);
+  return (out||'').trim()||null;
+ }catch(e){st.textContent='⚠️ '+atErrMsg(e);return null}
+ finally{btn.disabled=false}
+}
+async function wGemFix(){const st=document.getElementById('wStatus');const btn=document.getElementById('wGemBtn');const out=await wGemFixText(document.getElementById('wOut').value,st,btn);if(out){document.getElementById('wOut').value=out;st.textContent='✅ Gemini ပြင်ပြီးပြီ — SRT Download က မူရင်း Whisper စာသားအတိုင်း ထွက်မယ်'}}
+async function ttsAvGemFix(){const st=document.getElementById('ttsAvStatus');const btn=document.getElementById('ttsAvGemBtn');const out=await wGemFixText(document.getElementById('txt').value,st,btn);if(out){document.getElementById('txt').value=out;updCount();st.textContent='✅ Gemini ပြင်ပြီးပြီ — TTS box ထဲ မြန်မာစာသား မှန်မှန် ရောက်ပြီ'}}
 dropZone('sDrop','sFile',sPick);dropZone('rDrop','rFile',rPick);dropZone('tDrop','tFile',tPick);dropZone('fDrop','fFile',fPick);dropZone('wDrop','wFile',wPick);dropZone('ttsAvDrop','ttsAvFile',ttsAvPick);dropZone('ttsDocDrop','ttsDocFile',ttsDocPick);
 /* ================= Free Tools Wave 2 ================= */
 async function auDec(f){const ctx=new (window.AudioContext||window.webkitAudioContext)();return await ctx.decodeAudioData(await f.arrayBuffer())}
