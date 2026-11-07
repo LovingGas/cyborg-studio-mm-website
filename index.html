@@ -573,6 +573,9 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   function mvOpenFromHash(){ if(location.hash==='#tts-mv'){ if(typeof show==='function') show('tts'); var b=document.getElementById('mvBody'); if(b&&b.style.display==='none') mvToggle(); var s=document.getElementById('mvSection'); if(s) setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},80); try{history.replaceState(null,'',location.pathname+location.search);}catch(e){} } }
   window.addEventListener('hashchange',mvOpenFromHash);
   window.addEventListener('load',mvOpenFromHash);
+  function recapOpenFromHash(){ if(location.hash==='#recap'){ if(typeof show==='function') show('recap'); try{history.replaceState(null,'',location.pathname+location.search);}catch(e){} } }
+  window.addEventListener('hashchange',recapOpenFromHash);
+  window.addEventListener('load',recapOpenFromHash);
   </script>
   <div class="tts-grid">
     <div>
