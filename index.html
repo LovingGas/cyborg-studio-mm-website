@@ -32,6 +32,8 @@
 [data-theme="glassy"] body{background:radial-gradient(900px 480px at 85% -5%,rgba(0,184,217,.28),transparent 60%),radial-gradient(800px 500px at 5% 18%,rgba(68,138,255,.24),transparent 60%),radial-gradient(760px 520px at 50% 108%,rgba(255,77,141,.18),transparent 60%),linear-gradient(180deg,#eaf6ff 0%,#d6efff 55%,#eaf6ff 100%);background-attachment:fixed}
 [data-theme="glassy"] .card,[data-theme="glassy"] .tool,[data-theme="glassy"] .stepc,[data-theme="glassy"] .tcard,[data-theme="glassy"] .prodcard,[data-theme="glassy"] .chip,[data-theme="glassy"] .stp,[data-theme="glassy"] .botpanel,[data-theme="glassy"] .ptshelp,[data-theme="glassy"] .chap,[data-theme="glassy"] .soc,[data-theme="glassy"] .bot-in{backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.75)}
 [data-theme="glassy"] .hero{background:radial-gradient(700px 320px at 85% -10%,rgba(255,255,255,.35),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(255,255,255,.22),transparent 55%),linear-gradient(135deg,#0284c7,#0369a1 55%,#075985);box-shadow:0 22px 55px rgba(2,132,199,.28),inset 0 1px 0 rgba(255,255,255,.4)}
+/* Studio hero — Gemini bright cyan-blue */
+#scr-studio .hero{background:radial-gradient(760px 360px at 88% -12%,rgba(255,255,255,.30),transparent 60%),radial-gradient(640px 340px at 0% 112%,rgba(34,211,238,.45),transparent 55%),linear-gradient(135deg,#0ea5e9,#0284c7 55%,#0369a1);box-shadow:0 22px 55px rgba(2,132,199,.35),inset 0 1px 0 rgba(255,255,255,.4)}
 [data-theme="glassy"] .hero h1 .grad{background:linear-gradient(90deg,#fff,#bae6fd);-webkit-background-clip:text;background-clip:text;color:transparent}
 /* Glassy hero player (voice samples card) — deeper saturated blue glass so it pops on the bright blue hero, not washed out. */
 [data-theme="glassy"] .player{background:rgba(3,105,161,.45);border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:0 18px 44px rgba(2,132,199,.25),inset 0 1px 0 rgba(255,255,255,.35)}
@@ -95,6 +97,16 @@ nav button.on{color:#fff;background:var(--blue)}
 .prow b{font-size:14.5px;display:block;line-height:1.5}
 .prow span{font-size:12.5px;color:#7dd3fc}
 .prow .tag{margin-left:auto;font-size:11.5px;color:#a5f3fc;border:1px solid rgba(165,243,252,.3);padding:2px 8px;border-radius:999px;white-space:nowrap}
+/* Gemini-style voice rows: monogram avatars (no fake faces — Thiha male, Nilar female) + progress bar */
+.prow .ava{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:19px;font-weight:800;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.25);border:2px solid rgba(255,255,255,.55)}
+.prow .ava-m{background:linear-gradient(135deg,#0284c7,#38bdf8)}
+.prow .ava-f{background:linear-gradient(135deg,#ec4899,#a855f7)}
+.prow .ava-g{background:linear-gradient(135deg,#4285f4,#34a853 50%,#fbbc05)}
+.prow .ava-logo{background:#fff}
+.prow .ava svg{width:28px;height:28px;display:block}
+.prow .vbody{flex:1;min-width:0}
+.prow .vprog{height:5px;border-radius:99px;background:rgba(255,255,255,.18);margin-top:6px;overflow:hidden}
+.prow .vprog i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#22d3ee,#448aff,#a855f7,#ff4d8d)}
 /* Sections */
 section.blk{padding:38px 0 6px}
 .sec-h{font-size:24px;font-weight:800;letter-spacing:-.3px}
@@ -427,10 +439,10 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div class="player">
       <div class="ttl"><span data-en="Voice Samples">အသံ နမူနာများ</span><span class="pill">LIVE PREVIEW</span></div>
       <div class="wave" id="wave"></div>
-      <div class="prow"><button class="play" onclick="playMMVoice(this,'narrator')">▶</button><div><b>ကိုစိုးမိုး</b><span data-en="CyborgMM · Free">CyborgMM · အခမဲ့</span></div><span class="tag">CyborgMM</span></div>
-      <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>သီဟ</b><span data-en="Male · Free">ကျား · အခမဲ့</span></div><span class="tag">Free</span></div>
-      <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>နီလာ</b><span data-en="Female · Free">မ · အခမဲ့</span></div><span class="tag">Free</span></div>
-      <div class="prow"><button class="play" onclick="playSample(this)">▶</button><div><b>Gemini</b><span data-en="30 Voices">အသံ ၃၀ လုံး</span></div><span class="tag">Gemini TTS</span></div>
+      <div class="prow"><div class="ava ava-logo"><svg viewBox="0 0 120 120"><defs><linearGradient id="hg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00b8d9"/><stop offset=".52" stop-color="#448aff"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs><path d="M 85.4 31.8 A 38 38 0 1 0 85.4 88.2" fill="none" stroke="url(#hg2)" stroke-width="15" stroke-linecap="round"/><rect x="38" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg2)"/><rect x="51" y="40" width="8.5" height="40" rx="4.25" fill="url(#hg2)"/><rect x="64" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg2)"/><line x1="68.75" y1="60" x2="84" y2="60" stroke="#ff4d8d" stroke-width="3.5"/><circle cx="90" cy="60" r="5.5" fill="#ff4d8d"/><circle cx="85.4" cy="31.8" r="6" fill="#ffffff" stroke="#00b8d9" stroke-width="4"/><circle cx="85.4" cy="88.2" r="6" fill="#ffffff" stroke="#ff4d8d" stroke-width="4"/></svg></div><div class="vbody"><b>ကိုစိုးမိုး</b><span data-en="CyborgMM · Free">CyborgMM · အခမဲ့</span><div class="vprog"><i style="width:85%"></i></div></div><button class="play" onclick="playMMVoice(this,'narrator')">▶</button><span class="tag">CyborgMM</span></div>
+      <div class="prow"><div class="ava ava-m">သ</div><div class="vbody"><b>သီဟ</b><span data-en="Male · Free">ကျား · အခမဲ့</span><div class="vprog"><i style="width:72%"></i></div></div><button class="play" onclick="playSample(this)">▶</button><span class="tag">Free</span></div>
+      <div class="prow"><div class="ava ava-f">န</div><div class="vbody"><b>နီလာ</b><span data-en="Female · Free">မ · အခမဲ့</span><div class="vprog"><i style="width:64%"></i></div></div><button class="play" onclick="playSample(this)">▶</button><span class="tag">Free</span></div>
+      <div class="prow"><div class="ava ava-g">G</div><div class="vbody"><b>Gemini</b><span data-en="30 Voices">အသံ ၃၀ လုံး</span><div class="vprog"><i style="width:78%"></i></div></div><button class="play" onclick="playSample(this)">▶</button><span class="tag">Gemini TTS</span></div>
     </div>
   </div>
 
@@ -1906,9 +1918,9 @@ const tools=[
  {t:'Multi-Voice + Document Studio',e:'Multi-Voice Studio',d:'အသံ ၂–၃ သံနဲ့ ဇာတ်လမ်းတစ်ပုဒ် + စာအုပ် (TXT/DOCX/EPUB/PDF) ကို အသံထုတ် — CyborgMM ၃၁ သံချည်းပဲ, Fast window ချိန်သုံး',go:'',url:'#tts-mv',ic:'<path d="M12 3a3 3 0 0 1 3 3v4a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
 ];
 document.getElementById('tools').innerHTML=tools.map(x=>`<div class="tool" onclick="${x.url?`location.href='${x.url}'`:x.go?`show('${x.go}')`:`alert('ဒီ Tool က မကြာမီ ပါလာမယ် — အခု TTS Studio နဲ့ Converter တွေ သုံးလို့ရတယ်')`}">${x.soon?`<span class="soon-badge">မကြာမီ</span>`:''}<div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${x.ic}</svg></div><h3>${x.t}</h3><p>${x.d}</p><span class="open${x.soon?' soon':''}">${x.soon?'မကြာမီ':'ဖွင့်မယ် →'}</span></div>`).join('');
-// waveform
+// waveform — colors flow horizontally cyan→blue→purple→pink (Gemini style)
 const w=document.getElementById('wave');let wh='';
-for(let i=0;i<36;i++){const h=18+Math.round(Math.abs(Math.sin(i*.55))*44);wh+=`<i style="height:${h}px;animation-delay:${(i%9)*.09}s"></i>`}
+for(let i=0;i<36;i++){const h=18+Math.round(Math.abs(Math.sin(i*.55))*44);const hue=Math.round(190+i*(130/35));wh+=`<i style="height:${h}px;animation-delay:${(i%9)*.09}s;background:linear-gradient(180deg,hsl(${hue},95%,66%),hsl(${hue},90%,55%))"></i>`}
 w.innerHTML=wh;
 // screens
 function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('csmm-theme',t)}catch(e){}document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t));var f=document.getElementById('mvFrame');if(f&&f.contentWindow)f.contentWindow.postMessage({type:'mvTheme',theme:t},'*');}
