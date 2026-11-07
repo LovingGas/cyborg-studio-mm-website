@@ -709,7 +709,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     </div>
     <div style="display:flex;gap:8px;align-items:center;margin-top:9px;flex-wrap:wrap">
       <button type="button" id="mmRegBtn" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer;white-space:nowrap">Trial Key အခမဲ့ ရယူမယ်</button>
-      <button type="button" id="mmRegCopy" style="display:none;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer">Key ကူးမယ် 📋</button>
+      <button type="button" id="mmRegCopy" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer">Key ကူးမယ် 📋</button>
       <span id="mmRegText" style="color:var(--mut);font-size:13px"></span>
     </div>
     <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Trial Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
@@ -2062,7 +2062,7 @@ function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.av
     catch(e){t.textContent='Key ထုတ်လို့ မရပါ — ခဏနေမှ ပြန်စမ်းပါ။'}
     btn.disabled=false;
   });
-  document.getElementById('mmRegCopy').addEventListener('click',async()=>{const t=document.getElementById('mmRegText');try{await navigator.clipboard.writeText(mmInp.value.trim());t.textContent='Key ကူးပြီးပြီ ✓ — သိမ်းထားပါ။';}catch(e){mmInp.type='text';mmInp.select();t.textContent='Key ကို ရွေးပြီး ကူးပါ။';}});
+  document.getElementById('mmRegCopy').addEventListener('click',async()=>{const t=document.getElementById('mmRegText');const k=mmInp.value.trim();if(!k){t.textContent='Key မရှိသေးဘူး — Trial Key ရယူမယ် နှိပ်ပြီး အရင် ယူပါ။';return}try{await navigator.clipboard.writeText(k);t.textContent='Key ကူးပြီးပြီ ✓ — APK မှာ paste လုပ်လို့ရပြီ။';}catch(e){mmInp.type='text';mmInp.select();t.textContent='Key ကို ရွေးပြီး ကူးပါ။';}});
   const lb=document.getElementById('btnListen'),rp=document.getElementById('btnPlayRow');
   const togglePlay=()=>{if(!ttsAudio)return;if(ttsAudio.paused)ttsAudio.play();else ttsAudio.pause()};
   lb.addEventListener('click',togglePlay);
