@@ -342,7 +342,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   <div class="logo"><svg class="logosvg" viewBox="0 0 120 120"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00b8d9"/><stop offset=".52" stop-color="#448aff"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs><path d="M 85.4 31.8 A 38 38 0 1 0 85.4 88.2" fill="none" stroke="url(#hg)" stroke-width="15" stroke-linecap="round"/><rect x="38" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><rect x="51" y="40" width="8.5" height="40" rx="4.25" fill="url(#hg)"/><rect x="64" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><line x1="68.75" y1="60" x2="84" y2="60" stroke="#ff4d8d" stroke-width="3.5"/><circle cx="90" cy="60" r="5.5" fill="#ff4d8d"/><circle cx="85.4" cy="31.8" r="6" fill="#ffffff" stroke="#00b8d9" stroke-width="4"/><circle cx="85.4" cy="88.2" r="6" fill="#ffffff" stroke="#ff4d8d" stroke-width="4"/></svg>Cyborg Studio <span style="color:var(--blue)">MM</span></div>
   <nav>
     <button class="on hideM" onclick="show('home',this)">ပင်မ</button>
-    <button class="hideM" onclick="show('studio',this)">CyborgMM Voices</button>
+    <button class="hideM" onclick="show('studio',this)">CyborgMM TTS Voices</button>
     <button class="hideM" onclick="show('recap',this)">Recap App</button>
     <button class="hideM" onclick="show('guide',this)">📖 Guide</button>
     <button class="hideM" onclick="show('mgmt',this)">Management</button>
@@ -708,11 +708,11 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <button type="button" id="mmBalBtn" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:0 15px;font-weight:700;cursor:pointer;white-space:nowrap">Balance စစ်မယ်</button>
     </div>
     <div style="display:flex;gap:8px;align-items:center;margin-top:9px;flex-wrap:wrap">
-      <button type="button" id="mmRegBtn" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer;white-space:nowrap">Trial Key အခမဲ့ ရယူမယ်</button>
+      <button type="button" id="mmRegBtn" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer;white-space:nowrap">Free CSMM Key အခမဲ့ ရယူမယ်</button>
       <button type="button" id="mmRegCopy" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer">Key ကူးမယ် 📋</button>
       <span id="mmRegText" style="color:var(--mut);font-size:13px"></span>
     </div>
-    <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Trial Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
+    <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Free CSMM Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
   </div>
   <div class="card" id="gkeyWrap" style="margin-bottom:14px">
     <h3><span class="n">🔑</span>Gemini API Key <small style="color:var(--mut);font-weight:500">ကိုယ့် key နဲ့ အသံ ထုတ်မယ်</small></h3>
@@ -796,7 +796,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
           <input type="password" id="vcKey" class="tin" placeholder="CyborgMM User Key ထည့်ပါ" autocomplete="off" spellcheck="false">
           <button type="button" id="vcKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
         </div>
-        <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — TTS Studio မှာ ထည့်ထားတဲ့ Key နဲ့ အတူတူပဲ သုံးပါတယ်။ Key မရှိရင် TTS Studio ထဲက "Trial Key အခမဲ့ ရယူမယ်" မှာ ယူလို့ရတယ်။</div>
+        <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — TTS Studio မှာ ထည့်ထားတဲ့ Key နဲ့ အတူတူပဲ သုံးပါတယ်။ Key မရှိရင် TTS Studio ထဲက "Free CSMM Key အခမဲ့ ရယူမယ်" မှာ ယူလို့ရတယ်။</div>
       </div>
     </div>
   </div>
@@ -2057,12 +2057,12 @@ function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.av
   document.getElementById('mmRegBtn').addEventListener('click',async()=>{
     const t=document.getElementById('mmRegText');const cp=document.getElementById('mmRegCopy');const btn=document.getElementById('mmRegBtn');
     if(mmInp.value.trim()){t.textContent='Key ရှိပြီးသားပါ — အဟောင်း ဆုံးရှုံးမှာ စိုးလို့ အသစ် မထုတ်ပေးဘူး။ အသစ် လိုရင် အရင် Key ကို ကူးသိမ်းပြီး ဖျက်ပြီးမှ နှိပ်ပါ။';return}
-    btn.disabled=true;t.textContent='Trial Key ထုတ်နေတယ်...';
-    try{const r=await fetch(VOX_API+'/register',{method:'POST'});if(r.status===429){t.textContent='ဒီနေ့ Trial Key ၃ ခု ပြည့်သွားပြီ — မနက် ပြန်စမ်းပါ။';btn.disabled=false;return}if(!r.ok)throw new Error('http '+r.status);const j=await r.json();mmInp.value=j.user_key;try{localStorage.setItem('csmm-voice-key',j.user_key)}catch(e){};mmInp.type='text';t.textContent='ရပြီ ✓ Trial Key: '+j.user_key+' — ကူးပြီး သိမ်းထားပါ / screenshot ရိုက်ထားပါ။ Browser data ရှင်းရင် ပြန်ရမှာ မဟုတ်ဘူး (server မှာ hash ဘဲ ရှိလို့)။';cp.style.display='inline-block';}
+    btn.disabled=true;t.textContent='Free CSMM Key ထုတ်နေတယ်...';
+    try{const r=await fetch(VOX_API+'/register',{method:'POST'});if(r.status===429){t.textContent='ဒီနေ့ Free CSMM Key ၃ ခု ပြည့်သွားပြီ — မနက် ပြန်စမ်းပါ။';btn.disabled=false;return}if(!r.ok)throw new Error('http '+r.status);const j=await r.json();mmInp.value=j.user_key;try{localStorage.setItem('csmm-voice-key',j.user_key)}catch(e){};mmInp.type='text';t.textContent='ရပြီ ✓ Free CSMM Key: '+j.user_key+' — ကူးပြီး သိမ်းထားပါ / screenshot ရိုက်ထားပါ။ Browser data ရှင်းရင် ပြန်ရမှာ မဟုတ်ဘူး (server မှာ hash ဘဲ ရှိလို့)။';cp.style.display='inline-block';}
     catch(e){t.textContent='Key ထုတ်လို့ မရပါ — ခဏနေမှ ပြန်စမ်းပါ။'}
     btn.disabled=false;
   });
-  document.getElementById('mmRegCopy').addEventListener('click',async()=>{const t=document.getElementById('mmRegText');const k=mmInp.value.trim();if(!k){t.textContent='Key မရှိသေးဘူး — Trial Key ရယူမယ် နှိပ်ပြီး အရင် ယူပါ။';return}try{await navigator.clipboard.writeText(k);t.textContent='Key ကူးပြီးပြီ ✓ — APK မှာ paste လုပ်လို့ရပြီ။';}catch(e){mmInp.type='text';mmInp.select();t.textContent='Key ကို ရွေးပြီး ကူးပါ။';}});
+  document.getElementById('mmRegCopy').addEventListener('click',async()=>{const t=document.getElementById('mmRegText');const k=mmInp.value.trim();if(!k){t.textContent='Key မရှိသေးဘူး — Free CSMM Key ရယူမယ် နှိပ်ပြီး အရင် ယူပါ။';return}try{await navigator.clipboard.writeText(k);t.textContent='Key ကူးပြီးပြီ ✓ — APK မှာ paste လုပ်လို့ရပြီ။';}catch(e){mmInp.type='text';mmInp.select();t.textContent='Key ကို ရွေးပြီး ကူးပါ။';}});
   const lb=document.getElementById('btnListen'),rp=document.getElementById('btnPlayRow');
   const togglePlay=()=>{if(!ttsAudio)return;if(ttsAudio.paused)ttsAudio.play();else ttsAudio.pause()};
   lb.addEventListener('click',togglePlay);
@@ -2458,7 +2458,7 @@ function botReply(q){const s=q.toLowerCase();
  if((s.includes('recap')||s.includes('app')||/\bpos\b/.test(s))&&(q.includes('ဈေး')||s.includes('price')||q.includes('ဘယ်လောက်')||q.includes('ဝယ်')))return /\bpos\b/.test(s)&&!s.includes('recap')?'POS ရဲ့ ဈေးနှုန်း အသေးစိတ်ကို ဒီမှာ မပြောထားပါဘူး ခင်ဗျာ — Customer Service ကို Messenger / Viber / Telegram ကနေ ဆက်သွယ် မေးပေးပါ 🙏':'Recap app ကို ဒီ website ရဲ့ "Recap App" tab ကနေ ဆွဲလို့ ရပါတယ် ခင်ဗျာ။\nLicense ဈေးနှုန်း အသေးစိတ်ကိုတော့ ဒီမှာ မပြောထားပါဘူး — Customer Service ကို Messenger / Viber / Telegram ကနေ ဆက်သွယ် မေးပေးပါ 🙏';
  // ── CyborgMM Burmese Voices — intro (chip + general questions; rights
  // keywords still fall through to the rights rule below) ──
- if((s.includes('cyborgmm')||s.includes('burmese voices'))&&!(q.includes('မူပိုင်')||s.includes('commercial')||s.includes('copyright')))return 'CyborgMM Burmese Voices အကြောင်း ခင်ဗျာ —\nCyborg Studio MM က ကိုယ်တိုင် ထုတ်လုပ်ထားတဲ့ မြန်မာ အသံ ၃၁ လုံးပါ။ ဇာတ်ကြောင်းပြောသူ၊ တရား၊ သတင်း၊ ဆရာ/ဆရာမ၊ လူငယ်၊ အဘိုး/အဖွား စတဲ့ အသံ အမျိုးမျိုး ပါတယ်။\n🎁 အသံ ၃၁ လုံး အခမဲ့ စမ်းနိုင်ပါတယ် (တစ်နေ့ စာလုံး ၁၅၀၀/key အထိ, cap ကျော်မှ Points နဲ့)။\n✅ Commercial Rights ကို Cyborg Studio MM က ပိုင်ဆိုင်တာမို့ ဒီအသံတွေနဲ့ ထုတ်တဲ့ အသံဖိုင်တွေကို YouTube၊ TikTok၊ Facebook ဗီဒီယို၊ ကြော်ငြာတွေမှာ စိတ်ချစွာ သုံးနိုင်ပါတယ်။\n🌐 စမ်းကြည့်ရန် — ဒီ page ရဲ့ Studio → CyborgMM Burmese Voices မှာ အသံ နမူနာတွေ နားထောင်ပြီး၊ Trial Key အခမဲ့ ယူပြီး အသံ ထုတ်ကြည့်လို့ရပါတယ် ခင်ဗျာ 🙏';
+ if((s.includes('cyborgmm')||s.includes('burmese voices'))&&!(q.includes('မူပိုင်')||s.includes('commercial')||s.includes('copyright')))return 'CyborgMM Burmese Voices အကြောင်း ခင်ဗျာ —\nCyborg Studio MM က ကိုယ်တိုင် ထုတ်လုပ်ထားတဲ့ မြန်မာ အသံ ၃၁ လုံးပါ။ ဇာတ်ကြောင်းပြောသူ၊ တရား၊ သတင်း၊ ဆရာ/ဆရာမ၊ လူငယ်၊ အဘိုး/အဖွား စတဲ့ အသံ အမျိုးမျိုး ပါတယ်။\n🎁 အသံ ၃၁ လုံး အခမဲ့ စမ်းနိုင်ပါတယ် (တစ်နေ့ စာလုံး ၁၅၀၀/key အထိ, cap ကျော်မှ Points နဲ့)။\n✅ Commercial Rights ကို Cyborg Studio MM က ပိုင်ဆိုင်တာမို့ ဒီအသံတွေနဲ့ ထုတ်တဲ့ အသံဖိုင်တွေကို YouTube၊ TikTok၊ Facebook ဗီဒီယို၊ ကြော်ငြာတွေမှာ စိတ်ချစွာ သုံးနိုင်ပါတယ်။\n🌐 စမ်းကြည့်ရန် — ဒီ page ရဲ့ Studio → CyborgMM Burmese Voices မှာ အသံ နမူနာတွေ နားထောင်ပြီး၊ Free CSMM Key အခမဲ့ ယူပြီး အသံ ထုတ်ကြည့်လို့ရပါတယ် ခင်ဗျာ 🙏';
  // ── CyborgMM Burmese Voices — ownership / commercial rights ──
  if(s.includes('cyborgmm burmese')||s.includes('burmese voices')||q.includes('မူပိုင်')||s.includes('commercial')||s.includes('copyright')||q.includes('ကိုယ်ပိုင် အသံ')||q.includes('အသံ မူပိုင်'))return 'CyborgMM Burmese Voices အကြောင်း ခင်ဗျာ —\nဒီအသံ ၃၁ လုံးဟာ Cyborg Studio MM က ကိုယ်တိုင် ထုတ်လုပ်ထားတဲ့ အသံများဖြစ်ပါတယ်။ အခြား Voice Over အနုပညာရှင်များ၏ အသံကို ခွင့်ပြုချက်မရှိဘဲ ယူသုံး၊ Voice Clone လုပ်ထားခြင်း မရှိပါ။\nCommercial Rights ကို Cyborg Studio MM က ပိုင်ဆိုင်တာမို့၊ ဒီအသံတွေနဲ့ ထုတ်တဲ့ အသံဖိုင်တွေကို YouTube၊ TikTok၊ Facebook ဗီဒီယို၊ ကြော်ငြာတွေမှာ စိတ်ချစွာ သုံးနိုင်ပါတယ်။\nတခြားသူက ဖျက်လို့၊ ပြန်သိမ်းလို့ မရဘူး — သင့်အလုပ်ကို ရေရှည် စိတ်ချစွာ တည်ဆောက်နိုင်ပါတယ် ခင်ဗျာ 🙏';
  // ── Free Tools manuals — Batch 1 (Studio tools) ──
