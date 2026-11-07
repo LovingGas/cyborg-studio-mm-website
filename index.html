@@ -723,6 +723,84 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
   </div>
 </div>
+<!-- ============ VOICE CLONE ============ -->
+<div class="screen" id="scr-voiceclone">
+  <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
+  <div class="stepper">
+    <div class="stp act"><span class="n">1</span><span data-en="Reference voice">အသံ နမူနာ</span></div>
+    <div class="stp"><span class="n">2</span><span data-en="Name & consent">နာမည် + သဘောတူချက်</span></div>
+    <div class="stp"><span class="n">3</span><span data-en="Generate">အသံ ထုတ်မယ်</span></div>
+    <div class="stp"><span class="n">4</span><span data-en="Download">Download</span></div>
+  </div>
+  <div class="tts-grid">
+    <div>
+      <div class="card">
+        <h3><span class="n">1</span><span data-en="Reference voice">အသံ နမူနာ (၁၀–၃၀ စက္ကန့်)</span></h3>
+        <div class="hint" data-en="Record with your mic or upload a WAV file, then type exactly what you said.">Mic နဲ့ အသံသွင်း (သို့) WAV ဖိုင် တင်ပါ — ပြီးရင် ပြောခဲ့တဲ့ စာသားအတိုင်း အတိအကျ ရိုက်ပေးပါ။</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <button class="genbtn" id="vcRecBtn" onclick="vcRecToggle()">🎙️ အသံသွင်းမယ်</button>
+          <span class="hint" id="vcRecTime" style="align-self:center"></span>
+        </div>
+        <div class="drop" id="vcDrop" onclick="document.getElementById('vcRefFile').click()" style="margin-top:10px"><b>WAV ဖိုင် ရွေးပါ</b><br>10–30 စက္ကန့် WAV ဖိုင် (ရှင်းလင်းတဲ့ အသံ ဖြစ်ရင် ပိုကောင်းတယ်)
+          <input type="file" id="vcRefFile" accept=".wav,audio/wav,audio/*" hidden onchange="vcRefPick(this)"></div>
+        <div id="vcRefInfo" class="hint" style="margin-top:8px">အသံ နမူနာ မရှိသေးဘူး — Mic နဲ့ သွင်းပါ၊ WAV တင်ပါ။</div>
+        <audio id="vcRefAudio" controls style="display:none;width:100%;margin-top:8px"></audio>
+      </div>
+      <div class="card">
+        <h3><span class="n">2</span><span data-en="Name & consent">နာမည် + သဘောတူချက်</span></h3>
+        <div class="hint" data-en="Name your voice and type the exact transcript of the reference audio.">အသံကို နာမည်ပေးပါ၊ အသံ နမူနာထဲက ပြောခဲ့တဲ့ စာသားအတိုင်း ရိုက်ပါ။</div>
+        <input type="text" id="vcName" class="tin" placeholder="အသံ နာမည် — ဥပမာ ကျွန်တော့်အသံ" autocomplete="off" style="margin-top:10px">
+        <textarea id="vcRefText" placeholder="အသံ နမူနာထဲက ပြောခဲ့တဲ့ စာသားအတိုင်း ဒီမှာ ရိုက်ပါ..." style="margin-top:10px"></textarea>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-top:10px;font-size:14px;line-height:1.6;cursor:pointer"><input type="checkbox" id="vcConsent" style="margin-top:4px"> <span>ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံပဲ clone လုပ်ပါတယ် — တခြားသူရဲ့ အသံကို ခွင့်ပြုချက်မရှိဘဲ clone မလုပ်ပါ။</span></label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <button class="genbtn" id="vcSaveBtn" onclick="vcSaveVoice()">💾 အသံ သိမ်းမယ် (Save Voice)</button>
+        </div>
+        <div class="hint" id="vcSaveStatus" style="margin-top:10px"></div>
+      </div>
+      <div class="card">
+        <h3><span class="n">3</span><span data-en="Generate with your voice">စာသား ရိုက်ပြီး အသံထုတ်မယ်</span></h3>
+        <div class="hint" data-en="Pick a saved voice, type your script, and generate. Or generate once without saving.">သိမ်းထားတဲ့ အသံ ရွေးပြီး စာသား ရိုက်ထုတ်ပါ — မသိမ်းဘဲ တစ်ခါတည်း ထုတ်လို့လည်း ရတယ်။</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+          <b style="font-size:14.5px">🎙️ My Voices</b>
+          <button type="button" id="vcRefreshBtn" onclick="vcLoadVoices()" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:10px;padding:6px 12px;font-weight:700;cursor:pointer">ပြန်ဖွင့်မယ် ↻</button>
+        </div>
+        <div class="chips" id="vcList" style="margin-top:8px"></div>
+        <div class="hint" id="vcListStatus" style="margin-top:6px">သိမ်းထားတဲ့ အသံ မရှိသေးဘူး — အပေါ်မှာ အသံ အရင် သိမ်းပါ။</div>
+        <textarea id="vcText" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — မင်္ဂလာပါ၊ ဒီနေ့ ရာသီဥတု သာယာပါတယ်။" style="margin-top:10px"></textarea>
+        <div class="meta"><span id="vcCount">0 / 1,000</span><span>တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <button class="genbtn" id="vcGenBtn" onclick="vcGenerateSaved()">အသံထုတ်မယ် 🎙️</button>
+          <button class="genbtn" id="vcOnceBtn" onclick="vcGenerateOnce()" style="background:var(--field);color:var(--ink);border:1.5px solid var(--line)">မသိမ်းဘဲ တစ်ခါတည်း ထုတ်မယ်</button>
+        </div>
+      </div>
+    </div>
+    <div class="sticky-out">
+      <div class="card">
+        <h3><span class="n">4</span><span data-en="Output">ထွက်လာမယ့် အသံ</span></h3>
+        <div class="hint" data-en="Your generated voice will appear here.">ထုတ်ပြီးသား အသံ ဒီမှာ ပေါ်လာမယ်။</div>
+        <div class="out-empty" id="vcOutEmpty">🎧<br><span data-en="Nothing yet — press Generate below.">ဘာမှ မရှိသေးဘူး — အသံ ထုတ်မယ် နှိပ်ပါ။</span></div>
+        <div id="vcOutReady" style="display:none">
+          <div class="prow" style="background:var(--soft);border-color:var(--line);color:var(--ink)"><button class="play" id="vcBtnPlayRow">▶</button><div><b id="vcOutName">my_voice.wav</b><span style="color:var(--mut)" id="vcOutMeta">WAV · 48kHz</span></div><span class="tag" style="color:var(--blue2);border-color:#bae6fd">READY</span></div>
+        </div>
+        <div class="barwrap" id="vcBarWrap"><div class="bar" id="vcBar"></div></div>
+        <div class="meta" id="vcBarMeta" style="display:none"><span data-en="Generating...">ထုတ်နေတယ်...</span><span id="vcBarPct">0%</span></div>
+        <div class="dl">
+          <button id="vcBtnListen" disabled data-en="▶ Listen">▶ နားထောင်မယ်</button>
+          <button class="pri" id="vcBtnDl" disabled data-en="WAV Download">WAV Download</button>
+        </div>
+        <div class="hint" id="vcStatus" style="margin-top:10px"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15.5px"><span class="n">🔑</span>CyborgMM User Key</h3>
+        <div style="display:flex;gap:8px;align-items:stretch">
+          <input type="password" id="vcKey" class="tin" placeholder="CyborgMM User Key ထည့်ပါ" autocomplete="off" spellcheck="false">
+          <button type="button" id="vcKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
+        </div>
+        <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — TTS Studio မှာ ထည့်ထားတဲ့ Key နဲ့ အတူတူပဲ သုံးပါတယ်။ Key မရှိရင် TTS Studio ထဲက "Trial Key အခမဲ့ ရယူမယ်" မှာ ယူလို့ရတယ်။</div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ============ POS (cyborgstudiomm.com/pos) ============ -->
 <div class="screen" id="scr-pos">
   <div class="hero">
@@ -1890,7 +1968,7 @@ function icGo(){
 const tools=[
  {t:'AI အသံ ထုတ်မယ်',e:'AI Voice Generation',d:'စာရိုက်လိုက်တာနဲ့ အသံထွက်မယ်၊ Gemini အသံ ၃၀ လုံးထဲက ရွေးလို့ရတယ်',go:'tts',ic:'<path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
  {t:'Edge TTS (သီဟ/နီလာ)',e:'Edge TTS Free',d:'စာရိုက်ရင် သီဟ/နီလာ အသံ ထွက်မယ် — Microsoft Edge အသံ၊ အခမဲ့',go:'edgetts',ic:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9c1.2 1.6 1.2 4.4 0 6M18.5 6.5c2.4 3.2 2.4 7.8 0 11"/>'},
- {t:'Voice Clone',e:'Voice Clone',d:'ကိုယ့်အသံကို clone လုပ်ပြီး ဘယ် script မဆို ပြောခိုင်းလို့ရတယ်',go:'',soon:true,ic:'<circle cx="8" cy="8" r="3.2"/><path d="M3.5 20c.6-3.4 2.4-5 4.5-5s3.9 1.6 4.5 5M16 4.5c1.8.8 3 2.4 3 4.5M16.5 9.5c1 .5 1.7 1.5 1.9 2.8"/>'},
+ {t:'Voice Clone',e:'Voice Clone',d:'ကိုယ့်အသံကို clone လုပ်ပြီး ဘယ် script မဆို ပြောခိုင်းလို့ရတယ်',go:'voiceclone',ic:'<circle cx="8" cy="8" r="3.2"/><path d="M3.5 20c.6-3.4 2.4-5 4.5-5s3.9 1.6 4.5 5M16 4.5c1.8.8 3 2.4 3 4.5M16.5 9.5c1 .5 1.7 1.5 1.9 2.8"/>'},
  {t:'အသံ Converter',e:'Audio Converter',d:'MP3 ↔ WAV ပြောင်းလို့ရတယ် — browser ထဲမှာပဲ အလုပ်လုပ်တယ်၊ အခမဲ့',go:'audio',ic:'<path d="M4 10v4M8 7v10M12 5v14M16 8v8M20 11v2"/>'},
  {t:'MP3 ဖြတ် / Ringtone ဖြတ်',e:'MP3 Cutter / Ringtone',d:'MP3 လိုတဲ့ အပိုင်း ဖြတ်၊ fade ထည့်ပြီး ringtone လုပ် — အခမဲ့',go:'trim',ic:'<circle cx="6" cy="7" r="2.4"/><circle cx="6" cy="17" r="2.4"/><path d="M8 8.5L20 19M8 15.5L20 5"/>'},
  {t:'အသံ ပေါင်းရန်',e:'Audio Merge',d:'အသံဖိုင် အများ ဆက်ပြီး တစ်ခုတည်း ဖြစ် — အခမဲ့',go:'merge',ic:'<path d="M8 5v5a4 4 0 0 0 4 4h4"/><path d="m13.5 11 3 3-3 3"/>'},
@@ -2125,6 +2203,249 @@ async function generate(){
   }catch(e){stop(false);ttsSetStatus('အသံ ထုတ်လို့ မရပါ — server ခဏ အလုပ်များနေနိုင်တယ်၊ ခဏနေမှ ပြန်စမ်းကြည့်ပါ။')}
   if(gb)gb.disabled=false;
 }
+// ===== Voice Clone — reference (mic / WAV) + save + My Voices + generate =====
+// Same backend as CyborgMM TTS (Worker proxy, X-User-Key from localStorage
+// 'csmm-voice-key'). Same retry rule as TTS Studio: transient failures
+// (5xx / 524 / 504 / network abort) are retried indefinitely; fixable
+// errors (401 wrong key, 402 not enough Points, 400 bad voice/text) are
+// shown at once. A long queue is never shown as a failure.
+const VC_API='https://cyborg-voxcpm-proxy.lovinggas.workers.dev';
+let vcRefBlob=null,vcRefName='',vcRefDur=0,vcRefUrl='';
+let vcSavedVoices=[],vcSelVoice='';
+let vcAudio=null,vcUrl='',vcFile='';
+let vcRecorder=null,vcRecChunks=[],vcRecStart=0,vcRecIv=null;
+function vcSetStatus(m){const s=document.getElementById('vcStatus');if(s)s.textContent=m||''}
+function vcSetSaveStatus(m){const s=document.getElementById('vcSaveStatus');if(s)s.textContent=m||''}
+function vcGetKey(){const k=document.getElementById('vcKey');return k?k.value.trim():''}
+function vcSlug(n){return (n||'my_voice').replace(/[\\/:*?"<>|]/g,'').trim().replace(/\s+/g,'_')||'my_voice'}
+function vcCloneFile(name){return vcSlug(name)+'_cyborgmm_clone.wav'}
+function vcNeedKey(){const w=document.getElementById('vcKey');if(w){w.scrollIntoView({behavior:'smooth',block:'center'});w.focus({preventScroll:true})}vcSetStatus('CyborgMM အသံ သုံးဖို့ ကိုယ့် User Key အရင် ထည့်ပေးပါ (Key ကတ်ထဲမှာ)။');return false}
+function vcFixable(res,d){ // returns a Burmese message for fixable errors, '' for transient
+  if(res.status===401)return 'Key မှားနေပါတယ် — Key ကို ပြန်စစ်ပါ (သို့) Messenger / Viber / Telegram ကနေ Key ပြန်တောင်းပါ။';
+  if(res.status===402)return 'Points မလုံလောက်ဘူး — Balance စစ်ပြီး Points ထည့်ခိုင်းပါ (Messenger / Viber / Telegram)။';
+  if(res.status===400)return 'အသံ / စာသား မှားနေပါတယ် — အသံ ပြန်ရွေး၊ စာသား ၁,၀၀၀ အတွင်း ရှိလား စစ်ပါ။'+(d?' ('+d.slice(0,120)+')':'');
+  return '';
+}
+async function vcErrDetail(res){let d='';try{const j=await res.json();d=j.detail||j.error||j.message||''}catch(_){}return (typeof d==='string')?d:''}
+function vcProgress(){
+  const bw=document.getElementById('vcBarWrap'),bar=document.getElementById('vcBar'),bm=document.getElementById('vcBarMeta'),pct=document.getElementById('vcBarPct');
+  bw.style.display='block';bm.style.display='flex';let p=0;bar.style.width='0%';pct.textContent='0%';
+  const iv=setInterval(()=>{p=Math.min(92,p+Math.random()*9+3);bar.style.width=p+'%';pct.textContent=Math.floor(p)+'%'},220);
+  return function(ok){clearInterval(iv);if(ok){bar.style.width='100%';pct.textContent='100%'}setTimeout(()=>{bw.style.display='none';bm.style.display='none'},ok?350:0)};
+}
+function vcWire(blob,filename){
+  if(vcUrl)URL.revokeObjectURL(vcUrl);
+  if(vcAudio)vcAudio.pause();
+  vcUrl=URL.createObjectURL(blob);vcFile=filename;
+  vcAudio=new Audio(vcUrl);
+  const lb=document.getElementById('vcBtnListen'),rp=document.getElementById('vcBtnPlayRow'),db=document.getElementById('vcBtnDl');
+  const sync=()=>{lb.textContent=vcAudio.paused?'▶ နားထောင်မယ်':'❚❚ နားထောင်နေတယ်';if(rp)rp.textContent=vcAudio.paused?'▶':'❚❚'};
+  vcAudio.addEventListener('play',sync);vcAudio.addEventListener('pause',sync);vcAudio.addEventListener('ended',sync);
+  lb.onclick=()=>{if(vcAudio.paused)vcAudio.play();else vcAudio.pause()};
+  if(rp)rp.onclick=()=>{if(vcAudio.paused)vcAudio.play();else vcAudio.pause()};
+  db.onclick=()=>{const a=document.createElement('a');a.href=vcUrl;a.download=filename;a.click()};
+  document.getElementById('vcOutName').textContent=filename;
+  document.getElementById('vcOutMeta').textContent='WAV · 48kHz · '+fmtBytes(blob.size);
+  vcAudio.addEventListener('loadedmetadata',()=>{const d=vcAudio.duration;if(isFinite(d)&&d>0){const m=Math.floor(d/60),s=Math.round(d%60);document.getElementById('vcOutMeta').textContent=m+':'+String(s).padStart(2,'0')+' · WAV · 48kHz · '+fmtBytes(blob.size)}});
+  lb.disabled=false;db.disabled=false;
+  document.getElementById('vcOutEmpty').style.display='none';
+  document.getElementById('vcOutReady').style.display='block';
+  document.querySelectorAll('#scr-voiceclone .stp').forEach((s,i)=>{s.classList.toggle('act',i===3);s.classList.toggle('done',i<3)});
+}
+// --- reference audio: mic record (MediaRecorder) -> WAV, or WAV upload ---
+function vcRefShow(blob,name,dur){
+  vcRefBlob=blob;vcRefName=name;vcRefDur=dur;
+  if(vcRefUrl)URL.revokeObjectURL(vcRefUrl);
+  vcRefUrl=URL.createObjectURL(blob);
+  const au=document.getElementById('vcRefAudio');au.src=vcRefUrl;au.style.display='block';
+  const warn=(dur>0&&(dur<10||dur>30))?' — ⚠️ ၁၀–ၓ၀ စက္ကန့် အတွင်း ဖြစ်ရင် အကောင်းဆုံးပါ':'';
+  document.getElementById('vcRefInfo').textContent='အသံ နမူနာ အဆင်သင့် ✓ '+name+(dur>0?' ('+Math.round(dur)+' စက္ကန့်)':'')+warn;
+}
+function vcWavEncode(buf){ // AudioBuffer -> 16-bit PCM WAV (mono, source sample rate)
+  const ch=buf.numberOfChannels,len=buf.length,rate=buf.sampleRate;
+  const data=new Float32Array(len);
+  for(let c=0;c<ch;c++){const d=buf.getChannelData(c);for(let i=0;i<len;i++)data[i]+=d[i]/ch}
+  const ab=new ArrayBuffer(44+len*2),v=new DataView(ab);
+  const ws=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+  ws(0,'RIFF');v.setUint32(4,36+len*2,true);ws(8,'WAVE');ws(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,rate,true);v.setUint32(28,rate*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);ws(36,'data');v.setUint32(40,len*2,true);
+  for(let i=0;i<len;i++){const s=Math.max(-1,Math.min(1,data[i]));v.setInt16(44+i*2,s<0?s*0x8000:s*0x7FFF,true)}
+  return new Blob([ab],{type:'audio/wav'});
+}
+async function vcBlobToWav(blob){
+  try{const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const ab=await blob.arrayBuffer();const buf=await ctx.decodeAudioData(ab);
+    const wav=vcWavEncode(buf);if(ctx.close)ctx.close();return wav;
+  }catch(e){return blob}
+}
+async function vcRecToggle(){
+  const btn=document.getElementById('vcRecBtn');
+  if(vcRecorder&&vcRecorder.state==='recording'){
+    vcRecorder.stop();return;
+  }
+  let stream;
+  try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}
+  catch(e){vcSetStatus('Mic ဖွင့်လို့ မရပါ — browser က Mic ခွင့်ပြုချက် ပေးထားလား စစ်ပါ (https လိုပါတယ်)။');return}
+  vcRecChunks=[];
+  try{vcRecorder=new MediaRecorder(stream)}catch(e){stream.getTracks().forEach(t=>t.stop());vcSetStatus('ဒီ browser မှာ အသံသွင်းလို့ မရပါ — WAV ဖိုင် တင်ပြီး သုံးကြည့်ပါ။');return}
+  vcRecorder.ondataavailable=e=>{if(e.data&&e.data.size)vcRecChunks.push(e.data)};
+  vcRecorder.onstop=async()=>{
+    clearInterval(vcRecIv);stream.getTracks().forEach(t=>t.stop());
+    btn.textContent='🎙️ အသံသွင်းမယ်';document.getElementById('vcRecTime').textContent='';
+    const raw=new Blob(vcRecChunks,{type:vcRecorder.mimeType||'audio/webm'});
+    document.getElementById('vcRefInfo').textContent='အသံကို WAV ပြောင်းနေတယ်...';
+    const wav=await vcBlobToWav(raw);
+    const dur=await vcAudioDur(wav);
+    vcRefShow(wav,'mic-recording.wav',dur);
+    vcSetStatus('');
+  };
+  vcRecorder.start(250);vcRecStart=Date.now();
+  btn.textContent='⏹ ရပ်မယ် (သွင်းနေတယ်...)';
+  document.getElementById('vcRecTime').textContent='0 စက္ကန့်';
+  vcRecIv=setInterval(()=>{const s=Math.floor((Date.now()-vcRecStart)/1000);document.getElementById('vcRecTime').textContent=s+' စက္ကန့်'+(s>=30?' — ၃၀ စက္ကန့် ပြည့်ရင် ရပ်ပါ':'');if(s>=60&&vcRecorder&&vcRecorder.state==='recording')vcRecorder.stop()},1000);
+}
+function vcAudioDur(blob){
+  return new Promise(res=>{const u=URL.createObjectURL(blob);const a=new Audio();a.preload='metadata';
+    a.onloadedmetadata=()=>{const d=a.duration;URL.revokeObjectURL(u);res(isFinite(d)?d:0)};
+    a.onerror=()=>{URL.revokeObjectURL(u);res(0)};a.src=u;setTimeout(()=>res(0),8000)});
+}
+async function vcRefPick(inp){
+  const f=inp.files&&inp.files[0];if(!f)return;
+  const dur=await vcAudioDur(f);
+  vcRefShow(f,f.name,dur);
+  vcSetStatus('');
+}
+// --- Save Voice ---
+async function vcSaveVoice(){
+  const key=vcGetKey();if(!key)return vcNeedKey();
+  const name=document.getElementById('vcName').value.trim();
+  const refText=document.getElementById('vcRefText').value.trim();
+  const ok=document.getElementById('vcConsent').checked;
+  if(!vcRefBlob){vcSetSaveStatus('အသံ နမူနာ အရင် ထည့်ပါ — Mic နဲ့ သွင်းပါ၊ WAV တင်ပါ။');return}
+  if(!name){vcSetSaveStatus('အသံ နာမည် ရိုက်ပေးပါ။');return}
+  if(!refText){vcSetSaveStatus('အသံ နမူနာထဲက စာသားအတိုင်း ရိုက်ပေးပါ။');return}
+  if(!ok){vcSetSaveStatus('သဘောတူချက် checkbox အရင် အမှန်ခြစ်ပေးပါ — ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံပဲ clone လုပ်ပါတယ်။');return}
+  const btn=document.getElementById('vcSaveBtn');btn.disabled=true;
+  vcSetSaveStatus('အသံ သိမ်းနေတယ်...');
+  let attempt=0;
+  while(true){
+    try{
+      if(attempt>0)vcSetSaveStatus('ပြန်စမ်းနေတယ် — စာမျက်နှာ မပိတ်ဘဲ စောင့်ပါ...');
+      const fd=new FormData();
+      fd.append('ref_wav',vcRefBlob,'reference.wav');
+      fd.append('ref_text',refText);fd.append('name',name);fd.append('consent','yes');
+      const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),300000);
+      const res=await fetch(VC_API+'/voices/save',{method:'POST',headers:{'X-User-Key':key},body:fd,signal:ctl.signal});
+      clearTimeout(timer);
+      if(res.status===524||res.status===504||res.status>=500){attempt++;await new Promise(r=>setTimeout(r,3000));continue}
+      if(!res.ok){const d=await vcErrDetail(res);const m=vcFixable(res,d);
+        vcSetSaveStatus(m||('Server error — ခဏနေမှာ ပြန်စမ်းကြည့်ပါ။'+(d?' ('+d.slice(0,120)+')':'')));
+        btn.disabled=false;return}
+      vcSetSaveStatus('ရပြီ ✓ "'+name+'" အသံ သိမ်းပြီးပြီ — My Voices ထဲမှာ ပေါ်လာမယ်။');
+      btn.disabled=false;vcLoadVoices();return;
+    }catch(e){attempt++;await new Promise(r=>setTimeout(r,3000));continue}
+  }
+}
+// --- My Voices ---
+function vcVoiceName(v){if(typeof v==='string')return v;return v.name||v.voice_name||v.id||v.voice_id||''}
+async function vcLoadVoices(){
+  const key=vcGetKey();const list=document.getElementById('vcList');const st=document.getElementById('vcListStatus');
+  if(!key){list.innerHTML='';st.textContent='Key ထည့်ပြီးမှ My Voices ဖွင့်လို့ရတယ် — Key ကတ်ထဲမှာ ထည့်ပါ။';return}
+  st.textContent='My Voices ဖွင့်နေတယ်...';
+  let attempt=0;
+  while(true){
+    try{
+      if(attempt>0)st.textContent='ပြန်စမ်းနေတယ်...';
+      const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),60000);
+      const res=await fetch(VC_API+'/voices/saved',{headers:{'X-User-Key':key},signal:ctl.signal});
+      clearTimeout(timer);
+      if(res.status===524||res.status===504||res.status>=500){attempt++;await new Promise(r=>setTimeout(r,3000));continue}
+      if(!res.ok){const d=await vcErrDetail(res);const m=vcFixable(res,d);
+        st.textContent=m||('My Voices ဖွင့်လို့ မရပါ — ခဏနေမှာ ပြန်စမ်းကြည့်ပါ။'+(d?' ('+d.slice(0,120)+')':''));
+        return}
+      const j=await res.json();
+      const arr=Array.isArray(j)?j:(j.voices||j.saved||j.saved_voices||[]);
+      vcSavedVoices=arr.map(vcVoiceName).filter(Boolean);
+      if(!vcSavedVoices.length){list.innerHTML='';st.textContent='သိမ်းထားတဲ့ အသံ မရှိသေးဘူး — အပေါ်မှာ အသံ အရင် သိမ်းပါ။';return}
+      if(vcSelVoice&&!vcSavedVoices.includes(vcSelVoice))vcSelVoice='';
+      list.innerHTML='';
+      vcSavedVoices.forEach(n=>{
+        const b=document.createElement('button');b.className='chip'+(n===vcSelVoice?' sel':'');b.textContent=n;
+        b.onclick=()=>{vcSelVoice=n;list.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');st.textContent='"'+n+'" ရွေးပြီးပြီ ✓ — စာသား ရိုက်ပြီး အသံထုတ်မယ် နှိပ်ပါ။'};
+        list.appendChild(b);
+      });
+      st.textContent=vcSavedVoices.length+' သံ သိမ်းထားတယ် — သုံးမယ့် အသံ ရွေးပါ။';
+      return;
+    }catch(e){attempt++;await new Promise(r=>setTimeout(r,3000));continue}
+  }
+}
+// --- Generate (saved voice / one-off) ---
+async function vcGenFetch(makeReq){
+  // makeReq: () => fetch promise. Retries transient failures indefinitely.
+  // Returns {blob} on success, or {fixable} message string for 401/402/400.
+  let attempt=0;
+  while(true){
+    try{
+      if(attempt>0)vcSetStatus('ပြန်စမ်းနေတယ် — စာမျက်နှာ မပိတ်ဘဲ စောင့်ပါ...');
+      const res=await makeReq();
+      if(res.status===524||res.status===504||res.status>=500){attempt++;await new Promise(r=>setTimeout(r,3000));continue}
+      if(!res.ok){const d=await vcErrDetail(res);return {fixable:vcFixable(res,d)||('Server error — ခဏနေမှာ ပြန်စမ်းကြည့်ပါ။'+(d?' ('+d.slice(0,120)+')':''))}}
+      return {blob:await res.blob()};
+    }catch(e){attempt++;await new Promise(r=>setTimeout(r,3000));continue}
+  }
+}
+async function vcGenerateSaved(){
+  const key=vcGetKey();if(!key)return vcNeedKey();
+  const text=document.getElementById('vcText').value.trim();
+  if(!vcSelVoice){vcSetStatus('My Voices ထဲက သုံးမယ့် အသံ အရင် ရွေးပါ။');return}
+  if(!text){vcSetStatus('စာသား အရင် ရိုက်ပါ။');return}
+  if([...text].length>1000){vcSetStatus('တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+  const btn=document.getElementById('vcGenBtn');btn.disabled=true;
+  const stop=vcProgress();vcSetStatus('အသံ ထုတ်နေတယ်...');
+  const r=await vcGenFetch(()=>{
+    const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),300000);
+    return fetch(VC_API+'/tts-clone',{method:'POST',headers:{'Content-Type':'application/json','X-User-Key':key},body:JSON.stringify({voice_name:vcSelVoice,text:text}),signal:ctl.signal}).finally(()=>clearTimeout(timer));
+  });
+  stop(!r.fixable);
+  if(r.fixable){vcSetStatus(r.fixable);btn.disabled=false;return}
+  vcWire(r.blob,vcCloneFile(vcSelVoice));
+  vcSetStatus('ရပြီ ✓ "'+vcSelVoice+'" အသံနဲ့ ထုတ်ပြီးပြီ။');
+  btn.disabled=false;
+}
+async function vcGenerateOnce(){
+  const key=vcGetKey();if(!key)return vcNeedKey();
+  const text=document.getElementById('vcText').value.trim();
+  const refText=document.getElementById('vcRefText').value.trim();
+  if(!vcRefBlob){vcSetStatus('အသံ နမူနာ အရင် ထည့်ပါ — Mic နဲ့ သွင်းပါ၊ WAV တင်ပါ။');return}
+  if(!refText){vcSetStatus('အသံ နမူနာထဲက စာသားအတိုင်း ရိုက်ပေးပါ (အဆင့် ၂)။');return}
+  if(!document.getElementById('vcConsent').checked){vcSetStatus('သဘောတူချက် checkbox အရင် အမှန်ခြစ်ပေးပါ — ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံ ပဲ clone လုပ်ပါတယ်။');return}
+  if(!text){vcSetStatus('စာသား အရင် ရိုက်ပါ။');return}
+  if([...text].length>1000){vcSetStatus('တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+  const btn=document.getElementById('vcOnceBtn');btn.disabled=true;
+  const stop=vcProgress();vcSetStatus('အသံ ထုတ်နေတယ်... (မသိမ်းဘူး)');
+  const refBlob=vcRefBlob,refTxt=refText,name=document.getElementById('vcName').value.trim()||'my_voice';
+  const r=await vcGenFetch(()=>{
+    const fd=new FormData();
+    fd.append('ref_wav',refBlob,'reference.wav');
+    fd.append('ref_text',refTxt);fd.append('text',text);
+    const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),300000);
+    return fetch(VC_API+'/tts-clone',{method:'POST',headers:{'X-User-Key':key},body:fd,signal:ctl.signal}).finally(()=>clearTimeout(timer));
+  });
+  stop(!r.fixable);
+  if(r.fixable){vcSetStatus(r.fixable);btn.disabled=false;return}
+  vcWire(r.blob,vcCloneFile(name));
+  vcSetStatus('ရပြီ ✓ တစ်ခါတည်း ထုတ်ပြီးပြီ (မသိမ်းထားဘူး) — သိမ်းချင်ရင် "အသံ သိမ်းမယ်" နှိပ်ပါ။');
+  btn.disabled=false;
+}
+(function(){
+  const k=document.getElementById('vcKey');
+  try{const s=localStorage.getItem('csmm-voice-key');if(s)k.value=s}catch(e){}
+  k.addEventListener('input',()=>{try{localStorage.setItem('csmm-voice-key',k.value.trim())}catch(e){}});
+  document.getElementById('vcKeyEye').addEventListener('click',()=>{k.type=k.type==='password'?'text':'password';document.getElementById('vcKeyEye').textContent=k.type==='password'?'👁️':'🙈'});
+  const t=document.getElementById('vcText');
+  t.addEventListener('input',()=>{document.getElementById('vcCount').textContent=t.value.length.toLocaleString()+' / 1,000'});
+  document.getElementById('vcCount').textContent='0 / 1,000';
+  if(k.value.trim())vcLoadVoices();
+})();
 // Customer Service AI Bot (mock)
 function toggleBot(){document.getElementById('botPanel').classList.toggle('on')}
 function guideSeek(t){const v=document.getElementById('guideVid');if(!v)return;v.currentTime=t;const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{})}
@@ -2194,7 +2515,7 @@ function botReply(q){const s=q.toLowerCase();
  if(q.includes('ဈေး')||s.includes('price'))return 'အခု Tool တွေ အခမဲ့ သုံးလို့ရပါတယ် ခင်ဗျာ 🙏';
  if(q.includes('အသံ')||s.includes('tts'))return 'အသံထုတ်နည်းက လွယ်ပါတယ် — ၁။ TTS Studio ဖွင့် ၂။ စာရိုက် ၃။ အသံ chip ရွေး ၄။ အသံ ထုတ်မယ် နှိပ် ၅။ MP3 Download ဆွဲရုံပါပဲ။';
  if(s.includes('recap'))return 'Auto Recap မှာ ဗီဒီယိုတင်ပြီး (သို့) YouTube/TikTok link ထည့်၊ ပြောမယ့်အသံနဲ့ Ratio (9:16 / 16:9) ရွေးပြီး Start Recap နှိပ်ရုံပါပဲ။';
- if(s.includes('clone'))return 'Voice Clone မှာ ကိုယ့်အသံ sample (၁–၅ မိနစ်) တင်ပြီး နာမည်ပေးလိုက်ရင် clone အသံ ရပါပြီ။ ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံ ပဲ clone လုပ်ပါ။';
+ if(s.includes('clone'))return 'Voice Clone မှာ ကိုယ့်အသံ sample (၁၀–၃၀ စက္ကန့်) တင်ပြီး နာမည်ပေးလိုက်ရင် clone အသံ ရပါပြီ။ ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံ ပဲ clone လုပ်ပါ။';
  if(s.includes('srt'))return 'SRT Translate မှာ .srt ဖိုင်တင်ပြီး From/To ဘာသာရွေးရုံပါပဲ — timing နဲ့ စာကြောင်းနံပါတ် လုံးဝ မပျက်ပါဘူး။';
  return 'ဟုတ်ကဲ့၊ မေးခွန်းကို မှတ်ထားပါတယ် 🙏 ဒီနမူနာမှာတော့ AI Bot က အခြေခံမေးခွန်းတွေပဲ ဖြေနိုင်သေးတယ်။ တကယ့် version မှာ မဖြေနိုင်ရင် Customer Service လူကိုယ်‌တိုင် ဆက်သွယ်ပေးပါမယ်။'}
 function pushMsg(t,me){const b=document.getElementById('botBody');const d=document.createElement('div');d.className='msg '+(me?'me':'bot');d.textContent=t;b.appendChild(d);b.scrollTop=b.scrollHeight}
