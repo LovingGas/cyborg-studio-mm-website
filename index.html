@@ -121,6 +121,21 @@ section.blk{padding:38px 0 6px}
 .tool{position:relative}
 .tool .soon-badge{position:absolute;top:16px;right:16px;background:var(--gold);color:#0b1526;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:800;line-height:1.7}
 .tool .open.soon{color:var(--mut)}
+/* ===== Tools pastel tints (user order 2026-11-07) — 7 soft hues cycling over 28 tools; overlay tints var(--card) so all themes keep working ===== */
+.tool:nth-child(7n+1){background-image:linear-gradient(rgba(244,114,182,.30),rgba(244,114,182,.30))}
+.tool:nth-child(7n+1) .ic{background:#ffd6e8;color:#be185d}
+.tool:nth-child(7n+2){background-image:linear-gradient(rgba(96,165,250,.30),rgba(96,165,250,.30))}
+.tool:nth-child(7n+2) .ic{background:#d6e4ff;color:#1d4ed8}
+.tool:nth-child(7n+3){background-image:linear-gradient(rgba(74,222,128,.30),rgba(74,222,128,.30))}
+.tool:nth-child(7n+3) .ic{background:#d3f2dd;color:#15803d}
+.tool:nth-child(7n+4){background-image:linear-gradient(rgba(251,191,36,.32),rgba(251,191,36,.32))}
+.tool:nth-child(7n+4) .ic{background:#ffeec2;color:#b45309}
+.tool:nth-child(7n+5){background-image:linear-gradient(rgba(167,139,250,.30),rgba(167,139,250,.30))}
+.tool:nth-child(7n+5) .ic{background:#e4d9ff;color:#6d28d9}
+.tool:nth-child(7n+6){background-image:linear-gradient(rgba(45,212,191,.30),rgba(45,212,191,.30))}
+.tool:nth-child(7n+6) .ic{background:#c8f0ea;color:#0f766e}
+.tool:nth-child(7n+7){background-image:linear-gradient(rgba(251,146,60,.30),rgba(251,146,60,.30))}
+.tool:nth-child(7n+7) .ic{background:#ffddc9;color:#c2410c}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 .stepc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);display:flex;gap:14px}
 .num{width:36px;height:36px;flex:none;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-weight:800;display:grid;place-items:center;font-size:16px}
