@@ -32,15 +32,12 @@
 /* Glassy theme (glassmorphism, default 2026-11-06; LIGHT KBZ Pay style from 2026-11-06 ~02:20): frosted-glass panels over a fixed light colourful gradient — backdrop blur + glossy top highlight. Pressed/active buttons are dark blue (#1565c0). */
 [data-theme="glassy"] body{background:radial-gradient(900px 480px at 85% -5%,rgba(0,184,217,.28),transparent 60%),radial-gradient(800px 500px at 5% 18%,rgba(68,138,255,.24),transparent 60%),radial-gradient(760px 520px at 50% 108%,rgba(255,77,141,.18),transparent 60%),linear-gradient(180deg,#eaf6ff 0%,#d6efff 55%,#eaf6ff 100%);background-attachment:fixed}
 [data-theme="glassy"] .card,[data-theme="glassy"] .tool,[data-theme="glassy"] .stepc,[data-theme="glassy"] .tcard,[data-theme="glassy"] .prodcard,[data-theme="glassy"] .chip,[data-theme="glassy"] .stp,[data-theme="glassy"] .botpanel,[data-theme="glassy"] .ptshelp,[data-theme="glassy"] .chap,[data-theme="glassy"] .soc,[data-theme="glassy"] .bot-in{backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.75)}
-[data-theme="glassy"] .hero{background:radial-gradient(700px 320px at 85% -10%,rgba(255,255,255,.35),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(255,255,255,.22),transparent 55%),linear-gradient(135deg,#0284c7,#0369a1 55%,#075985);box-shadow:0 22px 55px rgba(2,132,199,.28),inset 0 1px 0 rgba(255,255,255,.4)}
+[data-theme="glassy"] .hero{background:radial-gradient(700px 320px at 85% -10%,rgba(255,255,255,.30),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(255,255,255,.20),transparent 55%),linear-gradient(135deg,#15803d,#166534 55%,#14532d);box-shadow:0 22px 55px rgba(21,128,61,.35),inset 0 1px 0 rgba(255,255,255,.4)}
 /* Studio hero — Gemini bright cyan-blue */
 #scr-studio .hero{background:radial-gradient(760px 360px at 88% -12%,rgba(255,255,255,.30),transparent 60%),radial-gradient(640px 340px at 0% 112%,rgba(34,211,238,.45),transparent 55%),linear-gradient(135deg,#0ea5e9,#0284c7 55%,#0369a1);box-shadow:0 22px 55px rgba(2,132,199,.35),inset 0 1px 0 rgba(255,255,255,.4)}
 [data-theme="glassy"] .hero h1 .grad{background:linear-gradient(90deg,#ffffff,#ffd740);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 8px rgba(3,69,94,.45))}
 [data-theme="glassy"] #scr-studio .hero{background:radial-gradient(700px 320px at 85% -10%,rgba(255,255,255,.30),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(255,255,255,.20),transparent 55%),linear-gradient(135deg,#15803d,#166534 55%,#14532d);box-shadow:0 22px 55px rgba(21,128,61,.35),inset 0 1px 0 rgba(255,255,255,.4)}
 [data-theme="glassy"] .ctaband{background:linear-gradient(135deg,#15803d,#166534);box-shadow:0 22px 50px rgba(21,128,61,.28)}
-[data-theme="glassy"] nav button.nav-green{background:linear-gradient(135deg,#15803d,#166534);color:#ffd740;text-shadow:0 0 10px rgba(255,215,64,.45);box-shadow:0 4px 14px rgba(21,128,61,.30)}
-[data-theme="glassy"] nav button.nav-green:hover{color:#ffe98a;background:linear-gradient(135deg,#16a34a,#15803d)}
-[data-theme="glassy"] nav button.nav-green.on{background:linear-gradient(135deg,#15803d,#166534);color:#ffd740;box-shadow:0 4px 14px rgba(21,128,61,.35),inset 0 0 0 1.5px rgba(255,215,64,.55)}
 /* Glassy hero player (voice samples card) — deeper saturated blue glass so it pops on the bright blue hero, not washed out. */
 [data-theme="glassy"] .player{background:rgba(3,105,161,.45);border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:0 18px 44px rgba(2,132,199,.25),inset 0 1px 0 rgba(255,255,255,.35)}
 [data-theme="glassy"] .prow{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32)}
@@ -368,12 +365,12 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 <header><div class="wrap hd">
   <div class="logo"><svg class="logosvg" viewBox="0 0 120 120"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00b8d9"/><stop offset=".52" stop-color="#448aff"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs><path d="M 85.4 31.8 A 38 38 0 1 0 85.4 88.2" fill="none" stroke="url(#hg)" stroke-width="15" stroke-linecap="round"/><rect x="38" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><rect x="51" y="40" width="8.5" height="40" rx="4.25" fill="url(#hg)"/><rect x="64" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><line x1="68.75" y1="60" x2="84" y2="60" stroke="#ff4d8d" stroke-width="3.5"/><circle cx="90" cy="60" r="5.5" fill="#ff4d8d"/><circle cx="85.4" cy="31.8" r="6" fill="#ffffff" stroke="#00b8d9" stroke-width="4"/><circle cx="85.4" cy="88.2" r="6" fill="#ffffff" stroke="#ff4d8d" stroke-width="4"/></svg>Cyborg Studio <span style="color:var(--blue)">MM</span></div>
   <nav>
-    <button class="on hideM nav-green" onclick="show('home',this)">ပင်မ</button>
+    <button class="on hideM" onclick="show('home',this)">ပင်မ</button>
     <button class="hideM" onclick="show('studio',this)">CyborgMM TTS Voices</button>
-    <button class="hideM nav-green" onclick="show('recap',this)">Recap App</button>
+    <button class="hideM" onclick="show('recap',this)">Recap App</button>
     <button class="hideM" onclick="show('guide',this)">📖 Guide</button>
-    <button class="hideM nav-green" onclick="show('mgmt',this)">Management</button>
-    <button class="hideM nav-green" onclick="show('pos',this)">POS</button>
+    <button class="hideM" onclick="show('mgmt',this)">Management</button>
+    <button class="hideM" onclick="show('pos',this)">POS</button>
     <button class="hideM" onclick="show('login',this)">👤 VIP Login</button>
     <div class="themesw" role="group" aria-label="Theme"><button data-t="glassy" class="on" onclick="setTheme('glassy')" title="Glassy">🫧</button><button data-t="day" onclick="setTheme('day')" title="Day">☀️</button><button data-t="night" onclick="setTheme('night')" title="Night">🌙</button></div>
     <div class="themesw fontsw" role="group" aria-label="Font"><button data-f="pyidaungsu" class="on" onclick="setFont('pyidaungsu')" title="Pyidaungsu">ပြည်ထောင်စု</button><button data-f="padauk" onclick="setFont('padauk')" title="Padauk">Padauk</button><button data-f="noto" onclick="setFont('noto')" title="Noto Sans Myanmar">Noto</button></div>
