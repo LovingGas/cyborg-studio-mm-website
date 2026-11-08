@@ -998,6 +998,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     </div>
   </div>
 
+  <!-- MGMT CARDS HIDDEN 2026-11-08: 8 Management app cards — commented out, not deleted (same convention as POS cards); restore by removing this comment wrapper.
   <section class="blk">
     <div class="sec-h">Management App များ — ၈ မျိုး</div>
     <div class="sec-s">အကုန်လုံး "မကြာမီ" အဆင့်ပါ။ ဆောက်မယ့် အစီအစဉ်အတိုင်း နံပါတ် တပ်ထားတယ်။ နာမည်ပုံစံက CyborgMM + နယ်ပယ် ဆိုပြီး တစ်ခုတည်း သွားမယ်။</div>
@@ -1012,6 +1013,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <div class="prodcard mgmtcard"><div class="purl acc-teal">မကြာမီ</div><h3>🌾 CyborgMM Broker</h3><p>Commodity Brokerage — ကုန်စည် ပွဲရုံ စီမံခန့်ခွဲမှု, ဝယ်/ရောင်း မှတ်တမ်း, ကော်မရှင် တွက်ချက်မှု။</p><span class="soon">မကြာမီ လာမည်</span></div>
     </div>
   </section>
+  -->
 
   
 </div>
@@ -1026,7 +1028,12 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <div id="loginBtns">
         <div id="gSignInBtn" style="margin-bottom:12px"></div>
         <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="CyborgStudioMMBot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
-        <button class="btn" disabled style="margin-top:12px;opacity:.55;cursor:not-allowed">✉️ Email login (မကြာမီ)</button>
+        <div style="margin-top:12px;border-top:1px solid var(--line);padding-top:12px">
+          <input type="email" id="emailInput" class="tin" placeholder="Email ထည့်ပါ" autocomplete="email" style="width:100%">
+          <button class="btn btn-cyan" id="emailSendBtn" style="margin-top:8px" onclick="emailSendCode()">Code ပို့မယ်</button>
+          <input type="text" id="emailCodeInput" class="tin" placeholder="6 လုံး code" maxlength="6" inputmode="numeric" style="width:100%;margin-top:8px;display:none">
+          <button class="btn btn-cyan" id="emailVerifyBtn" style="margin-top:8px;display:none" onclick="emailVerifyCode()">Login ဝင်မယ်</button>
+        </div>
       </div>
       <div id="memberCard" style="display:none">
         <div style="font-size:18px;font-weight:700" id="memberName"></div>
@@ -2134,6 +2141,33 @@ async function onTelegramAuth(user){
   }catch(e){loginStatus('Telegram login မရပါ — '+e.message+' (ခဏနေမှ ပြန်စမ်းပါ)။')}
 }
 function memberLogout(){memberSetSession('');refreshMember();loginStatus('Logout ပြီးပြီ။')}
+async function emailSendCode(){
+  const em=document.getElementById('emailInput');const email=(em.value||'').trim();
+  if(!email){loginStatus('Email ထည့်ပေးပါ။');return}
+  const btn=document.getElementById('emailSendBtn');btn.disabled=true;loginStatus('Code ပို့နေတယ်...');
+  try{
+    const r=await fetch(MEMBER_API+'/auth/email/request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(j.detail||('http '+r.status));
+    document.getElementById('emailCodeInput').style.display='block';
+    document.getElementById('emailVerifyBtn').style.display='inline-block';
+    loginStatus('Code ပို့ပြီးပြီ ✓ — email ထဲက 6 လုံး code ကို ထည့်ပြီး Login ဝင်မယ် နှိပ်ပါ။ (10 မိနစ်အတွင်း သုံးရပါမယ်)');
+  }catch(e){loginStatus('Code ပို့လို့ မရပါ — '+e.message)}
+  btn.disabled=false;
+}
+async function emailVerifyCode(){
+  const email=(document.getElementById('emailInput').value||'').trim();
+  const code=(document.getElementById('emailCodeInput').value||'').trim();
+  if(!email||!code){loginStatus('Email နဲ့ code ထည့်ပေးပါ။');return}
+  loginStatus('Code စစ်နေတယ်...');
+  try{
+    const r=await fetch(MEMBER_API+'/auth/email/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,code})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(j.detail||('http '+r.status));
+    document.getElementById('emailCodeInput').value='';
+    memberSetSession(j.session);loginStatus('ရပြီ ✓');refreshMember();
+  }catch(e){loginStatus('Login မရပါ — '+e.message+' (ခဏနေမှ ပြန်စမ်းပါ)။')}
+}
 let lastMemberKey='';
 async function memberGetKey(){
   const sess=memberSession();if(!sess){loginStatus('အရင် login ဝင်ပေးပါ။');return}
