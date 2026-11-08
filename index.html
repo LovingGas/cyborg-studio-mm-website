@@ -120,6 +120,12 @@ section.blk{padding:38px 0 6px}
 .tool .open{color:var(--blue);font-weight:700;font-size:14px;margin-top:8px;display:inline-block}
 .tool{position:relative}
 .tool .soon-badge{position:absolute;top:16px;right:16px;background:var(--gold);color:#0b1526;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:800;line-height:1.7}
+.tool.featured{grid-column:1/-1;padding:30px 28px;background:linear-gradient(135deg,rgba(0,184,217,.12),rgba(68,138,255,.12) 55%,rgba(255,77,141,.10));border:2px solid var(--cyan)}
+.tool.featured .ic{width:64px;height:64px;border-radius:18px;margin-bottom:14px}
+.tool.featured .ic svg{width:34px;height:34px}
+.tool.featured h3{font-size:26px;line-height:1.4}
+.tool.featured p{font-size:15.5px;min-height:0}
+.tool.featured .open{font-size:16px}
 .tool .open.soon{color:var(--mut)}
 /* ===== Tools pastel tints (user order 2026-11-07) — 7 soft hues cycling over 28 tools; overlay tints var(--card) so all themes keep working ===== */
 .tool:nth-child(7n+1){background-image:linear-gradient(rgba(244,114,182,.30),rgba(244,114,182,.30))}
@@ -2010,7 +2016,7 @@ function icGo(){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 const tools=[
- {t:'AI အသံ ထုတ်မယ်',e:'AI Voice Generation',d:'စာရိုက်လိုက်တာနဲ့ အသံထွက်မယ်၊ Gemini အသံ ၃၀ လုံးထဲက ရွေးလို့ရတယ်',go:'tts',ic:'<path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
+ {t:'TTS CyborgMM Burmese Voices',e:'CyborgMM TTS Voices',d:'CyborgMM မြန်မာ အသံ ၃၁ သံ (ကိုယ်ပိုင်ထုတ်လုပ်မှု, Commercial Rights ပါ) + Gemini အသံ ၃၀ + Free သီဟ/နီလာ — စာရိုက်လိုက်တာနဲ့ အသံထွက်မယ်',go:'tts',featured:true,ic:'<path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
  {t:'Edge TTS (သီဟ/နီလာ)',e:'Edge TTS Free',d:'စာရိုက်ရင် သီဟ/နီလာ အသံ ထွက်မယ် — Microsoft Edge အသံ၊ အခမဲ့',go:'edgetts',ic:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9c1.2 1.6 1.2 4.4 0 6M18.5 6.5c2.4 3.2 2.4 7.8 0 11"/>'},
  {t:'Voice Clone',e:'Voice Clone',d:'ကိုယ့်အသံကို clone လုပ်ပြီး ဘယ် script မဆို ပြောခိုင်းလို့ရတယ်',go:'voiceclone',ic:'<circle cx="8" cy="8" r="3.2"/><path d="M3.5 20c.6-3.4 2.4-5 4.5-5s3.9 1.6 4.5 5M16 4.5c1.8.8 3 2.4 3 4.5M16.5 9.5c1 .5 1.7 1.5 1.9 2.8"/>'},
  {t:'အသံ Converter',e:'Audio Converter',d:'MP3 ↔ WAV ပြောင်းလို့ရတယ် — browser ထဲမှာပဲ အလုပ်လုပ်တယ်၊ အခမဲ့',go:'audio',ic:'<path d="M4 10v4M8 7v10M12 5v14M16 8v8M20 11v2"/>'},
@@ -2041,7 +2047,7 @@ const tools=[
  {t:'QR Code ထုတ်',e:'QR Generator',d:'Link/စာသား ကနေ QR ပုံ ထုတ် — အခမဲ့',go:'qr',ic:'<rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h3v3h-3zM20 17v3h-3"/>'},
  {t:'Multi-Voice + Document Studio',e:'Multi-Voice Studio',d:'အသံ ၂–၃ သံနဲ့ ဇာတ်လမ်းတစ်ပုဒ် + စာအုပ် (TXT/DOCX/EPUB/PDF) ကို အသံထုတ် — CyborgMM ၃၁ သံချည်းပဲ, Fast window ချိန်သုံး',go:'',url:'#tts-mv',ic:'<path d="M12 3a3 3 0 0 1 3 3v4a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
 ];
-document.getElementById('tools').innerHTML=tools.map(x=>`<div class="tool" onclick="${x.url?`location.href='${x.url}'`:x.go?`show('${x.go}')`:`alert('ဒီ Tool က မကြာမီ ပါလာမယ် — အခု TTS Studio နဲ့ Converter တွေ သုံးလို့ရတယ်')`}">${x.soon?`<span class="soon-badge">မကြာမီ</span>`:''}<div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${x.ic}</svg></div><h3>${x.t}</h3><p>${x.d}</p><span class="open${x.soon?' soon':''}">${x.soon?'မကြာမီ':'ဖွင့်မယ် →'}</span></div>`).join('');
+document.getElementById('tools').innerHTML=tools.map(x=>`<div class="tool${x.featured?' featured':''}" onclick="${x.url?`location.href='${x.url}'`:x.go?`show('${x.go}')`:`alert('ဒီ Tool က မကြာမီ ပါလာမယ် — အခု TTS Studio နဲ့ Converter တွေ သုံးလို့ရတယ်')`}">${x.soon?`<span class="soon-badge">မကြာမီ</span>`:''}<div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${x.ic}</svg></div><h3>${x.t}</h3><p>${x.d}</p><span class="open${x.soon?' soon':''}">${x.soon?'မကြာမီ':'ဖွင့်မယ် →'}</span></div>`).join('');
 // waveform — colors flow horizontally cyan→blue→purple→pink (Gemini style)
 const w=document.getElementById('wave');let wh='';
 for(let i=0;i<36;i++){const h=18+Math.round(Math.abs(Math.sin(i*.55))*44);const hue=Math.round(190+i*(130/35));wh+=`<i style="height:${h}px;animation-delay:${(i%9)*.09}s;background:linear-gradient(180deg,hsl(${hue},95%,66%),hsl(${hue},90%,55%))"></i>`}
