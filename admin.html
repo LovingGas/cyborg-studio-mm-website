@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Dashboard — Cyborg Studio MM</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Pyidaungsu','Noto Sans Myanmar',system-ui,sans-serif;background:linear-gradient(180deg,#dbeafe 0%,#eff6ff 55%,#e0f2fe 100%);color:#0B1526;min-height:100vh}
+  .wrap{max-width:1080px;margin:0 auto;padding:22px 16px 60px}
+  h1{font-size:24px;margin:6px 0 4px}
+  .sub{color:#475569;font-size:14px;line-height:1.7;margin:0 0 16px}
+  .card{background:rgba(255,255,255,.82);backdrop-filter:blur(10px);border:1px solid #dbeafe;border-radius:16px;padding:16px;box-shadow:0 8px 24px rgba(21,101,192,.10);margin-bottom:16px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  input,select{font:inherit;color:#0B1526;background:#fff;border:1.5px solid #cbd5e1;border-radius:10px;padding:9px 12px}
+  input[type=number]{width:130px}
+  button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:9px 16px;background:#1565c0;color:#fff}
+  button.ghost{background:#fff;color:#1565c0;border:1.5px solid #1565c0}
+  button.danger{background:#dc2626}
+  button:disabled{opacity:.55;cursor:not-allowed}
+  #status{margin-top:10px;color:#475569;line-height:1.7;word-break:break-word}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{border-bottom:1px solid #e2e8f0;padding:9px 8px;text-align:left;vertical-align:top}
+  th{color:#475569;font-size:13px}
+  .acts{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .acts input[type=number]{width:110px;padding:6px 8px}
+  .acts select{padding:6px 8px}
+  .acts button{padding:6px 10px;font-size:13px}
+  .pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:700}
+  .pill.vip{background:#fef3c7;color:#92400e}
+  .pill.free{background:#e2e8f0;color:#475569}
+  .pill.frozen{background:#fee2e2;color:#991b1b}
+  .tblwrap{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>👑 VIP Dashboard — Cyborg Studio MM</h1>
+  <p class="sub">Admin only — member တွေ ကြည့် / Points ပေး / Tier ပေး / Freeze / ဖျက် လုပ်နိုင်ပါတယ်။ Admin key ကို ဒီ browser ထဲမှာပဲ (sessionStorage) သိမ်းပါတယ် — page ထဲမှာ ဘယ်တော့မှ မရေးထားဘူး။</p>
+
+  <div class="card">
+    <div class="row">
+      <input type="password" id="adminKey" placeholder="Admin Key ထည့်ပါ" autocomplete="off" style="flex:1;min-width:220px">
+      <button onclick="loadMembers()">Member များ ကြည့်မယ်</button>
+    </div>
+    <div id="status"></div>
+  </div>
+
+  <div class="card" id="tableCard" style="display:none">
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Name</th><th>Provider</th><th>Email</th><th>Tier</th><th>Points</th><th>Expiry</th><th>Frozen</th><th>Actions</th></tr></thead>
+        <tbody id="memberRows"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+const API='https://cyborg-voxcpm-proxy.lovinggas.workers.dev';
+function status(m){document.getElementById('status').textContent=m||''}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function adminKey(){
+  const inp=document.getElementById('adminKey');
+  const v=(inp.value||'').trim();
+  if(v){try{sessionStorage.setItem('csmm-admin-key',v)}catch(e){}}
+  else{try{const s=sessionStorage.getItem('csmm-admin-key');if(s)inp.value=s}catch(e){}}
+  return (document.getElementById('adminKey').value||'').trim();
+}
+async function adminFetch(path,opts){
+  const key=adminKey();
+  if(!key)throw new Error('Admin Key ထည့်ပေးပါ။');
+  const r=await fetch(API+path,Object.assign({headers:{'Content-Type':'application/json','X-Admin-Key':key}},opts||{}));
+  const j=await r.json().catch(()=>({}));
+  if(r.status===401)throw new Error('Admin Key မှားနေတယ် — ပြန်စစ်ပါ။');
+  if(!r.ok)throw new Error(j.detail||('http '+r.status));
+  return j;
+}
+function tierLabel(t){return (t==='vip30'||t==='vip50')?'VIP':'Free'}
+async function loadMembers(){
+  status('Member များ ဖတ်နေတယ်...');
+  try{
+    const j=await adminFetch('/admin/members');
+    const rows=document.getElementById('memberRows');
+    document.getElementById('tableCard').style.display='block';
+    if(!j.members.length){rows.innerHTML='<tr><td colspan="8">Member မရှိသေးဘူး။</td></tr>';status('Member 0 ယောက်');return}
+    rows.innerHTML=j.members.map(function(m){
+      const tierSel='<select onchange="setTier(\''+m.id+'\',this)">'+['free','vip30','vip50'].map(function(t){return '<option value="'+t+'"'+(m.tier===t?' selected':'')+'>'+(t==='free'?'Free':t==='vip30'?'VIP 30':'VIP 50')+'</option>'}).join('')+'</select>';
+      return '<tr>'+
+        '<td><b>'+esc(m.display_name||'Member')+'</b><br><small style="color:#64748b">'+esc(m.id.slice(0,8))+'…</small></td>'+
+        '<td>'+esc(m.provider)+'</td>'+
+        '<td>'+esc(m.email||'—')+'</td>'+
+        '<td><span class="pill '+(tierLabel(m.tier)==='VIP'?'vip':'free')+'">'+tierLabel(m.tier)+'</span><br>'+tierSel+'</td>'+
+        '<td><b>'+Number(m.points_balance||0).toLocaleString()+'</b></td>'+
+        '<td>'+(m.expires_at?esc(m.expires_at.slice(0,10)):'—')+'</td>'+
+        '<td>'+(m.frozen?'<span class="pill frozen">Frozen</span>':'—')+'</td>'+
+        '<td><div class="acts">'+
+          '<input type="number" id="grant-'+m.id+'" placeholder="Points" min="1" step="1">'+
+          '<button onclick="grantPoints(\''+m.id+'\')">Points ပေး</button>'+
+          '<button class="ghost" onclick="toggleFreeze(\''+m.id+'\','+(m.frozen?'false':'true')+')">'+(m.frozen?'Unfreeze':'Freeze')+'</button>'+
+          '<button class="danger" onclick="deleteMember(\''+m.id+'\',\''+esc(m.display_name||'Member').replace(/'/g,'')+'\')">ဖျက်</button>'+
+        '</div></td>'+
+      '</tr>';
+    }).join('');
+    status('ရပြီ ✓ Member '+j.members.length+' ယောက်');
+  }catch(e){status('မရပါ — '+e.message)}
+}
+async function grantPoints(id){
+  const inp=document.getElementById('grant-'+id);
+  const points=Math.floor(Number(inp.value)||0);
+  if(points<=0){status('Points ပမာဏ ထည့်ပေးပါ။');return}
+  status('Points ပေးနေတယ်...');
+  try{
+    const j=await adminFetch('/admin/member-grant',{method:'POST',body:JSON.stringify({member_id:id,points})});
+    status('ရပြီ ✓ Balance အသစ်: '+Number(j.balance_points).toLocaleString()+' Points');
+    loadMembers();
+  }catch(e){status('Points ပေးလို့ မရပါ — '+e.message)}
+}
+async function setTier(id,sel){
+  status('Tier ပြောင်းနေတယ်...');
+  try{
+    await adminFetch('/admin/member-tier',{method:'POST',body:JSON.stringify({member_id:id,tier:sel.value})});
+    status('ရပြီ ✓ Tier: '+sel.value);
+    loadMembers();
+  }catch(e){status('Tier ပြောင်းလို့ မရပါ — '+e.message);loadMembers()}
+}
+async function toggleFreeze(id,frozen){
+  status((frozen?'Freeze':'Unfreeze')+' လုပ်နေတယ်...');
+  try{
+    await adminFetch('/admin/member-freeze',{method:'POST',body:JSON.stringify({member_id:id,frozen})});
+    status('ရပြီ ✓ '+(frozen?'Freeze ပြီးပြီ':'Unfreeze ပြီးပြီ'));
+    loadMembers();
+  }catch(e){status('မရပါ — '+e.message)}
+}
+async function deleteMember(id,name){
+  if(!confirm('Member "'+name+'" ကို အပြီးဖျက်မှာလား? (key + Points အကုန် ပျက်မယ်)'))return;
+  status('ဖျက်နေတယ်...');
+  try{
+    await adminFetch('/admin/member-delete',{method:'POST',body:JSON.stringify({member_id:id})});
+    status('ရပြီ ✓ ဖျက်ပြီးပြီ');
+    loadMembers();
+  }catch(e){status('ဖျက်လို့ မရပါ — '+e.message)}
+}
+try{const s=sessionStorage.getItem('csmm-admin-key');if(s){document.getElementById('adminKey').value=s;loadMembers()}}catch(e){}
+</script>
+</body>
+</html>
