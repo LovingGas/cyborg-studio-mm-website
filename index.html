@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script>(function(){try{var t=localStorage.getItem('csmm-theme');if(t==='night'||t==='neon'||t==='glassy')document.documentElement.setAttribute('data-theme',t)}catch(e){}try{var f=localStorage.getItem('csmm-font');if(f==='padauk'||f==='noto'||f==='pyidaungsu')document.documentElement.setAttribute('data-font',f)}catch(e){}})();</script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 :root{--bg:#eaf6ff;--card:#fff;--ink:#0b1526;--mut:#5d6f8a;--line:#d6e9f8;--blue:#0066cc;--blue2:#0052a3;--cyan:#00b8d9;--pink:#ff4d8d;--orange:#ff8f2e;--red:#ff5252;--purple:#b388ff;--vivid-blue:#448aff;--teal:#2fd4d9;--green:#4fd964;--gold:#ffd740;--grad:linear-gradient(135deg,#0066cc 0%,#448aff 48%,#00b8d9 100%);--grad-warm:linear-gradient(135deg,#ff8f2e 0%,#ff5252 55%,#ff4d8d 100%);--soft:#e2f5ff;--radius:20px;--shadow:0 12px 32px rgba(0,102,204,.13),0 3px 10px rgba(255,77,141,.06);--hdr:rgba(255,255,255,.88);--hover:#eaf4ff;--field:#f7fcff;--track:#dbeeff;--num-n:#e2f0ff;--botbg:#f2f9ff;color-scheme:light}
 [data-theme="night"]{--bg:#0a101e;--card:#131c2f;--ink:#f3f8ff;--mut:#a7bad6;--line:#263a5c;--blue:#2fd4d9;--blue2:#7fd4ea;--cyan:#ff4d8d;--soft:#1b2a47;--shadow:0 14px 36px rgba(0,0,0,.48),0 4px 16px rgba(255,77,141,.08);--hdr:rgba(10,16,30,.88);--hover:#1a2a49;--field:#0d1729;--track:#263a5c;--num-n:#24365a;--botbg:#0c1526;color-scheme:dark}
@@ -368,6 +369,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <button class="hideM" onclick="show('guide',this)">📖 Guide</button>
     <button class="hideM" onclick="show('mgmt',this)">Management</button>
     <button class="hideM" onclick="show('pos',this)">POS</button>
+    <button class="hideM" onclick="show('login',this)">👤 Login</button>
     <div class="themesw" role="group" aria-label="Theme"><button data-t="glassy" class="on" onclick="setTheme('glassy')" title="Glassy">🫧</button><button data-t="day" onclick="setTheme('day')" title="Day">☀️</button><button data-t="night" onclick="setTheme('night')" title="Night">🌙</button></div>
     <div class="themesw fontsw" role="group" aria-label="Font"><button data-f="pyidaungsu" class="on" onclick="setFont('pyidaungsu')" title="Pyidaungsu">ပြည်ထောင်စု</button><button data-f="padauk" onclick="setFont('padauk')" title="Padauk">Padauk</button><button data-f="noto" onclick="setFont('noto')" title="Noto Sans Myanmar">Noto</button></div>
     <button class="lang" id="langBtn" onclick="toggleLang()">EN</button>
@@ -1012,6 +1014,32 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   </section>
 
   
+</div>
+
+<!-- ============ MEMBER LOGIN ============ -->
+<div class="screen" id="scr-login">
+  <section class="blk">
+    <button class="btn btn-ghost" onclick="show('home')">← ပင်မ</button>
+    <div class="sec-h">👤 Member Login</div>
+    <div class="sec-s">CyborgMM အသံတွေ အတွက် member login — Google (သို့) Telegram နဲ့ ဝင်ပါ။</div>
+    <div class="card" style="max-width:560px">
+      <div id="loginBtns">
+        <div id="gSignInBtn" style="margin-bottom:12px"></div>
+        <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="CyborgStudioMMBot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+        <button class="btn" disabled style="margin-top:12px;opacity:.55;cursor:not-allowed">✉️ Email login (မကြာမီ)</button>
+      </div>
+      <div id="memberCard" style="display:none">
+        <div style="font-size:18px;font-weight:700" id="memberName"></div>
+        <div style="color:var(--mut);margin-top:4px" id="memberMeta"></div>
+        <div style="margin-top:10px;line-height:1.9" id="memberStats"></div>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-cyan" id="memberKeyBtn" onclick="memberGetKey()">🔑 Key ရယူမယ်</button>
+          <button class="btn btn-ghost" onclick="memberLogout()">Logout</button>
+        </div>
+      </div>
+      <div id="loginStatus" style="margin-top:12px;color:var(--mut);line-height:1.7;word-break:break-all"></div>
+    </div>
+  </section>
 </div>
 
 <!-- ============ PHOTO CONVERTER ============ -->
@@ -2058,6 +2086,76 @@ function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{l
 function setFont(f){document.documentElement.setAttribute('data-font',f);try{localStorage.setItem('csmm-font',f)}catch(e){}document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))}
 (function(){var f=document.documentElement.getAttribute('data-font')||'pyidaungsu';document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))})();
 function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById('scr-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});if(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}}
+// ===== Member login (2026-11-08): Google + Telegram via Worker /auth/* =====
+// No fees/prices on this tab — tiers are shown as Free/VIP only.
+const GOOGLE_CLIENT_ID='769156137704-h2rhkhh43p1buj7jjnpf6mc8cfl7v1vj.apps.googleusercontent.com';
+const MEMBER_API='https://cyborg-voxcpm-proxy.lovinggas.workers.dev';
+function memberSession(){try{return localStorage.getItem('csmm-member-session')||''}catch(e){return ''}}
+function memberSetSession(s){try{if(s)localStorage.setItem('csmm-member-session',s);else localStorage.removeItem('csmm-member-session')}catch(e){}}
+function loginStatus(m){const el=document.getElementById('loginStatus');if(el)el.textContent=m||''}
+function memberTierLabel(t){return (t==='vip30'||t==='vip50')?'VIP':'Free'}
+async function refreshMember(){
+  const btns=document.getElementById('loginBtns'),card=document.getElementById('memberCard');
+  const sess=memberSession();
+  if(!sess){if(btns)btns.style.display='block';if(card)card.style.display='none';loginStatus('');return}
+  loginStatus('အကောင့် စစ်နေတယ်...');
+  try{
+    const r=await fetch(MEMBER_API+'/auth/me',{headers:{'Authorization':'Bearer '+sess}});
+    if(r.status===401){memberSetSession('');if(btns)btns.style.display='block';if(card)card.style.display='none';loginStatus('Session မရှိတော့ပါ — ပြန်ဝင်ပေးပါ။');return}
+    if(!r.ok)throw new Error('http '+r.status);
+    const j=await r.json();const m=j.member;
+    if(btns)btns.style.display='none';if(card)card.style.display='block';
+    document.getElementById('memberName').textContent=m.display_name||'Member';
+    document.getElementById('memberMeta').textContent=(m.provider==='google'?'Google':m.provider==='telegram'?'Telegram':m.provider)+(m.email?' · '+m.email:'');
+    const exp=m.expires_at?(' · သက်တမ်း: '+m.expires_at.slice(0,10)):'';
+    document.getElementById('memberStats').innerHTML='အဆင့်: <b>'+memberTierLabel(m.tier)+'</b><br>Points: <b>'+Number(m.points_balance||0).toLocaleString()+'</b>'+(m.frozen?' <b style="color:var(--red)">(Freeze)</b>':'')+'<br>Key: <b>'+(m.has_key?'ရှိပြီးသား ✓':'မရှိသေး')+'</b>'+exp;
+    document.getElementById('memberKeyBtn').style.display=m.has_key?'none':'inline-block';
+    loginStatus('');
+  }catch(e){loginStatus('အကောင့် စစ်လို့ မရပါ — ခဏနေမှ ပြန်စမ်းပါ။')}
+}
+async function onGoogleSignIn(res){
+  loginStatus('Google အကောင့် စစ်နေတယ်...');
+  try{
+    const r=await fetch(MEMBER_API+'/auth/google',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id_token:res.credential})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(j.detail||('http '+r.status));
+    memberSetSession(j.session);loginStatus('ရပြီ ✓');refreshMember();
+  }catch(e){loginStatus('Google login မရပါ — '+e.message+' (ခဏနေမှ ပြန်စမ်းပါ)။')}
+}
+async function onTelegramAuth(user){
+  loginStatus('Telegram အကောင့် စစ်နေတယ်...');
+  try{
+    const r=await fetch(MEMBER_API+'/auth/telegram',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:user.id,first_name:user.first_name,last_name:user.last_name,username:user.username,photo_url:user.photo_url,auth_date:user.auth_date,hash:user.hash})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(j.detail||('http '+r.status));
+    memberSetSession(j.session);loginStatus('ရပြီ ✓');refreshMember();
+  }catch(e){loginStatus('Telegram login မရပါ — '+e.message+' (ခဏနေမှ ပြန်စမ်းပါ)။')}
+}
+function memberLogout(){memberSetSession('');refreshMember();loginStatus('Logout ပြီးပြီ။')}
+async function memberGetKey(){
+  const sess=memberSession();if(!sess){loginStatus('အရင် login ဝင်ပေးပါ။');return}
+  const btn=document.getElementById('memberKeyBtn');btn.disabled=true;loginStatus('Key ထုတ်နေတယ်...');
+  try{
+    const r=await fetch(MEMBER_API+'/auth/key',{method:'POST',headers:{'Authorization':'Bearer '+sess}});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(j.detail||('http '+r.status));
+    try{localStorage.setItem('csmm-voice-key',j.user_key)}catch(e){}
+    const mm=document.getElementById('mmKey');if(mm)mm.value=j.user_key;
+    loginStatus('ရပြီ ✓ Member Key: '+j.user_key+' — ကူးပြီး သိမ်းထားပါ / screenshot ရိုက်ထားပါ။ Browser data ရှင်းရင် ပြန်ရမှာ မဟုတ်ဘူး (server မှာ hash ဘဲ ရှိလို့)။ TTS Studio key ကွက်ထဲလည်း ထည့်ပြီးပြီ။');
+    refreshMember();
+  }catch(e){loginStatus('Key ထုတ်လို့ မရပါ — '+e.message)}
+  btn.disabled=false;
+}
+let memberGisTries=0;
+function memberInitGoogle(){
+  if(typeof google==='undefined'||!google.accounts||!google.accounts.id){if(memberGisTries++<20)setTimeout(memberInitGoogle,500);return}
+  try{
+    google.accounts.id.initialize({client_id:GOOGLE_CLIENT_ID,callback:onGoogleSignIn});
+    google.accounts.id.renderButton(document.getElementById('gSignInBtn'),{theme:'outline',size:'large',text:'signin_with'});
+  }catch(e){}
+}
+memberInitGoogle();
+refreshMember();
 // chips: single-select per group + update genbar
 document.querySelectorAll('.chips').forEach(g=>{g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');updGen()})});
 function selText(group){const g=document.querySelector(`.chips[data-group="${group}"] .sel`);return g?g.textContent.replace('▶','').trim().split('·')[0].trim():''}
