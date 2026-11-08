@@ -35,7 +35,7 @@
 [data-theme="glassy"] .hero{background:radial-gradient(700px 320px at 85% -10%,rgba(255,255,255,.35),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(255,255,255,.22),transparent 55%),linear-gradient(135deg,#0284c7,#0369a1 55%,#075985);box-shadow:0 22px 55px rgba(2,132,199,.28),inset 0 1px 0 rgba(255,255,255,.4)}
 /* Studio hero — Gemini bright cyan-blue */
 #scr-studio .hero{background:radial-gradient(760px 360px at 88% -12%,rgba(255,255,255,.30),transparent 60%),radial-gradient(640px 340px at 0% 112%,rgba(34,211,238,.45),transparent 55%),linear-gradient(135deg,#0ea5e9,#0284c7 55%,#0369a1);box-shadow:0 22px 55px rgba(2,132,199,.35),inset 0 1px 0 rgba(255,255,255,.4)}
-[data-theme="glassy"] .hero h1 .grad{background:linear-gradient(90deg,#fff,#bae6fd);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="glassy"] .hero h1 .grad{background:linear-gradient(90deg,#ffffff,#ffd740);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 8px rgba(3,69,94,.45))}
 /* Glassy hero player (voice samples card) — deeper saturated blue glass so it pops on the bright blue hero, not washed out. */
 [data-theme="glassy"] .player{background:rgba(3,105,161,.45);border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:0 18px 44px rgba(2,132,199,.25),inset 0 1px 0 rgba(255,255,255,.35)}
 [data-theme="glassy"] .prow{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32)}
@@ -76,7 +76,7 @@ nav button.on{color:#fff;background:var(--blue)}
 @media(max-width:860px){.hero{grid-template-columns:1fr;padding:36px 24px}}
 .badge{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:999px;font-size:13.5px;font-weight:600}
 .hero h1{font-size:42px;line-height:1.45;font-weight:800;margin:18px 0 10px;letter-spacing:-.5px}
-.hero h1 .grad{background:linear-gradient(90deg,#38bdf8,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 .grad{background:linear-gradient(90deg,#ffffff,#ffd740);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 8px rgba(3,69,94,.45))}
 .hero p{color:#bae6fd;font-size:17px;max-width:480px}
 .hbtns{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
 .btn{padding:14px 26px;border-radius:14px;font-size:16px;font-weight:700;display:inline-flex;align-items:center;gap:9px;transition:.2s}
@@ -288,7 +288,7 @@ footer{margin:52px 0 0;border-top:1px solid var(--line);padding:26px 0 90px;colo
 nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,77,141,.25)}
 .cta{background:var(--grad);box-shadow:0 10px 24px rgba(0,184,217,.28),0 8px 22px rgba(255,77,141,.24)}
 .hero{background:radial-gradient(760px 360px at 88% -12%,rgba(255,77,141,.58),transparent 62%),radial-gradient(640px 340px at 0% 112%,rgba(255,143,46,.50),transparent 58%),radial-gradient(520px 280px at 48% 0%,rgba(47,212,217,.35),transparent 60%),linear-gradient(135deg,#0a101e 0%,#102a56 58%,#123a6d 100%);box-shadow:0 22px 55px rgba(10,16,30,.22)}
-.hero h1 .grad{background:linear-gradient(90deg,#2fd4d9 0%,#448aff 38%,#ff4d8d 72%,#ff8f2e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 .grad{background:linear-gradient(90deg,#ffffff,#ffd740);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 8px rgba(3,69,94,.45))}
 .badge{border-color:rgba(255,215,64,.42);background:rgba(255,143,46,.16)}
 .pill{background:rgba(255,143,46,.22);color:#ffd740;border-color:rgba(255,215,64,.45)}
 .stats span{color:#ffd740}
@@ -330,7 +330,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 /* Night vs Neon separation (2026-10-21): Night = calm navy/blue, Neon = black + electric glow */
 /* --- NIGHT: calm deep-sea blue, pink removed from the loud spots --- */
 [data-theme="night"] .hero{background:radial-gradient(700px 320px at 85% -10%,rgba(47,212,217,.34),transparent 60%),radial-gradient(600px 300px at 0% 110%,rgba(68,138,255,.38),transparent 55%),linear-gradient(135deg,#0a101e,#0d2f57);box-shadow:0 22px 55px rgba(3,8,20,.5)}
-[data-theme="night"] .hero h1 .grad{background:linear-gradient(90deg,#2fd4d9,#448aff);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="night"] .hero h1 .grad{background:linear-gradient(90deg,#ffffff,#ffd740);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 8px rgba(3,69,94,.45))}
 [data-theme="night"] .btn-cyan,[data-theme="night"] .cta,[data-theme="night"] .genbtn,[data-theme="night"] nav button.on,[data-theme="night"] .chip.sel{background:linear-gradient(135deg,#0891b2,#2563eb);box-shadow:0 12px 26px rgba(8,145,178,.35)}
 [data-theme="night"] .play{background:linear-gradient(135deg,#0891b2,#2563eb);box-shadow:0 8px 18px rgba(8,145,178,.35)}
 [data-theme="night"] .wave i{background:linear-gradient(180deg,#2fd4d9,#2563eb)}
