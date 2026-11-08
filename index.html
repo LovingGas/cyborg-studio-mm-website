@@ -601,7 +601,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <div>
       <div class="card">
         <h3><span class="n">1</span><span data-en="Add your text">စာသား ထည့်ပါ</span></h3>
-        <div class="hint" data-en="Myanmar or English — up to 1,000 characters per generate (Free and Gemini voices).">မြန်မာ / English ရတယ် — တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ (Free, Gemini, CyborgMM အသံအားလုံး)။</div>
+        <div class="hint" data-en="Myanmar or English — up to 5,000 characters per generate (CyborgMM, Gemini); Free voices (Thiha/Nilar) up to 1,000.">မြန်မာ / English ရတယ် — တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ (CyborgMM / Gemini)၊ Free အသံ (သီဟ/နီလာ) က ၁,၀၀၀ အထိ။</div>
                 <div class="chips" data-group="ttssrc">
           <button class="chip sel" onclick="ttsSrc('type')">✍️ စာရိုက်</button>
           <button class="chip" onclick="ttsSrc('av')">🎧 Video / အသံ → စာသား</button>
@@ -621,11 +621,11 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
             <input type="file" id="ttsDocFile" accept=".txt,.md,.docx,.epub,.pdf" hidden onchange="ttsDocPick(this)"></div>
           <div id="ttsDocInfo" class="hint" style="margin-top:8px"></div>
           <div id="ttsDocStatus" class="hint"></div>
-          <div class="hint">Browser ထဲမှာပဲ စာသားထုတ်တယ် — ဖိုင် server မတက်ဘူး။ စာသား ၁,၀၀၀ ကျော်ရင် အပိုင်းခွဲထုတ်ဖို့ လိုမယ်။</div>
+          <div class="hint">Browser ထဲမှာပဲ စာသားထုတ်တယ် — ဖိုင် server မတက်ဘူး။ စာသား ၅,၀၀၀ ကျော်ရင် အပိုင်းခွဲထုတ်ဖို့ လိုမယ်။</div>
           <button class="genbtn" id="ttsDocBtn" onclick="ttsDocRun()" disabled style="margin-top:10px">စာသား ထုတ်ပြီး ဒီ box ထဲ ထည့် 📄</button>
         </div>
 <textarea id="txt" oninput="updCount()" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — တစ်ခါတုန်းက ရွာလေးတစ်ရွာမှာ...">တစ်ခါတုန်းက တောင်ပေါ်ရွာလေးတစ်ရွာမှာ မောင်နှမ နှစ်ယောက် နေထိုင်ကြတယ်။ တစ်နေ့မှာတော့ သူတို့ဘဝကို ပြောင်းလဲသွားစေမယ့် ဖြစ်ရပ်တစ်ခု ဖြစ်ပွားခဲ့ပါတယ်။</textarea>
-        <div class="meta"><span id="ccount">0 / 1,000</span><span id="dur" data-en="Est. ~0 sec">ခန့်မှန်း ~၀ စက္ကန့်</span></div>
+        <div class="meta"><span id="ccount">0 / 5,000</span><span id="dur" data-en="Est. ~0 sec">ခန့်မှန်း ~၀ စက္ကန့်</span></div>
       </div>
       <div class="card">
         <h3><span class="n">2</span><span data-en="Choose a voice">အသံ ရွေးပါ</span></h3>
@@ -760,7 +760,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <button type="button" id="mmRegCopy" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer">Key ကူးမယ် 📋</button>
       <span id="mmRegText" style="color:var(--mut);font-size:13px"></span>
     </div>
-    <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Free CSMM Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
+    <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Free CSMM Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ။</div>
   </div>
   <div class="card" id="gkeyWrap" style="margin-bottom:14px">
     <h3><span class="n">🔑</span>Gemini API Key <small style="color:var(--mut);font-weight:500">ကိုယ့် key နဲ့ အသံ ထုတ်မယ်</small></h3>
@@ -768,7 +768,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <input type="password" id="gKey" class="tin" placeholder="Gemini API Key ထည့်ပါ (AIza...)" autocomplete="off" spellcheck="false">
       <button type="button" id="gKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
     </div>
-    <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ။</div>
+    <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။ တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ။</div>
   </div>
 </div>
 <!-- ============ VOICE CLONE ============ -->
@@ -815,7 +815,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <div class="chips" id="vcList" style="margin-top:8px"></div>
         <div class="hint" id="vcListStatus" style="margin-top:6px">သိမ်းထားတဲ့ အသံ မရှိသေးဘူး — အပေါ်မှာ အသံ အရင် သိမ်းပါ။</div>
         <textarea id="vcText" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — မင်္ဂလာပါ၊ ဒီနေ့ ရာသီဥတု သာယာပါတယ်။" style="margin-top:10px"></textarea>
-        <div class="meta"><span id="vcCount">0 / 1,000</span><span>တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိ</span></div>
+        <div class="meta"><span id="vcCount">0 / 5,000</span><span>တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ</span></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
           <button class="genbtn" id="vcGenBtn" onclick="vcGenerateSaved()">အသံထုတ်မယ် 🎙️</button>
           <button class="genbtn" id="vcOnceBtn" onclick="vcGenerateOnce()" style="background:var(--field);color:var(--ink);border:1.5px solid var(--line)">မသိမ်းဘဲ တစ်ခါတည်း ထုတ်မယ်</button>
@@ -2202,7 +2202,7 @@ refreshMember();
 document.querySelectorAll('.chips').forEach(g=>{g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');updGen()})});
 function selText(group){const g=document.querySelector(`.chips[data-group="${group}"] .sel`);return g?g.textContent.replace('▶','').trim().split('·')[0].trim():''}
 function updGen(){const v=(typeof ttsSel!=='undefined'&&ttsSel.name)?ttsSel.name:selText('voice'),s=selText('speed');if(v||s)document.getElementById('genVoice').textContent=`${v||'သီဟ'} · ${s||'1.0x'}`;const db=document.getElementById('btnDl');if(db&&db.disabled){const fmt=(typeof ttsSel!=='undefined'&&(ttsSel.group==='mm'||ttsSel.group==='gm'))?'WAV':'MP3';const lbl=(typeof ttsSel!=='undefined'&&ttsSel.group==='mm')?'48kHz quality wave':fmt+' Download';db.dataset.en=lbl;db.textContent=(typeof en!=='undefined'&&en)?db.dataset.en:lbl;if(typeof orig!=='undefined'&&orig.has(db))orig.set(db,lbl)}}
-function updCount(){const t=document.getElementById('txt').value;document.getElementById('ccount').textContent=`${t.length.toLocaleString()} / 1,000`;const sec=Math.max(1,Math.round(t.length/13));document.getElementById('dur').textContent=`ခန့်မှန်း ~${sec} စက္ကန့်`}
+function updCount(){const t=document.getElementById('txt').value;document.getElementById('ccount').textContent=`${t.length.toLocaleString()} / 5,000`;const sec=Math.max(1,Math.round(t.length/13));document.getElementById('dur').textContent=`ခန့်မှန်း ~${sec} စက္ကန့်`}
 function gmToggle(on){var w=document.getElementById('gmVoiceWrap');if(w)w.style.display=on?'block':'none';}
 updCount();
 let playing=false;
@@ -2415,7 +2415,7 @@ function vcNeedKey(){const w=document.getElementById('vcKey');if(w){w.scrollInto
 function vcFixable(res,d){ // returns a Burmese message for fixable errors, '' for transient
   if(res.status===401)return 'Key မှားနေပါတယ် — Key ကို ပြန်စစ်ပါ (သို့) Messenger / Viber / Telegram ကနေ Key ပြန်တောင်းပါ။';
   if(res.status===402)return 'Points မလုံလောက်ဘူး — Balance စစ်ပြီး Points ထည့်ခိုင်းပါ (Messenger / Viber / Telegram)။';
-  if(res.status===400)return 'အသံ / စာသား မှားနေပါတယ် — အသံ ပြန်ရွေး၊ စာသား ၁,၀၀၀ အတွင်း ရှိလား စစ်ပါ။'+(d?' ('+d.slice(0,120)+')':'');
+  if(res.status===400)return 'အသံ / စာသား မှားနေပါတယ် — အသံ ပြန်ရွေး၊ စာသား ၅,၀၀၀ အတွင်း ရှိလား စစ်ပါ။'+(d?' ('+d.slice(0,120)+')':'');
   return '';
 }
 async function vcErrDetail(res){let d='';try{const j=await res.json();d=j.detail||j.error||j.message||''}catch(_){}return (typeof d==='string')?d:''}
@@ -2590,7 +2590,7 @@ async function vcGenerateSaved(){
   const text=document.getElementById('vcText').value.trim();
   if(!vcSelVoice){vcSetStatus('My Voices ထဲက သုံးမယ့် အသံ အရင် ရွေးပါ။');return}
   if(!text){vcSetStatus('စာသား အရင် ရိုက်ပါ။');return}
-  if([...text].length>1000){vcSetStatus('တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+  if([...text].length>5000){vcSetStatus('တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
   const btn=document.getElementById('vcGenBtn');btn.disabled=true;
   const stop=vcProgress();vcSetStatus('အသံ ထုတ်နေတယ်...');
   const r=await vcGenFetch(()=>{
@@ -2611,7 +2611,7 @@ async function vcGenerateOnce(){
   if(!refText){vcSetStatus('အသံ နမူနာထဲက စာသားအတိုင်း ရိုက်ပေးပါ (အဆင့် ၂)။');return}
   if(!document.getElementById('vcConsent').checked){vcSetStatus('သဘောတူချက် checkbox အရင် အမှန်ခြစ်ပေးပါ — ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံ ပဲ clone လုပ်ပါတယ်။');return}
   if(!text){vcSetStatus('စာသား အရင် ရိုက်ပါ။');return}
-  if([...text].length>1000){vcSetStatus('တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+  if([...text].length>5000){vcSetStatus('တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
   const btn=document.getElementById('vcOnceBtn');btn.disabled=true;
   const stop=vcProgress();vcSetStatus('အသံ ထုတ်နေတယ်... (မသိမ်းဘူး)');
   const refBlob=vcRefBlob,refTxt=refText,name=document.getElementById('vcName').value.trim()||'my_voice';
@@ -2634,8 +2634,8 @@ async function vcGenerateOnce(){
   k.addEventListener('input',()=>{try{localStorage.setItem('csmm-voice-key',k.value.trim())}catch(e){}});
   document.getElementById('vcKeyEye').addEventListener('click',()=>{k.type=k.type==='password'?'text':'password';document.getElementById('vcKeyEye').textContent=k.type==='password'?'👁️':'🙈'});
   const t=document.getElementById('vcText');
-  t.addEventListener('input',()=>{document.getElementById('vcCount').textContent=t.value.length.toLocaleString()+' / 1,000'});
-  document.getElementById('vcCount').textContent='0 / 1,000';
+  t.addEventListener('input',()=>{document.getElementById('vcCount').textContent=t.value.length.toLocaleString()+' / 5,000'});
+  document.getElementById('vcCount').textContent='0 / 5,000';
   if(k.value.trim())vcLoadVoices();
 })();
 // Customer Service AI Bot (mock)
