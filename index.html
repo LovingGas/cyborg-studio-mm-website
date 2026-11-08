@@ -1036,6 +1036,8 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
           <button class="btn btn-cyan" id="memberKeyBtn" onclick="memberGetKey()">🔑 Key ရယူမယ်</button>
           <button class="btn btn-ghost" onclick="memberLogout()">Logout</button>
         </div>
+        <div id="memberKeyLine" style="display:none;margin-top:12px;padding:10px;border:1.5px dashed var(--blue);border-radius:10px;word-break:break-all;line-height:1.7"></div>
+        <button class="btn btn-ghost" id="memberKeyCopy" style="display:none;margin-top:8px" onclick="memberCopyKey()">📋 Key ကူးမယ်</button>
       </div>
       <div id="loginStatus" style="margin-top:12px;color:var(--mut);line-height:1.7;word-break:break-all"></div>
     </div>
@@ -2132,6 +2134,7 @@ async function onTelegramAuth(user){
   }catch(e){loginStatus('Telegram login မရပါ — '+e.message+' (ခဏနေမှ ပြန်စမ်းပါ)။')}
 }
 function memberLogout(){memberSetSession('');refreshMember();loginStatus('Logout ပြီးပြီ။')}
+let lastMemberKey='';
 async function memberGetKey(){
   const sess=memberSession();if(!sess){loginStatus('အရင် login ဝင်ပေးပါ။');return}
   const btn=document.getElementById('memberKeyBtn');btn.disabled=true;loginStatus('Key ထုတ်နေတယ်...');
@@ -2139,13 +2142,18 @@ async function memberGetKey(){
     const r=await fetch(MEMBER_API+'/auth/key',{method:'POST',headers:{'Authorization':'Bearer '+sess}});
     const j=await r.json().catch(()=>({}));
     if(!r.ok)throw new Error(j.detail||('http '+r.status));
+    lastMemberKey=j.user_key;
     try{localStorage.setItem('csmm-voice-key',j.user_key)}catch(e){}
     const mm=document.getElementById('mmKey');if(mm)mm.value=j.user_key;
-    loginStatus('ရပြီ ✓ Member Key: '+j.user_key+' — ကူးပြီး သိမ်းထားပါ / screenshot ရိုက်ထားပါ။ Browser data ရှင်းရင် ပြန်ရမှာ မဟုတ်ဘူး (server မှာ hash ဘဲ ရှိလို့)။ TTS Studio key ကွက်ထဲလည်း ထည့်ပြီးပြီ။');
+    const kl=document.getElementById('memberKeyLine');
+    if(kl){kl.textContent='Member Key: '+j.user_key+' — ကူးပြီး သိမ်းထားပါ / screenshot ရိုက်ထားပါ။ Browser data ရှင်းရင် ပြန်ရမှာ မဟုတ်ဘူး (server မှာ hash ဘဲ ရှိလို့)။ TTS Studio key ကွက်ထဲလည်း ထည့်ပြီးပြီ။';kl.style.display='block';}
+    const kc=document.getElementById('memberKeyCopy');if(kc)kc.style.display='inline-block';
+    loginStatus('ရပြီ ✓ Key ထုတ်ပြီးပြီ — အပေါ်က key ကို ကူးထားပါ။');
     refreshMember();
   }catch(e){loginStatus('Key ထုတ်လို့ မရပါ — '+e.message)}
   btn.disabled=false;
 }
+function memberCopyKey(){if(!lastMemberKey){loginStatus('Key မရှိသေးဘူး။');return}try{navigator.clipboard.writeText(lastMemberKey).then(function(){loginStatus('Key ကူးပြီးပြီ ✓ — APK မှာ paste လုပ်လို့ရပြီ။')}).catch(function(){loginStatus('Key ကူးမရပါ — key စာသားကို ရွေးပြီး ကူးပါ။')})}catch(e){loginStatus('Key ကူးမရပါ — key စာသားကို ရွေးပြီး ကူးပါ။')}}
 let memberGisTries=0;
 function memberInitGoogle(){
   if(typeof google==='undefined'||!google.accounts||!google.accounts.id){if(memberGisTries++<20)setTimeout(memberInitGoogle,500);return}
