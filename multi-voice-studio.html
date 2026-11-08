@@ -39,12 +39,12 @@ small{color:var(--mut)}
 အလုပ်လုပ်ပုံ: Segment တစ်ခု = အသံတစ်သံ + စာသား → တစ်ပိုင်းချင်း (၁,၀၀၀ စာလုံးအတွင်း) ထုတ် → WAV တစ်ခုတည်း ဆက်ပေး။
 Document တင်ရင် browser ထဲမှာပဲ စာသားထုတ်ပြီး အပိုင်းခွဲပေးတယ် (server ကို ဖိုင်မတင်ဘူး)။
 Project သိမ်းတာက ဒီ browser ထဲမှာပဲ (localStorage) — member cloud save က နောက်အဆင့်။<br>
-⚡ <b>အသံထုတ်တာက Fast Server window ချိန်မှာပဲ ရတယ်</b> (တနင်္လာ–သောကြာ 17:00–21:00, စနေ–တနင်္ဂနွေ 15:00–21:00 Myanmar Time)။
+⚡ <b>အသံထုတ်တာက Fast Server window ချိန်မှာပဲ ရတယ်</b> (တနင်္လာ–သောကြာ 15:00–19:00, စနေ–တနင်္ဂနွေ 15:00–21:00 Myanmar Time)။
 </div>
 
 <div id="routeSec">
 <h2>၁။ အသံထုတ်လမ်း (Generation route)</h2>
-<label><input type="checkbox" id="fastOnly" checked> Fast window ချိန်ပဲ သုံးလို့ရအောင် lock လုပ် (Mon–Fri 17:00–21:00, Sat–Sun 15:00–21:00 Myanmar Time)</label>
+<label><input type="checkbox" id="fastOnly" checked> Fast window ချိန်ပဲ သုံးလို့ရအောင် lock လုပ် (Mon–Fri 15:00–19:00, Sat–Sun 15:00–21:00 Myanmar Time)</label>
 </div>
 
 <h2>၂။ Document တင် → Segment ဖြစ်</h2>
@@ -100,7 +100,7 @@ function fastWindowInfo(now=new Date()){
   const dow=parts.find(p=>p.type==='weekday').value; // Mon..Sun
   const mins=get('hour')*60+get('minute');
   const isWeekend=(dow==='Sat'||dow==='Sun');
-  const start=isWeekend?15*60:17*60, end=21*60;
+  const start=15*60, end=isWeekend?21*60:19*60;
   return {open:mins>=start&&mins<end,start,end,mins,dow};
 }
 // Fast-window lock only: enable/disable the Generate All button. No status text — window times are in the note above.
@@ -214,6 +214,7 @@ async function genOne(voice,text){
 }
 async function generateAll(){
   if(document.getElementById('fastOnly').checked && !fastWindowInfo().open){alert('Fast window ပိတ်နေတယ် — window ဖွင့်ချိန်မှ ထုတ်လို့ရမယ်');return;}
+  if(document.getElementById('fastOnly').checked && !fastUrlVal){alert('Fast URL မရသေးဘူး — page ကို hard-refresh (ပိတ်/ပြန်ဖွင့်) လုပ်ပြီး ပြန်စမ်းပါ။ (Fast URL မပါပဲ Modal နဲ့ မထုတ်ဘူး — lock ဖွင့်ထားလို့)');return;}
   if(!segs.length||segs.some(s=>!s.text.trim())){alert('Segment စာသား အလွတ်ရှိတယ်');return;}
   if(segs.some(s=>s.text.length>MAX_CHARS)){alert('၁,၀၀၀ စာလုံးကျော်တဲ့ segment ရှိတယ် — အရင် အပိုင်းခွဲပါ');return;}
   logEl.textContent=''; log(`စတင်ပြီ: ${segs.length} segments`);
