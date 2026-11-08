@@ -1892,7 +1892,7 @@ agDraw(0);
   <section class="blk">
     <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
     <div class="sec-h" style="margin-top:14px">🔢 စာလုံး ရေတွက်မယ်</div>
-    <div class="sec-s">စာရိုက်တာနဲ့ စာလုံး / စကားလုံး / စာကြောင်း ချက်ချင်း ရေတွက်ပေးတယ် — TTS limit 1000 ကျော်လား စစ်ဖို့ — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
+    <div class="sec-s">စာရိုက်တာနဲ့ စာလုံး / စကားလုံး / စာကြောင်း ချက်ချင်း ရေတွက်ပေးတယ် — TTS limit 5000 ကျော်လား စစ်ဖို့ — browser ထဲမှာပဲ, <b>အခမဲ့</b>။</div>
     <div class="card">
       <div class="glabel">စာသား</div>
       <textarea id="cntIn" rows="8" placeholder="စာသား ဒီမှာ ရိုက်ပါ / ကူးထည့်ပါ..." oninput="cntGo()"></textarea>
@@ -1949,7 +1949,7 @@ function cntGo(){
   const lines=v?v.split('\n').length:0;
   const wrap=document.getElementById('cntOut');
   wrap.innerHTML='<div class="chip sel">စာလုံး: '+chars.toLocaleString()+'</div><div class="chip sel">စကားလုံး: '+words.toLocaleString()+'</div><div class="chip sel">စာကြောင်း: '+lines+'</div>';
-  document.getElementById('cntNote').textContent=chars>1000?'⚠️ TTS limit 1000 ကျော်နေပြီ — ခွဲပြီး ထုတ်ပါ။':'✓ TTS 1000 အတွင်း ရှိတယ်။';
+  document.getElementById('cntNote').textContent=chars>5000?'⚠️ TTS limit 5000 ကျော်နေပြီ — ခွဲပြီး ထုတ်ပါ။':'✓ TTS 5000 အတွင်း ရှိတယ်။';
 }
 let icImgObj=null,icFileName='';
 function icPick(input){const f=input.files&&input.files[0];if(!f)return;icFileName=f.name.replace(/\.[^.]+$/,'');const img=new Image();img.onload=function(){icImgObj=img;document.getElementById('icInfo').textContent='ပုံ ရပြီ ✓ — '+f.name+' ('+Math.round(f.size/1024)+' KB, '+img.width+'×'+img.height+')';document.getElementById('icBtn').disabled=false};img.src=URL.createObjectURL(f)}
@@ -2179,7 +2179,7 @@ async function generate(){
   const gb=document.querySelector('#scr-tts .genbtn');
   if(ttsSel.group==='gm'){
     const n=[...text].length;
-    if(n>1000){ttsSetStatus('Gemini နဲ့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — စာသား ခွဲထုတ်ကြည့်ပါ။ (အခု '+n.toLocaleString()+' လုံး)');return}
+    if(n>5000){ttsSetStatus('Gemini နဲ့ တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိပဲ ရပါတယ် — စာသား ခွဲထုတ်ကြည့်ပါ။ (အခု '+n.toLocaleString()+' လုံး)');return}
     const key=document.getElementById('gKey').value.trim();
     if(!key){const w=document.getElementById('gkeyWrap');w.scrollIntoView({behavior:'smooth',block:'center'});try{w.animate([{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}],{duration:420})}catch(e){}const old=w.style.borderColor;w.style.borderColor='#f43f5e';setTimeout(()=>{w.style.borderColor=old},2200);document.getElementById('gKey').focus({preventScroll:true});ttsSetStatus('Gemini အသံ သုံးဖို့ ကိုယ့် Gemini API Key အရင် ထည့်ပေးပါ (Key ကတ်ထဲမှာ)။');return}
     const stop=ttsProgress();if(gb)gb.disabled=true;
@@ -2202,7 +2202,7 @@ async function generate(){
   // CyborgMM Burmese Voices via Points proxy — key-gated, cold-start retry
   if(ttsSel.group==='mm'){
     const n=[...text].length;
-    if(n>1000){ttsSetStatus('CyborgMM အသံ မို့ တစ်ခါထုတ် စာလုံး ၁,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+    if(n>5000){ttsSetStatus('CyborgMM အသံ မို့ တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
     const key=document.getElementById('mmKey').value.trim();
     if(!key){const w=document.getElementById('mmKeyWrap');w.scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('mmKey').focus({preventScroll:true});ttsSetStatus('CyborgMM အသံ သုံးဖို့ ကိုယ့် User Key အရင် ထည့်ပေးပါ (Key ကတ်ထဲမှာ)။');return}
     const vid=ttsSel.vid||'narrator';
@@ -2222,7 +2222,7 @@ async function generate(){
           stop(false);
           if(res.status===401)ttsSetStatus('Key မှားနေပါတယ် — Key ကို ပြန်စစ်ပါ (သို့) Messenger / Viber / Telegram ကနေ Key ပြန်တောင်းပါ။');
           else if(res.status===402)ttsSetStatus('Points မလုံလောက်ဘူး — Balance စစ်ပြီး Points ထည့်ခိုင်းပါ (Messenger / Viber / Telegram)။');
-          else if(res.status===400)ttsSetStatus('အသံ / စာသား မှားနေပါတယ် — အသံ ပြန်ရွေး၊ စာသား ၁,၀၀၀ အတွင်း ရှိလား စစ်ပါ။');
+          else if(res.status===400)ttsSetStatus('အသံ / စာသား မှားနေပါတယ် — အသံ ပြန်ရွေး၊ စာသား ၅,၀၀၀ အတွင်း ရှိလား စစ်ပါ။');
           else ttsSetStatus('Server error — ခဏနေမှာ ပြန်စမ်းကြည့်ပါ။'+(d?' ('+d.slice(0,120)+')':''));
           if(gb)gb.disabled=false;return}
         const blob=await res.blob();stop(true);
@@ -2653,7 +2653,7 @@ async function whisperTranscribe(file,st){const model=dirOf('wmodel');
  st.textContent='စာသား ပြောင်းနေတယ်... (device ပေါ် မူတည်ပြီး ခဏ ကြာနိုင်တယ်)';
  const out=await wPipe(audio,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:dirOf('wlang')||'english',task:'transcribe'});
  return (out.text||'').trim()}
-function ttsPutText(t,src){const tx=document.getElementById('txt');tx.value=t;updCount();const st=document.getElementById(src==='av'?'ttsAvStatus':'ttsDocStatus');st.textContent='✅ စာသား '+t.length.toLocaleString()+' လုံး TTS box ထဲ ထည့်ပြီးပြီ'+(t.length>1000?' — ⚠️ ၁,၀၀၀ ကျော်နေတယ်, တစ်ခါထုတ် ၁,၀၀၀ အထိပဲ, အပိုင်းခွဲထုတ်ပါ':'')}
+function ttsPutText(t,src){const tx=document.getElementById('txt');tx.value=t;updCount();const st=document.getElementById(src==='av'?'ttsAvStatus':'ttsDocStatus');st.textContent='✅ စာသား '+t.length.toLocaleString()+' လုံး TTS box ထဲ ထည့်ပြီးပြီ'+(t.length>5000?' — ⚠️ ၅,၀၀၀ ကျော်နေတယ်, တစ်ခါထုတ် ၅,၀၀၀ အထိပဲ, အပိုင်းခွဲထုတ်ပါ':'')}
 async function ttsAvRun(){if(!ttsAvFileObj)return;const st=document.getElementById('ttsAvStatus');const btn=document.getElementById('ttsAvBtn');btn.disabled=true;
 try{const t=await whisperTranscribe(ttsAvFileObj,st);if(!t){st.textContent='စာသား မထွက်ဘူး — အသံ ပါတဲ့ ဖိုင်ဟုတ်ရဲ့လား စစ်ပါ';btn.disabled=false;return}ttsPutText(t,'av')}catch(e){st.textContent='မရပါ — internet ချိတ်ထားရဲ့လား စစ်ပြီး ပြန်စမ်းပါ။ Video ဖိုင်ဆိုရင် browser က အသံထုတ်မရတဲ့ format ဖြစ်နိုင်ပါတယ်။'}
 btn.disabled=false}
