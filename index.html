@@ -969,13 +969,17 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <h1>Cyborg<span class="grad">Recap</span>MM</h1>
       <p>ဖုန်းတစ်လုံးတည်းနဲ့ ရုပ်ရှင် recap video လုပ်နိုင်တဲ့ Android app — script, အသံ, ပုံ, render အကုန် app ထဲမှာပဲ ပြီးတယ်။</p>
       <div class="hbtns">
+        <!-- APK DOWNLOAD HIDDEN 2026-11-10 (user order: hide until stable — frequent updates look unstable; restore when stable)
         <a class="btn btn-cyan" style="text-decoration:none" href="https://drive.google.com/file/d/1WSy7lcWl9a1OdxUNAycrUPTfFv2UkJwn/view" target="_blank" rel="noopener">📥 Android APK ဆွဲမယ်</a>
+        -->
         <a class="btn btn-ghost" style="text-decoration:none" href="https://drive.google.com/file/d/1zsPGyLGQLnGzuhaeC03SpreKHNhis4B2/view" target="_blank" rel="noopener">📖 အသုံးပြုနည်း Manual (PDF)</a>
         <button class="btn btn-ghost" onclick="show('guide')">🎬 Video Guide</button>
         <button class="btn btn-ghost" onclick="show('studio')">Web Studio လည်း ရှိတယ်</button>
       </div>
       <p style="margin-top:10px;font-size:13.5px;opacity:.85">📖 Manual PDF — စာမျက်နှာ ၄၂ မျက်နှာ · 9.7 MB · ပုံနှင့်တကွ ရှင်းပြထားသည်</p>
+      <!-- APK VERSION LINE HIDDEN 2026-11-10 (user order: hide until stable)
       <p style="margin-top:10px;font-size:13.5px;opacity:.85">နောက်ဆုံး version <b>v1.3.32</b> · 74 MB · Google Drive ကနေ တိုက်ရိုက် download ဆွဲနိုင်တယ်</p>
+      -->
       <div class="stats">
         <div><b>7</b><span>အဆင့် Wizard</span></div>
         <div><b>3+</b><span>အသံ မိသားစု (Gemini/Edge/CyborgMM)</span></div>
@@ -1021,7 +1025,9 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <button class="chap" onclick="guideSeek(238.48)"><span class="tm">3:58</span>၁၃။ ပြဿနာ ဖြေရှင်းခြင်း + FAQ</button>
     </div>
     <div class="hbtns" style="margin-top:16px">
+      <!-- APK DOWNLOAD HIDDEN 2026-11-10 (user order: hide until stable; restore when stable)
       <a class="btn btn-cyan" style="text-decoration:none" href="https://drive.google.com/file/d/1WSy7lcWl9a1OdxUNAycrUPTfFv2UkJwn/view" target="_blank" rel="noopener">📥 Android APK ဆွဲမယ်</a>
+      -->
       <a class="btn btn-ghost" style="text-decoration:none" href="https://drive.google.com/file/d/1zsPGyLGQLnGzuhaeC03SpreKHNhis4B2/view" target="_blank" rel="noopener">📖 Manual (PDF) ဆွဲမယ်</a>
       <button class="btn btn-ghost" onclick="show('recap')">Recap App screen သို့ →</button>
     </div>
@@ -2747,8 +2753,8 @@ function botReply(q){const s=q.toLowerCase();
  if(s.includes('aistudio')||(s.includes('gemini')&&s.includes('key')))return 'Gemini key က အခမဲ့ပါ ခင်ဗျာ။\n၁။ aistudio.google.com/apikey မှာ Google account နဲ့ key ဆောက်ပါ (App ထဲ Settings → Gemini API Key အောက်က "Free key ရယူနည်း" လမ်းညွှန် ခလုတ်လည်း ရှိပါတယ်)\n၂။ ရလာတဲ့ key ကို Settings ရဲ့ Gemini API Key အကွက်မှာ paste လုပ်ပြီး "သိမ်းမယ်" နှိပ်ပါ\nKey ကို ဖုန်းထဲမှာပဲ သိမ်းပါတယ် — Step 2 AI script/ဘာသာပြန်နဲ့ Gemini TTS က ဒီ key ကိုပဲ သုံးပါတယ်။';
  if(s.includes('license')||s.includes('device code')||s.includes('activate')||q.includes('လက်မှတ်')||q.includes('key ဖွင့်')||q.includes('key ထည့်'))return 'License ကို App ထဲ Settings → License မှာ ဖွင့်ရပါတယ် ခင်ဗျာ။\n၁။ အဆင့် ၁ — ဖုန်းရဲ့ Device code (CRMM-…) ကို Copy လုပ်ပြီး ကျွန်တော်တို့ဆီ Messenger / Viber / Telegram နဲ့ ပို့ပါ\n၂။ အဆင့် ၂ — ပြန်ရလာတဲ့ key ကို အပြည့်အစုံ paste လုပ်ပြီး "ဖွင့်မယ်" နှိပ်ပါ\nKey တစ်ခုက အဲ့ဒီ code ထုတ်တဲ့ ဖုန်း တစ်လုံးမှာပဲ အလုပ်လုပ်ပါတယ် — ဖုန်း ပြောင်းရင် code အသစ် ပြန်ပို့ရပါမယ်။ "လက်မှတ် မမှန်" ပြရင် key အပြည့်အစုံ copy ထားတာ စစ်ပါ။';
  if(s.includes('downloads')||(q.includes('ဖိုင်')&&q.includes('ဘယ်မှာ')))return 'Render ပြီးရင် Step 7 မှာ "Downloads ထဲ သိမ်းမယ်" ခလုတ် ပေါ်လာပါတယ် ခင်ဗျာ — နှိပ်ရင် MP4 နဲ့ SRT ဖိုင်က ဖုန်းရဲ့ Downloads folder ထဲ ရောက်ပါတယ် (Poster ဆိုရင် PNG ဖိုင်ပါ)။ Share ခလုတ်နဲ့ တခြား app ကိုလည်း တန်း ပို့လို့ရပါတယ်။\nမသိမ်းရသေးရင် ဖိုင်တွေက app ရဲ့ project folder ထဲမှာပဲ ရှိသေးတာမို့ file manager မှာ မတွေ့တာပါ — Step 7 ပြန်သွားပြီး Downloads ထဲ သိမ်းပါ။';
- if(s.includes('windows')||s.includes('.exe')||q.includes('ကွန်ပျူတာ')||q.includes('ဝင်းဒိုး'))return 'Windows version (.exe) မကြာမီ လာပါမယ် ခင်ဗျာ 🙏 အခု Android APK ပဲ ရပါသေးတယ် — ဒီ website ရဲ့ "Recap App" tab ကနေ ဆွဲလို့ရပါတယ်။';
- if(s.includes('apk')||s.includes('download')||s.includes('install')||q.includes('ဆွဲ'))return 'ဒီ website ရဲ့ "Recap App" tab (screen) မှာ ခလုတ် ၂ ခု ရှိပါတယ် ခင်ဗျာ — "📥 Android APK ဆွဲမယ်" နဲ့ "📖 အသုံးပြုနည်း Manual (PDF)" ပါ။\nAPK ကို ဆွဲပြီး Android ဖုန်းမှာ install လုပ်ရုံနဲ့ တန်း သုံးလို့ရပါတယ်။\nAPK ထဲမှာ CyborgMM အသံ ၃၁ လုံး + Voice Clone (အခမဲ့) ပါပြီးသားပါ ခင်ဗျာ — Step 3 မှာ အသံ ရွေးလို့ရပါတယ်။\nManual PDF ထဲမှာ အသုံးပြုနည်း အပြည့်အစုံကို ပုံနှင့်တကွ ရှင်းပြထားပါတယ်။';
+ if(s.includes('windows')||s.includes('.exe')||q.includes('ကွန်ပျူတာ')||q.includes('ဝင်းဒိုး'))return 'Windows version (.exe) မကြာမီ လာပါမယ် ခင်ဗျာ 🙏 Android APK download က ခဏ ပိတ်ထားပါတယ် — stable version ထွက်မှ ပြန်ဖွင့်ပါမယ်။ အခု Web Studio (CyborgMM TTS Voices) ကို website မှာ သုံးလို့ရပါတယ်။';
+ if(s.includes('apk')||s.includes('download')||s.includes('install')||q.includes('ဆွဲ'))return 'Android APK download က ခဏ ပိတ်ထားပါတယ် ခင်ဗျာ 🙏 stable version ထွက်မှ ပြန်ဖွင့်ပါမယ်။\n"📖 အသုံးပြုနည်း Manual (PDF)" ကို website ရဲ့ "Recap App" tab ကနေ ဆွဲလို့ရပါတယ်။\nအခု Web Studio (CyborgMM TTS Voices) ကို website မှာ သုံးလို့ရပါတယ် — အသံ ၃၁ လုံး + Voice Clone (အခမဲ့) ပါပြီးသားပါ ခင်ဗျာ။';
  if(s.includes('whisper')||s.includes('auto-srt')||s.includes('auto srt'))return 'Auto-SRT (Whisper) က Step 2 မှာ video အသံကနေ စာတန်း အလိုအလျောက် ထုတ်ပေးပါတယ် ခင်ဗျာ။\nModel ကို တစ်ခါ ဒေါင်းထားရင် နောက်ပိုင်း offline ရပါတယ် — Tiny (101 MB) အမြန်ဆုံး · Base (159 MB) ပုံမှန်သုံးဖို့ သင့် · Small (374 MB) ပိုတိကျ · Large Turbo (1,037 MB) အတိကျဆုံး။\nဘာသာစကားက Auto-detect မို့ ရွေးစရာ မလိုပါ။ မြန်မာ စကား တိုက်ရိုက် မှတ်တာက မတိကျတတ်လို့ မူရင်း ဘာသာနဲ့ အရင် ထုတ်ပြီး Gemini "မြန်မာ ပြန်မယ်" နဲ့ ဘာသာပြန်တာ အကောင်းဆုံးပါ။';
  if(q.includes('စကား')&&(q.includes('မပါ')||q.includes('မရှိ')))return 'စကားပြော မပါတဲ့ video (သီချင်း / အသံ အကျိုးချည်းပဲ) ဆိုရင် Auto-SRT က စာတန်း အစစ် မထုတ်နိုင်ပါဘူး ခင်ဗျာ — Whisper က စကားသံကိုပဲ မှတ်တာပါ။\nကိုယ်ပိုင် SRT ဖိုင် ထည့်သုံး (သို့) စာတန်း မပါဘဲ ဆက်လုပ်ပါ။';
  if((q.includes('စာတန်း')||s.includes('subtitle'))&&(q.includes('ပိတ်')||q.includes('ပုံစံ')||s.includes('font')||q.includes('အရွယ်')||s.includes('player')||s.includes('burn')))return 'စာတန်း ၃ မျိုး တစ်ပြိုင်တည်း ထွက်ပါတယ် ခင်ဗျာ — ၁။ Burn-in (video ထဲ မြှုပ်ထား၊ ပုံစံ အမြဲ မှန်) ၂။ SRT ဖိုင် သပ်သပ် (YouTube အတွက်) ၃။ Embedded "Myanmar" track (MX Player / VLC ရဲ့ subtitle menu မှာ ဖွင့်/ပိတ် လို့ရ)။\nVideo ထဲ စာတန်း လုံးဝ မပါချင်ရင် Step 5 မှာ Subtitle ကို ပိတ်ထားပါ (SRT ဖိုင်ကတော့ သပ်သပ် ရနေမှာပါ)။\nFont (Pyidaungsu မူရင်း / Padauk / Noto) နဲ့ စာလုံး အရွယ်ကိုလည်း Step 5 မှာပဲ ချိန်ရပါတယ်။';
