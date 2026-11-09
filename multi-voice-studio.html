@@ -276,7 +276,7 @@ window.addEventListener('message',function(e){
     fastUrlVal=e.data.fastUrl;
     try{localStorage.setItem('cyborgmm-fast-url',fastUrlVal);}catch(e){}
   }
-  if(e.data&&e.data.type==='mvTheme'){var t=e.data.theme;document.documentElement.setAttribute('data-theme',(t==='night'||t==='neon'||t==='glassy')?t:'day');}
+  if(e.data&&e.data.type==='mvTheme'){var t=e.data.theme;document.documentElement.setAttribute('data-theme',(t==='night'||t==='neon'||t==='glassy')?t:(t==='tazaungdaing'?'night':'day'));}
 });
 function askTheme(){ if(window.parent!==window) window.parent.postMessage({type:'mvNeedTheme'},'*'); }
 askRoute(); setTimeout(askRoute,1000); askTheme();
