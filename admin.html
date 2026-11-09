@@ -46,6 +46,11 @@
     <div id="status"></div>
   </div>
 
+  <div class="card" id="telemetryCard" style="display:none">
+    <b>📱 Recap Free သုံးနေတာ (App ID ရေတွက်မှု — silent telemetry)</b>
+    <div id="telemetryText" style="margin-top:6px;font-size:16px">—</div>
+  </div>
+
   <div class="card" id="tableCard" style="display:none">
     <div class="tblwrap">
       <table>
@@ -82,6 +87,13 @@ async function adminFetch(path,opts){
   return j;
 }
 function tierLabel(t){return (t==='vip30'||t==='vip50')?'VIP':'Free'}
+async function loadTelemetry(){
+  try{
+    const t=await adminFetch('/admin/telemetry');
+    document.getElementById('telemetryCard').style.display='block';
+    document.getElementById('telemetryText').textContent='စုစုပေါင်း App ID: '+Number(t.total_app_ids||0).toLocaleString()+' · ဒီနေ့ အသစ်: '+Number(t.new_today||0).toLocaleString();
+  }catch(e){/* telemetry count is a bonus — member table must not break */}
+}
 async function loadMembers(){
   status('Member များ ဖတ်နေတယ်...');
   try{
@@ -89,6 +101,7 @@ async function loadMembers(){
     document.getElementById('keyCard').style.display='none';
     const rows=document.getElementById('memberRows');
     document.getElementById('tableCard').style.display='block';
+    loadTelemetry();
     if(!j.members.length){rows.innerHTML='<tr><td colspan="8">Member မရှိသေးဘူး။</td></tr>';status('Member 0 ယောက်');return}
     rows.innerHTML=j.members.map(function(m){
       const tierSel='<select onchange="setTier(\''+m.id+'\',this)">'+['free','vip30','vip50'].map(function(t){return '<option value="'+t+'"'+(m.tier===t?' selected':'')+'>'+(t==='free'?'Free':t==='vip30'?'VIP 30':'VIP 50')+'</option>'}).join('')+'</select>';
