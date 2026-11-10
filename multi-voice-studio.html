@@ -201,18 +201,28 @@ function silentWav(seconds=1,rate=48000){
   return pcmToWav(new Int16Array(rate*seconds),rate);
 }
 // ---- Generation (one segment = one existing /tts call, sequential) ----
-function refreshFastUrl(){ try{const fu=localStorage.getItem('cyborgmm-fast-url')||''; if(fu) fastUrlVal=fu;}catch(e){} }
+function refreshFastUrl(){ try{ fastUrlVal=localStorage.getItem('cyborgmm-fast-url')||''; }catch(e){} }
 async function genOne(voice,text){
   refreshFastUrl();
-  const route=fastUrlVal?'fast':'worker';
-  let url;
-  if(route==='worker'){ url=WORKER+'/tts'; }
-  else { url=fastUrlVal.replace(/\/$/,'')+'/tts'; }
-  const headers={'Content-Type':'application/json'};
-  if(route==='worker') headers['X-User-Key']=userKeyVal;
-  const r=await fetch(url,{method:'POST',headers,body:JSON.stringify({voice_id:voice,text})});
-  if(!r.ok) throw new Error(`Segment "${text.slice(0,20)}…" → HTTP ${r.status}`);
-  return await r.blob();
+  const fastOnly=document.getElementById('fastOnly')&&document.getElementById('fastOnly').checked;
+  // Fast first when a Fast URL is known; fall back to the Worker (Modal) if Fast fails,
+  // unless the user locked Fast-only. A stale Fast URL (Fast closed, page not refreshed)
+  // must not fail the whole generation — the Worker route is the fallback.
+  const routes=[];
+  if(fastUrlVal) routes.push('fast');
+  if(!fastOnly) routes.push('worker');
+  let lastErr=null;
+  for(const route of routes){
+    let url; const headers={'Content-Type':'application/json'};
+    if(route==='worker'){ url=WORKER+'/tts'; headers['X-User-Key']=userKeyVal; }
+    else { url=fastUrlVal.replace(/\/$/,'')+'/tts'; }
+    try{
+      const r=await fetch(url,{method:'POST',headers,body:JSON.stringify({voice_id:voice,text})});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return await r.blob();
+    }catch(e){ lastErr=e; if(route==='fast'&&routes.indexOf('worker')>=0) log('  → Fast မရဘူး ('+e.message+'), Worker နဲ့ ပြန်စမ်းမယ်'); }
+  }
+  throw new Error('Segment "'+text.slice(0,20)+'… " → '+(lastErr?lastErr.message:'မရဘူး'));
 }
 async function generateAll(){
   refreshFastUrl();
@@ -275,9 +285,9 @@ if(new URLSearchParams(location.search).get('embed')){
 }
 function askRoute(){ if(window.parent!==window) window.parent.postMessage({type:'mvNeedRoute'},'*'); }
 window.addEventListener('message',function(e){
-  if(e.data&&e.data.type==='mvRoute'&&e.data.fastUrl){
-    fastUrlVal=e.data.fastUrl;
-    try{localStorage.setItem('cyborgmm-fast-url',fastUrlVal);}catch(e){}
+  if(e.data&&e.data.type==='mvRoute'){
+    fastUrlVal=e.data.fastUrl||'';
+    try{ if(fastUrlVal) localStorage.setItem('cyborgmm-fast-url',fastUrlVal); else localStorage.removeItem('cyborgmm-fast-url'); }catch(e){}
   }
   if(e.data&&e.data.type==='mvTheme'){var t=e.data.theme;document.documentElement.setAttribute('data-theme',(t==='night'||t==='neon'||t==='glassy')?t:(t==='tazaungdaing'?'night':'day'));}
 });
