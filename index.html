@@ -3095,9 +3095,8 @@ async function atGemini(prompt,jsonMode){
   const key=atGetKey();if(!key)throw{at:'nokey'};
   const payload={contents:[{parts:[{text:prompt}]}]};
   if(jsonMode)payload.generationConfig={responseMimeType:'application/json'};
-  // App ရဲ့ fallback chain အတိုင်း — Google က model နာမည်ကို user အသစ်တွေအတွက် ပိတ်ထားတတ်တယ်
-  // (app build .6 မှာ gemini-2.5-flash က user ဖုန်းမှာ 404 ပေးခဲ့ဖူးတယ်) — တစ်ခု မရရင် နောက်တစ်ခု စမ်းမယ်။
-  const models=['gemini-3.8-flash','gemini-2.5-flash','gemini-2.0-flash','gemini-flash-latest'];
+  // App ရဲ့ fallback chain အတိုင်း — Google က 2.5-flash ကို new key တွေအတွက် ပိတ်လိုက်ပြီ (Nov 2026, 404 "no longer available to new users") — 3.5-flash-lite အရင်စမ်းမယ်။
+  const models=['gemini-3.5-flash-lite','gemini-3.8-flash'];
   let lastErr=null;
   for(const model of models){
     let res;try{res=await fetch(TTS_API+'/web-gemini-generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey:key,model:model,payload:payload})})}catch(e){throw{at:'net'}}
