@@ -201,7 +201,9 @@ function silentWav(seconds=1,rate=48000){
   return pcmToWav(new Int16Array(rate*seconds),rate);
 }
 // ---- Generation (one segment = one existing /tts call, sequential) ----
+function refreshFastUrl(){ try{const fu=localStorage.getItem('cyborgmm-fast-url')||''; if(fu) fastUrlVal=fu;}catch(e){} }
 async function genOne(voice,text){
+  refreshFastUrl();
   const route=fastUrlVal?'fast':'worker';
   let url;
   if(route==='worker'){ url=WORKER+'/tts'; }
@@ -213,6 +215,7 @@ async function genOne(voice,text){
   return await r.blob();
 }
 async function generateAll(){
+  refreshFastUrl();
   if(document.getElementById('fastOnly').checked && !fastWindowInfo().open){alert('Fast window ပိတ်နေတယ် — window ဖွင့်ချိန်မှ ထုတ်လို့ရမယ်');return;}
   if(document.getElementById('fastOnly').checked && !fastUrlVal){alert('Fast URL မရသေးဘူး — page ကို hard-refresh (ပိတ်/ပြန်ဖွင့်) လုပ်ပြီး ပြန်စမ်းပါ။ (Fast URL မပါပဲ Modal နဲ့ မထုတ်ဘူး — lock ဖွင့်ထားလို့)');return;}
   if(!segs.length||segs.some(s=>!s.text.trim())){alert('Segment စာသား အလွတ်ရှိတယ်');return;}

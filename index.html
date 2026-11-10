@@ -2153,7 +2153,7 @@ function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{l
 (function(){var t=document.documentElement.getAttribute('data-theme')||'day';document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t))})();
 function setFont(f){document.documentElement.setAttribute('data-font',f);try{localStorage.setItem('csmm-font',f)}catch(e){}document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))}
 (function(){var f=document.documentElement.getAttribute('data-font')||'pyidaungsu';document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))})();
-function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById('scr-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});if(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}}
+function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById('scr-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});if(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}if(id==='studio'){var f=document.getElementById('mvFrame');if(f&&f.contentWindow)setTimeout(function(){f.contentWindow.postMessage({type:'mvRoute',fastUrl:MV_FAST_URL},'*')},600);}}
 // ===== Member login (2026-11-08): Google + Telegram via Worker /auth/* =====
 // No fees/prices on this tab — tiers are shown as Free/VIP only.
 const GOOGLE_CLIENT_ID='769156137704-h2rhkhh43p1buj7jjnpf6mc8cfl7v1vj.apps.googleusercontent.com';
