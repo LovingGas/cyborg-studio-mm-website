@@ -461,18 +461,6 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     </div>
   </div>
 
-  <!-- Free Lifetime Key card — added 2026-11-07 (user order) -->
-  <div class="card" style="margin-top:14px;background:linear-gradient(135deg,#1a2a5e,#0e1630);border:1px solid #ffcf50;cursor:pointer" onclick="show('recap')">
-    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
-      <div style="font-size:30px">🎬</div>
-      <div style="flex:1;min-width:220px">
-        <b style="color:#fff;font-size:16px">CyborgRecapMM — Free Lifetime Key ယူနိုင်ပါပြီ 🔥</b>
-        <div style="color:#c3d0ee;font-size:13.5px;margin-top:4px">Movie Recap App — Lifetime Key အခမဲ့ လာရောက်တောင်းယူနိုင်ပါသည်။ Device Code ပို့ပြီး Key အခမဲ့ ရယူပါ။</div>
-      </div>
-      <span class="btn btn-cyan" style="white-space:nowrap;padding:10px 18px;font-size:14px">Recap App ကြည့်မယ် →</span>
-    </div>
-  </div>
-
   <section class="blk">
     <div class="sec-h">ထုတ်ကုန်များ</div>
     <div class="sec-s">ကဏ္ဍ တစ်ခုချင်းစီကို နှိပ်ပြီး အသေးစိတ် ကြည့်နိုင်တယ်။ လိပ်စာတွေက cyborgstudiomm.com အောက်မှာ ကဏ္ဍခွဲထားမယ်။</div>
@@ -483,12 +471,14 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <p>Faceless creator တွေအတွက် web စတူဒီယို — အသံထုတ်, Voice Clone, Auto Recap, SRT ဘာသာပြန်။ အခု အခမဲ့ သုံးလို့ရတယ်။</p>
         <span class="open">Studio ဖွင့်မယ် →</span>
       </div>
+      <!-- CyborgRecapMM product card HIDDEN 2026-11-10 (user order: hide until stable; restore when stable)
       <div class="prodcard" onclick="show('recap')">
         <div class="purl">cyborgstudiomm.com/recap</div>
         <h3>🎬 CyborgRecapMM</h3>
         <p>ဖုန်းတစ်လုံးတည်းနဲ့ ရုပ်ရှင် recap လုပ်နိုင်တဲ့ Android app — AI script, အသံအမျိုးမျိုး, live preview editor, poster maker အစုံ၊ render က ဖုန်းထဲမှာပဲ။</p>
         <span class="open">Recap app ကြည့်မယ် →</span>
       </div>
+      -->
       <div class="prodcard" onclick="show('pos')">
         <div class="purl">cyborgstudiomm.com/pos</div>
         <h3>🛒 CyborgMM POS</h3>
@@ -1033,7 +1023,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     </div>
     <p style="margin-top:14px;font-size:13.5px;color:var(--mut)">POS နဲ့ Studio guide တွေကိုလည်း ဒီနေရာမှာပဲ ထပ်ထည့်သွားပါမယ်။</p>
     <div class="sec-h" style="margin-top:22px">🆘 အကူအညီ လိုလား? ဆက်သွယ်ပါ</div>
-    <div class="sec-s">Lifetime Key တောင်းတာ, ငွေပေးချေမှု, အသံ/အက်ပ် ပြဿနာ — အကူအညီ လိုရင် အောက်က ချန်နယ် တစ်ခုခုကနေ ဆက်သွယ်နိုင်ပါတယ် ခင်ဗျာ။</div>
+    <div class="sec-s">ငွေပေးချေမှု, အသံ/အက်ပ် ပြဿနာ — အကူအညီ လိုရင် အောက်က ချန်နယ် တစ်ခုခုကနေ ဆက်သွယ်နိုင်ပါတယ် ခင်ဗျာ။</div>
     <div class="hbtns">
       <a class="btn btn-cyan" style="text-decoration:none" href="https://t.me/CyborgStudioMMBot" target="_blank" rel="noopener">✈️ Telegram</a>
       <a class="btn btn-ghost" style="text-decoration:none" href="https://m.me/cyborgstudiomm" target="_blank" rel="noopener">💬 Messenger</a>
@@ -2749,9 +2739,9 @@ function botReply(q){const s=q.toLowerCase();
  if(s.includes('audiogram')||s.includes('အသံ + ပုံ'))return 'အသံ + ပုံ → Video (Audiogram) သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "အသံ + ပုံ → Video" card ဖွင့်\n၂။ ပုံ ရွေး (Poster/Thumbnail — မရွေးရင် gradient နောက်ခံ သုံးမယ်)\n၃။ MP3 / WAV အသံ ရွေး (အသံ အရှည်အတိုင်း video ထွက်မယ်)\n၄။ Video အချိုး ရွေး: 9:16 (Reels/Shorts/TikTok) / 1:1 / 16:9 (YouTube), ခေါင်းစဉ် ထည့်ချင်ရင် ရိုက် → "အစမ်း ကြည့်မယ်" နဲ့ waveform စစ် → "Video ထုတ်မယ်" → Download ဆွဲ။\nထွက်လာတဲ့ ဖိုင်က WebM — YouTube / Facebook မှာ တန်းတင်လို့ရတယ်, TikTok အတွက် MP4 လိုရင် converter နဲ့ ပြောင်းပါ။ Browser ထဲမှာပဲ, အခမဲ့။';
  if(s.includes('တရား အပိုင်းခွဲ')||s.includes('sermon')||s.includes('splitter')||s.includes('အပိုင်းခွဲ'))return 'တရား အပိုင်းခွဲ (Sermon Splitter) သုံးနည်း ခင်ဗျာ —\n၁။ Studio tab → "တရား အပိုင်းခွဲ" card ဖွင့်\n၂။ MP3 / WAV ဖိုင် (တရား/lecture အရှည်) တင်\n၃။ အပိုင်း တစ်ခု အလျား ရွေး: 10 / 15 / 20 / 30 မိနစ် (ပုံမှန် 15)\n၄။ Format ရွေး: WAV (မြန်) / MP3 (ကြာနိုင်တယ်) → "အပိုင်းခွဲ" နှိပ် → အပိုင်း တစ်ခုချင်း Download ဆွဲလို့ရပါတယ်။\nBrowser ထဲမှာပဲ, အခမဲ့။';
  // ── CyborgRecapMM manual knowledge ──
- if(s.includes('trial')||q.includes('အစမ်း')||q.includes('၁၀ ရက်'))return 'Lifetime Key က auto မဟုတ်ပါဘူး ခင်ဗျာ — Key မရှိရင် Render / Poster / SRT ထုတ်တာတွေ ပိတ်ထားပါတယ်။\n၁။ App ထဲ Settings → License ဖွင့်ပြီး Device code (CRMM-…) ကို Copy လုပ်ပါ\n၂။ အဲ့ဒီ code ကို Messenger / Viber / Telegram ကနေ ကျွန်တော်တို့ဆီ ပို့ပြီး အခမဲ့ Lifetime Key တောင်းပါ\n၃။ ရလာတဲ့ key ကို paste လုပ်ပြီး "ဖွင့်မယ်" နှိပ်ပါ — တစ်သက်စာ သုံးလို့ရပါတယ်။';
+ if(s.includes('trial')||q.includes('အစမ်း')||q.includes('၁၀ ရက်'))return 'CyborgRecapMM က အခု အခမဲ့ Lifetime ဖြစ်သွားပါပြီ ခင်ဗျာ — App install လုပ်လိုက်တာနဲ့ License က auto Lifetime ဖြစ်ပါတယ်, Key တောင်းစရာ / ထည့်စရာ မလိုတော့ပါဘူး။ Render / Poster / SRT ထုတ်တာတွေ အကုန် ဖွင့်ထားပါတယ်။';
  if(s.includes('aistudio')||(s.includes('gemini')&&s.includes('key')))return 'Gemini key က အခမဲ့ပါ ခင်ဗျာ။\n၁။ aistudio.google.com/apikey မှာ Google account နဲ့ key ဆောက်ပါ (App ထဲ Settings → Gemini API Key အောက်က "Free key ရယူနည်း" လမ်းညွှန် ခလုတ်လည်း ရှိပါတယ်)\n၂။ ရလာတဲ့ key ကို Settings ရဲ့ Gemini API Key အကွက်မှာ paste လုပ်ပြီး "သိမ်းမယ်" နှိပ်ပါ\nKey ကို ဖုန်းထဲမှာပဲ သိမ်းပါတယ် — Step 2 AI script/ဘာသာပြန်နဲ့ Gemini TTS က ဒီ key ကိုပဲ သုံးပါတယ်။';
- if(s.includes('license')||s.includes('device code')||s.includes('activate')||q.includes('လက်မှတ်')||q.includes('key ဖွင့်')||q.includes('key ထည့်'))return 'License ကို App ထဲ Settings → License မှာ ဖွင့်ရပါတယ် ခင်ဗျာ။\n၁။ အဆင့် ၁ — ဖုန်းရဲ့ Device code (CRMM-…) ကို Copy လုပ်ပြီး ကျွန်တော်တို့ဆီ Messenger / Viber / Telegram နဲ့ ပို့ပါ\n၂။ အဆင့် ၂ — ပြန်ရလာတဲ့ key ကို အပြည့်အစုံ paste လုပ်ပြီး "ဖွင့်မယ်" နှိပ်ပါ\nKey တစ်ခုက အဲ့ဒီ code ထုတ်တဲ့ ဖုန်း တစ်လုံးမှာပဲ အလုပ်လုပ်ပါတယ် — ဖုန်း ပြောင်းရင် code အသစ် ပြန်ပို့ရပါမယ်။ "လက်မှတ် မမှန်" ပြရင် key အပြည့်အစုံ copy ထားတာ စစ်ပါ။';
+ if(s.includes('license')||s.includes('device code')||s.includes('activate')||q.includes('လက်မှတ်')||q.includes('key ဖွင့်')||q.includes('key ထည့်'))return 'CyborgRecapMM License က အခု auto Lifetime ဖြစ်ပါတယ် ခင်ဗျာ — App install လုပ်လိုက်တာနဲ့ Settings → License မှာ Lifetime လို့ ပြပါတယ်, Key တောင်းစရာ / ထည့်စရာ မလိုတော့ပါဘူး။';
  if(s.includes('downloads')||(q.includes('ဖိုင်')&&q.includes('ဘယ်မှာ')))return 'Render ပြီးရင် Step 7 မှာ "Downloads ထဲ သိမ်းမယ်" ခလုတ် ပေါ်လာပါတယ် ခင်ဗျာ — နှိပ်ရင် MP4 နဲ့ SRT ဖိုင်က ဖုန်းရဲ့ Downloads folder ထဲ ရောက်ပါတယ် (Poster ဆိုရင် PNG ဖိုင်ပါ)။ Share ခလုတ်နဲ့ တခြား app ကိုလည်း တန်း ပို့လို့ရပါတယ်။\nမသိမ်းရသေးရင် ဖိုင်တွေက app ရဲ့ project folder ထဲမှာပဲ ရှိသေးတာမို့ file manager မှာ မတွေ့တာပါ — Step 7 ပြန်သွားပြီး Downloads ထဲ သိမ်းပါ။';
  if(s.includes('windows')||s.includes('.exe')||q.includes('ကွန်ပျူတာ')||q.includes('ဝင်းဒိုး'))return 'Windows version (.exe) မကြာမီ လာပါမယ် ခင်ဗျာ 🙏 Android APK download က ခဏ ပိတ်ထားပါတယ် — stable version ထွက်မှ ပြန်ဖွင့်ပါမယ်။ အခု Web Studio (CyborgMM TTS Voices) ကို website မှာ သုံးလို့ရပါတယ်။';
  if(s.includes('apk')||s.includes('download')||s.includes('install')||q.includes('ဆွဲ'))return 'Android APK download က ခဏ ပိတ်ထားပါတယ် ခင်ဗျာ 🙏 stable version ထွက်မှ ပြန်ဖွင့်ပါမယ်။\n"📖 အသုံးပြုနည်း Manual (PDF)" ကို website ရဲ့ "Recap App" tab ကနေ ဆွဲလို့ရပါတယ်။\nအခု Web Studio (CyborgMM TTS Voices) ကို website မှာ သုံးလို့ရပါတယ် — အသံ ၃၁ လုံး + Voice Clone (အခမဲ့) ပါပြီးသားပါ ခင်ဗျာ။';
