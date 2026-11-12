@@ -2408,9 +2408,25 @@ async function generate(){
   if(ttsSel.group==='mm'){
     const n=[...text].length;
     if(n>5000){ttsSetStatus('CyborgMM အသံ မို့ တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
+    const vid=ttsSel.vid||'narrator';
+    // TEMP (Modal down 2026-11-12): Fast Server first when its URL is known — keyless, no Points. No Worker fallback while Fast URL is set (Modal disconnected). Worker path below runs only when no Fast URL is set.
+    let fastUrl=''; try{ fastUrl=(typeof MV_FAST_URL!=='undefined'&&MV_FAST_URL)||localStorage.getItem('cyborgmm-fast-url')||''; }catch(e){}
+    if(fastUrl){
+      const stopF=ttsProgress();if(gb)gb.disabled=true;
+      try{
+        ttsSetStatus('Fast Server နဲ့ ထုတ်နေတယ်…');
+        const ctlF=new AbortController();const timerF=setTimeout(()=>ctlF.abort(),120000);
+        const rF=await fetch(fastUrl.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:text}),signal:ctlF.signal});
+        clearTimeout(timerF);
+        if(!rF.ok) throw new Error('HTTP '+rF.status);
+        const blobF=await rF.blob();stopF(true);
+        ttsWire(blobF,ttsSel.name+'_cyborgmm_tts.wav','WAV');
+        ttsSetStatus('ရပြီ ✓ CyborgMM ('+ttsSel.name+') Fast Server နဲ့ ထုတ်ပြီးပြီ။');
+        if(gb)gb.disabled=false;return;
+      }catch(e){ stopF(false);ttsSetStatus('Fast Server နဲ့ မရဘူး — ခဏနေမှ ပြန်စမ်းကြည့်ပါ။');if(gb)gb.disabled=false;return; }
+    }
     const key=document.getElementById('mmKey').value.trim();
     if(!key){const w=document.getElementById('mmKeyWrap');w.scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('mmKey').focus({preventScroll:true});ttsSetStatus('CyborgMM အသံ သုံးဖို့ ကိုယ့် User Key အရင် ထည့်ပေးပါ (Key ကတ်ထဲမှာ)။');return}
-    const vid=ttsSel.vid||'narrator';
     const stop=ttsProgress();if(gb)gb.disabled=true;
     let lastErr='';
     let attempt=0;
