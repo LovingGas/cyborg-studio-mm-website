@@ -2451,6 +2451,44 @@ function ttsAddHistory(blob,filename){
   list.prepend(row);
   while(list.children.length>8){const last=list.lastElementChild;const b=last.querySelector('.miniplay');if(b&&b._hurl){histUrls.delete(b._hurl);if(ttsUrl!==b._hurl)URL.revokeObjectURL(b._hurl);if(histCurBtn===b)histCurBtn=null}list.removeChild(last)}
 }
+// ---- Single-voice chunking + WAV merge (2026-11-13) ----
+// Live Fast /tts caps at 1000 chars/call (pack api_server.py), so a
+// 5000-char text is split into <=1000-char chunks at sentence
+// boundaries and merged — the same pattern as Multi-Voice. Without
+// this, any text over 1000 chars got HTTP 400 and users saw
+// "Fast Server နဲ့ မရဘူး".
+function ttsChunkText(text){
+  const out=[]; let cur='';
+  const parts=text.split(/(?<=[။.!?\n])\s+/);
+  for(const p of parts){
+    if((cur+p).length>1000 && cur){out.push(cur.trim());cur=p;}
+    else cur+=(cur?' ':'')+p;
+    while(cur.length>1000){out.push(cur.slice(0,1000));cur=cur.slice(1000);}
+  }
+  if(cur.trim()) out.push(cur.trim());
+  return out.filter(Boolean);
+}
+async function ttsWavToPcm(blob){
+  const buf=await blob.arrayBuffer(); const v=new DataView(buf);
+  if(v.getUint32(0)!==0x52494646) throw new Error('WAV မဟုတ်ဘူး');
+  let off=12;
+  while(off<buf.byteLength-8){
+    const id=v.getUint32(off), size=v.getUint32(off+4,true);
+    if(id===0x64617461) return {pcm:new Int16Array(buf,off+8,size/2), rate:v.getUint32(off-16+4,true)||48000};
+    off+=8+size+(size%2);
+  }
+  throw new Error('WAV data chunk မတွေ့ဘူး');
+}
+function ttsPcmToWav(pcm,rate=48000){
+  const out=new ArrayBuffer(44+pcm.length*2); const v=new DataView(out);
+  const w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};
+  w(0,'RIFF'); v.setUint32(4,36+pcm.length*2,true); w(8,'WAVE'); w(12,'fmt ');
+  v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,1,true);
+  v.setUint32(24,rate,true); v.setUint32(28,rate*2,true); v.setUint16(32,2,true); v.setUint16(34,16,true);
+  w(36,'data'); v.setUint32(40,pcm.length*2,true);
+  pcm.forEach((x,i)=>v.setInt16(44+i*2,x,true));
+  return new Blob([out],{type:'audio/wav'});
+}
 async function generate(){
   const text=document.getElementById('txt').value.trim();
   ttsSetStatus('');
@@ -2489,12 +2527,21 @@ async function generate(){
     if(fastUrl){
       const stopF=ttsProgress();if(gb)gb.disabled=true;
       try{
-        ttsSetStatus('Fast Server နဲ့ ထုတ်နေတယ်…');
-        const ctlF=new AbortController();const timerF=setTimeout(()=>ctlF.abort(),120000);
-        const rF=await fetch(fastUrl.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:text}),signal:ctlF.signal});
-        clearTimeout(timerF);
-        if(!rF.ok) throw new Error('HTTP '+rF.status);
-        const blobF=await rF.blob();stopF(true);
+        const chunks=ttsChunkText(text);
+        const pcms=[];
+        for(let i=0;i<chunks.length;i++){
+          ttsSetStatus('Fast Server နဲ့ ထုတ်နေတယ်… ('+(i+1)+'/'+chunks.length+' အပိုင်း)');
+          const ctlF=new AbortController();const timerF=setTimeout(()=>ctlF.abort(),120000);
+          const rF=await fetch(fastUrl.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:chunks[i]}),signal:ctlF.signal});
+          clearTimeout(timerF);
+          if(!rF.ok) throw new Error('HTTP '+rF.status);
+          const p=await ttsWavToPcm(await rF.blob());
+          if(p.rate!==48000) throw new Error('Sample rate 48000 မဟုတ်ဘူး');
+          pcms.push(p.pcm);
+        }
+        let total=pcms.reduce((a,p)=>a+p.length,0); const merged=new Int16Array(total); let o=0;
+        pcms.forEach(p=>{merged.set(p,o);o+=p.length;});
+        const blobF=ttsPcmToWav(merged);stopF(true);
         ttsWire(blobF,ttsSel.name+'_cyborgmm_tts.wav','WAV');
         ttsSetStatus('ရပြီ ✓ CyborgMM ('+ttsSel.name+') Fast Server နဲ့ ထုတ်ပြီးပြီ။');
         if(gb)gb.disabled=false;return;
