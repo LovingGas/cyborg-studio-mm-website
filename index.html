@@ -2533,7 +2533,7 @@ async function generate(){
           let attemptF=0;
           while(true){
             try{
-              ttsSetStatus('Fast Server နဲ့ ထုတ်နေတယ်… ('+(i+1)+'/'+chunks.length+' အပိုင်း)'+(attemptF>0?' — တစ်ယောက် ထုတ်နေတယ်, ခဏ စောင့်ပေးပါ…':''));
+              ttsSetStatus('Fast Server နဲ့ ထုတ်နေတယ်… ('+(i+1)+'/'+chunks.length+' အပိုင်း)');
               const ctlF=new AbortController();const timerF=setTimeout(()=>ctlF.abort(),120000);
               const rF=await fetch(fastUrl.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:chunks[i]}),signal:ctlF.signal});
               clearTimeout(timerF);
