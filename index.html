@@ -2530,14 +2530,23 @@ async function generate(){
         const chunks=ttsChunkText(text);
         const pcms=[];
         for(let i=0;i<chunks.length;i++){
-          ttsSetStatus('Fast Server နဲ့ ထုတ်နေတယ်… ('+(i+1)+'/'+chunks.length+' အပိုင်း)');
-          const ctlF=new AbortController();const timerF=setTimeout(()=>ctlF.abort(),120000);
-          const rF=await fetch(fastUrl.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:chunks[i]}),signal:ctlF.signal});
-          clearTimeout(timerF);
-          if(!rF.ok) throw new Error('HTTP '+rF.status);
-          const p=await ttsWavToPcm(await rF.blob());
-          if(p.rate!==48000) throw new Error('Sample rate 48000 မဟုတ်ဘူး');
-          pcms.push(p.pcm);
+          let attemptF=0;
+          while(true){
+            try{
+              ttsSetStatus('Fast Server နဲ့ ထုတ်နေတယ်… ('+(i+1)+'/'+chunks.length+' အပိုင်း)'+(attemptF>0?' — တစ်ယောက် ထုတ်နေတယ်, ခဏ စောင့်ပေးပါ…':''));
+              const ctlF=new AbortController();const timerF=setTimeout(()=>ctlF.abort(),120000);
+              const rF=await fetch(fastUrl.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:chunks[i]}),signal:ctlF.signal});
+              clearTimeout(timerF);
+              if(!rF.ok) throw new Error('HTTP '+rF.status);
+              const p=await ttsWavToPcm(await rF.blob());
+              if(p.rate!==48000) throw new Error('Sample rate 48000 မဟုတ်ဘူး');
+              pcms.push(p.pcm);
+              break;
+            }catch(e){
+              if((/HTTP (524|504)/.test(e.message)||e.name==='AbortError')&&attemptF<3){attemptF++;await new Promise(r=>setTimeout(r,3000));continue}
+              throw e;
+            }
+          }
         }
         let total=pcms.reduce((a,p)=>a+p.length,0); const merged=new Int16Array(total); let o=0;
         pcms.forEach(p=>{merged.set(p,o);o+=p.length;});
