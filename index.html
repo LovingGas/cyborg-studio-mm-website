@@ -421,7 +421,9 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
     <button class="on hideM" onclick="show('home',this)">ပင်မ</button>
     <button class="hideM" onclick="show('studio',this)">CyborgMM TTS Voices</button>
     <button class="hideM" onclick="show('recap',this)">Recap App</button>
+    <!-- GUIDE NAV HIDDEN 2026-11-15 (user order: hide Recap manual until Windows + APK final; restore then)
     <button class="hideM" onclick="show('guide',this)">📖 Guide</button>
+    -->
     <button class="hideM" onclick="show('mgmt',this)">Management</button>
     <button class="hideM" onclick="show('pos',this)">POS</button>
     <button class="hideM" onclick="show('login',this)">👤 Login</button>
@@ -1037,11 +1039,17 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <!-- APK DOWNLOAD HIDDEN 2026-11-10 (user order: hide until stable — frequent updates look unstable; restore when stable)
         <a class="btn btn-cyan" style="text-decoration:none" href="https://drive.google.com/file/d/1WSy7lcWl9a1OdxUNAycrUPTfFv2UkJwn/view" target="_blank" rel="noopener">📥 Android APK ဆွဲမယ်</a>
         -->
+        <!-- MANUAL PDF HIDDEN 2026-11-15 (user order: hide Recap manual until Windows + APK final; restore then)
         <a class="btn btn-ghost" style="text-decoration:none" href="https://drive.google.com/file/d/1zsPGyLGQLnGzuhaeC03SpreKHNhis4B2/view" target="_blank" rel="noopener">📖 အသုံးပြုနည်း Manual (PDF)</a>
+        -->
+        <!-- VIDEO GUIDE BUTTON HIDDEN 2026-11-15 (user order: hide Recap manual until Windows + APK final; restore then)
         <button class="btn btn-ghost" onclick="show('guide')">🎬 Video Guide</button>
+        -->
         <button class="btn btn-ghost" onclick="show('studio')">Web Studio လည်း ရှိတယ်</button>
       </div>
+      <!-- MANUAL PDF LINE HIDDEN 2026-11-15 (user order: hide Recap manual until Windows + APK final; restore then)
       <p style="margin-top:10px;font-size:13.5px;opacity:.85">📖 Manual PDF — စာမျက်နှာ ၄၂ မျက်နှာ · 9.7 MB · ပုံနှင့်တကွ ရှင်းပြထားသည်</p>
+      -->
       <!-- APK VERSION LINE HIDDEN 2026-11-10 (user order: hide until stable)
       <p style="margin-top:10px;font-size:13.5px;opacity:.85">နောက်ဆုံး version <b>v1.3.32</b> · 74 MB · Google Drive ကနေ တိုက်ရိုက် download ဆွဲနိုင်တယ်</p>
       -->
@@ -1062,49 +1070,6 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   <section class="blk">
     <div class="sec-h">Web မှာပါ သုံးချင်ရင်</div>
     <button class="btn btn-cyan" onclick="show('studio')">AI Voice Studio ဖွင့်မယ် →</button>
-  </section>
-</div>
-
-<!-- ============ GUIDE (cyborgstudiomm.com/guide) ============ -->
-<div class="screen" id="scr-guide">
-  <section class="blk" style="margin-top:26px">
-    <div class="sec-h">အသုံးပြုနည်း လမ်းညွှန် — CyborgRecapMM</div>
-    <div class="sec-s">CyborgRecapMM ကို အစအဆုံး သုံးတတ်အောင် အသံနဲ့ ရှင်းပြထားတဲ့ video tutorial (၄ မိနစ် ၂၄ စက္ကန့်) ပါ။ အခန်း တစ်ခုချင်းစီကိုလည်း အောက်က စာရင်းကနေ အချိန် နှိပ်ပြီး တိုက်ရိုက် ကြည့်လို့ရပါတယ်။</div>
-    <div class="card" style="padding:14px">
-      <video id="guideVid" controls preload="none" poster="guide-recap-poster.jpg" src="guide-recap-video.mp4" style="width:100%;aspect-ratio:16/9;border-radius:14px;background:#000;display:block"></video>
-    </div>
-    <div class="sec-h" style="font-size:19px">ပါဝင်သော အခန်းများ</div>
-    <div>
-      <button class="chap" onclick="guideSeek(0)"><span class="tm">0:00</span>၁။ စတင်ခြင်း (Home Screen)</button>
-      <button class="chap" onclick="guideSeek(15.74)"><span class="tm">0:16</span>၂။ License ဖွင့်ခြင်း (Activation)</button>
-      <button class="chap" onclick="guideSeek(41.96)"><span class="tm">0:42</span>၃။ Settings နဲ့ API Keys</button>
-      <button class="chap" onclick="guideSeek(60.26)"><span class="tm">1:00</span>၄။ အဆင့် ၁ — Video</button>
-      <button class="chap" onclick="guideSeek(76.4)"><span class="tm">1:16</span>၅။ အဆင့် ၂ — Script (SRT)</button>
-      <button class="chap" onclick="guideSeek(99.66)"><span class="tm">1:40</span>၆။ အဆင့် ၃ — အသံ (Voice)</button>
-      <button class="chap" onclick="guideSeek(122.12)"><span class="tm">2:02</span>၇။ My Voices — Clone အသံများ</button>
-      <button class="chap" onclick="guideSeek(135.78)"><span class="tm">2:16</span>၈။ အဆင့် ၄ — Style ပုံ (Look)</button>
-      <button class="chap" onclick="guideSeek(160.56)"><span class="tm">2:41</span>၉။ အဆင့် ၅ — Style စစ် (Check) နဲ့ Preview</button>
-      <button class="chap" onclick="guideSeek(186.78)"><span class="tm">3:07</span>၁၀။ အဆင့် ၆ — Overlay</button>
-      <button class="chap" onclick="guideSeek(202.68)"><span class="tm">3:23</span>၁၁။ အဆင့် ၇ — ထုတ်မယ် (Export)</button>
-      <button class="chap" onclick="guideSeek(225.7)"><span class="tm">3:46</span>၁၂။ Poster / Thumbnail နဲ့ Batch Queue</button>
-      <button class="chap" onclick="guideSeek(238.48)"><span class="tm">3:58</span>၁၃။ ပြဿနာ ဖြေရှင်းခြင်း + FAQ</button>
-    </div>
-    <div class="hbtns" style="margin-top:16px">
-      <!-- APK DOWNLOAD HIDDEN 2026-11-10 (user order: hide until stable; restore when stable)
-      <a class="btn btn-cyan" style="text-decoration:none" href="https://drive.google.com/file/d/1WSy7lcWl9a1OdxUNAycrUPTfFv2UkJwn/view" target="_blank" rel="noopener">📥 Android APK ဆွဲမယ်</a>
-      -->
-      <a class="btn btn-ghost" style="text-decoration:none" href="https://drive.google.com/file/d/1zsPGyLGQLnGzuhaeC03SpreKHNhis4B2/view" target="_blank" rel="noopener">📖 Manual (PDF) ဆွဲမယ်</a>
-      <button class="btn btn-ghost" onclick="show('recap')">Recap App screen သို့ →</button>
-    </div>
-    <p style="margin-top:14px;font-size:13.5px;color:var(--mut)">POS နဲ့ Studio guide တွေကိုလည်း ဒီနေရာမှာပဲ ထပ်ထည့်သွားပါမယ်။</p>
-    <div class="sec-h" style="margin-top:22px">🆘 အကူအညီ လိုလား? ဆက်သွယ်ပါ</div>
-    <div class="sec-s">ငွေပေးချေမှု, အသံ/အက်ပ် ပြဿနာ — အကူအညီ လိုရင် အောက်က ချန်နယ် တစ်ခုခုကနေ ဆက်သွယ်နိုင်ပါတယ် ခင်ဗျာ။</div>
-    <div class="hbtns">
-      <a class="btn btn-cyan" style="text-decoration:none" href="https://t.me/CyborgStudioMMBot" target="_blank" rel="noopener">✈️ Telegram</a>
-      <a class="btn btn-ghost" style="text-decoration:none" href="https://m.me/cyborgstudiomm" target="_blank" rel="noopener">💬 Messenger</a>
-      <a class="btn btn-ghost" style="text-decoration:none" href="https://www.tiktok.com/@cyborgstudiomm" target="_blank" rel="noopener">🎵 TikTok</a>
-    </div>
-    <p style="margin-top:10px;font-size:13.5px;color:var(--mut)">Viber မှာလည်း Cyborg Studio MM ကို ရှာပြီး ဆက်သွယ်နိုင်ပါတယ်။</p>
   </section>
 </div>
 
