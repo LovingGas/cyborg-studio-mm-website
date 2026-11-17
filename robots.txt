@@ -1,4 +1,42 @@
 User-agent: *
 Allow: /
 
+# AI training crawlers — do not use this site's content to train models.
+# Search crawlers (Googlebot, Bingbot, Applebot) are NOT blocked here.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
 Sitemap: https://cyborgstudiomm.com/sitemap.xml
