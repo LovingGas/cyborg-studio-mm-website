@@ -972,7 +972,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <button type="button" id="mmRegCopy" style="border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 15px;font-weight:700;cursor:pointer">Key ကူးမယ် 📋</button>
       <span id="mmRegText" style="color:var(--mut);font-size:13px"></span>
     </div>
-    <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Free CSMM Key ရယူမယ် နှိပ်ပါ (IP တစ်ခုကနေ တစ်ရက် ၃ ခု အထိပဲ ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ။</div>
+    <div class="hint" id="mmBalText" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ key စာသားအတိုင်း မသိမ်း၊ hash ဘဲ သိမ်းပါတယ်။ Key မရှိရင် အပေါ်က Free CSMM Key ရယူမယ် နှိပ်ပါ (Login ဝင်ပြီးမှ တစ်ယောက် တစ်ခု ရပါတယ်)။ တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ။</div>
   </div>
   <div class="card" id="gkeyWrap" style="margin-bottom:14px">
     <h3><span class="n">🔑</span>Gemini API Key <small style="color:var(--mut);font-weight:500">ကိုယ့် key နဲ့ အသံ ထုတ်မယ်</small></h3>
@@ -2356,8 +2356,10 @@ function ttsVoiceName(chip){const c=chip.cloneNode(true);c.querySelectorAll('.av
   document.getElementById('mmRegBtn').addEventListener('click',async()=>{
     const t=document.getElementById('mmRegText');const cp=document.getElementById('mmRegCopy');const btn=document.getElementById('mmRegBtn');
     if(mmInp.value.trim()){t.textContent='Key ရှိပြီးသားပါ — အဟောင်း ဆုံးရှုံးမှာ စိုးလို့ အသစ် မထုတ်ပေးဘူး။ အသစ် လိုရင် အရင် Key ကို ကူးသိမ်းပြီး ဖျက်ပြီးမှ နှိပ်ပါ။';return}
+    const sess=memberSession();
+    if(!sess){t.textContent='Free Key ယူဖို့ အရင် Login ဝင်ပေးပါ — Login tab ကနေ Google / Email / Telegram နဲ့ ဝင်လို့ရပါတယ်။';show('login');return}
     btn.disabled=true;t.textContent='Free CSMM Key ထုတ်နေတယ်...';
-    try{const r=await fetch(VOX_API+'/register',{method:'POST'});if(r.status===429){t.textContent='ဒီနေ့ Free CSMM Key ၃ ခု ပြည့်သွားပြီ — မနက် ပြန်စမ်းပါ။';btn.disabled=false;return}if(!r.ok)throw new Error('http '+r.status);const j=await r.json();mmInp.value=j.user_key;try{localStorage.setItem('csmm-voice-key',j.user_key)}catch(e){};mmInp.type='text';t.textContent='ရပြီ ✓ Free CSMM Key: '+j.user_key+' — ကူးပြီး သိမ်းထားပါ / screenshot ရိုက်ထားပါ။ Browser data ရှင်းရင် ပြန်ရမှာ မဟုတ်ဘူး (server မှာ hash ဘဲ ရှိလို့)။';cp.style.display='inline-block';}
+    try{const r=await fetch(VOX_API+'/register',{method:'POST',headers:{'Authorization':'Bearer '+sess}});if(r.status===401){t.textContent='Session မရှိတော့ပါ — Login ပြန်ဝင်ပေးပါ။';btn.disabled=false;show('login');return}if(r.status===400){t.textContent='Key ထုတ်ပြီးသားပါ — သိမ်းထားတဲ့ Key ကို သုံးပါ။ Key ကို server မှာ hash ဘဲ သိမ်းထားလို့ ပြန်ပြလို့ မရဘူး။';btn.disabled=false;return}if(!r.ok)throw new Error('http '+r.status);const j=await r.json();mmInp.value=j.user_key;try{localStorage.setItem('csmm-voice-key',j.user_key)}catch(e){};mmInp.type='text';t.textContent='ရပြီ ✓ Free CSMM Key: '+j.user_key+' — ကူးပြီး သိမ်းထားပါ / screenshot ရိုက်ထားပါ။ Browser data ရှင်းရင် ပြန်ရမှာ မဟုတ်ဘူး (server မှာ hash ဘဲ ရှိလို့)။';cp.style.display='inline-block';}
     catch(e){t.textContent='Key ထုတ်လို့ မရပါ — ခဏနေမှ ပြန်စမ်းပါ။'}
     btn.disabled=false;
   });
