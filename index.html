@@ -412,6 +412,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 [data-theme="tazaungdaing"] #festive .oilamp{position:absolute;bottom:10px;width:26px;height:16px;background:radial-gradient(ellipse at 50% 25%,#f0b25e 0%,#c2701d 55%,#7c2d12 100%);border-radius:5px 5px 13px 13px/5px 5px 16px 16px;box-shadow:0 0 14px rgba(255,179,0,.35)}
 [data-theme="tazaungdaing"] #festive .oilamp::before{content:"";position:absolute;left:50%;top:-14px;width:9px;height:15px;transform:translateX(-50%);background:radial-gradient(circle at 50% 75%,#fff8dc 0%,#ffd740 45%,#ff8f2e 80%,rgba(255,143,46,0) 100%);border-radius:50% 50% 50% 50%/68% 68% 32% 32%;box-shadow:0 0 12px 4px rgba(255,200,60,.55);animation:tzFlicker 1.4s ease-in-out infinite;animation-delay:var(--d,0s)}
 @keyframes tzFlicker{0%,100%{transform:translateX(-50%) scale(1);opacity:1}50%{transform:translateX(-50%) scale(.88);opacity:.85}}
+.srv-status{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff;margin:2px 0 4px}.srv-dot{width:11px;height:11px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.9);flex:none}.srv-dot.on{background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.9);animation:srvPulse 1.6s ease-in-out infinite}@keyframes srvPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.75}}
 [data-theme="tazaungdaing"] #festive .oilamp.o1{left:calc(50% - 113px)}[data-theme="tazaungdaing"] #festive .oilamp.o2{left:calc(50% - 63px)}[data-theme="tazaungdaing"] #festive .oilamp.o3{left:calc(50% - 13px)}[data-theme="tazaungdaing"] #festive .oilamp.o4{left:calc(50% + 37px)}[data-theme="tazaungdaing"] #festive .oilamp.o5{left:calc(50% + 87px)}
 @media (max-width:640px){[data-theme="tazaungdaing"] #festive .lantern{width:26px!important;height:34px!important}[data-theme="tazaungdaing"] #festive .robe{width:84px;height:114px;left:12px;bottom:10px}[data-theme="tazaungdaing"] #festive .lotus{left:108px;bottom:12px;width:76px;height:60px}[data-theme="tazaungdaing"] #festive .lotus i{width:20px;height:38px;margin-left:-10px;bottom:8px}[data-theme="tazaungdaing"] #festive .lotus i:nth-child(3){height:44px}[data-theme="tazaungdaing"] #festive .lotus::after{width:14px;height:11px;margin-left:-7px;bottom:10px}[data-theme="tazaungdaing"] #festive .oilamp{width:22px!important;height:14px!important}}@media (max-width:800px){[data-theme="tazaungdaing"] #festive .oilamp{bottom:92px!important}[data-theme="tazaungdaing"] #festive .oilamp.o1{left:30%!important}[data-theme="tazaungdaing"] #festive .oilamp.o2{left:40%!important}[data-theme="tazaungdaing"] #festive .oilamp.o3{left:50%!important}[data-theme="tazaungdaing"] #festive .oilamp.o4{left:60%!important}[data-theme="tazaungdaing"] #festive .oilamp.o5{left:70%!important}}
 @media (prefers-reduced-motion:reduce){[data-theme="tazaungdaing"] #festive .star,[data-theme="tazaungdaing"] #festive .lantern,[data-theme="tazaungdaing"] #festive .robe,[data-theme="tazaungdaing"] #festive .lotus,[data-theme="tazaungdaing"] #festive .oilamp::before{animation:none}}
@@ -642,6 +643,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 <script>document.querySelectorAll("audio.mmvoice").forEach(function(a){a.addEventListener("play",function(){document.querySelectorAll("audio.mmvoice").forEach(function(o){if(o!==a)o.pause()})})});</script>
   <div class="card" style="background:linear-gradient(160deg,#141f42,#0e1630);border-color:#4a62be;margin-bottom:14px">
     <h3 style="font-size:15.5px;color:#fff" data-en="Fast Server Time">⚡ Fast Server Time</h3>
+    <div class="srv-status"><span class="srv-dot"></span><span class="srv-txt">…</span></div>
     <div style="color:#c3d0ee;font-size:14px;line-height:1.7">
       <b style="color:#fff">CyborgMM Burmese Voices — အသံထုတ်တာ ပုံမှန်ထက် အများကြီး မြန်မယ်။</b><br>
           ✨ <b style="color:#fff">စာလုံးရေ Unlimited အခမဲ့ ထုတ်နိုင်ပါသည်။</b><br>
@@ -947,6 +949,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       </div>
       <div class="card" style="background:linear-gradient(160deg,#141f42,#0e1630);border-color:#4a62be">
         <h3 style="font-size:15.5px;color:#fff" data-en="Fast Server Time">⚡ Fast Server Time</h3>
+    <div class="srv-status"><span class="srv-dot"></span><span class="srv-txt">…</span></div>
         <div style="color:#c3d0ee;font-size:14px;line-height:1.7">
           <b style="color:#fff">CyborgMM Burmese Voices — အသံထုတ်တာ ပုံမှန်ထက် အများကြီး မြန်မယ်။</b><br>
           ✨ <b style="color:#fff">စာလုံးရေ Unlimited အခမဲ့ ထုတ်နိုင်ပါသည်။</b><br>
@@ -3331,5 +3334,28 @@ function pwaGo(){
   </div>
 </div>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e5f400ef3da2405684e34a543114307e"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+// Fast Server live status — schedule-based (Myanmar Time)
+(function(){
+  var DAYS=['တနင်္ဂနွေ','တနင်္လာ','အင်္ဂါ','ဗုဒ္ဓဟူး','ကြာသပတေး','သောကြာ','စနေ'];
+  function openMins(d){return (d>=1&&d<=5)?1020:900;} // Mon-Fri 17:00, Sat-Sun 15:00; closes 21:00
+  function fmt(m){return Math.floor(m/60)+':'+(m%60<10?'0':'')+(m%60);}
+  function tick(){
+    var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Yangon'}));
+    var day=now.getDay(), mins=now.getHours()*60+now.getMinutes();
+    var open=mins>=openMins(day)&&mins<1260, txt;
+    if(open){txt='ဖွင့်နေတယ် · 21:00 ပိတ်မယ်';}
+    else{
+      var d=new Date(now), n=0, m=mins;
+      while(m>=openMins(d.getDay())){d.setDate(d.getDate()+1);d.setHours(0,0,0,0);m=0;n++;if(n>7)break;}
+      var when=n===0?'ဒီနေ့ '+fmt(openMins(d.getDay())):(n===1?'မနက်ဖြန် '+fmt(openMins(d.getDay())):DAYS[d.getDay()]+' '+fmt(openMins(d.getDay())));
+      txt='ပိတ်နေတယ် · '+when+' ဖွင့်မယ်';
+    }
+    document.querySelectorAll('.srv-dot').forEach(function(e){e.classList.toggle('on',open);});
+    document.querySelectorAll('.srv-txt').forEach(function(e){e.textContent=txt;});
+  }
+  tick(); setInterval(tick,60000);
+})();
+</script>
 </body>
 </html>
