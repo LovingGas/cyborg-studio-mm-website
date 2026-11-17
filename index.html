@@ -2501,7 +2501,11 @@ async function generate(){
     const n=[...text].length;
     if(n>5000){ttsSetStatus('CyborgMM အသံ မို့ တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိပဲ ရပါတယ် — ခွဲပြီး ထုတ်ကြည့်ပါ။');return}
     const vid=ttsSel.vid||'narrator';
-    // TEMP (Modal down 2026-11-12): Fast Server first when its URL is known — keyless, no Points. No Worker fallback while Fast URL is set (Modal disconnected). Worker path below runs only when no Fast URL is set.
+    // LOGIN-ONLY (2026-11-18, user order): CyborgMM voice needs a member login + key — even on Fast (keyless until now).
+    if(!memberSession()){ ttsSetStatus('CyborgMM အသံ ထုတ်ဖို့ အရင် Login ဝင်ပေးပါ — Login tab ကနေ Google / Email / Telegram နဲ့ ဝင်လို့ရပါတယ်။'); show('login'); return; }
+    const mmKeyVal=(document.getElementById('mmKey')&&document.getElementById('mmKey').value||'').trim();
+    if(!mmKeyVal){ ttsSetStatus('CSMM Key မရှိသေးဘူး — Login ဝင်ပြီးမှ Free Key ထုတ်ပေးပါ (Key ကတ်ထဲက ခလုတ်)။'); const w=document.getElementById('mmKeyWrap'); if(w) w.scrollIntoView({behavior:'smooth',block:'center'}); document.getElementById('mmKey').focus({preventScroll:true}); return; }
+    // TEMP (Modal down 2026-11-12): Fast Server first when its URL is known. No Worker fallback while Fast URL is set (Modal disconnected). Worker path below runs only when no Fast URL is set.
     let fastUrl=''; try{ fastUrl=(typeof MV_FAST_URL!=='undefined'&&MV_FAST_URL)||localStorage.getItem('cyborgmm-fast-url')||''; }catch(e){}
     if(fastUrl){
       const stopF=ttsProgress();if(gb)gb.disabled=true;
@@ -2514,7 +2518,7 @@ async function generate(){
             try{
               ttsSetStatus('Fast Server နဲ့ ထုတ်နေတယ်… ('+(i+1)+'/'+chunks.length+' အပိုင်း)');
               const ctlF=new AbortController();const timerF=setTimeout(()=>ctlF.abort(),120000);
-              const rF=await fetch(fastUrl.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:vid,text:chunks[i]}),signal:ctlF.signal});
+              const rF=await fetch(fastUrl.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Content-Type':'application/json','X-User-Key':mmKeyVal},body:JSON.stringify({voice_id:vid,text:chunks[i]}),signal:ctlF.signal});
               clearTimeout(timerF);
               if(!rF.ok) throw new Error('HTTP '+rF.status);
               const p=await ttsWavToPcm(await rF.blob());
@@ -2551,7 +2555,7 @@ async function generate(){
         if(!res.ok){let d='';try{d=(await res.json()).detail||''}catch(_){}
           if(res.status>=500){attempt++;await new Promise(r=>setTimeout(r,3000));continue}
           stop(false);
-          if(res.status===401)ttsSetStatus('Key မှားနေပါတယ် — Key ကို ပြန်စစ်ပါ (သို့) Messenger / Viber / Telegram ကနေ Key ပြန်တောင်းပါ။');
+          if(res.status===401)ttsSetStatus('Key မှားနေပါတယ် — Login ဝင်ပြီး Key ပြန်ယူပါ။');
           else if(res.status===402)ttsSetStatus('Points မလုံလောက်ဘူး — Balance စစ်ပြီး Points ထည့်ခိုင်းပါ (Messenger / Viber / Telegram)။');
           else if(res.status===400)ttsSetStatus('အသံ / စာသား မှားနေပါတယ် — အသံ ပြန်ရွေး၊ စာသား ၅,၀၀၀ အတွင်း ရှိလား စစ်ပါ။');
           else ttsSetStatus('Server error — ခဏနေမှာ ပြန်စမ်းကြည့်ပါ။'+(d?' ('+d.slice(0,120)+')':''));
