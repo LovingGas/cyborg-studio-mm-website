@@ -2,6 +2,7 @@
 <html lang="my" data-theme="tazaungdaing" data-font="pyidaungsu">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://telegram.org https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: data:; connect-src 'self' https://cyborg-voxcpm-proxy.lovinggas.workers.dev https://cyborg-edge-tts.lovinggas.workers.dev https://fast.cyborgstudiomm.com https://accounts.google.com https://static.cloudflareinsights.com https://cloudflareinsights.com; frame-src https://accounts.google.com https://oauth.telegram.org; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cyborg Studio MM — POS · AI Voice · Recap</title>
 <link rel="canonical" href="https://cyborgstudiomm.com/">
@@ -2144,12 +2145,12 @@ function icGo(){
   <div class="bot-in"><input id="botInput" placeholder="မေးခွန်း ရိုက်ပါ..." onkeydown="if(event.key==='Enter')sendBot()"><button onclick="sendBot()">ပို့မယ်</button></div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/rabbit-node@1.0.4/dist/rabbit.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js" integrity="sha384-xuasJXVcyv3hZq0eYpelEkBC8l4yufatZXDsKuyCU2rqfhDCb+ftuE/mSfZAteiK" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/rabbit-node@1.0.4/dist/rabbit.min.js" integrity="sha384-egjanzL1d5eIKYEIl+/44CDw8j6H1z/aalX+7YwyXafVQEeWU6COKygQwe2v13Kf" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha384-3zSEDfvllQohrq0PHL1fOXJuC/jSOO34H46t6UQfobFOmxE5BpjjaIJY5F2/bMnU" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous"></script>
 <script>
 const tools=[
  {t:'TTS CyborgMM Burmese Voices',e:'CyborgMM TTS Voices',d:'CyborgMM မြန်မာ အသံ ၃၁ သံ (ကိုယ်ပိုင်ထုတ်လုပ်မှု, Commercial Rights ပါ) + Gemini အသံ ၃၀ + Free သီဟ/နီလာ — စာရိုက်လိုက်တာနဲ့ အသံထွက်မယ်',go:'tts',featured:true,ic:'<path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'},
