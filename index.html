@@ -698,6 +698,86 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
         <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,200,80,.4);border-radius:12px;padding:10px 8px;text-align:center"><div style="font-size:22px">🇺🇸</div><b style="color:#fff;font-size:14px">အမေရိကန်</b><div style="color:#ffc850;font-size:12.5px">English</div></div>
       </div>
     </div>
+  <div class="card" id="vcSection" style="margin-bottom:14px">
+    <h3 style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span>🎙️ Voice Clone</span><button type="button" id="vcToggleBtn" onclick="vcToggle()" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:10px;padding:6px 12px;font-weight:700;cursor:pointer;white-space:nowrap">ဖွင့်မယ် ▾</button></h3>
+    <div class="hint">ကိုယ့်အသံကို clone လုပ်ပြီး ဘယ် script မဆို ပြောခိုင်းလို့ရတယ် — အသံ နမူနာ ၁၀–၃၀ စက္ကန့် + စာသား အတိအကျ တင်ပါ။</div>
+    <div id="vcBody" style="display:none;margin-top:10px">
+  <div class="stepper">
+    <div class="stp act"><span class="n">1</span><span data-en="Reference voice">အသံ နမူနာ</span></div>
+    <div class="stp"><span class="n">2</span><span data-en="Name & consent">နာမည် + သဘောတူချက်</span></div>
+    <div class="stp"><span class="n">3</span><span data-en="Generate">အသံ ထုတ်မယ်</span></div>
+    <div class="stp"><span class="n">4</span><span data-en="Download">Download</span></div>
+  </div>
+  <div class="tts-grid">
+    <div>
+      <div class="card">
+        <h3><span class="n">1</span><span data-en="Reference voice">အသံ နမူနာ (၁၀–၃၀ စက္ကန့်)</span></h3>
+        <div class="hint" data-en="Record with your mic or upload a WAV file, then type exactly what you said.">Mic နဲ့ အသံသွင်း (သို့) WAV ဖိုင် တင်ပါ — ပြီးရင် ပြောခဲ့တဲ့ စာသားအတိုင်း အတိအကျ ရိုက်ပေးပါ။</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <button class="genbtn" id="vcRecBtn" onclick="vcRecToggle()">🎙️ အသံသွင်းမယ်</button>
+          <span class="hint" id="vcRecTime" style="align-self:center"></span>
+        </div>
+        <div class="drop" id="vcDrop" onclick="document.getElementById('vcRefFile').click()" style="margin-top:10px"><b>WAV ဖိုင် ရွေးပါ</b><br>10–30 စက္ကန့် WAV ဖိုင် (ရှင်းလင်းတဲ့ အသံ ဖြစ်ရင် ပိုကောင်းတယ်)
+          <input type="file" id="vcRefFile" accept=".wav,audio/wav,audio/*" hidden onchange="vcRefPick(this)"></div>
+        <div id="vcRefInfo" class="hint" style="margin-top:8px">အသံ နမူနာ မရှိသေးဘူး — Mic နဲ့ သွင်းပါ၊ WAV တင်ပါ။</div>
+        <audio id="vcRefAudio" controls style="display:none;width:100%;margin-top:8px"></audio>
+      </div>
+      <div class="card">
+        <h3><span class="n">2</span><span data-en="Name & consent">နာမည် + သဘောတူချက်</span></h3>
+        <div class="hint" data-en="Name your voice and type the exact transcript of the reference audio.">အသံကို နာမည်ပေးပါ၊ အသံ နမူနာထဲက ပြောခဲ့တဲ့ စာသားအတိုင်း ရိုက်ပါ။</div>
+        <input type="text" id="vcName" class="tin" placeholder="အသံ နာမည် — ဥပမာ ကျွန်တော့်အသံ" autocomplete="off" style="margin-top:10px">
+        <textarea id="vcRefText" placeholder="အသံ နမူနာထဲက ပြောခဲ့တဲ့ စာသားအတိုင်း ဒီမှာ ရိုက်ပါ..." style="margin-top:10px"></textarea>
+        <label style="display:flex;gap:8px;align-items:flex-start;margin-top:10px;font-size:14px;line-height:1.6;cursor:pointer"><input type="checkbox" id="vcConsent" style="margin-top:4px"> <span>ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံပဲ clone လုပ်ပါတယ် — တခြားသူရဲ့ အသံကို ခွင့်ပြုချက်မရှိဘဲ clone မလုပ်ပါ။</span></label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <button class="genbtn" id="vcSaveBtn" onclick="vcSaveVoice()">💾 အသံ သိမ်းမယ် (Save Voice)</button>
+        </div>
+        <div class="hint" id="vcSaveStatus" style="margin-top:10px"></div>
+      </div>
+      <div class="card">
+        <h3><span class="n">3</span><span data-en="Generate with your voice">စာသား ရိုက်ပြီး အသံထုတ်မယ်</span></h3>
+        <div class="hint" data-en="Pick a saved voice, type your script, and generate. Or generate once without saving.">သိမ်းထားတဲ့ အသံ ရွေးပြီး စာသား ရိုက်ထုတ်ပါ — မသိမ်းဘဲ တစ်ခါတည်း ထုတ်လို့လည်း ရတယ်။</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+          <b style="font-size:14.5px">🎙️ My Voices</b>
+          <button type="button" id="vcRefreshBtn" onclick="vcLoadVoices()" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:10px;padding:6px 12px;font-weight:700;cursor:pointer">ပြန်ဖွင့်မယ် ↻</button>
+        </div>
+        <div class="chips" id="vcList" style="margin-top:8px"></div>
+        <div class="hint" id="vcListStatus" style="margin-top:6px">သိမ်းထားတဲ့ အသံ မရှိသေးဘူး — အပေါ်မှာ အသံ အရင် သိမ်းပါ။</div>
+        <textarea id="vcText" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — မင်္ဂလာပါ၊ ဒီနေ့ ရာသီဥတု သာယာပါတယ်။" style="margin-top:10px"></textarea>
+        <div class="meta"><span id="vcCount">0 / 5,000</span><span>တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <button class="genbtn" id="vcGenBtn" onclick="vcGenerateSaved()">အသံထုတ်မယ် 🎙️</button>
+          <button class="genbtn" id="vcOnceBtn" onclick="vcGenerateOnce()" style="background:var(--field);color:var(--ink);border:1.5px solid var(--line)">မသိမ်းဘဲ တစ်ခါတည်း ထုတ်မယ်</button>
+        </div>
+      </div>
+    </div>
+    <div class="sticky-out">
+      <div class="card">
+        <h3><span class="n">4</span><span data-en="Output">ထွက်လာမယ့် အသံ</span></h3>
+        <div class="hint" data-en="Your generated voice will appear here.">ထုတ်ပြီးသား အသံ ဒီမှာ ပေါ်လာမယ်။</div>
+        <div class="out-empty" id="vcOutEmpty">🎧<br><span data-en="Nothing yet — press Generate below.">ဘာမှ မရှိသေးဘူး — အသံ ထုတ်မယ် နှိပ်ပါ။</span></div>
+        <div id="vcOutReady" style="display:none">
+          <div class="prow" style="background:var(--soft);border-color:var(--line);color:var(--ink)"><button class="play" id="vcBtnPlayRow">▶</button><div><b id="vcOutName">my_voice.wav</b><span style="color:var(--mut)" id="vcOutMeta">WAV · 48kHz</span></div><span class="tag" style="color:var(--blue2);border-color:#bae6fd">READY</span></div>
+        </div>
+        <div class="barwrap" id="vcBarWrap"><div class="bar" id="vcBar"></div></div>
+        <div class="meta" id="vcBarMeta" style="display:none"><span data-en="Generating...">ထုတ်နေတယ်...</span><span id="vcBarPct">0%</span></div>
+        <div class="dl">
+          <button id="vcBtnListen" disabled data-en="▶ Listen">▶ နားထောင်မယ်</button>
+          <button class="pri" id="vcBtnDl" disabled data-en="WAV Download">WAV Download</button>
+        </div>
+        <div class="hint" id="vcStatus" style="margin-top:10px"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15.5px"><span class="n">🔑</span>CyborgMM User Key</h3>
+        <div style="display:flex;gap:8px;align-items:stretch">
+          <input type="password" id="vcKey" class="tin" placeholder="CyborgMM User Key ထည့်ပါ" autocomplete="off" spellcheck="false">
+          <button type="button" id="vcKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
+        </div>
+        <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — TTS Studio မှာ ထည့်ထားတဲ့ Key နဲ့ အတူတူပဲ သုံးပါတယ်။ Key မရှိရင် TTS Studio ထဲက "Free CSMM Key အခမဲ့ ရယူမယ်" မှာ ယူလို့ရတယ်။</div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
   <div class="card" id="mvSection" style="margin-bottom:14px">
     <h3 style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span>🎙️ Multi-Voice + Document Studio</span><button type="button" id="mvToggleBtn" onclick="mvToggle()" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:10px;padding:6px 12px;font-weight:700;cursor:pointer;white-space:nowrap">ဖွင့်မယ် ▾</button></h3>
     <div class="hint">အသံ အများကြီး တစ်ပိုင်းချင်း ပြောင်းပြီး ဇာတ်လမ်း / စာအုပ် တစ်အုပ်လုံး အသံထုတ်မယ် — Document (TXT / DOCX / EPUB / PDF) တင်ပြီး Segment တွေ အလိုအလျောက် ခွဲပေးတယ်။</div>
@@ -709,6 +789,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
   var MV_FAST_URL='https://fast.cyborgstudiomm.com';
   try{if(MV_FAST_URL) localStorage.setItem('cyborgmm-fast-url',MV_FAST_URL); else localStorage.removeItem('cyborgmm-fast-url');}catch(e){}
   function mvToggle(){var b=document.getElementById('mvBody'),t=document.getElementById('mvToggleBtn');var open=b.style.display==='none';b.style.display=open?'block':'none';t.textContent=open?'ပိတ်မယ် ▴':'ဖွင့်မယ် ▾';}
+  function vcToggle(){var b=document.getElementById('vcBody'),t=document.getElementById('vcToggleBtn');var open=b.style.display==='none';b.style.display=open?'block':'none';t.textContent=open?'ပိတ်မယ် ▴':'ဖွင့်မယ် ▾';}
   window.addEventListener('message',function(e){
     if(!e.data) return;
     if(e.data.type==='mvHeight'){var f=document.getElementById('mvFrame');if(f) f.style.height=Math.max(600,e.data.h+20)+'px';}
@@ -894,84 +975,6 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
       <button type="button" id="gKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
     </div>
     <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — ကျွန်တော်တို့ server မှာ မသိမ်း၊ မမြင်ရပါ။ Key မရှိရင် Google AI Studio (aistudio.google.com/apikey) မှာ အခမဲ့ ယူလို့ရပါတယ်။ VPN မလိုပါ — ကျွန်တော်တို့ proxy ကနေ ချိတ်ပေးပါတယ်။ တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ။</div>
-  </div>
-</div>
-<!-- ============ VOICE CLONE ============ -->
-<div class="screen" id="scr-voiceclone">
-  <button class="btn btn-ghost" onclick="show('studio')">← Studio Tool တွေ</button>
-  <div class="stepper">
-    <div class="stp act"><span class="n">1</span><span data-en="Reference voice">အသံ နမူနာ</span></div>
-    <div class="stp"><span class="n">2</span><span data-en="Name & consent">နာမည် + သဘောတူချက်</span></div>
-    <div class="stp"><span class="n">3</span><span data-en="Generate">အသံ ထုတ်မယ်</span></div>
-    <div class="stp"><span class="n">4</span><span data-en="Download">Download</span></div>
-  </div>
-  <div class="tts-grid">
-    <div>
-      <div class="card">
-        <h3><span class="n">1</span><span data-en="Reference voice">အသံ နမူနာ (၁၀–၃၀ စက္ကန့်)</span></h3>
-        <div class="hint" data-en="Record with your mic or upload a WAV file, then type exactly what you said.">Mic နဲ့ အသံသွင်း (သို့) WAV ဖိုင် တင်ပါ — ပြီးရင် ပြောခဲ့တဲ့ စာသားအတိုင်း အတိအကျ ရိုက်ပေးပါ။</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-          <button class="genbtn" id="vcRecBtn" onclick="vcRecToggle()">🎙️ အသံသွင်းမယ်</button>
-          <span class="hint" id="vcRecTime" style="align-self:center"></span>
-        </div>
-        <div class="drop" id="vcDrop" onclick="document.getElementById('vcRefFile').click()" style="margin-top:10px"><b>WAV ဖိုင် ရွေးပါ</b><br>10–30 စက္ကန့် WAV ဖိုင် (ရှင်းလင်းတဲ့ အသံ ဖြစ်ရင် ပိုကောင်းတယ်)
-          <input type="file" id="vcRefFile" accept=".wav,audio/wav,audio/*" hidden onchange="vcRefPick(this)"></div>
-        <div id="vcRefInfo" class="hint" style="margin-top:8px">အသံ နမူနာ မရှိသေးဘူး — Mic နဲ့ သွင်းပါ၊ WAV တင်ပါ။</div>
-        <audio id="vcRefAudio" controls style="display:none;width:100%;margin-top:8px"></audio>
-      </div>
-      <div class="card">
-        <h3><span class="n">2</span><span data-en="Name & consent">နာမည် + သဘောတူချက်</span></h3>
-        <div class="hint" data-en="Name your voice and type the exact transcript of the reference audio.">အသံကို နာမည်ပေးပါ၊ အသံ နမူနာထဲက ပြောခဲ့တဲ့ စာသားအတိုင်း ရိုက်ပါ။</div>
-        <input type="text" id="vcName" class="tin" placeholder="အသံ နာမည် — ဥပမာ ကျွန်တော့်အသံ" autocomplete="off" style="margin-top:10px">
-        <textarea id="vcRefText" placeholder="အသံ နမူနာထဲက ပြောခဲ့တဲ့ စာသားအတိုင်း ဒီမှာ ရိုက်ပါ..." style="margin-top:10px"></textarea>
-        <label style="display:flex;gap:8px;align-items:flex-start;margin-top:10px;font-size:14px;line-height:1.6;cursor:pointer"><input type="checkbox" id="vcConsent" style="margin-top:4px"> <span>ကိုယ့်အသံ (သို့) ခွင့်ပြုထားတဲ့ အသံပဲ clone လုပ်ပါတယ် — တခြားသူရဲ့ အသံကို ခွင့်ပြုချက်မရှိဘဲ clone မလုပ်ပါ။</span></label>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-          <button class="genbtn" id="vcSaveBtn" onclick="vcSaveVoice()">💾 အသံ သိမ်းမယ် (Save Voice)</button>
-        </div>
-        <div class="hint" id="vcSaveStatus" style="margin-top:10px"></div>
-      </div>
-      <div class="card">
-        <h3><span class="n">3</span><span data-en="Generate with your voice">စာသား ရိုက်ပြီး အသံထုတ်မယ်</span></h3>
-        <div class="hint" data-en="Pick a saved voice, type your script, and generate. Or generate once without saving.">သိမ်းထားတဲ့ အသံ ရွေးပြီး စာသား ရိုက်ထုတ်ပါ — မသိမ်းဘဲ တစ်ခါတည်း ထုတ်လို့လည်း ရတယ်။</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
-          <b style="font-size:14.5px">🎙️ My Voices</b>
-          <button type="button" id="vcRefreshBtn" onclick="vcLoadVoices()" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:10px;padding:6px 12px;font-weight:700;cursor:pointer">ပြန်ဖွင့်မယ် ↻</button>
-        </div>
-        <div class="chips" id="vcList" style="margin-top:8px"></div>
-        <div class="hint" id="vcListStatus" style="margin-top:6px">သိမ်းထားတဲ့ အသံ မရှိသေးဘူး — အပေါ်မှာ အသံ အရင် သိမ်းပါ။</div>
-        <textarea id="vcText" placeholder="ဒီမှာ စာရိုက်ပါ... ဥပမာ — မင်္ဂလာပါ၊ ဒီနေ့ ရာသီဥတု သာယာပါတယ်။" style="margin-top:10px"></textarea>
-        <div class="meta"><span id="vcCount">0 / 5,000</span><span>တစ်ခါထုတ် စာလုံး ၅,၀၀၀ အထိ</span></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-          <button class="genbtn" id="vcGenBtn" onclick="vcGenerateSaved()">အသံထုတ်မယ် 🎙️</button>
-          <button class="genbtn" id="vcOnceBtn" onclick="vcGenerateOnce()" style="background:var(--field);color:var(--ink);border:1.5px solid var(--line)">မသိမ်းဘဲ တစ်ခါတည်း ထုတ်မယ်</button>
-        </div>
-      </div>
-    </div>
-    <div class="sticky-out">
-      <div class="card">
-        <h3><span class="n">4</span><span data-en="Output">ထွက်လာမယ့် အသံ</span></h3>
-        <div class="hint" data-en="Your generated voice will appear here.">ထုတ်ပြီးသား အသံ ဒီမှာ ပေါ်လာမယ်။</div>
-        <div class="out-empty" id="vcOutEmpty">🎧<br><span data-en="Nothing yet — press Generate below.">ဘာမှ မရှိသေးဘူး — အသံ ထုတ်မယ် နှိပ်ပါ။</span></div>
-        <div id="vcOutReady" style="display:none">
-          <div class="prow" style="background:var(--soft);border-color:var(--line);color:var(--ink)"><button class="play" id="vcBtnPlayRow">▶</button><div><b id="vcOutName">my_voice.wav</b><span style="color:var(--mut)" id="vcOutMeta">WAV · 48kHz</span></div><span class="tag" style="color:var(--blue2);border-color:#bae6fd">READY</span></div>
-        </div>
-        <div class="barwrap" id="vcBarWrap"><div class="bar" id="vcBar"></div></div>
-        <div class="meta" id="vcBarMeta" style="display:none"><span data-en="Generating...">ထုတ်နေတယ်...</span><span id="vcBarPct">0%</span></div>
-        <div class="dl">
-          <button id="vcBtnListen" disabled data-en="▶ Listen">▶ နားထောင်မယ်</button>
-          <button class="pri" id="vcBtnDl" disabled data-en="WAV Download">WAV Download</button>
-        </div>
-        <div class="hint" id="vcStatus" style="margin-top:10px"></div>
-      </div>
-      <div class="card">
-        <h3 style="font-size:15.5px"><span class="n">🔑</span>CyborgMM User Key</h3>
-        <div style="display:flex;gap:8px;align-items:stretch">
-          <input type="password" id="vcKey" class="tin" placeholder="CyborgMM User Key ထည့်ပါ" autocomplete="off" spellcheck="false">
-          <button type="button" id="vcKeyEye" title="Key ပြမယ် / ဖျောက်မယ်" style="border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;padding:0 15px;font-size:17px;cursor:pointer">👁️</button>
-        </div>
-        <div class="hint" style="margin-top:9px">Key က သင့် browser ထဲမှာပဲ သိမ်းထားပါတယ် — TTS Studio မှာ ထည့်ထားတဲ့ Key နဲ့ အတူတူပဲ သုံးပါတယ်။ Key မရှိရင် TTS Studio ထဲက "Free CSMM Key အခမဲ့ ရယူမယ်" မှာ ယူလို့ရတယ်။</div>
-      </div>
-    </div>
   </div>
 </div>
 <!-- ============ POS (cyborgstudiomm.com/pos) ============ -->
@@ -2196,7 +2199,7 @@ function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{l
 (function(){var t=document.documentElement.getAttribute('data-theme')||'day';document.querySelectorAll('.themesw button[data-t]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-t')===t))})();
 function setFont(f){document.documentElement.setAttribute('data-font',f);try{localStorage.setItem('csmm-font',f)}catch(e){}document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))}
 (function(){var f=document.documentElement.getAttribute('data-font')||'pyidaungsu';document.querySelectorAll('.fontsw button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-f')===f))})();
-function show(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById('scr-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});if(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}if(id==='studio'){var f=document.getElementById('mvFrame');if(f&&f.contentWindow)setTimeout(function(){f.contentWindow.postMessage({type:'mvRoute',fastUrl:MV_FAST_URL},'*')},600);}}
+function show(id,btn){if(id==='voiceclone'){show('tts',btn);setTimeout(function(){var b=document.getElementById('vcBody');if(b&&b.style.display==='none')vcToggle();var s=document.getElementById('vcSection');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});},120);return;}document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById('scr-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});if(btn){document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}if(id==='studio'){var f=document.getElementById('mvFrame');if(f&&f.contentWindow)setTimeout(function(){f.contentWindow.postMessage({type:'mvRoute',fastUrl:MV_FAST_URL},'*')},600);}}
 // ===== Member login (2026-11-08): Google + Telegram via Worker /auth/* =====
 // No fees/prices on this tab — tiers are shown as Free/VIP only.
 const GOOGLE_CLIENT_ID='769156137704-h2rhkhh43p1buj7jjnpf6mc8cfl7v1vj.apps.googleusercontent.com';
@@ -2616,7 +2619,7 @@ function vcWire(blob,filename){
   lb.disabled=false;db.disabled=false;
   document.getElementById('vcOutEmpty').style.display='none';
   document.getElementById('vcOutReady').style.display='block';
-  document.querySelectorAll('#scr-voiceclone .stp').forEach((s,i)=>{s.classList.toggle('act',i===3);s.classList.toggle('done',i<3)});
+  document.querySelectorAll('#vcSection .stp').forEach((s,i)=>{s.classList.toggle('act',i===3);s.classList.toggle('done',i<3)});
 }
 // --- reference audio: mic record (MediaRecorder) -> WAV, or WAV upload ---
 function vcRefShow(blob,name,dur){
