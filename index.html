@@ -390,6 +390,8 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 /* Festival decorations: floating lanterns, twinkling stars, golden robe + lotus (Kathina) — theme-scoped, pointer-events none, lightweight CSS only */
 #festive{display:none}
 [data-theme="tazaungdaing"] #festive{display:block;position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+/* Lantern fix 2026-11-17 (member card "Points: 0" showed as "oints: 0"): page content sits above the festive layer so floating lanterns never cover text; decorations stay visible in the gaps/margins */
+[data-theme="tazaungdaing"] main,[data-theme="tazaungdaing"] footer{position:relative;z-index:2}
 [data-theme="tazaungdaing"] #festive .star{position:absolute;width:3px;height:3px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 6px 1px rgba(255,215,64,.8);animation:tzTwinkle 3s ease-in-out infinite}
 @keyframes tzTwinkle{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.15)}}
 [data-theme="tazaungdaing"] #festive .lantern{position:absolute;width:34px;height:44px;border-radius:50%/42%;background:radial-gradient(ellipse at 50% 30%,#fff3c4 0%,#ffd740 35%,#ff8f2e 75%,#e85d04 100%);box-shadow:0 0 22px 6px rgba(255,179,0,.45),0 0 60px 18px rgba(255,143,46,.18);animation:tzFloat 5s ease-in-out infinite}
