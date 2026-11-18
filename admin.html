@@ -36,11 +36,10 @@
 <body>
 <div class="wrap">
   <h1>👑 VIP Dashboard — Cyborg Studio MM</h1>
-  <p class="sub">Admin only — member တွေ ကြည့် / Points ပေး / Tier ပေး / Freeze / ဖျက် လုပ်နိုင်ပါတယ်။ VIP Login မှာ login ဝင်ထားရင် session နဲ့ အလိုလို ဖွင့်ပါတယ် — Admin Key မလိုဘူး။ (Admin Key သုံးချင်ရင်လည်း ရတယ် — key ကို ဒီ browser ထဲမှာပဲ (sessionStorage) သိမ်းပါတယ်။)</p>
 
   <div class="card" id="keyCard">
     <div class="row">
-      <input type="password" id="adminKey" placeholder="Admin Key ထည့်ပါ (session မရှိရင်)" autocomplete="off" style="flex:1;min-width:220px">
+      <input type="password" id="adminKey" placeholder="Admin Key ထည့်ပါ" autocomplete="off" style="flex:1;min-width:220px">
       <button onclick="loadMembers()">Member များ ကြည့်မယ်</button>
     </div>
     <div id="status"></div>
@@ -72,17 +71,14 @@ function adminKey(){
   else{try{const s=sessionStorage.getItem('csmm-admin-key');if(s)inp.value=s}catch(e){}}
   return (document.getElementById('adminKey').value||'').trim();
 }
-function memberSession(){try{return localStorage.getItem('csmm-member-session')||''}catch(e){return ''}}
 async function adminFetch(path,opts){
   const key=adminKey();
-  const sess=memberSession();
-  if(!key&&!sess)throw new Error('VIP Login မှာ အရင် login ဝင်ပေးပါ (သို့) Admin Key ထည့်ပါ။');
+  if(!key)throw new Error('Admin Key ထည့်ပါ။');
   const headers={'Content-Type':'application/json'};
-  if(sess)headers['Authorization']='Bearer '+sess;
-  if(key)headers['X-Admin-Key']=key;
+  headers['X-Admin-Key']=key;
   const r=await fetch(API+path,Object.assign({headers},opts||{}));
   const j=await r.json().catch(()=>({}));
-  if(r.status===401)throw new Error(sess?'Session မရှိတော့ပါ — VIP Login မှာ ပြန်ဝင်ပေးပါ (သို့) Admin Key ထည့်ပါ။':'Admin Key မှားနေတယ် — ပြန်စစ်ပါ။');
+  if(r.status===401)throw new Error('Admin Key မှားနေတယ် — ပြန်စစ်ပါ။');
   if(!r.ok)throw new Error(j.detail||('http '+r.status));
   return j;
 }
@@ -160,7 +156,7 @@ async function deleteMember(id,name){
     loadMembers();
   }catch(e){status('ဖျက်လို့ မရပါ — '+e.message)}
 }
-try{const s=sessionStorage.getItem('csmm-admin-key');if(s){document.getElementById('adminKey').value=s}if(s||memberSession()){loadMembers()}}catch(e){}
+try{const s=sessionStorage.getItem('csmm-admin-key');if(s){document.getElementById('adminKey').value=s;loadMembers()}}catch(e){}
 </script>
 </body>
 </html>
