@@ -424,7 +424,7 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 <header><div class="wrap hd">
   <div class="logo"><svg class="logosvg" viewBox="0 0 120 120"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00b8d9"/><stop offset=".52" stop-color="#448aff"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs><path d="M 85.4 31.8 A 38 38 0 1 0 85.4 88.2" fill="none" stroke="url(#hg)" stroke-width="15" stroke-linecap="round"/><rect x="38" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><rect x="51" y="40" width="8.5" height="40" rx="4.25" fill="url(#hg)"/><rect x="64" y="49" width="8.5" height="22" rx="4.25" fill="url(#hg)"/><line x1="68.75" y1="60" x2="84" y2="60" stroke="#ff4d8d" stroke-width="3.5"/><circle cx="90" cy="60" r="5.5" fill="#ff4d8d"/><circle cx="85.4" cy="31.8" r="6" fill="#ffffff" stroke="#00b8d9" stroke-width="4"/><circle cx="85.4" cy="88.2" r="6" fill="#ffffff" stroke="#ff4d8d" stroke-width="4"/></svg>Cyborg Studio <span style="color:var(--blue)">MM</span></div>
   <nav>
-    <button class="on hideM" onclick="show('home',this)">ပင်မ</button>
+    <button class="on hideM" onclick="show('home',this)">Home</button>
     <button class="hideM" onclick="show('studio',this)">CyborgMM TTS Voices</button>
     <button class="hideM" onclick="show('recap',this)">Recap App</button>
     <!-- GUIDE NAV HIDDEN 2026-11-15 (user order: hide Recap manual until Windows + APK final; restore then)
@@ -1139,13 +1139,14 @@ nav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,7
 <!-- ============ MEMBER LOGIN ============ -->
 <div class="screen" id="scr-login">
   <section class="blk">
-    <button class="btn btn-ghost" onclick="show('home')">← ပင်မ</button>
+    <button class="btn btn-ghost" onclick="show('home')">← Home</button>
     <div class="sec-h">👤 Login</div>
     <div class="sec-s">CyborgMM အသံတွေ အတွက် member login — Google (သို့) Telegram နဲ့ ဝင်ပါ။</div>
     <div class="card" style="max-width:560px">
       <div id="loginBtns">
         <div id="gSignInBtn" style="margin-bottom:12px"></div>
         <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="CyborgStudioMMBot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+        <div id="tgFallback" style="display:none;margin-top:8px;color:var(--mut);line-height:1.7">Telegram button မပေါ်သေးရင် ခဏစောင့်ပြီးမှ page ကို refresh လုပ်ကြည့်ပါ ခင်ဗျာ — ဒါမှမဟုတ် Telegram app မှာ <a href="https://t.me/CyborgStudioMMBot" target="_blank" rel="noopener">@CyborgStudioMMBot</a> ကို သုံးနိုင်ပါတယ်။</div>
         <div style="margin-top:12px;border-top:1px solid var(--line);padding-top:12px">
           <input type="email" id="emailInput" class="tin" placeholder="Email ထည့်ပါ" autocomplete="email" style="width:100%">
           <button class="btn btn-cyan" id="emailSendBtn" style="margin-top:8px" onclick="emailSendCode()">Code ပို့မယ်</button>
@@ -2224,11 +2225,11 @@ function memberTierLabel(t){return (t==='vip30'||t==='vip50')?'VIP':'Free'}
 async function refreshMember(){
   const btns=document.getElementById('loginBtns'),card=document.getElementById('memberCard');
   const sess=memberSession();
-  if(!sess){if(btns)btns.style.display='block';if(card)card.style.display='none';loginStatus('');return}
+  if(!sess){if(btns)btns.style.display='block';if(card)card.style.display='none';memberTgTries=0;memberInitTelegram();loginStatus('');return}
   loginStatus('အကောင့် စစ်နေတယ်...');
   try{
     const r=await fetch(MEMBER_API+'/auth/me',{headers:{'Authorization':'Bearer '+sess}});
-    if(r.status===401){memberSetSession('');if(btns)btns.style.display='block';if(card)card.style.display='none';loginStatus('Session မရှိတော့ပါ — ပြန်ဝင်ပေးပါ။');return}
+    if(r.status===401){memberSetSession('');if(btns)btns.style.display='block';if(card)card.style.display='none';memberTgTries=0;memberInitTelegram();loginStatus('Session မရှိတော့ပါ — ပြန်ဝင်ပေးပါ။');return}
     if(!r.ok)throw new Error('http '+r.status);
     const j=await r.json();const m=j.member;
     if(btns)btns.style.display='none';if(card)card.style.display='block';
@@ -2314,7 +2315,30 @@ function memberInitGoogle(){
     google.accounts.id.renderButton(document.getElementById('gSignInBtn'),{theme:'outline',size:'large',text:'signin_with'});
   }catch(e){}
 }
+// Telegram login widget: the <script> tag renders the button ONCE at load.
+// If telegram.org is slow/blocked at that moment the button never appears
+// (unlike Google, which retries). Re-check + re-inject until it renders.
+let memberTgTries=0;
+function showTgFallback(){var f=document.getElementById('tgFallback');if(f)f.style.display='block'}
+function memberInitTelegram(){
+  var box=document.getElementById('loginBtns');if(!box)return;
+  if(box.querySelector('iframe[src*="oauth.telegram.org"]'))return;
+  if(memberTgTries++>=6){showTgFallback();return}
+  var tag=box.querySelector('script[data-telegram-login]');
+  if(tag&&memberTgTries<3){setTimeout(memberInitTelegram,1500);return}
+  if(tag)tag.remove();
+  var s=document.createElement('script');
+  s.async=true;s.src='https://telegram.org/js/telegram-widget.js?22';
+  s.setAttribute('data-telegram-login','CyborgStudioMMBot');
+  s.setAttribute('data-size','large');
+  s.setAttribute('data-onauth','onTelegramAuth(user)');
+  s.setAttribute('data-request-access','write');
+  var emailDiv=box.querySelector('div[style*="border-top"]');
+  if(emailDiv)box.insertBefore(s,emailDiv);else box.appendChild(s);
+  setTimeout(memberInitTelegram,2000);
+}
 memberInitGoogle();
+memberInitTelegram();
 refreshMember();
 // chips: single-select per group + update genbar
 document.querySelectorAll('.chips').forEach(g=>{g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');updGen()})});
